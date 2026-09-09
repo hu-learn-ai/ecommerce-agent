@@ -156,7 +156,7 @@ v2.0 的核心改进：LLM 不再被固定路由到单个 Agent，而是自主�
 | BERT 商品分类模型（`models/best/`） | ~390MB（加载期 int8 量化后权重内存降约 4 倍） | 自行训练：`python scripts/train_classify_model.py`（训练数据由 `scripts/import_taobao_data.py` 从原始数据集生成，不随仓库分发；当前 65 万样本验证集 acc 99.6% / macro-F1 99.6%）。域外拒识 = 品类关键词黑名单 + 逐类马氏距离门控（`models/best/ood_stats.npz`，重建：`python scripts/build_ood_stats.py`） |
 | NER 实体抽取模型（`models/ner/best_model/`） | ~390MB（加载期 int8 量化） | 自行训练：`python scripts/train_ner.py`（6k 训练句，BIO 标注，测试集 F1 0.80）；推理端含 BIO 约束解码 + 相邻同类实体合并，修复实体碎片化 |
 | BGE 中文嵌入模型（`BAAI/bge-base-zh-v1.5`） | ~400MB（加载期 int8 量化） | 首次运行自动从 HuggingFace 下载；国内环境可在 `.env` 配置 `HF_ENDPOINT=https://hf-mirror.com`；可用 `MODEL_QUANTIZE=false` 关闭量化 |
-| FAISS 索引（`data/faiss_index/`） | ~18MB | 已随仓库分发；如需重建：`python scripts/build_faiss_index.py` + `python scripts/build_faq_index.py` |
+| FAISS 索引（`data/faiss_index/`） | ~18MB | 与商品原始数据同源，为保护数据**不随本仓库分发**；准备原始数据后按「快速开始」重建：`python scripts/import_taobao_data.py` → `python scripts/build_faiss_index.py` + `python scripts/build_faq_index.py`。索引缺失时检索 Agent 自动降级并给出明确提示 |
 
 未加载分类模型时，classify Agent 会自动降级到规则关键词兜底方案，不影响系统运行。
 模型加载期 int8 动态量化默认开启（仅 CPU 生效），分类/NER 推理提速约 2.5 倍、嵌入提速约 3 倍。
@@ -166,9 +166,10 @@ v2.0 的核心改进：LLM 不再被固定路由到单个 Agent，而是自主�
 ### 方式一：Docker 部署（推荐）
 
 ```bash
-# 1. 配置环境变量
+# 1. 配置环境变量（compose 需要 .env.docker，两处复制同一模板后填写）
 cp .env.example .env
-# 编辑填入 DeepSeek API Key、Neo4j 密码等
+cp .env.example .env.docker
+# 编辑填入 DeepSeek API Key、Neo4j/MySQL 密码等
 
 # 2. 一键启动
 docker compose up -d
