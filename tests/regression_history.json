@@ -2,7 +2,7 @@
   {
     "name": "classify_v1.0",
     "timestamp": "2026-08-26T18:50:54.926693",
-    "report_path": "d:\\AI\\AI-projects\\DianShang\\ecommerce-agent\\tests\\classify_eval_report.json",
+    "report_path": "tests\\classify_eval_report.json",
     "metrics": {
       "in_domain_total": 40,
       "ood_total": 17,
@@ -76,7 +76,7 @@
   {
     "name": "ner_v1.0",
     "timestamp": "2026-08-26T18:50:56.448534",
-    "report_path": "d:\\AI\\AI-projects\\DianShang\\ecommerce-agent\\tests\\ner_eval_report.json",
+    "report_path": "tests\\ner_eval_report.json",
     "metrics": {
       "total_cases": 20,
       "metrics.micro.precision": 0.475,
@@ -122,7 +122,7 @@
   {
     "name": "router_v1.0",
     "timestamp": "2026-08-26T18:50:57.983787",
-    "report_path": "d:\\AI\\AI-projects\\DianShang\\ecommerce-agent\\tests\\router_eval_report.json",
+    "report_path": "tests\\router_eval_report.json",
     "metrics": {
       "total": 47,
       "metrics.accuracy": 0.9149,
@@ -241,7 +241,7 @@
   {
     "name": "kgqa_v1.0",
     "timestamp": "2026-08-26T18:50:59.483482",
-    "report_path": "d:\\AI\\AI-projects\\DianShang\\ecommerce-agent\\tests\\kgqa_eval_report.json",
+    "report_path": "tests\\kgqa_eval_report.json",
     "metrics": {
       "cypher_generation.total_cases": 8,
       "cypher_generation.chitchat_none_rate": 1.0,
