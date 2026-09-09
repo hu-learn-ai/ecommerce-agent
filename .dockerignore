@@ -1,0 +1,30 @@
+# ============================================
+# Docker 构建上下文排除（加速构建）
+# data/ 和 models/ 由 docker-compose 以 volume 挂载，
+# 无需打进镜像（否则构建上下文 460MB+，传输极慢）
+# ============================================
+
+.git
+__pycache__
+*.pyc
+.idea
+.pytest_cache
+.workbuddy
+.private_backup
+
+.env
+.env.docker
+.env.example
+venv
+
+# 大数据目录（volume 挂载，不进入镜像）
+data
+models
+淘宝用户消费数据汇总
+
+docs
+tests
+
+*.tar.gz
+*.log
+structure.txt

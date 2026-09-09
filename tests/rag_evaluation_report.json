@@ -1,0 +1,772 @@
+{
+  "total_cases": 15,
+  "results": [
+    {
+      "query": "蓝牙耳机",
+      "retrieved_ids": [
+        "JD001565",
+        "JD002845",
+        "JD000431",
+        "JD001811",
+        "JD001881",
+        "JD001457",
+        "JD002514",
+        "JD003443",
+        "JD001214",
+        "JD003879"
+      ],
+      "relevant_ids": [
+        "JD001881",
+        "JD001457",
+        "JD001305",
+        "JD003879",
+        "JD002845",
+        "JD000832",
+        "JD001811",
+        "JD003443",
+        "JD003075",
+        "JD001684",
+        "JD002514",
+        "JD001565",
+        "JD002816",
+        "JD001214",
+        "JD000431"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.06666666666666667,
+        "recall@3": 0.2,
+        "recall@5": 0.3333333333333333,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.9,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 128.29,
+      "gen_latency_ms": 0.5,
+      "judge_latency_ms": 752.18,
+      "latency_ms": 128.79,
+      "token_cost": {
+        "prompt_tokens": 1542,
+        "completion_tokens": 0,
+        "total_tokens": 1542,
+        "cost_usd": 0.000221
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **联想（Lenovo） 联想蓝牙耳机无线TC09 锖色** | 品牌: 联想 | 分类: 手机数码 | 相似度: 0.6897\n2. **纽曼（Newmine）V28微鳯运动蓝牙耳机对讲机防丢通话器音乐耳机可录音持久续航磁吸收纳手机通用 纽曼微鳯蓝牙耳机V28** | 品牌: 纽曼 | 分类: 家用电器 | 相似度: 0.6532\n3. **JBL MIN",
+      "type": "search",
+      "description": "搜索蓝牙耳机"
+    },
+    {
+      "query": "500元以下手机",
+      "retrieved_ids": [
+        "KD003000",
+        "JD003267",
+        "KD001194",
+        "JD001007",
+        "KD001185",
+        "JD000871",
+        "KD001030",
+        "JD001960",
+        "KD000072",
+        "JD001564"
+      ],
+      "relevant_ids": [
+        "KD003000",
+        "KD001583",
+        "KD001030",
+        "KD001464",
+        "KD001194",
+        "KD001594",
+        "KD002796",
+        "KD000072",
+        "KD002843",
+        "KD001185"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.1,
+        "recall@3": 0.2,
+        "recall@5": 0.3,
+        "precision@5": 0.6,
+        "mrr": 1.0,
+        "ndcg@5": 0.639945385422766,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 0.5,
+        "answer_relevance": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "retrieval_latency_ms": 105.47,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 856.4,
+      "latency_ms": 105.47,
+      "token_cost": {
+        "prompt_tokens": 1568,
+        "completion_tokens": 0,
+        "total_tokens": 1568,
+        "cost_usd": 0.000225
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **小米（MI）REDMI Note15 第三代骁龙6 金刚品质 5800mAh大电量 IP66防尘防水 8+128 子夜黑 红米 5G手机** | 品牌: 小米 | 分类: 手机数码 | 价格: ¥783.99 | 相似度: 0.6585\n2. **索尼（SONY）PXW-Z150 手持式4K摄像机直播婚庆会议带SDI输出 索尼Z150 套餐一（描述下拉可",
+      "type": "search",
+      "description": "价格过滤搜索"
+    },
+    {
+      "query": "婴儿纸尿裤",
+      "retrieved_ids": [
+        "JD001563",
+        "JD000827",
+        "JD001210",
+        "JD003490",
+        "JD003328",
+        "JD003067",
+        "JD001023",
+        "JD002471",
+        "JD001825",
+        "JD001372"
+      ],
+      "relevant_ids": [
+        "JD000063",
+        "JD000801",
+        "JD000827",
+        "JD003490",
+        "JD001563",
+        "JD001867",
+        "JD001825",
+        "JD003328",
+        "JD002285",
+        "JD002211",
+        "JD001023",
+        "JD002471",
+        "JD001210"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.07692307692307693,
+        "recall@3": 0.23076923076923078,
+        "recall@5": 0.38461538461538464,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "retrieval_latency_ms": 81.3,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 1057.21,
+      "latency_ms": 81.3,
+      "token_cost": {
+        "prompt_tokens": 1591,
+        "completion_tokens": 0,
+        "total_tokens": 1591,
+        "cost_usd": 0.000229
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **Meilen美乐婴儿体重秤新生儿宝宝婴儿称家用精准减肥称重电子秤人体儿童身高体重秤礼盒装 搭配毛毯-小兔子图案（不含秤）** | 分类: 家用电器 | 相似度: 0.4500\n2. **色果内裤消毒机家用小型内衣烘干机迷你紫外线臭氧杀菌多功能高温婴儿衣物毛巾除菌便携机器 蓝色【紫外线+巴氏+臭氧杀菌】** | 分类: 家用电器 | 相似度: 0.4112",
+      "type": "search",
+      "description": "母婴商品搜索"
+    },
+    {
+      "query": "运动鞋",
+      "retrieved_ids": [
+        "JD000606",
+        "JD000081",
+        "JD000773",
+        "JD001965",
+        "JD003431",
+        "JD001826",
+        "JD000384",
+        "JD002901",
+        "JD001660",
+        "JD002291"
+      ],
+      "relevant_ids": [
+        "JD000606",
+        "JD000773",
+        "JD003431"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.3333333333333333,
+        "recall@3": 0.6666666666666666,
+        "recall@5": 1.0,
+        "precision@5": 0.6,
+        "mrr": 1.0,
+        "ndcg@5": 0.8854598815714874,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "retrieval_latency_ms": 87.12,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 1024.64,
+      "latency_ms": 87.12,
+      "token_cost": {
+        "prompt_tokens": 1549,
+        "completion_tokens": 0,
+        "total_tokens": 1549,
+        "cost_usd": 0.000222
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **大学生直排轮滑鞋成人平花旱冰成年溜冰男女生初学者闪光宸焕安格里 白色③套餐 36** | 分类: 手机数码 | 相似度: 0.5215\n2. **小米（MI） 生态米家通用烘鞋器干鞋烤鞋神器除臭家用学生宿舍速干暖鞋子烘干机哄鞋子BYM 【儿童款】-浅粉色** | 品牌: 小米 | 分类: 家用电器 | 相似度: 0.4723\n3. **智能手环运动电子无",
+      "type": "search",
+      "description": "服装鞋包搜索"
+    },
+    {
+      "query": "面膜护肤",
+      "retrieved_ids": [
+        "JD001912",
+        "JD000424",
+        "JD001207",
+        "JD002667",
+        "JD002086",
+        "JD000326",
+        "JD001844",
+        "JD000296",
+        "JD000233",
+        "JD000330"
+      ],
+      "relevant_ids": [
+        "JD001207",
+        "JD001912",
+        "JD000326",
+        "JD000424",
+        "JD000296",
+        "JD002667",
+        "JD002086"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.14285714285714285,
+        "recall@3": 0.42857142857142855,
+        "recall@5": 0.7142857142857143,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5,
+        "context_precision": 0.5,
+        "context_recall": 0.5
+      },
+      "retrieval_latency_ms": 88.68,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 952.76,
+      "latency_ms": 88.68,
+      "token_cost": {
+        "prompt_tokens": 1428,
+        "completion_tokens": 0,
+        "total_tokens": 1428,
+        "cost_usd": 0.000205
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **法国VLVEE美容仪器导入仪脸部按摩仪红蓝光子嫩肤仪洁面洗脸提拉紧致 新升级护肤组合白色** | 分类: 医药保健 | 相似度: 0.5476\n2. **inbei护肤面部MEK美容仪导入出精华家用提拉紧致清洁洗脸部按摩仪器嘉琪琦奇眼部同款神器 少女粉** | 分类: 医药保健 | 相似度: 0.5354\n3. **LeveTop卸妆神器美妆蛋 振动热敷",
+      "type": "search",
+      "description": "美妆护肤搜索"
+    },
+    {
+      "query": "笔记本电脑",
+      "retrieved_ids": [
+        "KD000172",
+        "KD001701",
+        "KD000162",
+        "KD002554",
+        "KD000099",
+        "KD000503",
+        "KD002413",
+        "KD002609",
+        "KD001715",
+        "KD000708"
+      ],
+      "relevant_ids": [
+        "KD000099",
+        "KD000708",
+        "KD001701",
+        "KD002444",
+        "KD000058",
+        "KD002609",
+        "KD001715",
+        "KD001174",
+        "KD001095",
+        "KD000827",
+        "KD002413",
+        "KD001223",
+        "KD002554",
+        "KD002448",
+        "KD002476",
+        "KD000503",
+        "KD000777",
+        "KD000172",
+        "KD002097",
+        "KD000162"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.05,
+        "recall@3": 0.15,
+        "recall@5": 0.25,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 122.03,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 1049.26,
+      "latency_ms": 122.03,
+      "token_cost": {
+        "prompt_tokens": 1511,
+        "completion_tokens": 0,
+        "total_tokens": 1511,
+        "cost_usd": 0.000217
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **联想ThinkPad笔记本电脑新款正品补贴20%酷睿i5/i7超轻薄商务办公本 新酷睿i5六代处理器 DDR4 16G+1TB疾速固态** | 品牌: 联想 | 分类: 手机数码 | 价格: ¥1999.0 | 相似度: 0.6643\n2. **新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记",
+      "type": "search",
+      "description": "手机数码搜索"
+    },
+    {
+      "query": "食品零食",
+      "retrieved_ids": [
+        "JD002072",
+        "JD002710",
+        "JD000085",
+        "JD002507",
+        "JD001039",
+        "JD003559",
+        "JD000743",
+        "JD002142",
+        "JD003550",
+        "JD001280"
+      ],
+      "relevant_ids": [
+        "JD002072",
+        "JD003096",
+        "JD000743",
+        "JD002142",
+        "JD001039",
+        "JD002507",
+        "JD000031",
+        "JD002813",
+        "JD002710",
+        "JD001037",
+        "JD003550",
+        "JD000085",
+        "JD003279",
+        "JD003559"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.07142857142857142,
+        "recall@3": 0.21428571428571427,
+        "recall@5": 0.35714285714285715,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5,
+        "context_precision": 0.5,
+        "context_recall": 0.5
+      },
+      "retrieval_latency_ms": 72.77,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 904.57,
+      "latency_ms": 72.77,
+      "token_cost": {
+        "prompt_tokens": 1407,
+        "completion_tokens": 0,
+        "total_tokens": 1407,
+        "cost_usd": 0.000203
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **火宫殿 休闲零食大礼包 送女友女生湖南特产豆干鸭翅 网红零食 538g** | 品牌: 火宫殿 | 分类: 食品生鲜 | 相似度: 0.5521\n2. **妙可奶酪棒儿童零食营养零食高钙棒棒奶酪即食干酪乳酪一件特价 芒果味*16支** | 分类: 食品生鲜 | 相似度: 0.5195\n3. **雪媚娘 酥蛋糕 咸蛋黄休闲食品零食整箱批发 糕点心下午茶 4",
+      "type": "search",
+      "description": "食品生鲜搜索"
+    },
+    {
+      "query": "宠物狗粮",
+      "retrieved_ids": [
+        "JD002123",
+        "JD001516",
+        "JD001904",
+        "JD003264",
+        "JD000811",
+        "JD000190",
+        "JD000098",
+        "JD001967",
+        "JD000325",
+        "JD001795"
+      ],
+      "relevant_ids": [
+        "JD003264",
+        "JD003949",
+        "JD000190",
+        "JD001904",
+        "JD000811",
+        "JD002186",
+        "JD000963",
+        "JD002123"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.125,
+        "recall@3": 0.25,
+        "recall@5": 0.5,
+        "precision@5": 0.8,
+        "mrr": 1.0,
+        "ndcg@5": 0.7860137352654724,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "retrieval_latency_ms": 64.38,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 973.15,
+      "latency_ms": 64.38,
+      "token_cost": {
+        "prompt_tokens": 1403,
+        "completion_tokens": 0,
+        "total_tokens": 1403,
+        "cost_usd": 0.000202
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **狗狗定位器猫咪宠物防丢神器项圈小型铃铛追踪定位防走丢用品大全 粉色** | 分类: 手机数码 | 相似度: 0.5229\n2. **古稀 小狗按摩枕头会按摩的哈士奇按摩狗抱枕毛绒玩具腿部颈部按摩颈椎生日礼物女送女友出差神器实用礼品 插电款萌宠小狗-毛绒靠枕-多功能仿真** | 品牌: 古稀 | 分类: 医药保健 | 相似度: 0.4868\n3. **YO",
+      "type": "search",
+      "description": "宠物用品搜索"
+    },
+    {
+      "query": "家用吸尘器",
+      "retrieved_ids": [
+        "JD000963",
+        "JD000292",
+        "JD003574",
+        "JD002186",
+        "JD001876",
+        "JD003519",
+        "JD001054",
+        "JD000921",
+        "JD002830",
+        "JD001805"
+      ],
+      "relevant_ids": [
+        "JD001876",
+        "JD000292",
+        "JD003574",
+        "JD002830",
+        "JD000254",
+        "JD002186",
+        "JD003855",
+        "JD001054",
+        "JD000295",
+        "JD000963",
+        "JD000921",
+        "JD001805",
+        "JD003519"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.07692307692307693,
+        "recall@3": 0.23076923076923078,
+        "recall@5": 0.38461538461538464,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.8,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 114.84,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 985.37,
+      "latency_ms": 114.84,
+      "token_cost": {
+        "prompt_tokens": 1463,
+        "completion_tokens": 0,
+        "total_tokens": 1463,
+        "cost_usd": 0.00021
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **苏泊尔家用手持吸尘器吸拖一体大功率吸尘器家庭宠物毛发吸尘VCS63S-C8 PRO 白色** | 分类: 家用电器 | 相似度: 0.7057\n2. **德尔玛（Deerma）吸尘器小型手持吸尘器家用立式吸尘机 DX129C** | 品牌: 德尔玛 | 分类: 家用电器 | 相似度: 0.6917\n3. **艾美特 手持式吸尘器家用清洁大吸力轻便除尘吸尘",
+      "type": "search",
+      "description": "家用电器搜索"
+    },
+    {
+      "query": "户外帐篷",
+      "retrieved_ids": [
+        "JD001543",
+        "JD003846",
+        "JD002153",
+        "JD002278",
+        "JD003604",
+        "JD000941",
+        "JD000683",
+        "JD001831",
+        "JD001075",
+        "JD000303"
+      ],
+      "relevant_ids": [
+        "JD002278",
+        "JD001831",
+        "JD000275",
+        "JD000584",
+        "JD003846",
+        "JD000303",
+        "JD003604",
+        "JD000683",
+        "JD000517",
+        "JD001075",
+        "JD002153",
+        "JD001054",
+        "JD001543",
+        "JD000941",
+        "JD003936"
+      ],
+      "retrieval_metrics": {
+        "recall@1": 0.06666666666666667,
+        "recall@3": 0.2,
+        "recall@5": 0.3333333333333333,
+        "precision@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0
+      },
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "retrieval_latency_ms": 65.7,
+      "gen_latency_ms": 0.0,
+      "judge_latency_ms": 857.96,
+      "latency_ms": 65.7,
+      "token_cost": {
+        "prompt_tokens": 1476,
+        "completion_tokens": 0,
+        "total_tokens": 1476,
+        "cost_usd": 0.000212
+      },
+      "answer": "🔍 共找到 10 个相关商品：\n\n1. **单反双肩相机包防水大容量腊染帆布英伦背包户外包摄影包 军绿色** | 分类: 手机数码 | 相似度: 0.4374\n2. **先科室外防水音柱户外酒店铺壁挂式音箱音响广场校园公共广播喇叭 无源音柱套装（20W音柱*2+100W功放*1）+** | 分类: 家用电器 | 相似度: 0.3931\n3. **【旗舰京品】小米对讲机1S小型手持远距离大功率户外酒",
+      "type": "search",
+      "description": "运动户外搜索"
+    },
+    {
+      "query": "怎么退货？",
+      "retrieved_docs": 3,
+      "keyword_hit_rate": 1.0,
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 296.54,
+      "gen_latency_ms": 1716.83,
+      "judge_latency_ms": 944.13,
+      "latency_ms": 2013.37,
+      "token_cost": {
+        "prompt_tokens": 629,
+        "completion_tokens": 0,
+        "total_tokens": 629,
+        "cost_usd": 9.4e-05
+      },
+      "answer": "您好！关于退货，您可以在收到商品后**7天内**申请退换货。具体操作是：进入「我的订单」，找到对应订单，点击「申请退换货」即可。请注意，退换货的商品需要保持**原包装完好**哦。\n\n如果您还有其他关于退货的问题（比如退款时间等），也可以告诉我，我会尽力帮您解答！如果遇到FAQ中没有覆盖的情况，建议您联系人工客服进一步处理，祝您购物愉快！😊",
+      "type": "cs",
+      "description": "退货政策"
+    },
+    {
+      "query": "退款多久到账？",
+      "retrieved_docs": 3,
+      "keyword_hit_rate": 0.75,
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.67,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 69.47,
+      "gen_latency_ms": 1534.81,
+      "judge_latency_ms": 634.33,
+      "latency_ms": 1604.28,
+      "token_cost": {
+        "prompt_tokens": 585,
+        "completion_tokens": 0,
+        "total_tokens": 585,
+        "cost_usd": 8.7e-05
+      },
+      "answer": "您好！关于退款到账时间，根据我们的规则：**在收到您退回的商品后，退款会在1-3个工作日内原路退回到您的支付账户**，请您留意查收。\n\n如果您还有其他关于退换货或订单的问题，也欢迎随时咨询。祝您购物愉快！😊",
+      "type": "cs",
+      "description": "退款时效"
+    },
+    {
+      "query": "运费谁出？",
+      "retrieved_docs": 3,
+      "keyword_hit_rate": 0.5,
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.67,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 66.7,
+      "gen_latency_ms": 1308.54,
+      "judge_latency_ms": 1157.59,
+      "latency_ms": 1375.24,
+      "token_cost": {
+        "prompt_tokens": 624,
+        "completion_tokens": 0,
+        "total_tokens": 624,
+        "cost_usd": 9.3e-05
+      },
+      "answer": "您好！关于运费的问题，根据我们的规则：\n\n- **单笔订单满99元**，可以享受**免邮费**；\n- 不满99元，会收取**10元邮费**；\n- 如果是**偏远地区**（如新疆、西藏等），可能需要额外邮费。\n\n所以运费是由**买家承担**的，但达到免邮门槛后我们为您承担。如果您还有其他订单或地址方面的疑问，建议联系人工客服进一步确认哦～😊",
+      "type": "cs",
+      "description": "运费责任"
+    },
+    {
+      "query": "发货时间",
+      "retrieved_docs": 3,
+      "keyword_hit_rate": 0.33,
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.33,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 61.38,
+      "gen_latency_ms": 1265.82,
+      "judge_latency_ms": 2036.57,
+      "latency_ms": 1327.2,
+      "token_cost": {
+        "prompt_tokens": 563,
+        "completion_tokens": 0,
+        "total_tokens": 563,
+        "cost_usd": 8.5e-05
+      },
+      "answer": "您好！关于发货时间，一般情况下，我们会在您付款后的**24小时内**为您安排发货。不过遇到节假日可能会有延迟，发货后您会收到短信通知，请您留意查收哦。\n\n如果还有其他问题，随时可以问我，祝您购物愉快！😊",
+      "type": "cs",
+      "description": "发货时效"
+    },
+    {
+      "query": "怎么开发票？",
+      "retrieved_docs": 3,
+      "keyword_hit_rate": 1.0,
+      "generation_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.33,
+        "context_recall": 1.0
+      },
+      "retrieval_latency_ms": 73.2,
+      "gen_latency_ms": 1879.44,
+      "judge_latency_ms": 1816.31,
+      "latency_ms": 1952.64,
+      "token_cost": {
+        "prompt_tokens": 594,
+        "completion_tokens": 0,
+        "total_tokens": 594,
+        "cost_usd": 8.9e-05
+      },
+      "answer": "您好！关于开发票的问题，为您解答如下：\n\n您可以在下单时直接选择「需要发票」，并填写发票抬头和税号。订单完成后，电子发票会自动发送到您预留的邮箱中，非常方便。\n\n如果您在操作过程中遇到任何问题，或者需要其他帮助，也欢迎随时联系我们的人工客服，我们会尽力协助您。祝您购物愉快！",
+      "type": "cs",
+      "description": "发票政策"
+    }
+  ],
+  "summary": {
+    "retrieval": {
+      "recall@1": 0.111,
+      "recall@3": 0.2771,
+      "recall@5": 0.4557,
+      "precision@5": 0.9,
+      "mrr": 1.0,
+      "ndcg@5": 0.9311,
+      "hit_rate@5": 1.0
+    },
+    "generation": {
+      "faithfulness": 0.9667,
+      "answer_relevance": 0.6,
+      "context_precision": 0.4467,
+      "context_recall": 0.6,
+      "valid": true,
+      "error_count": 0
+    },
+    "performance": {
+      "avg_latency_ms": 613.59,
+      "max_latency_ms": 2013.37,
+      "min_latency_ms": 64.38,
+      "p50_latency_ms": 114.84,
+      "p90_latency_ms": 1813.3,
+      "p95_latency_ms": 1970.86,
+      "avg_retrieval_latency_ms": 99.86,
+      "avg_gen_latency_ms": 1284.32,
+      "avg_judge_latency_ms": 1066.83,
+      "p50_judge_latency_ms": 973.15,
+      "p90_judge_latency_ms": 1552.82
+    },
+    "token_usage": {
+      "total_tokens": 19449,
+      "total_cost_usd": 0.00286,
+      "total_calls": 20,
+      "avg_tokens_per_case": 1296.6,
+      "by_model": {
+        "deepseek-chat": {
+          "prompt_tokens": 18472,
+          "completion_tokens": 977,
+          "total_tokens": 19449,
+          "cost_usd": 0.00285964,
+          "calls": 20
+        }
+      }
+    }
+  },
+  "retrieval_baseline": {
+    "cases": 10,
+    "summary": {
+      "keyword_only": {
+        "recall@1": 0.0676,
+        "recall@3": 0.1685,
+        "recall@5": 0.277,
+        "precision@5": 0.7,
+        "mrr": 0.8143,
+        "ndcg@5": 0.7184,
+        "hit_rate@5": 0.8
+      },
+      "vector_only": {
+        "recall@1": 0.111,
+        "recall@3": 0.3329,
+        "recall@5": 0.4489,
+        "precision@5": 0.9,
+        "mrr": 1.0,
+        "ndcg@5": 0.9592,
+        "hit_rate@5": 1.0
+      },
+      "hybrid": {
+        "recall@1": 0.111,
+        "recall@3": 0.2771,
+        "recall@5": 0.4557,
+        "precision@5": 0.9,
+        "mrr": 1.0,
+        "ndcg@5": 0.9311,
+        "hit_rate@5": 1.0
+      }
+    }
+  }
+}

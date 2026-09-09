@@ -1,0 +1,310 @@
+{
+  "total_cases": 20,
+  "metrics": {
+    "micro": {
+      "precision": 0.4737,
+      "recall": 0.5294,
+      "f1": 0.5,
+      "tp": 18,
+      "fp": 20,
+      "fn": 16
+    },
+    "macro": {
+      "precision": 0.4412,
+      "recall": 0.4254,
+      "f1": 0.4322
+    },
+    "per_type": {
+      "品牌": {
+        "precision": 0.8889,
+        "recall": 0.8,
+        "f1": 0.8421,
+        "tp": 8,
+        "fp": 1,
+        "fn": 2,
+        "support": 10
+      },
+      "商品": {
+        "precision": 0.4348,
+        "recall": 0.4762,
+        "f1": 0.4545,
+        "tp": 10,
+        "fp": 13,
+        "fn": 11,
+        "support": 21
+      },
+      "款式": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
+        "fp": 1,
+        "fn": 3,
+        "support": 3
+      },
+      "规格": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tp": 0,
+        "fp": 5,
+        "fn": 0,
+        "support": 0
+      }
+    },
+    "errors": [
+      {
+        "query": "华为Mate60 Pro 5G手机",
+        "type": "商品",
+        "true": null,
+        "pred": "Mate60 Pro 5G手机",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "华为Mate60 Pro 5G手机",
+        "type": "商品",
+        "true": "手机",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "苹果iPhone 15 Pro Max 256GB",
+        "type": "品牌",
+        "true": "苹果",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "苹果iPhone 15 Pro Max 256GB",
+        "type": "商品",
+        "true": null,
+        "pred": "苹果iPhone",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "苹果iPhone 15 Pro Max 256GB",
+        "type": "商品",
+        "true": "iPhone",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "小米蓝牙耳机 降噪版",
+        "type": "商品",
+        "true": null,
+        "pred": "耳机",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "小米蓝牙耳机 降噪版",
+        "type": "商品",
+        "true": "蓝牙耳机",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "戴森V12 Detect Slim 无线吸尘器",
+        "type": "商品",
+        "true": null,
+        "pred": "线吸尘器",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "戴森V12 Detect Slim 无线吸尘器",
+        "type": "商品",
+        "true": "吸尘器",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "美的空调 1.5匹 挂机",
+        "type": "商品",
+        "true": null,
+        "pred": "挂机",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "美的空调 1.5匹 挂机",
+        "type": "规格",
+        "true": null,
+        "pred": "1.5匹",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "苏泊尔电饭煲 4L 球釜",
+        "type": "品牌",
+        "true": "苏泊尔",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "苏泊尔电饭煲 4L 球釜",
+        "type": "商品",
+        "true": null,
+        "pred": "电饭煲 4L 球釜",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "苏泊尔电饭煲 4L 球釜",
+        "type": "商品",
+        "true": "电饭煲",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "苏泊尔电饭煲 4L 球釜",
+        "type": "规格",
+        "true": null,
+        "pred": "苏泊尔",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "飞利浦电动牙刷 HX6730",
+        "type": "商品",
+        "true": null,
+        "pred": "电",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "飞利浦电动牙刷 HX6730",
+        "type": "商品",
+        "true": null,
+        "pred": "牙刷",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "飞利浦电动牙刷 HX6730",
+        "type": "商品",
+        "true": "电动牙刷",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "蓝牙耳机无线降噪",
+        "type": "商品",
+        "true": null,
+        "pred": "耳机",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "蓝牙耳机无线降噪",
+        "type": "商品",
+        "true": null,
+        "pred": "蓝",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "蓝牙耳机无线降噪",
+        "type": "商品",
+        "true": "蓝牙耳机",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "连衣裙 红色 韩版",
+        "type": "款式",
+        "true": "韩版",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "连衣裙 红色 韩版",
+        "type": "款式",
+        "true": "红色",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "口红哑光丝绒 红色",
+        "type": "款式",
+        "true": "红色",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "小米手环8华为手表对比",
+        "type": "款式",
+        "true": null,
+        "pred": "8",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "小米手环8华为手表对比",
+        "type": "规格",
+        "true": null,
+        "pred": "对",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "iPhone和Android手机哪个好",
+        "type": "规格",
+        "true": null,
+        "pred": "iPhone",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "你好",
+        "type": "品牌",
+        "true": null,
+        "pred": "你",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "500元以下的蓝牙耳机",
+        "type": "商品",
+        "true": null,
+        "pred": "耳机",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "500元以下的蓝牙耳机",
+        "type": "商品",
+        "true": null,
+        "pred": "蓝",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "500元以下的蓝牙耳机",
+        "type": "商品",
+        "true": "蓝牙耳机",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "500元以下的蓝牙耳机",
+        "type": "规格",
+        "true": null,
+        "pred": "500元",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "运动鞋篮球鞋跑步鞋推荐",
+        "type": "商品",
+        "true": null,
+        "pred": "运动鞋篮球鞋跑步鞋",
+        "error_type": "false_positive"
+      },
+      {
+        "query": "运动鞋篮球鞋跑步鞋推荐",
+        "type": "商品",
+        "true": "跑步鞋",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "运动鞋篮球鞋跑步鞋推荐",
+        "type": "商品",
+        "true": "运动鞋",
+        "pred": null,
+        "error_type": "false_negative"
+      },
+      {
+        "query": "运动鞋篮球鞋跑步鞋推荐",
+        "type": "商品",
+        "true": "篮球鞋",
+        "pred": null,
+        "error_type": "false_negative"
+      }
+    ]
+  }
+}

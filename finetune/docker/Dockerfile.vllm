@@ -1,0 +1,12 @@
+# vLLM 服务镜像（构建上下文为仓库根目录）
+# 用法：docker build -f finetune/docker/Dockerfile.vllm -t qwen-cs-7b-vllm .
+FROM vllm/vllm-openai:latest
+
+# 国内网络镜像（可选）
+ENV HF_ENDPOINT=https://hf-mirror.com
+
+# 模型权重通过 volume 挂载（见 docker-compose.vllm.yml），不打包进镜像
+COPY finetune/scripts/serve_vllm.sh /app/serve_vllm.sh
+RUN chmod +x /app/serve_vllm.sh
+
+ENTRYPOINT ["/app/serve_vllm.sh"]

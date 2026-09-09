@@ -1,0 +1,160 @@
+{
+  "level": "keyword",
+  "total": 47,
+  "metrics": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0,
+    "micro_precision": 1.0,
+    "micro_recall": 1.0,
+    "micro_f1": 1.0,
+    "per_class": {
+      "kg_qa": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "errors": {}
+      },
+      "search": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 9,
+        "errors": {}
+      },
+      "classify": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2,
+        "errors": {}
+      },
+      "recommend": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8,
+        "errors": {}
+      },
+      "order": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5,
+        "errors": {}
+      },
+      "customer_service": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "errors": {}
+      },
+      "analytics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5,
+        "errors": {}
+      },
+      "chitchat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "errors": {}
+      }
+    },
+    "confusion_matrix": {
+      "search": {
+        "search": 9,
+        "kg_qa": 0,
+        "classify": 0,
+        "recommend": 0,
+        "order": 0,
+        "customer_service": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "recommend": {
+        "recommend": 8,
+        "kg_qa": 0,
+        "search": 0,
+        "classify": 0,
+        "order": 0,
+        "customer_service": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "classify": {
+        "classify": 2,
+        "kg_qa": 0,
+        "search": 0,
+        "recommend": 0,
+        "order": 0,
+        "customer_service": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "kg_qa": {
+        "kg_qa": 6,
+        "search": 0,
+        "classify": 0,
+        "recommend": 0,
+        "order": 0,
+        "customer_service": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "order": {
+        "order": 5,
+        "kg_qa": 0,
+        "search": 0,
+        "classify": 0,
+        "recommend": 0,
+        "customer_service": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "customer_service": {
+        "customer_service": 6,
+        "kg_qa": 0,
+        "search": 0,
+        "classify": 0,
+        "recommend": 0,
+        "order": 0,
+        "analytics": 0,
+        "chitchat": 0
+      },
+      "analytics": {
+        "analytics": 5,
+        "kg_qa": 0,
+        "search": 0,
+        "classify": 0,
+        "recommend": 0,
+        "order": 0,
+        "customer_service": 0,
+        "chitchat": 0
+      },
+      "chitchat": {
+        "chitchat": 6,
+        "kg_qa": 0,
+        "search": 0,
+        "classify": 0,
+        "recommend": 0,
+        "order": 0,
+        "customer_service": 0,
+        "analytics": 0
+      }
+    }
+  },
+  "errors": [],
+  "level1": {
+    "hit_rate": 1.0,
+    "accuracy_on_hits": 1.0,
+    "hit_count": 47,
+    "total": 47
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "updated": "2026-08-24",
+  "categories": ["售前咨询", "售后退换货", "物流发货", "退款发票", "投诉安抚", "政策规则", "域外拒答", "闲聊"],
+  "policies": [
+    {"policy_id": "faq_pre_001", "category": "售前咨询", "title": "商品信息以页面标注为准", "policy": "商品规格、参数、材质、产地等信息以商品详情页标注为准；页面未标注的，可先咨询在线客服确认后再下单。", "entities": {"rule": "页面标注为准"}},
+    {"policy_id": "faq_pre_002", "category": "售前咨询", "title": "库存与缺货", "policy": "商品库存以页面展示为准，拍下并支付成功即代表锁定库存；若出现超卖缺货，我们会主动联系您退款或换货。", "entities": {"rule": "以页面库存为准"}},
+    {"policy_id": "faq_pre_003", "category": "售前咨询", "title": "价格与优惠", "policy": "最终成交价以订单页实付金额为准；优惠券、满减、平台红包可叠加使用，具体以结算页展示为准。", "entities": {"rule": "以订单页实付为准"}},
+    {"policy_id": "faq_pre_004", "category": "售前咨询", "title": "尺码规格选择", "policy": "尺码建议参考商品页尺码表；拿不准时可根据身高体重咨询在线客服，但我们不保证尺码一定合适。", "entities": {"rule": "参考尺码表"}},
+    {"policy_id": "faq_pre_005", "category": "售前咨询", "title": "预售商品发货", "policy": "预售商品按商品页标注的预售时间发货，通常为付款后 15-30 天内；发货后会以站内信和短信通知。", "entities": {"duration": "15-30天"}},
+    {"policy_id": "faq_pre_006", "category": "售前咨询", "title": "定制商品不支持无理由退换", "policy": "定制类商品（刻字、定制尺寸、定制图案等）不支持 7 天无理由退换货；质量问题除外。", "entities": {"exception": "定制类商品"}},
+
+    {"policy_id": "faq_ret_001", "category": "售后退换货", "title": "7天无理由退换货", "policy": "自签收次日起 7 日内支持无理由退换货，商品需保持完好、不影响二次销售；定制类、鲜活易腐、贴身衣物等特殊商品除外。", "entities": {"duration": "7天", "condition": ["商品完好", "不影响二次销售"], "exception": ["定制类", "鲜活易腐", "贴身衣物"]}},
+    {"policy_id": "faq_ret_002", "category": "售后退换货", "title": "质量问题退换货", "policy": "商品存在质量问题的，支持退货或换货，退换货运费由商家承担；请保留商品与包装，提交问题照片或视频。", "entities": {"rule": "质量问题商家承担运费"}},
+    {"policy_id": "faq_ret_003", "category": "售后退换货", "title": "退换货流程", "policy": "在订单页申请退换货，填写原因并上传凭证，商家审核通过后按指引寄回；仓库验收后安排退款或换发。", "entities": {"flow": "申请→审核→寄回→验收→退款/换发"}},
+    {"policy_id": "faq_ret_004", "category": "售后退换货", "title": "换货发货时效", "policy": "换货商品验收通过后，我们会在 3-5 个工作日内为您重新发出；物流单号可在订单页查看。", "entities": {"duration": "3-5个工作日"}},
+    {"policy_id": "faq_ret_005", "category": "售后退换货", "title": "运费险", "policy": "订单含运费险的，退换货可获运费理赔，赔付金额以保险公司实际审核为准；无运费险的非质量问题退货运费由买家承担。", "entities": {"rule": "运费险以保险公司审核为准"}},
+    {"policy_id": "faq_ret_006", "category": "售后退换货", "title": "特殊商品退换限制", "policy": "定制类、鲜活易腐、已拆封的贴身衣物、虚拟商品等不支持无理由退换；商品存在质量问题的除外。", "entities": {"exception": ["定制类", "鲜活易腐", "贴身衣物", "虚拟商品"]}},
+
+    {"policy_id": "faq_log_001", "category": "物流发货", "title": "发货时效", "policy": "现货商品下单后 48 小时内发货，节假日顺延；预售商品按页面标注时间发货。", "entities": {"duration": "48小时", "exception": ["节假日顺延", "预售商品"]}},
+    {"policy_id": "faq_log_002", "category": "物流发货", "title": "物流查询", "policy": "发货后可在订单详情页查看物流单号与轨迹；如长时间未更新，可联系我们为您核查。", "entities": {"rule": "订单页查询"}},
+    {"policy_id": "faq_log_003", "category": "物流发货", "title": "物流异常处理", "policy": "包裹滞留、丢件或损坏的，我们会联系快递公司核查；确认丢件的，将为您补发或全额退款。", "entities": {"rule": "丢件补发或全额退款"}},
+    {"policy_id": "faq_log_004", "category": "物流发货", "title": "签收与验货", "policy": "建议先验货再签收；外包装破损的可以拒收，并拍照联系客服处理。", "entities": {"rule": "破损可拒收"}},
+    {"policy_id": "faq_log_005", "category": "物流发货", "title": "运费与包邮", "policy": "全场满 99 元包邮，不满 99 元按地区收取运费；偏远地区运费以结算页为准。", "entities": {"amount": "满99元包邮"}},
+    {"policy_id": "faq_log_006", "category": "物流发货", "title": "修改收货地址", "policy": "订单未发货前可在订单详情页自助修改收货地址；已发货的无法修改，可联系快递协商转寄。", "entities": {"rule": "未发货可修改"}},
+
+    {"policy_id": "faq_ref_001", "category": "退款发票", "title": "退款时效", "policy": "退款申请审核通过后，款项将在 3-7 个工作日内原路返回您的支付账户；具体到账时间以支付渠道为准。", "entities": {"duration": "3-7个工作日"}},
+    {"policy_id": "faq_ref_002", "category": "退款发票", "title": "退款到账查询", "policy": "可在订单页查看退款进度；超过 7 个工作日未到账的，请提供支付凭证，我们为您加急核实。", "entities": {"duration": "7个工作日"}},
+    {"policy_id": "faq_ref_003", "category": "退款发票", "title": "电子发票", "policy": "支持电子发票，下单时可选择开具；开票一般在交易完成后 1-3 个工作日内发送至您的邮箱。", "entities": {"duration": "1-3个工作日"}},
+    {"policy_id": "faq_ref_004", "category": "退款发票", "title": "发票重开与修改", "policy": "发票抬头或内容有误的，可在签收后 30 天内申请重开，需将原发票作废后重新开具。", "entities": {"duration": "30天"}},
+    {"policy_id": "faq_ref_005", "category": "退款发票", "title": "取消订单退款", "policy": "未发货订单可直接取消并全额退款；已发货订单需先申请退货，按退货流程处理。", "entities": {"rule": "未发货全额退款"}},
+    {"policy_id": "faq_ref_006", "category": "退款发票", "title": "原路返回", "policy": "退款默认原路返回：使用微信/支付宝支付的原路退回；使用银行卡支付的退回银行卡，到账时间以银行处理为准。", "entities": {"rule": "原路返回"}},
+
+    {"policy_id": "faq_cmp_001", "category": "投诉安抚", "title": "投诉受理", "policy": "您的投诉我们非常重视，会先安抚情绪并记录问题；简单问题当场答复，复杂问题转专员处理。", "entities": {"rule": "转专员处理"}},
+    {"policy_id": "faq_cmp_002", "category": "投诉安抚", "title": "升级处理时效", "policy": "升级处理的投诉，专员会在 24 小时内电话或站内信联系您，全程跟进到问题解决。", "entities": {"duration": "24小时"}},
+    {"policy_id": "faq_cmp_003", "category": "投诉安抚", "title": "补偿政策", "policy": "补偿方案需根据事实与订单情况核实后确定，我们不会在核实前承诺具体金额；确认责任后会给出方案并兑现。", "entities": {"rule": "核实后补偿"}},
+    {"policy_id": "faq_cmp_004", "category": "投诉安抚", "title": "服务态度投诉", "policy": "对客服服务态度不满的，可提供聊天记录或通话时间，我们会核实后对相关人员进行处理并向您反馈。", "entities": {"rule": "核实后处理"}},
+    {"policy_id": "faq_cmp_005", "category": "投诉安抚", "title": "外部投诉渠道", "policy": "如对处理结果不满意，您还可以通过平台客服或 12315 等监管渠道投诉，我们愿意配合处理。", "entities": {"rule": "12315"}},
+
+    {"policy_id": "faq_pol_001", "category": "政策规则", "title": "价格保护", "policy": "签收后 7 天内若同一商品降价，可在订单页申请价保，核实后差价将原路退回。", "entities": {"duration": "7天"}},
+    {"policy_id": "faq_pol_002", "category": "政策规则", "title": "运费规则", "policy": "非质量问题的退换货运费由买家承担，质量问题由商家承担；满 99 元包邮，偏远地区以结算页为准。", "entities": {"rule": "质量问题商家承担", "amount": "满99元包邮"}},
+    {"policy_id": "faq_pol_003", "category": "政策规则", "title": "会员权益", "policy": "注册会员享专属折扣、生日礼、积分翻倍等特权；等级越高权益越多，具体以会员中心展示为准。", "entities": {"rule": "会员中心展示为准"}},
+    {"policy_id": "faq_pol_004", "category": "政策规则", "title": "积分规则", "policy": "购物按实付金额累积积分，积分可在积分商城兑换优惠券或商品；有效期与规则以积分中心为准。", "entities": {"rule": "以积分中心为准"}},
+    {"policy_id": "faq_pol_005", "category": "政策规则", "title": "客服时间", "policy": "在线客服 9:00-21:00，全年无休；电话客服 9:00-18:00（工作日）。", "entities": {"time": ["9:00-21:00", "9:00-18:00"]}},
+    {"policy_id": "faq_pol_006", "category": "政策规则", "title": "支付方式", "policy": "支持微信、支付宝、银行卡、花呗、京东白条等多种支付方式，下单时选择即可。", "entities": {"rule": "多种支付方式"}},
+    {"policy_id": "faq_pol_007", "category": "政策规则", "title": "订单取消规则", "policy": "未发货订单可在订单页直接取消并全额退款；已发货订单需走退货流程。", "entities": {"rule": "未发货可直接取消"}},
+    {"policy_id": "faq_pol_008", "category": "政策规则", "title": "隐私保护", "policy": "我们会依法保护您的个人信息，不向第三方泄露订单与联系方式；营销短信可随时退订。", "entities": {"rule": "不泄露用户信息"}},
+
+    {"policy_id": "faq_ood_001", "category": "域外拒答", "title": "与购物无关的问题", "policy": "与购物、订单、售后无关的问题不在服务范围内，礼貌说明并引导回归正题或转人工。", "entities": {"rule": "引导回归正题"}},
+    {"policy_id": "faq_ood_002", "category": "域外拒答", "title": "敏感与违法违规", "policy": "涉及违法、敏感、人身攻击等内容的，不予回答并明确拒绝，必要时引导举报。", "entities": {"rule": "拒绝并引导举报"}},
+    {"policy_id": "faq_ood_003", "category": "域外拒答", "title": "外部比价与链接", "policy": "不提供第三方平台比价、外链或非官方渠道信息，避免误导用户。", "entities": {"rule": "不提供外链"}},
+    {"policy_id": "faq_ood_004", "category": "域外拒答", "title": "超出客服能力", "policy": "超出客服能力范围的问题（如法律、医疗建议）不臆断回答，建议咨询专业人士或转人工。", "entities": {"rule": "不臆断回答"}},
+    {"policy_id": "faq_ood_005", "category": "域外拒答", "title": "诱导违规", "policy": "代刷单、好评返现、套取优惠等违规请求一律拒绝，并可举报。", "entities": {"rule": "一律拒绝"}},
+
+    {"policy_id": "faq_chat_001", "category": "闲聊", "title": "问候", "policy": "用热情、礼貌的语气回应用户问候，保持简短自然，不展开无关话题。", "entities": {"rule": "简短自然"}},
+    {"policy_id": "faq_chat_002", "category": "闲聊", "title": "感谢", "policy": "回应感谢时表达欢迎与后续服务意愿，不添加承诺性内容。", "entities": {"rule": "不添加承诺"}},
+    {"policy_id": "faq_chat_003", "category": "闲聊", "title": "简单寒暄", "policy": "寒暄保持简短、友善，主动引导回购物或服务主题。", "entities": {"rule": "引导回主题"}},
+    {"policy_id": "faq_chat_004", "category": "闲聊", "title": "道别", "policy": "道别时使用礼貌结束语，提示后续可继续联系。", "entities": {"rule": "礼貌结束语"}}
+  ]
+}

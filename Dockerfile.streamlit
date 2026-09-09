@@ -1,0 +1,34 @@
+FROM python:3.11-slim
+
+LABEL maintainer="ec-agent"
+LABEL description="电商智能体 Streamlit 前端"
+
+WORKDIR /app
+
+# 构建参数：默认公共 PyPI 源，可通过 --build-arg 覆盖
+ARG PIP_INDEX_URL=https://pypi.org/simple
+
+# 安装系统依赖（Debian 官方源）
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安装 Python 依赖
+RUN pip install --no-cache-dir --timeout 60 --retries 10 \
+    streamlit>=1.38.0 \
+    requests>=2.31.0 \
+    -i "$PIP_INDEX_URL"
+
+# 复制前端代码
+COPY frontend/ ./frontend/
+
+# 暴露端口
+EXPOSE 8501
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+
+# 启动 Streamlit
+CMD ["streamlit", "run", "frontend/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]

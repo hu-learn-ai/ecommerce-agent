@@ -1,0 +1,107 @@
+services:
+  # ============================================
+  # API 服务（主后端）
+  # ============================================
+  agent-api:
+    build: .
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env.docker
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/api/health', timeout=5)\" || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - ec-network
+
+  # ============================================
+  # Streamlit 前端
+  # ============================================
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://agent-api:8002
+    depends_on:
+      - agent-api
+    restart: unless-stopped
+    networks:
+      - ec-network
+
+  # ============================================
+  # Neo4j 图数据库
+  # ============================================
+  neo4j:
+    image: neo4j:5.26-community
+    ports:
+      - "7474:7474"   # Browser UI
+      - "7687:7687"   # Bolt 协议
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:?请在 .env.docker 中设置 NEO4J_PASSWORD}
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_memory_heap_max__size=1G
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      # 导入脚本不随仓库分发：先用 scripts/import_taobao_data.py 生成
+      # data/processed/neo4j_import.cypher，再按 README 手动导入
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - ec-network
+
+  # ============================================
+  # MySQL 业务数据库 (gmall)
+  # ============================================
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:?请在 .env.docker 中设置 MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DB:-gmall}
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # 初始化 SQL 不随仓库分发：如需首次自动建库，请将
+      # data/processed/mysql_gmall.sql 挂载到 /docker-entrypoint-initdb.d/
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p${MYSQL_PASSWORD:?请在 .env.docker 中设置 MYSQL_PASSWORD} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - ec-network
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  mysql_data:
+
+networks:
+  ec-network:
+    driver: bridge

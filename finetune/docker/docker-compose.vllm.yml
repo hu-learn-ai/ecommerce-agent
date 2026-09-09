@@ -1,0 +1,32 @@
+# vLLM 服务 compose 片段（配合 finetune/docker/Dockerfile.vllm）
+# 用法：docker compose -f finetune/docker/docker-compose.vllm.yml up -d
+services:
+  vllm:
+    build:
+      context: ..
+      dockerfile: finetune/docker/Dockerfile.vllm
+    image: qwen-cs-7b-vllm:latest
+    container_name: qwen-cs-7b-vllm
+    ports:
+      - "8000:8000"
+    volumes:
+      # 合并后的模型目录挂载为只读
+      - ${CS_MODEL_PATH:-./models/qwen-cs-7b-merged}:/root/autodl-tmp/models/qwen-cs-7b-merged:ro
+    environment:
+      MODEL_PATH: /root/autodl-tmp/models/qwen-cs-7b-merged
+      SERVED_MODEL_NAME: ${CS_MODEL_NAME:-qwen-cs-7b}
+      MAX_MODEL_LEN: "4096"
+      GPU_UTIL: "0.90"
+      PORT: "8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

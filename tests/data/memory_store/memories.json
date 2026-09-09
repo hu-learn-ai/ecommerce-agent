@@ -1,0 +1,220 @@
+[
+  {
+    "content": "用户正在寻找蓝牙耳机推荐，处于购买决策阶段",
+    "category": "fact",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743854.4518628,
+    "importance": 0.6499999999999999,
+    "ttl_days": 90,
+    "last_accessed": 1787743854.4518628,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户未明确使用场景和预算，需要进一步询问",
+    "category": "fact",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743854.4545436,
+    "importance": 0.55,
+    "ttl_days": 90,
+    "last_accessed": 1787743854.4545436,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户正在考虑购买蓝牙耳机，具体询问了酷狗M2的价格",
+    "category": "fact",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743860.7204566,
+    "importance": 0.6,
+    "ttl_days": 90,
+    "last_accessed": 1787743860.7204566,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户对价格敏感，需要知道具体价格才能做购买决策",
+    "category": "preference",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743860.7223299,
+    "importance": 0.75,
+    "ttl_days": 365,
+    "last_accessed": 1787743860.7223299,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": true,
+    "linked_sessions": [
+      "multiturn_eval_1_1787743835"
+    ]
+  },
+  {
+    "content": "用户正在考虑购买真无线蓝牙耳机，且特别看重降噪功能",
+    "category": "preference",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743873.534731,
+    "importance": 0.8500000000000001,
+    "ttl_days": 730,
+    "last_accessed": 1787743873.534731,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": true,
+    "linked_sessions": [
+      "multiturn_eval_1_1787743835"
+    ]
+  },
+  {
+    "content": "用户对酷狗（KUGOU）M2 真无线蓝牙耳机感兴趣，但该耳机可能不具备主动降噪功能",
+    "category": "fact",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743873.5367107,
+    "importance": 0.6499999999999999,
+    "ttl_days": 90,
+    "last_accessed": 1787743873.5367107,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户可能用于运动或游戏场景（因询问了运动耳机）",
+    "category": "fact",
+    "session_id": "multiturn_eval_1_1787743835",
+    "timestamp": 1787743873.5376937,
+    "importance": 0.55,
+    "ttl_days": 90,
+    "last_accessed": 1787743873.5376937,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户对价格敏感，预算在500元以内",
+    "category": "preference",
+    "session_id": "multiturn_eval_2_1787743875",
+    "timestamp": 1787743893.0584123,
+    "importance": 0.8500000000000001,
+    "ttl_days": 730,
+    "last_accessed": 1787743893.0584123,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": true,
+    "linked_sessions": [
+      "multiturn_eval_2_1787743875"
+    ]
+  },
+  {
+    "content": "用户购机预算为500元以内",
+    "category": "fact",
+    "session_id": "multiturn_eval_2_1787743875",
+    "timestamp": 1787743911.4722714,
+    "importance": 0.75,
+    "ttl_days": 90,
+    "last_accessed": 1787743911.4722714,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户有购买手机的需求",
+    "category": "fact",
+    "session_id": "multiturn_eval_2_1787743875",
+    "timestamp": 1787743911.47427,
+    "importance": 0.6499999999999999,
+    "ttl_days": 90,
+    "last_accessed": 1787743911.47427,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户预算在500元以内购买平板电脑",
+    "category": "fact",
+    "session_id": "multiturn_eval_2_1787743875",
+    "timestamp": 1787743922.729394,
+    "importance": 0.7,
+    "ttl_days": 90,
+    "last_accessed": 1787743922.729394,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户有购买平板电脑的意向",
+    "category": "decision",
+    "session_id": "multiturn_eval_2_1787743875",
+    "timestamp": 1787743922.7314057,
+    "importance": 0.85,
+    "ttl_days": 360,
+    "last_accessed": 1787743922.7314057,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": true,
+    "linked_sessions": [
+      "multiturn_eval_2_1787743875"
+    ]
+  },
+  {
+    "content": "用户正在寻找无线鼠标，可能用于办公或游戏场景",
+    "category": "fact",
+    "session_id": "multiturn_eval_3_1787743925",
+    "timestamp": 1787743934.2609,
+    "importance": 0.6,
+    "ttl_days": 90,
+    "last_accessed": 1787743934.2609,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户正在考虑购买手机，对比 iPhone 15 和华为 Mate60",
+    "category": "fact",
+    "session_id": "multiturn_eval_4_1787743943",
+    "timestamp": 1787743954.1713245,
+    "importance": 0.6499999999999999,
+    "ttl_days": 90,
+    "last_accessed": 1787743954.1738594,
+    "access_count": 1,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户对华为 Mate60 有购买意向（至少是考虑对象）",
+    "category": "fact",
+    "session_id": "multiturn_eval_4_1787743943",
+    "timestamp": 1787743954.1756465,
+    "importance": 0.6,
+    "ttl_days": 90,
+    "last_accessed": 1787743954.1756465,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": false,
+    "linked_sessions": []
+  },
+  {
+    "content": "用户可能偏好高端旗舰手机（对比的是两款旗舰机型）",
+    "category": "preference",
+    "session_id": "multiturn_eval_4_1787743943",
+    "timestamp": 1787743954.1776514,
+    "importance": 0.65,
+    "ttl_days": 365,
+    "last_accessed": 1787743954.1776514,
+    "access_count": 0,
+    "forget_score": 0.0,
+    "shared": true,
+    "linked_sessions": [
+      "multiturn_eval_4_1787743943"
+    ]
+  }
+]

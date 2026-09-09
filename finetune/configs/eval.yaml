@@ -1,0 +1,13 @@
+# 评估配置（P3 使用，测试集与 Judge 模型）
+test_path: data/eval/test_labeled.jsonl   # 人工标注测试集，唯一评估口径
+judge_model: deepseek-chat
+judge_dimensions: [correctness, completeness, tone, safety]
+compare_models:
+  base: Qwen/Qwen2.5-7B-Instruct
+  finetuned: Qwen/Qwen2.5-7B-Instruct-merged
+  deepseek: deepseek-chat
+targets:
+  policy_accuracy: 0.90
+  hallucination_rate: 0.05
+  ood_refusal_rate: 0.90
+  multi_turn_keep_rate: 0.85

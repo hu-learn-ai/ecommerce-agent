@@ -1,0 +1,265 @@
+{
+  "in_domain_total": 40,
+  "ood_total": 17,
+  "classification": {
+    "accuracy": 0.7895,
+    "macro_precision": 0.9172,
+    "macro_recall": 0.76,
+    "macro_f1": 0.77,
+    "micro_precision": 0.7895,
+    "micro_recall": 0.7895,
+    "micro_f1": 0.7895,
+    "per_class": {
+      "医药保健": {
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.3333,
+        "support": 10,
+        "errors": {
+          "无法判断": 8
+        }
+      },
+      "家用电器": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 10,
+        "errors": {
+          "无法判断": 2
+        }
+      },
+      "手机数码": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 10,
+        "errors": {
+          "无法判断": 2
+        }
+      },
+      "食品生鲜": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10,
+        "errors": {}
+      },
+      "无法判断": {
+        "precision": 0.5862,
+        "recall": 1.0,
+        "f1": 0.7391,
+        "support": 17,
+        "errors": {}
+      }
+    },
+    "confusion_matrix": {
+      "手机数码": {
+        "手机数码": 8,
+        "无法判断": 2,
+        "医药保健": 0,
+        "家用电器": 0,
+        "食品生鲜": 0
+      },
+      "家用电器": {
+        "家用电器": 8,
+        "无法判断": 2,
+        "医药保健": 0,
+        "手机数码": 0,
+        "食品生鲜": 0
+      },
+      "医药保健": {
+        "医药保健": 2,
+        "无法判断": 8,
+        "家用电器": 0,
+        "手机数码": 0,
+        "食品生鲜": 0
+      },
+      "食品生鲜": {
+        "食品生鲜": 10,
+        "医药保健": 0,
+        "家用电器": 0,
+        "手机数码": 0,
+        "无法判断": 0
+      },
+      "无法判断": {
+        "无法判断": 17,
+        "医药保健": 0,
+        "家用电器": 0,
+        "手机数码": 0,
+        "食品生鲜": 0
+      }
+    }
+  },
+  "calibration": {
+    "ece": 0.0008,
+    "bins": [
+      {
+        "bin_low": 0.0,
+        "bin_high": 0.1,
+        "count": 12,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.1,
+        "bin_high": 0.2,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.2,
+        "bin_high": 0.3,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.3,
+        "bin_high": 0.4,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.4,
+        "bin_high": 0.5,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.5,
+        "bin_high": 0.6,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.6,
+        "bin_high": 0.7,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.7,
+        "bin_high": 0.8,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.8,
+        "bin_high": 0.9,
+        "count": 0,
+        "avg_conf": 0.0,
+        "acc": 0.0,
+        "gap": 0.0
+      },
+      {
+        "bin_low": 0.9,
+        "bin_high": 1.0,
+        "count": 28,
+        "avg_conf": 0.9988,
+        "acc": 1.0,
+        "gap": 0.0012
+      }
+    ]
+  },
+  "ood_detection": {
+    "ood_recall": 1.0,
+    "indomain_accept_rate": 0.7,
+    "fpr_at_95_tpr": 0.0,
+    "auroc": 0.85,
+    "confusion": {
+      "tp": 17,
+      "fp": 12,
+      "fn": 0,
+      "tn": 28
+    }
+  },
+  "in_domain_errors": [
+    {
+      "title": "荣耀Magic6 至臻版",
+      "expected": "手机数码",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "realme GT5 240W快充",
+      "expected": "手机数码",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "飞利浦电动牙刷 HX6730",
+      "expected": "家用电器",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "小米扫地机器人 扫拖一体",
+      "expected": "家用电器",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "欧姆龙电子体温计 红外",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "Swisse深海鱼油胶囊",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "三九感冒灵颗粒",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "同仁堂六味地黄丸",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "云南白药气雾剂",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "强生邦迪创可贴",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "杜蕾斯避孕套 超薄",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    },
+    {
+      "title": "稳健医用口罩 一次性",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0
+    }
+  ],
+  "ood_errors": []
+}

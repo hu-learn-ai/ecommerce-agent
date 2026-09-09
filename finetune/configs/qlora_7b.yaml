@@ -1,0 +1,40 @@
+# QLoRA 主跑配置（Run A：20k 全场景）
+# 对应 docs/微调项目执行计划.md 3.2
+model_name: Qwen/Qwen2.5-7B-Instruct
+output_dir: checkpoints/qwen-cs-7b
+
+quantization:
+  method: bitsandbytes
+  load_in_4bit: true
+  bnb_4bit_quant_type: nf4
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_compute_dtype: bf16
+
+lora:
+  r: 64
+  alpha: 128
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+training:
+  max_seq_len: 2048
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 8          # 等效 global batch 32
+  num_train_epochs: 3
+  learning_rate: 2.0e-4
+  lr_scheduler: cosine
+  warmup_ratio: 0.10
+  weight_decay: 0.01
+  gradient_checkpointing: true
+  packing: false                          # 标准对话数据集，不 packing
+  loss_mask: assistant_only               # 只对 assistant 回答计算 loss（关键面试点）
+  save_strategy: steps
+  save_steps: 500                         # adapter_only，支持断点续跑
+  logging_strategy: steps
+  logging_steps: 20
+  report_to: tensorboard                  # 或 wandb
+  seed: 42
+
+data:
+  train_path: data/processed/train.jsonl
+  val_path: data/processed/val.jsonl

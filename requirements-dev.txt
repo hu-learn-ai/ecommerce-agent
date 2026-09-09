@@ -1,0 +1,12 @@
+# ============================================
+# 开发/测试依赖（CI 与本地开发使用）
+# 用法: pip install -r requirements-dev.txt
+# ============================================
+-r requirements.txt
+
+# --- Test ---
+pytest>=8.0
+
+# --- BM25 baseline（tests/bm25_baseline.py） ---
+jieba>=0.42.1
+rank-bm25>=0.2.2

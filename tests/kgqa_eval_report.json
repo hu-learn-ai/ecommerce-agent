@@ -1,0 +1,271 @@
+{
+  "cypher_generation": {
+    "total_cases": 8,
+    "results": [
+      {
+        "query": "华为有哪些产品？",
+        "category": "brand_query",
+        "generated_cypher": "MATCH (t:Trademark) WHERE t.name CONTAINS '华为' MATCH (t)<-[:Have]-(p:SPU) RETURN p.name AS product, t.name AS brand LIMIT 10",
+        "is_none": false,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": "Trademark"
+      },
+      {
+        "query": "华为是什么品牌",
+        "category": "brand_query",
+        "generated_cypher": "MATCH (t:Trademark) WHERE t.name CONTAINS '华为' RETURN t.name AS brand LIMIT 5",
+        "is_none": false,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": "Trademark"
+      },
+      {
+        "query": "吸尘器属于什么类别",
+        "category": "category_query",
+        "generated_cypher": "MATCH (p:SPU) WHERE p.name CONTAINS '吸尘器' MATCH (p)-[:Belong]->(c:Category3) RETURN p.name AS product, c.name AS category LIMIT 5",
+        "is_none": false,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": "Category"
+      },
+      {
+        "query": "手机属于哪个分类",
+        "category": "category_query",
+        "generated_cypher": "MATCH (p:SPU) WHERE p.name CONTAINS '手机' MATCH (p)-[:Belong]->(c:Category3) RETURN p.name AS product, c.name AS category LIMIT 5",
+        "is_none": false,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": "Category"
+      },
+      {
+        "query": "这款手机的内存是多少",
+        "category": "attr_query",
+        "generated_cypher": "NONE",
+        "is_none": true,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": null
+      },
+      {
+        "query": "和iPhone类似的产品有哪些",
+        "category": "relation_query",
+        "generated_cypher": "MATCH (p:SPU) WHERE p.name CONTAINS 'iPhone' \nMATCH (p)-[:Belong]->(c:Category3) \nMATCH (similar:SPU)-[:Belong]->(c) \nWHERE similar <> p \nRETURN DISTINCT similar.name AS product, c.name AS category \nLIMIT 10",
+        "is_none": false,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": "SPU"
+      },
+      {
+        "query": "你好",
+        "category": "chitchat",
+        "generated_cypher": "NONE",
+        "is_none": true,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": null
+      },
+      {
+        "query": "今天天气怎么样",
+        "category": "chitchat",
+        "generated_cypher": "NONE",
+        "is_none": true,
+        "keyword_coverage": 1.0,
+        "passed_safety": true,
+        "expected_node": null
+      }
+    ],
+    "chitchat_none_rate": 1.0,
+    "avg_keyword_coverage": 1.0,
+    "safety_pass_rate": 1.0
+  },
+  "security": {
+    "total": 8,
+    "passed": 8,
+    "pass_rate": 1.0,
+    "results": [
+      {
+        "name": "L0 多语句注入",
+        "injected_cypher": "MATCH (n) RETURN n; DROP DATABASE neo4j;",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L1 非 MATCH 开头 (写操作)",
+        "injected_cypher": "CREATE (n:Test) RETURN n",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L2 DELETE 写操作",
+        "injected_cypher": "MATCH (n:Test) DELETE n",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L2 CALL 子过程",
+        "injected_cypher": "MATCH (n) CALL db.labels() YIELD label RETURN label",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L3 笛卡尔积 (多 MATCH 无 WHERE)",
+        "injected_cypher": "MATCH (a), (b), (c) RETURN a, b, c",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L3 MATCH 子句过多 (>5)",
+        "injected_cypher": "MATCH (a) MATCH (b) MATCH (c) MATCH (d) MATCH (e) MATCH (f) MATCH (g) RETURN a",
+        "blocked": true,
+        "expected_blocked": true,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "",
+        "passed": true
+      },
+      {
+        "name": "L4 自动注入 LIMIT (合法查询但无 LIMIT)",
+        "injected_cypher": "MATCH (n:SPU) WHERE n.name CONTAINS '手机' RETURN n.name AS name",
+        "blocked": false,
+        "expected_blocked": false,
+        "modified": true,
+        "expected_modified": true,
+        "result_cypher": "MATCH (n:SPU) WHERE n.name CONTAINS '手机' RETURN n.name AS name LIMIT 100",
+        "passed": true
+      },
+      {
+        "name": "合法查询 (应通过)",
+        "injected_cypher": "MATCH (n:SPU) WHERE n.name CONTAINS '手机' RETURN n.name LIMIT 5",
+        "blocked": false,
+        "expected_blocked": false,
+        "modified": false,
+        "expected_modified": false,
+        "result_cypher": "MATCH (n:SPU) WHERE n.name CONTAINS '手机' RETURN n.name LIMIT 5",
+        "passed": true
+      }
+    ]
+  },
+  "e2e": {
+    "available": true,
+    "total": 8,
+    "results": [
+      {
+        "query": "华为有哪些产品？",
+        "category": "brand_query",
+        "answer": "根据知识图谱查询结果，华为目前有以下产品（共10款）：\n\n**平板电脑（7款）：**\n- HUAWEI MatePad Mini 悦读版（8.8英寸OLED屏，雪域白/曜石黑）\n- HUAWEI MatePad Air 12英寸 2025（羽砂白/烟云灰）\n- HUAWEI MatePad Pro 13.2英寸 2025（宣白）\n- HUAWEI MatePad 11.5'S 灵动款（深空灰）\n- HUAWEI MatePad 11.5'S（深空灰）\n- HUAWEI MatePad 11.5 2024款（冰霜银）\n\n**手机（2款）：**\n- HUAWEI Pura 80（12GB+512G",
+        "latency_ms": 3275.21,
+        "judge_latency_ms": 2637.24,
+        "judge_score": 6.8,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "华为是什么品牌",
+        "category": "brand_query",
+        "answer": "根据查询结果，**华为是一个品牌**，具体来说，它是一个知名的科技品牌（全称“华为技术有限公司”），主要涉及通信设备、智能手机、云计算等领域。查询结果中直接给出了品牌名称“华为”，因此可以确认您所问的“华为”就是该品牌本身。如果您想了解更具体的产品线或背景，可以进一步提问哦！",
+        "latency_ms": 2684.7,
+        "judge_latency_ms": 2759.34,
+        "judge_score": 7.9,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "吸尘器属于什么类别",
+        "category": "category_query",
+        "answer": "根据查询结果，**吸尘器属于“家用电器”类别**。\n\n在知识图谱中，多款吸尘器产品（如艾美特、必胜、美的、小米、戴森等）均被归类为“家用电器”。因此，可以确认吸尘器属于家用电器这一大类。",
+        "latency_ms": 2368.4,
+        "judge_latency_ms": 2263.5,
+        "judge_score": 9.2,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "手机属于哪个分类",
+        "category": "category_query",
+        "answer": "根据查询结果，**“手机”并没有直接作为一个独立商品出现在知识图谱中**，但图谱里有多款**支持手机蓝牙或手机操控功能**的产品，它们分别属于以下分类：\n\n- **医药保健**：如SKG眼部按摩仪、SKG颈椎按摩器、左点智能艾灸盒等（这些产品可通过手机App或蓝牙操控）。\n- **家用电器**：如艾益生双头灸温阳仪、夏普50英寸智能电视（支持手机投屏）。\n\n因此，**“手机”本身不属于某个固定分类**，而是作为这些产品的**功能控制方式**出现。如果您是想问“手机这个品类”的分类，当前图谱中没有直接数据，建议换个更具体的商品名称（如“智能手机”）再查询。",
+        "latency_ms": 2915.57,
+        "judge_latency_ms": 2311.12,
+        "judge_score": 7.2,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "这款手机的内存是多少",
+        "category": "attr_query",
+        "answer": "作为电商知识助手，我可以告诉你，**我无法直接查看你正在浏览的那款手机的具体参数**，因为我没有接入实时商品数据库，也看不到你屏幕上的商品页面。\n\n不过，我可以教你**3秒钟自己找到答案**的方法，以及**如何判断这个信息是否可靠**：\n\n**1. 最快查找路径（按平台区分）：**\n- **淘宝/天猫**：在商品标题下方，通常有一行“选择：颜色/版本”的选项，点击“版本”或“规格”，里面会明确列出“8GB+128GB”、“12GB+256GB”等（前面的数字是运行内存，后面是存储空间）。\n- **京东/拼多多**：在商品主图下方，有“规格参数”或“商品介绍”标签，点进去，在“主体”或“存储”一",
+        "latency_ms": 7510.8,
+        "judge_latency_ms": 3098.81,
+        "judge_score": 7.7,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "和iPhone类似的产品有哪些",
+        "category": "relation_query",
+        "answer": "根据知识图谱的查询结果，我为您找到了以下与iPhone类似的产品（均为“手机数码”类目下的智能手机或平板电脑）：\n\n**智能手机类：**\n- OPPO Reno14（12GB+256GB，人鱼姬配色，支持AI拍照）\n- vivo iQOO Z10x（6500mAh大电池，天玑7300芯片）\n- vivo iQOO Neo11（骁龙8至尊版，2K 144Hz屏幕）\n- 小米Redmi Note14（5110mAh大电量，金刚品质）\n- OPPO A3i Plus（超硬核抗摔耐磨，OLED阳光屏）\n\n**平板电脑类（与iPhone生态类似）：**\n- Apple iPad Air 11英寸（M3芯",
+        "latency_ms": 5271.95,
+        "judge_latency_ms": 4071.54,
+        "judge_score": 7.5,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "你好",
+        "category": "chitchat",
+        "answer": "你好！很高兴为你提供电商方面的帮助。😊\n\n作为电商知识助手，我可以帮你解答以下类型的问题：\n\n1. **平台运营**：淘宝、京东、拼多多、抖音小店等平台的规则、流量机制、活动报名。\n2. **店铺优化**：标题优化、主图设计、详情页转化率提升、评价管理。\n3. **营销推广**：直通车/万相台投放、搜索排名、直播带货、内容种草（小红书/抖音）。\n4. **供应链与物流**：选品策略、库存管理、发货时效、售后处理。\n5. **数据分析**：核心指标（转化率、客单价、复购率）、竞品分析、市场趋势。\n6. **法规与风险**：广告法违禁词、知识产权、税务合规、平台处罚规避。\n\n如果你有具体问题，可以",
+        "latency_ms": 3889.78,
+        "judge_latency_ms": 2357.04,
+        "judge_score": 8.5,
+        "fallback_triggered": false,
+        "error": null
+      },
+      {
+        "query": "今天天气怎么样",
+        "category": "chitchat",
+        "answer": "作为电商知识助手，我的专长是购物、商品、促销、物流、售后等电商领域的问题。关于“今天天气怎么样”，我无法获取实时气象数据，也无法预测天气。\n\n**诚实告知：** 我目前没有联网查询天气的功能，所以无法给你准确的天气信息。\n\n**建议你：**\n1. 打开手机自带的“天气”应用，或搜索“天气”关键词。\n2. 访问中国天气网（www.weather.com.cn）或使用墨迹天气、彩云天气等App。\n3. 如果你在电商平台（如淘宝、京东）上，可以搜索“雨伞”“防晒衣”等商品——如果你告诉我你所在的城市和出行需求，我可以帮你推荐适合当前季节的防雨或防晒装备，以及对应的优惠券。\n\n需要我帮你推荐“雨天通勤",
+        "latency_ms": 3732.61,
+        "judge_latency_ms": 2669.76,
+        "judge_score": 8.2,
+        "fallback_triggered": false,
+        "error": null
+      }
+    ],
+    "avg_judge_score": 7.88,
+    "fallback_rate": 0.0,
+    "token_usage": {
+      "total_calls": 24,
+      "total_tokens": 13743,
+      "total_cost_usd": 0.002466,
+      "by_model": {
+        "deepseek-chat": {
+          "prompt_tokens": 9870,
+          "completion_tokens": 3873,
+          "total_tokens": 13743,
+          "cost_usd": 0.00246624,
+          "calls": 24
+        }
+      }
+    }
+  }
+}

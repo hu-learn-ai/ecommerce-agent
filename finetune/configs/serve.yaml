@@ -1,0 +1,6 @@
+# vLLM 部署配置（P4 使用）
+model_path: Qwen/Qwen2.5-7B-Instruct-merged
+served_model_name: qwen-cs-7b
+max_model_len: 4096
+gpu_memory_utilization: 0.90
+port: 8000

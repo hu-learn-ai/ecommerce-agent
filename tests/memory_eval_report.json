@@ -1,0 +1,281 @@
+{
+  "summary_quality": {
+    "available": true,
+    "total": 2,
+    "results": [
+      {
+        "key_fact_retention": 1.0,
+        "missed_facts": [],
+        "compression_ratio": 1.18,
+        "summary_length": 68,
+        "original_length": 80,
+        "name": "偏好+预算对话",
+        "summary": "用户预算约8000元，主要用途为写代码，偏好14寸便携机型。助手建议16GB内存以上、SSD 512GB起。用户未指定品牌，需后续推荐。"
+      },
+      {
+        "key_fact_retention": 1.0,
+        "missed_facts": [],
+        "compression_ratio": 1.06,
+        "summary_length": 118,
+        "original_length": 125,
+        "name": "购买决策对话",
+        "summary": "用户询问降噪耳机推荐，助手推荐Sony WH-1000XM5（约2299元）或Bose QC Ultra。用户嫌贵，要求2000元以内，助手改荐Sony WH-1000XM4，约1599元。用户偏好：预算2000元内，倾向Sony品牌。"
+      }
+    ],
+    "avg_key_fact_retention": 1.0,
+    "avg_compression_ratio": 1.12
+  },
+  "long_term_retrieval": {
+    "available": true,
+    "total": 4,
+    "results": [
+      {
+        "conversation": "我是 Java 开发者,平时用 Spring Boot",
+        "expected_extract": "Java",
+        "category": "preference",
+        "should_retrieve": true,
+        "retrieved_count": 1,
+        "hit": true,
+        "retrieved_top": "用户是 Java 开发者，使用 Spring Boot"
+      },
+      {
+        "conversation": "我对价格敏感,预算一般控制在500以内",
+        "expected_extract": "500",
+        "category": "preference",
+        "should_retrieve": true,
+        "retrieved_count": 2,
+        "hit": true,
+        "retrieved_top": "用户对价格敏感，预算一般控制在500以内"
+      },
+      {
+        "conversation": "上次我买了台华为MateBook",
+        "expected_extract": "华为",
+        "category": "fact",
+        "should_retrieve": true,
+        "retrieved_count": 3,
+        "hit": true,
+        "retrieved_top": "用户购买过华为MateBook"
+      },
+      {
+        "conversation": "今天天气不错",
+        "expected_extract": null,
+        "category": null,
+        "should_retrieve": false,
+        "retrieved_count": 3,
+        "hit": false,
+        "retrieved_top": "用户对价格敏感，预算一般控制在500以内"
+      }
+    ],
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1": 0.8571
+  },
+  "cross_session_migration": {
+    "available": true,
+    "session_a_said": "Python 开发者, FastAPI",
+    "session_b_query": "我平时用什么编程语言",
+    "migration_hit": true,
+    "context_built": "[用户历史记忆]\n- 用户是 Python 开发者，偏好使用 FastAPI (preference)\n- 用户是 Java 开发者，使用 Spring Boot (fact)\n- 用户对价格敏感，预算一般控制在500以内 (preference)",
+    "linked_sessions": [
+      [
+        "test_session"
+      ],
+      [
+        "session_A"
+      ]
+    ]
+  },
+  "forgetting_curve": {
+    "forgetting_curves": [
+      {
+        "name": "高重要性",
+        "importance": 0.9,
+        "access_count": 5,
+        "curve": [
+          {
+            "days": 0,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 1,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 7,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 30,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 90,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 365,
+            "forget_score": 0.3109,
+            "retention": 0.6891
+          }
+        ]
+      },
+      {
+        "name": "中重要性",
+        "importance": 0.5,
+        "access_count": 2,
+        "curve": [
+          {
+            "days": 0,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 1,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 7,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 30,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 90,
+            "forget_score": 0.2429,
+            "retention": 0.7571
+          },
+          {
+            "days": 365,
+            "forget_score": 0.7068,
+            "retention": 0.2932
+          }
+        ]
+      },
+      {
+        "name": "低重要性",
+        "importance": 0.2,
+        "access_count": 0,
+        "curve": [
+          {
+            "days": 0,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 1,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 7,
+            "forget_score": 0.0184,
+            "retention": 0.9816
+          },
+          {
+            "days": 30,
+            "forget_score": 0.1874,
+            "retention": 0.8126
+          },
+          {
+            "days": 90,
+            "forget_score": 0.4988,
+            "retention": 0.5012
+          },
+          {
+            "days": 365,
+            "forget_score": 0.9167,
+            "retention": 0.0833
+          }
+        ]
+      },
+      {
+        "name": "高重要性未访问",
+        "importance": 0.9,
+        "access_count": 0,
+        "curve": [
+          {
+            "days": 0,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 1,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 7,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 30,
+            "forget_score": 0.0,
+            "retention": 1.0
+          },
+          {
+            "days": 90,
+            "forget_score": 0.1032,
+            "retention": 0.8968
+          },
+          {
+            "days": 365,
+            "forget_score": 0.5609,
+            "retention": 0.4391
+          }
+        ]
+      }
+    ],
+    "ttl_validation": [
+      {
+        "category": "preference",
+        "importance": 0.5,
+        "expected_ttl": 365,
+        "actual_ttl": 365,
+        "passed": true
+      },
+      {
+        "category": "fact",
+        "importance": 0.5,
+        "expected_ttl": 90,
+        "actual_ttl": 90,
+        "passed": true
+      },
+      {
+        "category": "context",
+        "importance": 0.5,
+        "expected_ttl": 30,
+        "actual_ttl": 30,
+        "passed": true
+      },
+      {
+        "category": "ephemeral",
+        "importance": 0.5,
+        "expected_ttl": 1,
+        "actual_ttl": 1,
+        "passed": true
+      },
+      {
+        "category": "preference",
+        "importance": 0.95,
+        "expected_ttl": 1095,
+        "actual_ttl": 1095,
+        "passed": true
+      }
+    ],
+    "expired_check": {
+      "expired_is_expired": true,
+      "not_expired_is_expired": true
+    }
+  }
+}

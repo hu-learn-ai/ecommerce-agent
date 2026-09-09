@@ -1,0 +1,264 @@
+{
+  "scenarios": [
+    {
+      "scenario_name": "商品咨询 + 追问规格",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "有没有蓝牙耳机推荐",
+          "answer": "为您找到了几款蓝牙耳机，以下是整理后的结果（均已去除耳机套/耳帽等配件类商品）：\n\n## 🎧 蓝牙耳机推荐\n\n**1. JBL MINI NC 黑色**（真无线 · 主动降噪）\n- 主动降噪、防水防汗，运动通勤两相宜，苹果/华为/小米/安卓通用\n\n**2. JBL TUNE215BT 曜石黑**（半入耳 · 无线）\n- 蓝牙5.0、Type-C极速充电、超长续航，支持苹果安卓\n\n**3. 酷狗（KUGOU）M2 星空灰**（真无线 · 半入耳）\n- 柄式半入耳设计，适合运动游戏，超长续航智能版\n\n**4. 联想（Lenovo）TC09 锖色**（无线）\n- 联想品牌无线蓝牙耳机\n\n**5. 纽曼（Newmine）V28**（运动蓝牙耳机）\n- 支持对讲机防丢、音乐播放、可录音，持久续航，磁吸收纳，手机通用\n\n**6. Masentek F808**（骨传导 · 挂耳式）\n- 不入耳式设计，",
+          "expected_keywords": [
+            "蓝牙",
+            "耳机"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.8,
+          "latency_ms": 22158.37,
+          "judge_latency_ms": 2986.39,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "第一款多少钱",
+          "answer": "我为您查询了 **JBL MINI NC 黑色** 蓝牙耳机的信息，搜索结果中找到了这款商品，但**很抱歉，工具返回的结果中没有包含这款耳机的具体价格信息**。\n\n从搜索结果来看，这款商品的信息如下：\n\n**JBL MINI NC 黑色** 蓝牙耳机\n- 品牌：JBL\n- 分类：手机数码\n- 特点：主动降噪真无线耳机、无线运动耳机、防水防汗、苹果华为小米安卓通用\n\n---\n\n📌 由于当前商品库中未提供该款耳机的具体售价，我暂时无法告诉您准确的价格。\n\n如果您需要，我可以：\n1. 帮您**查询其他几款蓝牙耳机的价格**（比如 JBL TUNE215BT、酷狗 M2 等）\n2. 或者根据您的**预算**为您重新推荐合适的蓝牙耳机\n\n请问您希望怎么处理呢？😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.3,
+          "latency_ms": 4160.97,
+          "judge_latency_ms": 3372.8,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "有降噪功能吗",
+          "answer": "我来为您查询一下 **JBL MINI NC 黑色** 这款蓝牙耳机的降噪功能信息。\n\n根据搜索结果，这款商品的信息如下：\n\n**JBL MINI NC 黑色** 蓝牙耳机\n- 品牌：JBL\n- 分类：手机数码\n- 特点：**主动降噪**真无线耳机、无线运动耳机、防水防汗、苹果华为小米安卓通用\n\n---\n\n✅ **是的，这款 JBL MINI NC 黑色 蓝牙耳机具备主动降噪功能！**\n\n从商品标题和描述来看，它明确标注了\"**主动降噪**\"特性，属于真无线降噪耳机，同时具备防水防汗功能，适合运动通勤等场景使用。\n\n请问还需要了解其他信息吗？比如它的续航、佩戴方式，或者需要我帮您对比其他几款耳机的降噪情况？😊",
+          "expected_keywords": [
+            "降噪"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.2,
+          "latency_ms": 1899.81,
+          "judge_latency_ms": 2729.38,
+          "intent": "chitchat",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_1_1787747706"
+    },
+    {
+      "scenario_name": "偏好记忆 + 后续推荐",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "我对价格敏感,预算500以内",
+          "answer": "根据您\"预算500元以内、价格敏感\"的需求，我为您找到了以下商品推荐：\n\n## 🛒 为您推荐的商品\n\n### 📱 手机数码类\n1. **VIMAI 无线监听耳机**（适用mivsn魅声/十盏灯/iCON艾肯/Ickb so8声卡）\n   - 特点：无延迟、HiFi音质、兼容性强，含监听耳机2个+发射器\n   - 适用场景：直播、录音等\n\n### 🏠 家用电器类\n2. **美的烘干机 家用小型速干衣机**\n   - 特点：风干烘干、折叠设计、大容量，适合家庭日常使用\n\n### 💆 医药保健类\n3. **华为通用足浴盆 全自动按摩洗脚盆**\n   - 特点：电动恒温加热、高深桶设计，旋钮标准款，泡脚养生好物\n\n### 🍤 食品生鲜类\n4. **京鲜生 冷冻黑虎虾 海鲜礼盒**（1kg，8-10个头，长23cm）\n5. **椰子冻 新鲜椰奶冻**（330g×6盒整箱）\n\n---\n\n💡 **温馨提",
+          "expected_keywords": [
+            "500"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 6.7,
+          "latency_ms": 13698.32,
+          "judge_latency_ms": 3228.01,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "推荐个手机",
+          "answer": "很抱歉，根据系统查询结果，目前没有找到符合您**预算500元以内**的手机商品。😔\n\n### 📋 查询结果说明\n\n在售的手机商品价格如下：\n- **Apple iPhone 13 mini**（二手，128G）：¥1449\n- **Apple iPhone 16**（128GB）：¥4476.61\n- **Apple iPhone 17**（256GB）：¥5469.01\n\n这些手机的最低价格也达到了 **¥1449**，超出了您的500元预算较多。\n\n### 💡 小建议\n1. 如果您能适当**提高预算**（比如1000-1500元），可以考虑二手的 iPhone 13 mini；\n2. 或者您也可以考虑**儿童电话手表**等价格较低的智能通讯设备；\n3. 如果有其他需求，比如千元机推荐或特定用途，我可以帮您进一步查询！\n\n请问需要我帮您调整搜索方向吗？😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.5,
+          "latency_ms": 13200.02,
+          "judge_latency_ms": 3666.5,
+          "intent": "recommend",
+          "evaluation_type": "long_term_recall",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "再推荐一款平板",
+          "answer": "非常抱歉，经过系统查询，**没有找到符合条件的平板电脑**。😔\n\n### 📋 查询结果说明\n\n系统为您匹配到的\"手机数码\"类商品中，实际没有平板电脑，包括：\n- 新科广场舞蓝牙音箱（8吋+双话筒）\n- 中信出版社图书音像\n- 帮宝适母婴用品\n- 新秀丽箱包配饰\n- 花王母婴用品\n\n以上商品均与平板电脑需求**完全无关**，无法为您推荐。\n\n### 💡 小建议\n1. 如果您能**放宽预算**或**降低要求**，我可以换个方向帮您查询；\n2. 或者您可以告诉我平板的具体用途（如看剧、学习、办公）和期望品牌，我再试试看；\n3. 如果系统有新的货源，后续也可以再为您查询。\n\n请问需要我调整查询条件，或者帮您看看其他类型的数码产品吗？😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 6.6,
+          "latency_ms": 9644.34,
+          "judge_latency_ms": 2729.8,
+          "intent": "recommend",
+          "evaluation_type": "long_term_recall",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_2_1787747744"
+    },
+    {
+      "scenario_name": "话题切换",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "你好",
+          "answer": "你好！😊 很高兴为你服务。\n\n我是你的电商智能助手，可以帮你：\n\n- 🔍 **搜索商品** — 查找你想要的商品\n- 🛍️ **个性化推荐** — 根据你的需求推荐合适商品\n- 📦 **订单查询** — 追踪订单和物流信息\n- 🏷️ **商品分类** — 识别商品所属分类\n- 📊 **数据分析** — 了解销售趋势和热销排行\n- 💬 **售后服务** — 解答退换货等政策问题\n\n有什么我可以帮你的吗？无论是想买东西、查订单，还是了解售后政策，尽管告诉我！😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.4,
+          "latency_ms": 1747.13,
+          "judge_latency_ms": 2784.67,
+          "intent": "chitchat",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "搜索无线鼠标",
+          "answer": "我为你搜索了\"无线鼠标\"，找到了以下相关商品：\n\n### 🖱️ 搜索结果\n\n1. **联想电脑外接无线键盘鼠标蓝牙双模套装**（冰河银 2.4G充电版）\n   - 键鼠套装，办公打字专用，静音无声，适合笔记本/台式机\n\n2. **黑峡谷x3同款青轴机械键盘87键 + 游戏鼠标套装**\n   - 电竞游戏专用，黑灰拼色，青轴87键\n\n3. **创乐博 树莓派4B 显示器无线鼠标键盘套件**（两个套餐可选）\n   - 适合树莓派开发板用户，含无线键鼠\n\n---\n\n不过需要说明的是，搜索结果中**没有找到单独的\"无线鼠标\"单品**，找到的多为**键鼠套装**或相关配件。如果你需要的是：\n\n- 🎯 **单独的无线鼠标**（比如罗技、雷蛇等品牌）\n- 💰 **特定预算范围**的无线鼠标\n- 🎮 **游戏专用**或💼 **办公专用**的无线鼠标\n\n可以告诉我你的具体需求，我可以帮你进一步搜索或推荐！😊",
+          "expected_keywords": [
+            "鼠标"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.2,
+          "latency_ms": 4362.07,
+          "judge_latency_ms": 3421.51,
+          "intent": "search",
+          "evaluation_type": "topic_switch",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "怎么退货",
+          "answer": "好的，我为你整理了退货政策，请查收：\n\n### 📦 退货/退换货政策\n\n**⏰ 退货时限**\n- 收到商品后 **7天内** 可申请退换货\n\n**📝 操作步骤**\n1. 进入「我的订单」\n2. 找到对应订单\n3. 点击「申请退换货」\n\n**⚠️ 注意事项**\n- 退换货商品需保持 **原包装完好**\n- 退款将在收到退货商品后 **1-3个工作日内** 原路退回你的支付账户\n\n**🔍 不同订单状态的处理方式**\n| 订单状态 | 处理方式 |\n|---------|---------|\n| 未付款 | 可直接取消 |\n| 已付款未发货 | 联系客服取消 |\n| 已发货 | 无法取消，需收到商品后再申请退货 |\n\n---\n\n如果你遇到**商品质量问题、包装破损**等特殊情况，建议直接联系人工客服，我们会尽快帮你处理！😊\n\n还有什么需要帮忙的吗？",
+          "expected_keywords": [
+            "退货"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.6,
+          "latency_ms": 5459.75,
+          "judge_latency_ms": 3011.98,
+          "intent": "customer_service",
+          "evaluation_type": "topic_switch",
+          "needs_context": false,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_3_1787747790"
+    },
+    {
+      "scenario_name": "对比咨询",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "iPhone 15 和华为 Mate60 哪个好",
+          "answer": "我为您搜索了这两款手机的相关信息，下面为您整理对比结果：\n\n## 📱 iPhone 15 vs 华为Mate60 对比\n\n### 关于搜索结果\n我在商品库中找到了 **iPhone 15** 的相关商品，但**没有找到华为Mate60** 的直营商品（搜索到的主要是华为Mate X6折叠屏、手表、耳机等配件类产品）。\n\n---\n\n### iPhone 15 在售商品（部分）\n| 型号 | 配置 | 价格 |\n|------|------|------|\n| Apple iPhone 15 (A3092) | 128GB 粉色 | ¥3509.1 |\n| Apple iPhone 15 (A3092) | 128GB 蓝色 | ¥3509.1 |\n| Apple iPhone 15 (A3092) | 256GB 粉色 | ¥4409.1 |\n| 美版 iPhone 15 | 128GB 全",
+          "expected_keywords": [
+            "iPhone",
+            "华为"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.6,
+          "latency_ms": 8869.58,
+          "judge_latency_ms": 2825.05,
+          "intent": "chitchat",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "前者的电池怎么样",
+          "answer": "根据查询结果，我为您整理了 **iPhone 15 电池** 的详细情况：\n\n## 🔋 iPhone 15 电池续航详解\n\n### 官方标称续航（苹果官方数据）\n| 使用场景 | 续航时长 |\n|---------|---------|\n| 视频播放 | 最长 **20小时** |\n| 流媒体视频 | 最长 **16小时** |\n| 音频播放 | 最长 **80小时** |\n\n### 电池容量（第三方拆解估算）\n- **iPhone 15**：约 **3349 mAh**（比iPhone 14略有增加）\n- 全系改用 **USB-C接口**，但充电速度仍为 **20W-27W**（需自购快充头），充满约1.5-2小时\n\n---\n\n### 📊 实际体验评价\n\n**优点：**\n- ✅ A16芯片 + 高效OLED屏，日常中度使用（微信、刷视频、导航）**能撑一天**\n- ✅ 标准版续航属于中上",
+          "expected_keywords": [
+            "电池"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.3,
+          "latency_ms": 11974.01,
+          "judge_latency_ms": 3519.91,
+          "intent": "chitchat",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "后者呢",
+          "answer": "您问的是 **华为Mate60** 的电池情况。不过很抱歉，我在当前商品库中**没有找到华为Mate60** 的在售商品信息，因此无法为您提供该机型的官方电池数据。\n\n为了不误导您，我不会凭空编造华为Mate60的电池参数。\n\n---\n\n### 我可以这样帮您：\n\n1. **如果您想了解华为Mate60的电池**，建议您提供具体的**商品链接或型号**，我可以帮您查询对应商品详情。\n\n2. **如果您想找其他华为手机**，可以告诉我具体型号（比如 Mate60 Pro、Pura 70、nova系列等），我帮您搜索在售商品。\n\n3. **如果您想对比续航**，我可以帮您搜索 **iPhone 15 Plus**（续航更强的苹果机型）来做参考。\n\n---\n\n请问您更倾向于哪种方式呢？或者您想了解哪款具体的华为机型？😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.5,
+          "latency_ms": 2472.87,
+          "judge_latency_ms": 2757.53,
+          "intent": "chitchat",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_4_1787747811"
+    }
+  ],
+  "summary": {
+    "total_scenarios": 4,
+    "total_turns": 12,
+    "avg_judge_score": 8.31,
+    "avg_keyword_coverage": 1.0,
+    "by_evaluation_type": {
+      "relevance": {
+        "count": 4,
+        "avg_score": 7.88
+      },
+      "coreference": {
+        "count": 3,
+        "avg_score": 8.7
+      },
+      "context_inherit": {
+        "count": 1,
+        "avg_score": 9.2
+      },
+      "long_term_recall": {
+        "count": 2,
+        "avg_score": 7.55
+      },
+      "topic_switch": {
+        "count": 2,
+        "avg_score": 8.9
+      }
+    },
+    "latency": {
+      "p50_ms": 7164.66,
+      "p90_ms": 13648.49,
+      "p95_ms": 17505.34,
+      "avg_ms": 8303.94
+    },
+    "token_usage": {
+      "total_calls": 54,
+      "total_tokens": 87242,
+      "total_cost_usd": 0.014695,
+      "by_model": {
+        "deepseek-chat": {
+          "prompt_tokens": 69519,
+          "completion_tokens": 17723,
+          "total_tokens": 87242,
+          "cost_usd": 0.014695100000000004,
+          "calls": 54
+        }
+      }
+    }
+  }
+}

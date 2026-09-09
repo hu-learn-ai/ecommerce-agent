@@ -1,0 +1,24 @@
+# 训练侧依赖（AutoDL PyTorch 2.x + CUDA 12.x 镜像内安装）
+torch>=2.2
+transformers>=4.43
+peft>=0.12
+trl>=0.9
+bitsandbytes>=0.43
+accelerate>=0.33
+datasets>=2.20
+sentence-transformers>=3.0
+tiktoken>=0.7
+einops>=0.8
+
+# 数据侧依赖（本地 Python 3.11+ 即可）
+openai>=1.30
+pandas>=2.0
+pyyaml>=6.0
+python-dotenv>=1.0
+
+# 实验记录（可选，默认本地 tensorboard 也可）
+wandb>=0.17
+
+# 部署/量化（可选，按需安装；vLLM 推荐直接用 finetune/docker 镜像）
+# vllm>=0.6
+# autoawq>=0.2
