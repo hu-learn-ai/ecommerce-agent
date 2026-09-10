@@ -35,7 +35,20 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from clean_dataset import load_jsonl, load_policy_library
 
-from config.settings import settings
+# config 模块依赖 python-dotenv 与完整仓库结构；容器上没有 config/ 时
+# 退化为直接读环境变量（DEEPSEEK_API_KEY / DEEPSEEK_BASE_URL / DEEPSEEK_MODEL），
+# 保证脚本可在 AutoDL 上独立运行
+try:
+    from config.settings import settings
+except ImportError:
+    from types import SimpleNamespace
+
+    settings = SimpleNamespace(
+        hf_endpoint=os.getenv("HF_ENDPOINT", "https://hf-mirror.com"),
+        deepseek_model=os.getenv("DEEPSEEK_MODEL", "deepseek-chat"),
+        deepseek_api_key=os.getenv("DEEPSEEK_API_KEY", ""),
+        deepseek_base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+    )
 
 os.environ.setdefault("HF_ENDPOINT", settings.hf_endpoint)
 
@@ -518,6 +531,28 @@ def main():
     policy_library = load_policy_library(args.policy_library)
     print(f"[Evaluate] 测试集 {len(records)} 条")
 
+    # 路径检查：避免 merged 不存在时 HF transformers 把本地路径当 repo_id 报 HFValidationError
+    # 注：base_model 默认是 HF repo_id（如 Qwen/Qwen2.5-7B-Instruct），不是本地路径，跳过 isdir 检查
+    if not args.skip_local:
+        def _is_local_path(p: str) -> bool:
+            return p.startswith(("/", "./", "../", "~")) or os.path.isabs(p)
+
+        if _is_local_path(args.base_model) and not os.path.isdir(args.base_model):
+            raise FileNotFoundError(
+                f"[Evaluate] base-model 路径不存在: {args.base_model}\n"
+                "  请确认 base 模型目录完整（或传 HF repo_id，如 Qwen/Qwen2.5-7B-Instruct）。"
+            )
+        if _is_local_path(args.finetuned_model) and not os.path.isdir(args.finetuned_model):
+            raise FileNotFoundError(
+                f"[Evaluate] finetuned-model 路径不存在: {args.finetuned_model}\n"
+                "  请先跑合并：\n"
+                "    python finetune/scripts/merge_adapter.py \\\n"
+                "        --base-model /path/to/Qwen2.5-7B-Instruct \\\n"
+                "        --adapter finetune/checkpoints/qwen-cs-7b \\\n"
+                "        --output <此路径>\n"
+                "  或加 --skip-local 跳过本地推理（仅用 DeepSeek + 已有缓存）。"
+            )
+
     pred_dir = os.path.join(args.output_dir, "predictions")
     judge_dir = os.path.join(args.output_dir, "judge")
     os.makedirs(pred_dir, exist_ok=True)
@@ -585,7 +620,10 @@ def main():
     consistency = None
     if args.judge_repeat >= 2 and judge_results:
         samples = load_jsonl(os.path.join(judge_dir, "finetuned.jsonl"))
-        if samples and all(len((r.get("scores") or {}).get(d, {}).get("repeats", 0) >= 2 for d in JUDGE_DIMS) for r in samples):
+        if samples and all(
+            all((r.get("scores") or {}).get(d, {}).get("repeats", 0) >= 2 for d in JUDGE_DIMS)
+            for r in samples
+        ):
             consistency = "Judge 重复采样一致性见各维度 repeats；本次报告按均值计分"
 
     report = {

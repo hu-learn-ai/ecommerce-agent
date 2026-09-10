@@ -24,9 +24,13 @@ REPO_ROOT = os.path.dirname(PROJECT_ROOT)
 if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
 
-from config.settings import settings
-
-os.environ.setdefault("HF_ENDPOINT", settings.hf_endpoint)
+# config 模块依赖 python-dotenv 与完整仓库结构；merge 场景只需要 HF 镜像地址，
+# 容器上没有 config/ 时直接用环境变量兜底，保证脚本可独立运行
+try:
+    from config.settings import settings
+    os.environ.setdefault("HF_ENDPOINT", settings.hf_endpoint)
+except ImportError:
+    os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 
 
 def main():

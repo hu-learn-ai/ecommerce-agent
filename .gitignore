@@ -89,6 +89,11 @@ finetune/data/processed/*
 !finetune/data/processed/README.md
 finetune/reports/*
 !finetune/reports/README.md
+!finetune/reports/finetune_eval_report.md
+!finetune/reports/finetune_eval_report.json
+finetune/reports_run_a/*
+!finetune/reports_run_a/finetune_eval_report.md
+!finetune/reports_run_a/finetune_eval_report.json
 finetune/checkpoints/
 finetune/runs/
 
