@@ -27,13 +27,12 @@
 """
 
 import json
-import math
 import os
 import shutil
 import sys
 import tempfile
 import time
-from typing import List, Optional
+from typing import List
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -44,7 +43,6 @@ os.environ.setdefault("HF_HUB_OFFLINE", "1")
 os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 from config.settings import settings
-
 
 # ------------------------------------------------------------------ #
 #  测试用例集
@@ -193,7 +191,7 @@ class MemorySystemEvaluator:
         if not self.llm:
             return {"available": False, "note": "无 LLM, 跳过摘要质量评估"}
 
-        from orchestration.memory import ShortTermMemory, Message
+        from orchestration.memory import Message, ShortTermMemory
 
         results = []
         for case in SUMMARY_TEST_CASES:
@@ -444,7 +442,7 @@ def print_report(result: dict):
 
     sq = result["summary_quality"]
     if sq.get("available"):
-        print(f"\n  📝 短期记忆摘要质量:")
+        print("\n  📝 短期记忆摘要质量:")
         print(f"    用例数: {sq['total']}")
         print(f"    平均关键事实保留率: {sq['avg_key_fact_retention']:.4f}")
         print(f"    平均压缩比: {sq['avg_compression_ratio']}")
@@ -457,7 +455,7 @@ def print_report(result: dict):
 
     lt = result["long_term_retrieval"]
     if lt.get("available"):
-        print(f"\n  🧠 长期记忆检索:")
+        print("\n  🧠 长期记忆检索:")
         print(f"    用例数: {lt['total']}")
         print(f"    Precision: {lt['precision']:.4f}")
         print(f"    Recall: {lt['recall']:.4f}")
@@ -472,14 +470,14 @@ def print_report(result: dict):
 
     cs = result["cross_session_migration"]
     if cs.get("available"):
-        print(f"\n  🔗 跨会话画像迁移:")
+        print("\n  🔗 跨会话画像迁移:")
         print(f"    迁移命中: {cs['migration_hit']}")
         print(f"    context: {cs['context_built'][:120]}")
     else:
         print(f"\n  🔗 跨会话迁移: {cs.get('note')}")
 
     fc = result["forgetting_curve"]
-    print(f"\n  📉 遗忘曲线:")
+    print("\n  📉 遗忘曲线:")
     for curve in fc["forgetting_curves"]:
         print(f"    {curve['name']} (imp={curve['importance']}, "
               f"access={curve['access_count']}):")
@@ -495,7 +493,7 @@ def print_report(result: dict):
               f"expected={t['expected_ttl']}d actual={t['actual_ttl']}d")
 
     ec = fc["expired_check"]
-    print(f"\n  🗑️  过期清理:")
+    print("\n  🗑️  过期清理:")
     print(f"    过期记忆被识别为过期: {ec['expired_is_expired']}")
     print(f"    未过期记忆被识别为未过期: {ec['not_expired_is_expired']}")
 

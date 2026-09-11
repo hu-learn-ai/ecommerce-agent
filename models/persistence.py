@@ -184,8 +184,9 @@ def maybe_quantize_model(model, device) -> object:
             return model
         if str(device) != "cpu":
             return model
-        import torch
         import warnings
+
+        import torch
 
         # transformers 5.x 的 BertModel 支持动态量化 Linear 层；
         # 量化后不可再 .to(非cpu)，这里只对 CPU 生效。
@@ -206,8 +207,9 @@ def quantize_sentence_transformer(embedder) -> object:
 
         if not settings.model_quantize:
             return embedder
-        import torch
         import warnings
+
+        import torch
 
         container = None
         # 兼容 sentence-transformers 5.x（st[0].auto_model）与 4.x（st.model[0].auto_model）

@@ -100,7 +100,7 @@ def main() -> None:
 
     tok, model, labels, dev = load_classification_model(args.model_path)
     in_domain = [(q, e) for q, e in CASES if e is not None]
-    out_domain = [(q, e) for q, e in CASES if e is None]
+    [(q, e) for q, e in CASES if e is None]
 
     def predict(texts):
         enc = tok(texts, padding=True, truncation=True, max_length=64, return_tensors="pt").to(dev)

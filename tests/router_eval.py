@@ -37,6 +37,7 @@ from langchain_openai import ChatOpenAI
 
 from config.settings import settings
 from orchestration.router import RouterAgent
+
 # 复用共享多分类指标计算器
 from tests._classification_metrics import compute_classification_metrics
 
@@ -268,11 +269,11 @@ class RouterEvaluator:
 
         if "level1" in result:
             l1 = result["level1"]
-            print(f"\n  Level 1 (keyword) 分层:")
+            print("\n  Level 1 (keyword) 分层:")
             print(f"    命中率: {l1['hit_rate']:.4f}  ({l1['hit_count']}/{l1['total']})")
             print(f"    命中时准确率: {l1['accuracy_on_hits']:.4f}")
 
-        print(f"\n  每类指标:")
+        print("\n  每类指标:")
         print(f"    {'intent':<18s}{'P':>8s}{'R':>8s}{'F1':>8s}{'support':>10s}  errors")
         for label in INTENT_LABELS:
             c = m["per_class"].get(label, {})

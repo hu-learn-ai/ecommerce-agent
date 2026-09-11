@@ -31,9 +31,10 @@ if PROJECT_ROOT not in sys.path:
 from langchain_openai import ChatOpenAI
 
 from config.settings import settings
+from orchestration.observability import obs
+
 # 复用 rag_evaluation 的健壮 JSON 解析(支持代码块包裹/夹杂文字/尾随逗号/单引号)
 from tests.rag_evaluation import GenerationMetrics, _extract_token_usage
-from orchestration.observability import obs
 
 
 class AgentEvaluator:

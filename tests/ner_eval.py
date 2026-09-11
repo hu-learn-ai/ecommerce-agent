@@ -15,7 +15,7 @@ import json
 import os
 import sys
 from collections import defaultdict
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -307,12 +307,12 @@ def print_report(result: dict):
     print(f"\n  测试用例: {result['total_cases']}")
     m = result["metrics"]
 
-    print(f"\n  📊 Entity-level 指标:")
+    print("\n  📊 Entity-level 指标:")
     print(f"    Micro:  P={m['micro']['precision']:.4f}  R={m['micro']['recall']:.4f}  F1={m['micro']['f1']:.4f}")
     print(f"            (TP={m['micro']['tp']}  FP={m['micro']['fp']}  FN={m['micro']['fn']})")
     print(f"    Macro:  P={m['macro']['precision']:.4f}  R={m['macro']['recall']:.4f}  F1={m['macro']['f1']:.4f}")
 
-    print(f"\n    按实体类型:")
+    print("\n    按实体类型:")
     print(f"      {'type':<8s}{'P':>8s}{'R':>8s}{'F1':>8s}{'tp':>6s}{'fp':>6s}{'fn':>6s}{'support':>10s}")
     for etype in ENTITY_TYPES:
         c = m["per_type"][etype]

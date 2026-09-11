@@ -116,15 +116,15 @@ def load_sample(csv_path: str, sample: int, seed: int = 42):
     rng = random.Random(seed)
     per_class = max(200, sample // len(set(labels)))
     by_label: dict = {}
-    for t, l in zip(texts, labels):
-        by_label.setdefault(l, []).append(t)
+    for t, lbl in zip(texts, labels):
+        by_label.setdefault(lbl, []).append(t)
     sampled = []
-    for l, ts in by_label.items():
+    for lbl, ts in by_label.items():
         picked = rng.sample(ts, min(per_class, len(ts)))
-        sampled.extend((t, l) for t in picked)
+        sampled.extend((t, lbl) for t in picked)
     print(f"[OOD] 加载 {len(texts)} 条，抽样 {len(sampled)} 条")
-    print(f"[OOD] 分布: {dict(Counter(l for _, l in sampled))}")
-    return [t for t, _ in sampled], [l for _, l in sampled]
+    print(f"[OOD] 分布: {dict(Counter(lbl for _, lbl in sampled))}")
+    return [t for t, _ in sampled], [lbl for _, lbl in sampled]
 
 
 def main() -> None:
@@ -136,14 +136,14 @@ def main() -> None:
 
     texts, labels = load_sample(args.data, args.sample)
     label_list = sorted(set(labels))
-    label2id = {l: i for i, l in enumerate(label_list)}
+    label2id = {lbl: i for i, lbl in enumerate(label_list)}
 
     tok, model, model_labels, device = load_classification_model(
         os.path.dirname(args.output)
     )
     # 输出目录内 labels.txt 为准，保证与线上一致
     label_list = list(model_labels)
-    label2id = {l: i for i, l in enumerate(label_list)}
+    label2id = {lbl: i for i, lbl in enumerate(label_list)}
 
     print(f"[OOD] 模型类: {label_list}")
     model.eval()
@@ -194,10 +194,10 @@ def main() -> None:
     print("[OOD] 编码训练样本特征...")
     feats, logits, ys = [], [], []
     for i in range(0, len(texts), args.batch):
-        f, l = encode_with_logits(texts[i : i + args.batch])
+        f, lgt = encode_with_logits(texts[i : i + args.batch])
         feats.append(f)
-        logits.append(l)
-        ys.extend(label2id[l] for l in labels[i : i + args.batch])
+        logits.append(lgt)
+        ys.extend(label2id[lbl] for lbl in labels[i : i + args.batch])
     feats = np.vstack(feats)
     logits = np.vstack(logits)
     ys = np.asarray(ys, dtype=np.int64)

@@ -112,7 +112,7 @@ def main():
     quant_cfg = cfg["quantization"]
     lora_cfg = cfg["lora"]
     train_cfg = cfg["training"]
-    data_cfg = cfg["data"]
+    cfg["data"]
 
     if torch.cuda.is_available():
         free_mem, total_mem = torch.cuda.mem_get_info()

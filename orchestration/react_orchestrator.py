@@ -624,7 +624,7 @@ class ReactOrchestrator:
                 ]
 
                 # 按意图选择模型层级（接线三级模型分级）
-                tier = cost_optimizer.model_router.get_tier(intent, len(user_input))
+                cost_optimizer.model_router.get_tier(intent, len(user_input))
                 stream_llm = cost_optimizer.get_llm(intent, len(user_input))
                 model = stream_llm.bind_tools(self._tools)
                 tools_called: list[str] = []

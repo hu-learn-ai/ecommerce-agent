@@ -61,8 +61,8 @@ def build_label_vocab(train_path) -> tuple[list[str], dict, dict]:
             if len(parts) == 2:
                 labels.add(parts[1])
     label_list = sorted(labels)
-    label2id = {l: i for i, l in enumerate(label_list)}
-    id2label = {i: l for i, l in enumerate(label_list)}
+    label2id = {lbl: i for i, lbl in enumerate(label_list)}
+    id2label = {i: lbl for i, lbl in enumerate(label_list)}
     return label_list, label2id, id2label
 
 
@@ -76,7 +76,7 @@ def tokenize_and_align(
     input_ids_list, attn_list, labels_list = [], [], []
     for sent in sentences:
         text = "".join(t for t, _ in sent)
-        char_labels = [label2id.get(l, 0) for _, l in sent]
+        char_labels = [label2id.get(lbl, 0) for _, lbl in sent]
         enc = tokenizer(
             text,
             max_length=max_length,
@@ -187,13 +187,13 @@ def main() -> None:
 
     import numpy as np
     import torch
+    from torch.utils.data import Dataset
     from transformers import (
         AutoModelForTokenClassification,
         AutoTokenizer,
         Trainer,
         TrainingArguments,
     )
-    from torch.utils.data import Dataset
 
     class NerDataset(Dataset):
         def __init__(self, input_ids, attn, labels):
@@ -236,7 +236,7 @@ def main() -> None:
     dev_ds = NerDataset(dev_ids, dev_attn, dev_labels)
 
     # 类别权重（O 占绝大多数，降权）
-    flat = [l for seq in train_labels for l in seq if l != -100]
+    flat = [lbl for seq in train_labels for lbl in seq if lbl != -100]
     counts = Counter(flat)
     weights = np.zeros(len(label_list), dtype=np.float32)
     total = sum(counts.values())
@@ -270,8 +270,8 @@ def main() -> None:
         preds = np.argmax(logits, axis=-1)
         tp = fp = fn = 0
         for sent_pred, sent_labels in zip(preds, labels):
-            valid_gold = [l for l in sent_labels if l != -100]
-            valid_pred = [p for p, l in zip(sent_pred, sent_labels) if l != -100]
+            valid_gold = [lbl for lbl in sent_labels if lbl != -100]
+            valid_pred = [p for p, lbl in zip(sent_pred, sent_labels) if lbl != -100]
             g_spans = decode_spans(valid_gold, id2label)
             p_spans = decode_spans(valid_pred, id2label)
             tp += len(g_spans & p_spans)
@@ -332,9 +332,9 @@ def main() -> None:
                 b_attn = torch.stack(attn[i : i + args.batch_size * 2]).to(device)
                 logits = model(input_ids=b_ids, attention_mask=b_attn).logits
                 for b in range(logits.size(0)):
-                    valid_gold = [l for l in lab[i + b] if l != -100]
+                    valid_gold = [lbl for lbl in lab[i + b] if lbl != -100]
                     valid_pred = [
-                        p for p, l in zip(logits[b].argmax(-1).tolist(), lab[i + b]) if l != -100
+                        p for p, lbl in zip(logits[b].argmax(-1).tolist(), lab[i + b]) if lbl != -100
                     ]
                     g_spans = decode_spans(valid_gold, id2label)
                     p_spans = decode_spans(valid_pred, id2label)

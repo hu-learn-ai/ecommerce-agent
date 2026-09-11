@@ -73,4 +73,5 @@ for (q, exp), p in zip(cases, probs):
 acc = (len(in_domain) - wrong) / len(in_domain)
 print(f"\n域内 {len(in_domain)} 条准确率: {acc:.1%} ({len(in_domain)-wrong}/{len(in_domain)})")
 from collections import Counter
+
 print("域外分布:", dict(Counter(labels[p.argmax().item()] for _, p in zip(out_domain, probs[len(in_domain):]))))

@@ -181,7 +181,7 @@ def main() -> None:
         w.writerow(["text", "label"])
         w.writerows(sampled)
 
-    dist = Counter(l for _, l in sampled)
+    dist = Counter(lbl for _, lbl in sampled)
     print(f"\n[Augment] 输出: {OUTPUT_CSV}")
     print(f"[Augment] 总样本: {len(sampled)}（含难例 {hard_added} 条）")
     print(f"[Augment] 分布: {dict(dist)}")

@@ -30,7 +30,6 @@ import json
 import os
 import sys
 import time
-from typing import List, Optional
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -44,10 +43,8 @@ from langchain_openai import ChatOpenAI
 
 from config.settings import settings
 from orchestration.observability import obs
-from tests._classification_metrics import compute_classification_metrics
 from tests._eval_env import TokenRecordingLLM
 from tests.evaluate import AgentEvaluator
-
 
 # ------------------------------------------------------------------ #
 #  测试用例集 — 覆盖 4 类问题 + 安全攻击用例
@@ -191,7 +188,7 @@ class KGQAEvaluator:
             query = case["query"]
             try:
                 cypher = self.agent._generate_cypher(query)
-            except Exception as e:
+            except Exception:
                 cypher = ""
 
             # 判断是否 NONE (无法用 Cypher 表达)
@@ -369,12 +366,12 @@ class KGQAEvaluator:
 def print_report(result: dict):
     """打印可读报告"""
     cg = result["cypher_generation"]
-    print(f"\n  📝 Cypher 生成质量:")
+    print("\n  📝 Cypher 生成质量:")
     print(f"    用例数: {cg['total_cases']}")
     print(f"    闲聊识别率 (应返回 NONE): {cg['chitchat_none_rate']:.4f}")
     print(f"    关键词覆盖率 (语义等价性): {cg['avg_keyword_coverage']:.4f}")
     print(f"    安全校验通过率: {cg['safety_pass_rate']:.4f}")
-    print(f"\n    生成样例:")
+    print("\n    生成样例:")
     for r in cg["results"][:5]:
         status = "NONE" if r["is_none"] else "OK"
         print(f"      [{r['category']}] {status} kw_cov={r['keyword_coverage']:.2f} "
@@ -391,7 +388,7 @@ def print_report(result: dict):
 
     e2e = result["e2e"]
     if e2e.get("available"):
-        print(f"\n  🔗 端到端执行:")
+        print("\n  🔗 端到端执行:")
         print(f"    用例数: {e2e['total']}")
         print(f"    平均评分: {e2e['avg_judge_score']}/10")
         print(f"    降级率: {e2e['fallback_rate']:.4f}")

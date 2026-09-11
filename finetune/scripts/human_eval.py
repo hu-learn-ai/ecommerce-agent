@@ -74,7 +74,6 @@ def sample_human_csv(args):
 
 
 def kappa_report(args):
-    import evaluate_llm
 
     human_rows = []
     with open(args.human_csv, encoding="utf-8-sig") as f:

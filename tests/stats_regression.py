@@ -27,7 +27,7 @@ import os
 import statistics
 import sys
 from datetime import datetime
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -478,18 +478,18 @@ def main():
             print(f"  上次记录: {result['previous']}")
         if result.get("regression"):
             r = result["regression"]
-            print(f"\n  回归分析:")
+            print("\n  回归分析:")
             print(f"    回归指标数: {len(r['regressions'])}")
             print(f"    改进指标数: {len(r['improvements'])}")
             print(f"    未变指标数: {r['unchanged_count']}")
             print(f"    回归率: {r['regression_rate']:.4f}")
             if r["regressions"]:
-                print(f"\n    回归详情:")
+                print("\n    回归详情:")
                 for reg in r["regressions"][:10]:
                     print(f"      {reg['key']}: {reg['old']} → {reg['new']} "
                           f"({reg['change_pct']}%)")
             if r["improvements"]:
-                print(f"\n    改进详情:")
+                print("\n    改进详情:")
                 for imp in r["improvements"][:10]:
                     print(f"      {imp['key']}: {imp['old']} → {imp['new']} "
                           f"({imp['change_pct']}%)")
@@ -504,7 +504,7 @@ def main():
         for name, count in hist.get("by_name", {}).items():
             print(f"    {name}: {count} 次")
         if hist.get("trends"):
-            print(f"\n  趋势分析:")
+            print("\n  趋势分析:")
             for name, t in hist["trends"].items():
                 print(f"\n  [{name}] ({t['records']} 次记录)")
                 print(f"    {t['first_time']} → {t['last_time']}")

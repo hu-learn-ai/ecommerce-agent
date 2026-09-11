@@ -18,10 +18,9 @@
 
 import json
 import os
-import re
 import sys
 import time
-from typing import List, Optional
+from typing import List
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -40,7 +39,6 @@ from langchain_openai import ChatOpenAI
 from config.settings import settings
 from orchestration.observability import obs
 from tests.evaluate import AgentEvaluator
-
 
 # ------------------------------------------------------------------ #
 #  多轮对话测试用例
@@ -301,23 +299,23 @@ def print_report(result: dict):
     print(f"  平均 Judge 评分: {s['avg_judge_score']}/10")
     print(f"  关键词覆盖率: {s['avg_keyword_coverage']:.4f}")
 
-    print(f"\n  按评估类型拆分:")
+    print("\n  按评估类型拆分:")
     print(f"    {'type':<20s}{'turns':>8s}{'avg_score':>12s}")
     for etype, d in s["by_evaluation_type"].items():
         print(f"    {etype:<20s}{d['count']:>8d}{d['avg_score']:>12.2f}")
 
     lat = s["latency"]
-    print(f"\n  延迟:")
+    print("\n  延迟:")
     print(f"    p50: {lat['p50_ms']:.0f}ms  p90: {lat['p90_ms']:.0f}ms  p95: {lat['p95_ms']:.0f}ms")
     print(f"    avg: {lat['avg_ms']:.0f}ms")
 
     tu = s["token_usage"]
-    print(f"\n  Token 用量:")
+    print("\n  Token 用量:")
     print(f"    total_tokens: {tu.get('total_tokens', 0)}")
     print(f"    total_cost_usd: ${tu.get('total_cost_usd', 0):.6f}")
 
     # 关键场景详查
-    print(f"\n  关键场景详情:")
+    print("\n  关键场景详情:")
     for r in result["scenarios"]:
         print(f"\n  [{r['scenario_name']}] ({r['total_turns']} 轮)")
         for t in r["turns"]:
@@ -347,9 +345,9 @@ def main():
     )
 
     # 使用 ReactOrchestrator (支持 session_id 和记忆)
+    from orchestration.react_orchestrator import ReactOrchestrator
     from orchestration.registry import create_neo4j_driver, register_all_agents
     from orchestration.router import RouterAgent
-    from orchestration.react_orchestrator import ReactOrchestrator
 
     neo4j_driver = None
     try:

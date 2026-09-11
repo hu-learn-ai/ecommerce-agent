@@ -15,6 +15,7 @@ FastAPI 统一 API 层 — 电商智能体 HTTP 接口
 
 import json
 import os
+import secrets
 import sys
 import time
 from collections import defaultdict
@@ -25,7 +26,6 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
-import secrets
 
 # 确保项目根目录在 sys.path 中
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

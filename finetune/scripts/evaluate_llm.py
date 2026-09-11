@@ -443,7 +443,7 @@ def write_report(report, md_path, json_path):
         f"- 测试集：{report['test_path']}（{report['num_samples']} 条）",
         f"- 评估时间：{report['timestamp']}",
         f"- 模型：base=`{report['models']['base']}`，finetuned=`{report['models']['finetuned']}`，deepseek=`{report['models']['deepseek']}`",
-        f"- 口径：LLM-as-Judge 四维评分（1-5）+ 规则可判定指标 + 人工抽检（见 human_eval）",
+        "- 口径：LLM-as-Judge 四维评分（1-5）+ 规则可判定指标 + 人工抽检（见 human_eval）",
         "",
         "## 1. 四维 Judge 均分",
         "",

@@ -43,7 +43,6 @@ from config.settings import settings
 from orchestration.observability import obs
 from tests.evaluate import AgentEvaluator
 
-
 # ------------------------------------------------------------------ #
 #  端到端测试用例 — 覆盖 8 个意图, 每条标注 expected_intent 用于路由准确率
 # ---------------------------------------------------------------- #
@@ -321,26 +320,26 @@ def print_report(result: dict):
 
     acc = s["accuracy"]
     print(f"\n  🎯 路由准确率: {acc['overall']:.4f}")
-    print(f"    按意图:")
+    print("    按意图:")
     for intent, stats in acc["by_intent"].items():
         print(f"      {intent:<18s}: {stats['accuracy']:.4f}  ({stats['correct']}/{stats['total']})")
 
     q = s["quality"]
-    print(f"\n  📝 答案质量 (LLM Judge):")
+    print("\n  📝 答案质量 (LLM Judge):")
     print(f"    平均分: {q['avg_score']}/10  (min={q['min_score']}, max={q['max_score']})")
     if q["judge_error_count"]:
         print(f"    ⚠️  Judge 失败 {q['judge_error_count']} 次")
 
     lat = s["latency"]
-    print(f"\n  ⚡ 延迟 (真实端到端,含 LLM 调用):")
+    print("\n  ⚡ 延迟 (真实端到端,含 LLM 调用):")
     print(f"    p50: {lat['p50_ms']:.0f}ms  p90: {lat['p90_ms']:.0f}ms  p95: {lat['p95_ms']:.0f}ms")
     print(f"    avg: {lat['avg_ms']:.0f}ms  min: {lat['min_ms']:.0f}ms  max: {lat['max_ms']:.0f}ms")
 
     fb = s["fallback"]
-    print(f"\n  🔄 降级事件:")
+    print("\n  🔄 降级事件:")
     print(f"    触发次数: {fb['triggered_count']}  触发率: {fb['triggered_rate']:.4f}")
     if fb["event_counts"]:
-        print(f"    事件分布:")
+        print("    事件分布:")
         for event, count in fb["event_counts"].items():
             print(f"      {event}: {count}")
 
@@ -349,7 +348,7 @@ def print_report(result: dict):
         print(f"\n  ❌ 执行异常: {err['execution_error_count']} 次")
 
     tu = s["token_usage"]
-    print(f"\n  💰 Token 用量 (端到端链路 + Judge):")
+    print("\n  💰 Token 用量 (端到端链路 + Judge):")
     print(f"    total_tokens: {tu['total_tokens']}")
     print(f"    total_cost_usd: ${tu['total_cost_usd']:.6f}")
     if tu.get("by_model"):
@@ -379,9 +378,9 @@ def main():
     )
 
     # 初始化 Agent 与编排器
+    from orchestration.graph import ECommerceOrchestrator
     from orchestration.registry import create_neo4j_driver, register_all_agents
     from orchestration.router import RouterAgent
-    from orchestration.graph import ECommerceOrchestrator
 
     neo4j_driver = None
     try:

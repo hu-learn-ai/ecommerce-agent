@@ -19,7 +19,7 @@
 import json
 import os
 import sys
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -276,8 +276,8 @@ class ClassifyEvaluator:
                 "auroc": ROC 曲线下面积,
             }
         """
-        n_ood = sum(1 for y in y_true if y == 1)
-        n_in = sum(1 for y in y_true if y == 0)
+        sum(1 for y in y_true if y == 1)
+        sum(1 for y in y_true if y == 0)
         tp = sum(1 for t, p in zip(y_true, y_pred) if t == 1 and p == 1)
         fp = sum(1 for t, p in zip(y_true, y_pred) if t == 0 and p == 1)
         fn = sum(1 for t, p in zip(y_true, y_pred) if t == 1 and p == 0)
@@ -354,12 +354,12 @@ def print_report(result: dict):
     print(f"\n  域内用例: {result['in_domain_total']}  |  域外用例: {result['ood_total']}")
 
     cls = result["classification"]
-    print(f"\n  📊 多分类指标 (4 类 + 无法判断):")
+    print("\n  📊 多分类指标 (4 类 + 无法判断):")
     print(f"    Accuracy: {cls['accuracy']:.4f}")
     print(f"    Macro-F1: {cls['macro_f1']:.4f}  (P={cls['macro_precision']:.4f}, R={cls['macro_recall']:.4f})")
     print(f"    Micro-F1: {cls['micro_f1']:.4f}")
 
-    print(f"\n    每类指标:")
+    print("\n    每类指标:")
     print(f"      {'class':<12s}{'P':>8s}{'R':>8s}{'F1':>8s}{'support':>10s}  errors")
     for label in ALL_LABELS:
         c = cls["per_class"].get(label, {})
@@ -372,9 +372,9 @@ def print_report(result: dict):
         )
 
     cal = result["calibration"]
-    print(f"\n  🎯 置信度校准 (ECE):")
+    print("\n  🎯 置信度校准 (ECE):")
     print(f"    ECE = {cal['ece']:.4f}  (0=完美校准, 越大越过度/不足自信)")
-    print(f"    分桶明细 (置信度区间 → 实际准确率):")
+    print("    分桶明细 (置信度区间 → 实际准确率):")
     for b in cal["bins"]:
         if b["count"] == 0:
             continue
@@ -385,7 +385,7 @@ def print_report(result: dict):
         )
 
     ood = result["ood_detection"]
-    print(f"\n  🛡️  OOD 域外拒识:")
+    print("\n  🛡️  OOD 域外拒识:")
     print(f"    OOD Recall (域外样本被拒识比例): {ood['ood_recall']:.4f}")
     print(f"    InDomain Accept (域内被正确接收): {ood['indomain_accept_rate']:.4f}")
     print(f"    FPR@95%TPR (95% OOD 召回下的域内误拒率): {ood['fpr_at_95_tpr']:.4f}")
