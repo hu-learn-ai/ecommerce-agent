@@ -67,8 +67,11 @@ class TokenUsage:
 class TokenTracker:
     """Token 用量聚合追踪器"""
 
+    # M6 修复：明细记录上限，防止长运行服务内存无限增长
+    MAX_USAGE_RECORDS = 10000
+
     def __init__(self):
-        self._usage: list[TokenUsage] = []
+        self._usage: deque = deque(maxlen=self.MAX_USAGE_RECORDS)
         self._by_model: dict[str, dict] = defaultdict(
             lambda: {
                 "prompt_tokens": 0,

@@ -274,10 +274,30 @@ class DiskCache:
     def __init__(self, cache_dir: str = None):
         self.cache_dir = cache_dir or settings.cache_persist_path
         os.makedirs(self.cache_dir, exist_ok=True)
+        # M6 修复：启动时清理过期缓存文件，防止磁盘无限增长
+        self._cleanup_expired_files()
 
     def _key_to_path(self, key: str) -> str:
         key_hash = hashlib.md5(key.encode()).hexdigest()
         return os.path.join(self.cache_dir, f"{key_hash}.json")
+
+    def _cleanup_expired_files(self):
+        """清理已过期缓存文件（TTL × 6 视为过期），防止磁盘无限增长"""
+        try:
+            now = time.time()
+            for fname in os.listdir(self.cache_dir):
+                if not fname.endswith(".json"):
+                    continue
+                path = os.path.join(self.cache_dir, fname)
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    if now - data.get("timestamp", 0) > settings.cache_ttl_seconds * 6:
+                        os.remove(path)
+                except Exception:
+                    continue
+        except Exception:
+            pass
 
     def get(self, key: str) -> Optional[str]:
         path = self._key_to_path(key)
@@ -290,6 +310,11 @@ class DiskCache:
             if (
                 time.time() - data.get("timestamp", 0) > settings.cache_ttl_seconds * 6
             ):  # L2 TTL 更长
+                # 过期即删除，避免残留
+                try:
+                    os.remove(path)
+                except Exception:
+                    pass
                 return None
             return data.get("value")
         except Exception:

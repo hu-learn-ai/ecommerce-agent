@@ -9,8 +9,13 @@ services:
     env_file:
       - .env.docker
     volumes:
-      - ./data:/app/data
-      - ./models:/app/models
+      # H3/M3 修复：数据库端口不再对外映射；
+      # faiss 索引目录只读挂载（防运行时被污染触发 pickle RCE）；
+      # 缓存/记忆用命名卷（自动继承镜像内 appuser 属主）
+      - ./data/faiss_index:/app/data/faiss_index:ro
+      - agent_cache:/app/data/cache
+      - agent_memory:/app/data/memory_store
+      - ./models:/app/models:ro
     depends_on:
       neo4j:
         condition: service_healthy
@@ -35,6 +40,8 @@ services:
       dockerfile: Dockerfile.streamlit
     ports:
       - "8501:8501"
+    env_file:
+      - .env.docker
     environment:
       - API_BASE_URL=http://agent-api:8002
     depends_on:
@@ -44,13 +51,10 @@ services:
       - ec-network
 
   # ============================================
-  # Neo4j 图数据库
+  # Neo4j 图数据库（H3 修复：仅容器网络内可达，不再映射到宿主机）
   # ============================================
   neo4j:
     image: neo4j:5.26-community
-    ports:
-      - "7474:7474"   # Browser UI
-      - "7687:7687"   # Bolt 协议
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:?请在 .env.docker 中设置 NEO4J_PASSWORD}
       - NEO4J_PLUGINS=["apoc"]
@@ -71,12 +75,10 @@ services:
       - ec-network
 
   # ============================================
-  # MySQL 业务数据库 (gmall)
+  # MySQL 业务数据库 (gmall)（H3 修复：仅容器网络内可达）
   # ============================================
   mysql:
     image: mysql:8.0
-    ports:
-      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:?请在 .env.docker 中设置 MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DB:-gmall}
@@ -101,6 +103,8 @@ volumes:
   neo4j_data:
   neo4j_logs:
   mysql_data:
+  agent_cache:
+  agent_memory:
 
 networks:
   ec-network:

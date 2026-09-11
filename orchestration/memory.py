@@ -851,7 +851,13 @@ class MemoryManager:
         messages = []
 
         # 1. 跨会话共享记忆 (preference/decision 类型)
-        if self._long_term and current_query:
+        # M2 修复：默认关闭（settings.memory_shared_enabled=false），
+        # 避免不同会话/用户的偏好互相串味
+        if (
+            settings.memory_shared_enabled
+            and self._long_term
+            and current_query
+        ):
             shared_ctx = self._get_shared_context(session_id, current_query)
             if shared_ctx:
                 messages.append({
@@ -981,16 +987,18 @@ class MemoryManager:
             session_notes = [m.content for m in session_memories[:5]]
 
             # 跨会话共享的偏好/决策记忆 (排除当前 session 的)
-            shared_memories = [
-                m for m in self._long_term.memories
-                if m.shared
-                and m.category in ("preference", "decision")
-                and m.session_id != session_id
-                and not m.is_expired()
-                and m.forget_score < 0.8
-            ]
-            shared_memories.sort(key=lambda m: m.last_accessed, reverse=True)
-            shared_notes = [m.content for m in shared_memories[:3]]
+            # M2 修复：默认关闭共享注入，避免串味
+            if settings.memory_shared_enabled:
+                shared_memories = [
+                    m for m in self._long_term.memories
+                    if m.shared
+                    and m.category in ("preference", "decision")
+                    and m.session_id != session_id
+                    and not m.is_expired()
+                    and m.forget_score < 0.8
+                ]
+                shared_memories.sort(key=lambda m: m.last_accessed, reverse=True)
+                shared_notes = [m.content for m in shared_memories[:3]]
 
         if session_notes:
             profile["long_term_notes"] = session_notes
@@ -1000,10 +1008,29 @@ class MemoryManager:
         return profile
 
     def clear_session(self, session_id: str):
-        """清除会话的短期记忆 (长期记忆保留，可跨会话使用)"""
+        """清除会话记忆（短期记忆 + 该会话的长期记忆）。
+
+        M2 修复：原实现只清短期记忆，长期记忆会永久残留且跨会话可见，
+        不满足数据删除权要求。现在同时删除该 session 的长期记忆并重建索引。
+        """
         if session_id in self._short_term:
             self._short_term[session_id].clear()
             del self._short_term[session_id]
+
+        if self._long_term:
+            try:
+                self._long_term._ensure_loaded()
+                before = len(self._long_term.memories)
+                self._long_term.memories = [
+                    m
+                    for m in self._long_term.memories
+                    if m.session_id != session_id
+                ]
+                if len(self._long_term.memories) != before:
+                    self._long_term._save()
+                    self._long_term._build_faiss_index()
+            except Exception as exc:  # noqa: BLE001
+                print(f"[MemoryManager] 清除长期记忆失败: {exc}")
 
     def shutdown(self):
         """关闭记忆系统，保存持久化数据"""

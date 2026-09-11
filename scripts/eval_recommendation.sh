@@ -18,6 +18,8 @@ cd "$(dirname "$0")/.."
 
 # 环境检查
 echo "=== 前置检查 ==="
+# 注：docker-compose 部署时 Neo4j 端口不对外映射（仅容器网络内可达），
+# 本探活针对本地/开发环境；容器部署请改用 docker compose exec 内执行
 if ! curl -s -o /dev/null --max-time 3 http://localhost:7474; then
     echo "[WARN] Neo4j (7474) 未响应 — 推荐评估需要图谱数据"
 fi

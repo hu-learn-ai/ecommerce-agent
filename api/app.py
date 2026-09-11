@@ -76,7 +76,14 @@ class ChatRequest(BaseModel):
 
     message: str = Field(..., min_length=1, max_length=2000, description="用户消息")
     session_id: Optional[str] = Field("default", description="会话 ID（用于多轮记忆）")
-    user_profile: Optional[dict] = Field(None, description="用户画像")
+    user_profile: Optional[dict] = Field(
+        None,
+        description=(
+            "用户画像（仅偏好类信息，如预算/偏好分类）。"
+            "身份类字段（user_id/uid/open_id 等）会被服务端忽略，"
+            "身份只能由可信反向代理通过 TRUSTED_USER_ID_HEADER 注入。"
+        ),
+    )
 
 
 class ChatResponse(BaseModel):
@@ -263,18 +270,51 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API Key 认证
-_API_ACCESS_KEY = os.getenv("API_ACCESS_KEY", "")
+# ------------------------------------------------------------------ #
+#  安全配置（修复：默认 fail-closed，杜绝零鉴权裸奔）
+# ------------------------------------------------------------------ #
+
+# API Key：未配置时拒绝所有业务请求（/api/health 除外），强制安全默认
+_API_ACCESS_KEY = os.getenv("API_ACCESS_KEY", "").strip()
+# 可信反向代理注入的用户身份头（如 X-User-Id）。由代理在完成登录鉴权后注入，
+# 客户端无法伪造；未配置时 user_id 为 None，订单类 PII 自动脱敏
+_USER_ID_HEADER = os.getenv("TRUSTED_USER_ID_HEADER", "").strip()
+# 是否部署在可信反向代理之后（仅此时才信任 X-Forwarded-For，防伪造绕过限流）
+_TRUST_PROXY = os.getenv("TRUST_PROXY", "false").lower() == "true"
+# user_profile 中禁止携带的身份类字段：身份只能来自 _USER_ID_HEADER
+_IDENTITY_KEYS = ("user_id", "uid", "open_id", "openid")
+
+
+def _resolve_user_id(request: Request) -> Optional[str]:
+    """从可信代理注入的身份头解析用户 ID（未配置或缺失时返回 None）。"""
+    if not _USER_ID_HEADER:
+        return None
+    value = (request.headers.get(_USER_ID_HEADER) or "").strip()
+    return value or None
+
+
+def _sanitize_user_profile(profile: Optional[dict]) -> Optional[dict]:
+    """剥离 user_profile 中的身份类字段（身份只能由服务端可信头提供）。"""
+    if not profile:
+        return None
+    cleaned = {k: v for k, v in profile.items() if k not in _IDENTITY_KEYS}
+    return cleaned or None
 
 
 @app.middleware("http")
 async def verify_api_key(request: Request, call):
-    """API Key 认证中间件"""
-    if (
-        _API_ACCESS_KEY
-        and request.url.path.startswith("/api/")
-        and request.url.path != "/api/health"
-    ):
+    """API Key 认证中间件 — fail-closed：未配置密钥时拒绝所有 /api/* 请求。"""
+    if request.url.path.startswith("/api/") and request.url.path != "/api/health":
+        if not _API_ACCESS_KEY:
+            return JSONResponse(
+                503,
+                {
+                    "detail": (
+                        "服务未配置 API_ACCESS_KEY，已拒绝处理业务请求（安全默认）。"
+                        "请设置环境变量 API_ACCESS_KEY 后重启服务。"
+                    )
+                },
+            )
         api_key = request.headers.get("X-API-Key")
         if not secrets.compare_digest(api_key or "", _API_ACCESS_KEY):
             return JSONResponse(401, {"detail": "Unauthorized: invalid or missing API key"})
@@ -293,13 +333,17 @@ async def rate_limit(request: Request, call):
     if not request.url.path.startswith("/api/") or request.url.path == "/api/health":
         return await call(request)
 
-    # 反向代理场景：优先取 X-Forwarded-For 第一个 IP（需可信代理场景才可靠）
-    forwarded = request.headers.get("X-Forwarded-For", "")
-    client_ip = (
-        forwarded.split(",")[0].strip()
-        if forwarded
-        else (request.client.host if request.client else "unknown")
-    )
+    # 反向代理场景：仅当 TRUST_PROXY=true（部署在可信代理之后）才信任
+    # X-Forwarded-For；否则该头可被客户端任意伪造，直接绕过限流
+    if _TRUST_PROXY:
+        forwarded = request.headers.get("X-Forwarded-For", "")
+        client_ip = (
+            forwarded.split(",")[0].strip()
+            if forwarded
+            else (request.client.host if request.client else "unknown")
+        )
+    else:
+        client_ip = request.client.host if request.client else "unknown"
     now = time.time()
 
     # 定期清理过期桶，防止长期运行内存增长
@@ -368,12 +412,17 @@ async def chat(request: ChatRequest):
 
     session_id = request.session_id or "default"
 
+    # 身份只取可信头（H1 修复：user_profile 不再承载身份，杜绝越权查单）
+    user_id = _resolve_user_id(request)
+    profile = _sanitize_user_profile(request.user_profile)
+
     # 调用编排器
     if settings.react_enabled and hasattr(orchestrator, "ainvoke"):
         response, state_info = await orchestrator.ainvoke(
             request.message,
             session_id=session_id,
-            user_profile=request.user_profile,
+            user_profile=profile,
+            user_id=user_id,
         )
     else:
         # 降级到原编排器
@@ -415,6 +464,10 @@ async def chat_stream(request: ChatRequest):
 
     session_id = request.session_id or "default"
 
+    # 身份只取可信头（H1 修复）；user_profile 剥离身份字段
+    user_id = _resolve_user_id(request)
+    profile = _sanitize_user_profile(request.user_profile)
+
     async def event_generator():
         """SSE 事件生成器"""
         try:
@@ -428,7 +481,8 @@ async def chat_stream(request: ChatRequest):
                 async for chunk in orchestrator.ainvoke_stream(
                     request.message,
                     session_id=session_id,
-                    user_profile=request.user_profile,
+                    user_profile=profile,
+                    user_id=user_id,
                 ):
                     full_response += chunk
                     yield f"data: {json.dumps({'type': 'token', 'content': chunk}, ensure_ascii=False)}\n\n"
@@ -446,7 +500,21 @@ async def chat_stream(request: ChatRequest):
             yield f"data: {json.dumps({'type': 'done', 'full_response': full_response}, ensure_ascii=False)}\n\n"
 
         except Exception as e:
-            yield f"data: {json.dumps({'type': 'error', 'message': str(e)}, ensure_ascii=False)}\n\n"
+            # M4 修复：错误信息脱敏，内部细节只进服务端日志
+            try:
+                from orchestration.observability import obs
+
+                obs.logger.error("SSE 流式输出异常", error=str(e))
+            except Exception:  # noqa: BLE001
+                pass
+            yield (
+                "data: "
+                + json.dumps(
+                    {"type": "error", "message": "服务内部错误，请稍后重试"},
+                    ensure_ascii=False,
+                )
+                + "\n\n"
+            )
 
     return StreamingResponse(
         event_generator(),
@@ -516,9 +584,12 @@ async def get_stats(session_id: str = None):
         "cache_stats": cost_optimizer.get_stats(),
     }
 
-    # 记忆系统统计
+    # 记忆系统统计 — L6 修复：只返回聚合口径，不暴露任意会话的明细
     if hasattr(orchestrator, "get_memory_stats"):
-        stats["memory"] = orchestrator.get_memory_stats(session_id=session_id)
+        mem = orchestrator.get_memory_stats()
+        if isinstance(mem, dict):
+            mem.pop("sessions", None)  # 去掉逐会话消息数，防会话枚举
+        stats["memory"] = mem
 
     # 追踪信息
     spans = obs.get_trace_tree()
@@ -560,10 +631,11 @@ async def clear_session(session_id: str):
 if __name__ == "__main__":
     import uvicorn
 
+    # L1 修复：生产默认关闭 reload（仅显式设置 UVICORN_RELOAD=true 时开启）
     uvicorn.run(
         "api.app:app",
         host=settings.api_host,
         port=settings.api_port,
-        reload=True,
+        reload=os.getenv("UVICORN_RELOAD", "false").lower() == "true",
         log_level="info",
     )

@@ -163,13 +163,17 @@ v2.0 的核心改进：LLM 不再被固定路由到单个 Agent，而是自主�
 
 ## 快速开始
 
+> **安全默认（H3）**：`API_ACCESS_KEY` 未配置时，所有 `/api/*` 业务请求会被拒绝（503 fail-closed）。
+> 启动前请先设置，生成方式：`openssl rand -hex 32`。前端会自动携带该密钥访问后端。
+
 ### 方式一：Docker 部署（推荐）
 
 ```bash
 # 1. 配置环境变量（compose 需要 .env.docker，两处复制同一模板后填写）
 cp .env.example .env
 cp .env.example .env.docker
-# 编辑填入 DeepSeek API Key、Neo4j/MySQL 密码等
+# 编辑填入 DeepSeek API Key、Neo4j/MySQL 密码、API_ACCESS_KEY 等
+# （注意：compose 中的 Neo4j/MySQL 不再对外映射端口，只能容器网络内访问）
 
 # 2. 一键启动
 docker compose up -d
@@ -200,6 +204,7 @@ pip install -r requirements.txt
 
 # 3. 配置环境变量
 cp .env.example .env
+# 务必设置 API_ACCESS_KEY（未设置时 API 拒绝业务请求）
 
 # 4. 启动 Neo4j 和 MySQL
 
@@ -221,16 +226,19 @@ streamlit run frontend/streamlit_app.py --server.port 8501  # 前端
 | POST | /api/classify | 独立商品分类 |
 | POST | /api/search | 独立商品搜索 |
 | GET | /api/agents | 查看已注册 Agent 列表 |
-| GET | /api/health | 健康检查 |
-| GET | /api/stats | **系统统计 (Token/缓存/记忆)** |
-| GET | /api/trace | **获取追踪树** |
-| DELETE | /api/session/{id} | **清除会话记忆** |
+| GET | /api/health | 健康检查（免鉴权） |
+| GET | /api/stats | **系统统计 (Token/缓存/记忆聚合口径)** |
+| GET | /api/trace | **获取追踪树（需 API Key）** |
+| DELETE | /api/session/{id} | **清除会话记忆（短期 + 该会话长期记忆）** |
+
+> 除 `/api/health` 外，所有 `/api/*` 接口都需要请求头 `X-API-Key: <你的 API_ACCESS_KEY>`。
 
 ### 流式对话示例
 
 ```bash
 curl -X POST http://localhost:8002/api/chat/stream \
   -H "Content-Type: application/json" \
+  -H "X-API-Key: <你的 API_ACCESS_KEY>" \
   -d '{"message":"搜索蓝牙耳机","session_id":"test123"}' \
   --no-buffer
 ```
@@ -347,6 +355,22 @@ python tests/evaluate.py
 | `TRACING_ENABLED` | false | 启用 LangSmith tracing |
 | `LANGSMITH_API_KEY` | | LangSmith API Key |
 | `LITE_MODEL` | deepseek-chat | 简单任务使用的模型 |
+| `API_ACCESS_KEY` | **必填** | API 访问密钥；未配置时所有 `/api/*` 业务请求被拒绝（fail-closed） |
+| `TRUSTED_USER_ID_HEADER` | 空 | 可信代理注入的用户身份头（如 X-User-Id）；不配置则订单 PII 自动脱敏 |
+| `TRUST_PROXY` | false | 是否部署在可信反向代理之后（仅此时信任 X-Forwarded-For） |
+| `CORS_ORIGINS` | localhost | 允许的跨域来源（逗号分隔） |
+| `MEMORY_SHARED_ENABLED` | false | 跨会话共享记忆（默认关闭，防用户偏好串味） |
+
+## 安全与隐私加固
+
+本轮已修复的安全缺陷（详见 `docs/SECURITY.md`）：
+
+- **越权查单（IDOR）**：`user_profile` 不再承载身份字段，`user_id` 只能由可信反向代理通过 `TRUSTED_USER_ID_HEADER` 注入；未配置时订单收货人/地址自动脱敏。
+- **跨用户缓存泄露**：订单（order）意图的回答禁止写入/命中共享缓存。
+- **默认零鉴权**：`API_ACCESS_KEY` 未配置时 API fail-closed（503）；前端自动携带 `X-API-Key`；docker-compose 不再对外映射数据库端口，faiss 索引目录只读挂载，容器以非 root 运行。
+- **限流伪造**：仅当 `TRUST_PROXY=true` 时才信任 `X-Forwarded-For`。
+- **记忆隐私**：`session_id` 缺省或为 `default` 时不启用记忆（多轮对话请传入唯一 session_id）；跨会话共享记忆默认关闭；清除会话会同时删除该会话的短期与长期记忆；`/api/stats` 只返回聚合口径。
+- **其他**：SSE 错误脱敏、系统提示注入防线、磁盘缓存过期清理、Token 明细记录上限、依赖版本上限、追踪不记录原始工具输入。
 
 ## 项目结构
 

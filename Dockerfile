@@ -17,6 +17,9 @@ LABEL description="电商领域智能体 API 服务"
 
 WORKDIR /app
 
+# 创建非 root 运行用户（M3 安全加固：避免容器内以 root 运行）
+RUN useradd --create-home --uid 10001 appuser
+
 # 构建参数：默认公共源，可通过 --build-arg 覆盖
 ARG TORCH_INDEX_URL=https://download.pytorch.org/whl/cpu
 ARG PIP_INDEX_URL=https://pypi.org/simple
@@ -43,8 +46,12 @@ RUN pip install --no-cache-dir --timeout 60 --retries 10 \
 # 复制项目文件
 COPY . .
 
-# 创建数据目录
-RUN mkdir -p data/faiss_index models
+# 创建数据目录并切换到非 root 用户（M3 加固：容器内不以 root 运行，
+# 即使发生反序列化等 RCE，攻击者也拿不到 root 权限）
+RUN mkdir -p data/faiss_index data/cache data/memory_store models \
+    && chown -R appuser:appuser /app
+
+USER appuser
 
 # 暴露端口
 EXPOSE 8002

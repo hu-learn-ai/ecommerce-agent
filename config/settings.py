@@ -123,6 +123,9 @@ class Settings:
     memory_store_path: str = field(
         default_factory=lambda: os.getenv("MEMORY_STORE_PATH", "./data/memory_store")
     )
+    # 跨会话共享记忆（M2 修复：默认关闭，避免不同会话/用户的偏好互相串味；
+    # 确认多会话归属同一用户时再开启）
+    memory_shared_enabled: bool = os.getenv("MEMORY_SHARED_ENABLED", "false").lower() == "true"
 
     # === 可观测性 ===
     langsmith_api_key: str = field(default_factory=lambda: os.getenv("LANGSMITH_API_KEY", ""))

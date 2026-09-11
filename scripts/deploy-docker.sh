@@ -166,7 +166,8 @@ echo ""
 echo -e "${YELLOW}=== Step 4: 检查端口冲突 ===${NC}"
 
 CONFLICT=false
-for PORT in 8002 8501 7474 7687 3306; do
+# H3 修复：数据库端口（3306/7687/7474）已不再对外映射，仅检查对外服务端口
+for PORT in 8002 8501; do
     if ss -tlnp 2>/dev/null | grep -q ":$PORT "; then
         echo -e "${YELLOW}[WARN]${NC} 端口 $PORT 已被占用:"
         ss -tlnp 2>/dev/null | grep ":$PORT "
@@ -181,7 +182,7 @@ if [ "$CONFLICT" = true ]; then
         exit 1
     fi
 else
-    echo -e "${GREEN}[OK]${NC} 所需端口均空闲 (8002/8501/7474/7687/3306)"
+    echo -e "${GREEN}[OK]${NC} 对外端口均空闲 (8002/8501；数据库端口已不对外暴露)"
 fi
 
 # ============================================
@@ -313,13 +314,16 @@ echo "访问地址:"
 echo "  API 文档:    http://$(hostname -I | awk '{print $1}'):8002/docs"
 echo "  前端 UI:     http://$(hostname -I | awk '{print $1}'):8501"
 echo "  健康检查:    http://$(hostname -I | awk '{print $1}'):8002/api/health"
-echo "  Neo4j:       http://$(hostname -I | awk '{print $1}'):7474"
+echo ""
+echo "（Neo4j/MySQL 仅容器网络内可达，不对外暴露；如需运维访问请使用: docker compose exec）"
 echo ""
 echo "常用命令:"
 echo "  查看状态:  docker compose ps"
 echo "  查看日志:  docker compose logs -f agent-api"
 echo "  重启服务:  docker compose restart"
 echo "  停止服务:  docker compose down"
+echo "  访问数据库: docker compose exec -T mysql mysql -u root -p<密码> gmall"
 echo ""
 echo -e "${YELLOW}提醒: 请在阿里云安全组开放端口 8002 和 8501${NC}"
+echo -e "${YELLOW}       访问 /api/* 接口需在 .env.docker 中设置 API_ACCESS_KEY 并携带 X-API-Key 头${NC}"
 echo -e "${YELLOW}       控制台: https://ecs.console.aliyun.com${NC}"

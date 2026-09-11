@@ -20,6 +20,17 @@ import streamlit as st
 # API 地址
 API_BASE = os.getenv("API_BASE_URL", "http://localhost:8002")
 
+# API 访问密钥（H3 修复：与后端一致，所有 /api/* 请求携带 X-API-Key）
+API_ACCESS_KEY = os.getenv("API_ACCESS_KEY", "").strip()
+
+
+def api_headers() -> dict:
+    """构造带 API Key 的请求头"""
+    headers = {"Content-Type": "application/json"}
+    if API_ACCESS_KEY:
+        headers["X-API-Key"] = API_ACCESS_KEY
+    return headers
+
 # ------------------------------------------------------------------ #
 #  页面配置
 # ------------------------------------------------------------------ #
@@ -60,6 +71,7 @@ def stream_chat(message: str, session_id: str):
         response = requests.post(
             f"{API_BASE}/api/chat/stream",
             json={"message": message, "session_id": session_id},
+            headers=api_headers(),
             stream=True,
             timeout=120,
         )
@@ -101,6 +113,7 @@ def non_stream_chat(message: str, session_id: str) -> dict:
         response = requests.post(
             f"{API_BASE}/api/chat",
             json={"message": message, "session_id": session_id},
+            headers=api_headers(),
             timeout=120,
         )
         if response.status_code == 200:
@@ -135,7 +148,7 @@ with st.sidebar:
 
     # 健康检查
     try:
-        resp = requests.get(f"{API_BASE}/api/health", timeout=3)
+        resp = requests.get(f"{API_BASE}/api/health", headers=api_headers(), timeout=3)
         if resp.status_code == 200:
             data = resp.json()
             st.success(f"✅ 服务在线 | {data.get('agents_registered', 0)} 个 Agent")
@@ -161,7 +174,7 @@ with st.sidebar:
     # 系统统计
     with st.expander("📊 系统统计"):
         try:
-            resp = requests.get(f"{API_BASE}/api/stats", timeout=5)
+            resp = requests.get(f"{API_BASE}/api/stats", headers=api_headers(), timeout=5)
             if resp.status_code == 200:
                 stats = resp.json()
 
@@ -213,6 +226,7 @@ with st.sidebar:
                         resp = requests.post(
                             f"{API_BASE}/api/classify",
                             json={"title": classify_input, "top_k": top_k},
+                            headers=api_headers(),
                             timeout=10,
                         )
                         if resp.status_code == 200:
@@ -252,6 +266,7 @@ with st.sidebar:
                                 "min_price": min_p if min_p > 0 else None,
                                 "max_price": max_p if max_p > 0 else None,
                             },
+                            headers=api_headers(),
                             timeout=15,
                         )
                         if resp.status_code == 200:
@@ -271,7 +286,11 @@ with st.sidebar:
         st.session_state.messages = []
         # 清除后端记忆
         try:
-            requests.delete(f"{API_BASE}/api/session/{st.session_state.session_id}", timeout=5)
+            requests.delete(
+                f"{API_BASE}/api/session/{st.session_state.session_id}",
+                headers=api_headers(),
+                timeout=5,
+            )
         except Exception:
             pass
         st.rerun()

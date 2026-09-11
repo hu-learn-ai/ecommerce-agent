@@ -23,10 +23,13 @@ elif [ -f ".venv/bin/activate" ]; then
     source .venv/bin/activate
 fi
 
-# 加载环境变量
+# 加载环境变量（set -a + source 方式可正确处理含空格/特殊字符的值 — L7 修复）
 if [ -f ".env" ]; then
     echo "加载 .env 配置..."
-    export $(grep -v '^#' .env | xargs)
+    set -a
+    # shellcheck disable=SC1091
+    source .env
+    set +a
 else
     echo "⚠️  .env 文件不存在，请先配置: cp .env.example .env"
     exit 1
@@ -35,6 +38,9 @@ fi
 # 检查关键配置
 if [ -z "$DEEPSEEK_API_KEY" ]; then
     echo "⚠️  DEEPSEEK_API_KEY 未配置，LLM 功能将不可用"
+fi
+if [ -z "$API_ACCESS_KEY" ]; then
+    echo "⚠️  API_ACCESS_KEY 未配置，API 将以 fail-closed 模式拒绝所有业务请求"
 fi
 
 # 启动 API 服务
@@ -47,5 +53,5 @@ echo ""
 exec uvicorn api.app:app \
     --host "${API_HOST:-0.0.0.0}" \
     --port "${API_PORT:-8002}" \
-    --workers 2 \
+    --workers 1 \
     --log-level info

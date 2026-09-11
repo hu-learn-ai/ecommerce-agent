@@ -224,7 +224,8 @@ Cypher查询:"""
         cypher_upper = cypher.upper().strip()
 
         # === Level 1: 白名单 — 必须以 MATCH 或 OPTIONAL MATCH 开头 ===
-        allowed_starts = ("MATCH", "OPTIONAL MATCH", "CYPHER")
+        # L5 修复：移除 CYPHER 前缀放行（可被用于切换 runtime/planner 等执行参数）
+        allowed_starts = ("MATCH", "OPTIONAL MATCH")
         if not any(cypher_upper.startswith(prefix) for prefix in allowed_starts):
             print(f"[KGQAAgent] L1: Cypher 不以 MATCH 开头，拒绝执行: {cypher[:80]}")
             return ""
