@@ -96,11 +96,28 @@ class ModelTierRouter:
         except Exception:
             return False
 
+    def _deepseek_key(self) -> str:
+        """DeepSeek API key；缺失时返回占位符，避免构造阶段崩溃。
+
+        ChatOpenAI 客户端只在真正发起请求时才需要有效 key；
+        若在 import/构造阶段因缺 key 抛异常，会导致模块无法加载
+        （典型症状：CI 无凭据环境下 pytest 收集失败 exit 2）。
+        与 _probe_vllm 的 "EMPTY" 占位约定一致。
+        """
+        key = (settings.deepseek_api_key or "").strip()
+        if not key:
+            obs.log_event(
+                "model_router",
+                warning="DEEPSEEK_API_KEY 未设置，客户端以占位 key 构造，实际调用 LLM 时将失败",
+            )
+            return "EMPTY"
+        return key
+
     def _build_deepseek_lite(self) -> ChatOpenAI:
         """DeepSeek lite 模型（默认 Tier 1；本地 vLLM 探活失败时的兜底）"""
         return ChatOpenAI(
             model=settings.lite_model,
-            api_key=settings.deepseek_api_key,
+            api_key=self._deepseek_key(),
             base_url=settings.deepseek_base_url,
             temperature=settings.lite_temperature,
             max_tokens=settings.lite_max_tokens,
@@ -131,7 +148,7 @@ class ModelTierRouter:
         # Tier 2: standard — deepseek-chat + 标准参数
         self._models[2] = ChatOpenAI(
             model=settings.standard_model,
-            api_key=settings.deepseek_api_key,
+            api_key=self._deepseek_key(),
             base_url=settings.deepseek_base_url,
             temperature=settings.standard_temperature,
             max_tokens=settings.standard_max_tokens,
@@ -144,7 +161,7 @@ class ModelTierRouter:
         # 注意: R1 不支持 temperature 调节, API 会忽略该参数
         self._models[3] = ChatOpenAI(
             model=settings.heavy_model,
-            api_key=settings.deepseek_api_key,
+            api_key=self._deepseek_key(),
             base_url=settings.deepseek_base_url,
             temperature=settings.heavy_temperature,
             max_tokens=settings.heavy_max_tokens,
