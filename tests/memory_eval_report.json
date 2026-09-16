@@ -6,24 +6,24 @@
       {
         "key_fact_retention": 1.0,
         "missed_facts": [],
-        "compression_ratio": 1.18,
-        "summary_length": 68,
+        "compression_ratio": 1.29,
+        "summary_length": 62,
         "original_length": 80,
         "name": "偏好+预算对话",
-        "summary": "用户预算约8000元，主要用途为写代码，偏好14寸便携机型。助手建议16GB内存以上、SSD 512GB起。用户未指定品牌，需后续推荐。"
+        "summary": "用户想买笔记本电脑，预算8000左右，主要用来写代码，偏好14寸、方便携带。助手建议16GB内存以上、SSD 512GB起。"
       },
       {
         "key_fact_retention": 1.0,
         "missed_facts": [],
-        "compression_ratio": 1.06,
-        "summary_length": 118,
+        "compression_ratio": 0.89,
+        "summary_length": 141,
         "original_length": 125,
         "name": "购买决策对话",
-        "summary": "用户询问降噪耳机推荐，助手推荐Sony WH-1000XM5（约2299元）或Bose QC Ultra。用户嫌贵，要求2000元以内，助手改荐Sony WH-1000XM4，约1599元。用户偏好：预算2000元内，倾向Sony品牌。"
+        "summary": "用户询问降噪耳机推荐，助手推荐 Sony WH-1000XM5 或 Bose QC Ultra。用户询问 Sony 那款价格，助手称 Sony WH-1000XM5 大概 2299 元。用户觉得太贵，要求 2000 以内，助手推荐 Sony WH-1000XM4，约 1599 元。"
       }
     ],
     "avg_key_fact_retention": 1.0,
-    "avg_compression_ratio": 1.12
+    "avg_compression_ratio": 1.09
   },
   "long_term_retrieval": {
     "available": true,
@@ -36,7 +36,7 @@
         "should_retrieve": true,
         "retrieved_count": 1,
         "hit": true,
-        "retrieved_top": "用户是 Java 开发者，使用 Spring Boot"
+        "retrieved_top": "用户是 Java 开发者，平时使用 Spring Boot"
       },
       {
         "conversation": "我对价格敏感,预算一般控制在500以内",
@@ -54,7 +54,7 @@
         "should_retrieve": true,
         "retrieved_count": 3,
         "hit": true,
-        "retrieved_top": "用户购买过华为MateBook"
+        "retrieved_top": "用户对价格敏感，预算一般控制在500以内"
       },
       {
         "conversation": "今天天气不错",
@@ -75,11 +75,10 @@
     "session_a_said": "Python 开发者, FastAPI",
     "session_b_query": "我平时用什么编程语言",
     "migration_hit": true,
-    "context_built": "[用户历史记忆]\n- 用户是 Python 开发者，偏好使用 FastAPI (preference)\n- 用户是 Java 开发者，使用 Spring Boot (fact)\n- 用户对价格敏感，预算一般控制在500以内 (preference)",
+    "strict_hit": true,
+    "leaked_terms": [],
+    "context_built": "[用户历史记忆]\n- 用户是 Python 开发者 (fact)\n- 用户偏好使用 FastAPI (preference)",
     "linked_sessions": [
-      [
-        "test_session"
-      ],
       [
         "session_A"
       ]

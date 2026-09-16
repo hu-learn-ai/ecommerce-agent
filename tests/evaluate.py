@@ -16,7 +16,15 @@
 
 import json
 import os
+import re
 import sys
+
+# Windows GBK 控制台下打印 emoji 会抛 UnicodeEncodeError（评估跑完才崩、报告不落盘）
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(errors="replace")
+    except Exception:  # noqa: BLE001 - 流不支持 reconfigure 时忽略
+        pass
 
 # 必须在 import sentence-transformers/huggingface 相关模块前设置
 # 否则 SentenceTransformer 加载时仍请求 huggingface.co 超时
@@ -53,6 +61,19 @@ class AgentEvaluator:
         # 借用 GenerationMetrics 的静态解析方法,保证与 RAG 评估同款健壮度
         self._parse_json = GenerationMetrics._parse_json_response
 
+    # 被截断的输出里按维度抢救分数：只认"维度名 + score"，不套用同一个数字
+    _DIM_SCORE_RE = re.compile(
+        r'"(\w+)"\s*:\s*\{[^{}]*?"score"\s*:\s*([0-9]+(?:\.[0-9]+)?)'
+    )
+
+    def _salvage_scores(self, text: str) -> dict:
+        """从截断/半结构化输出里按维度抢救出已有的分数。"""
+        found = {}
+        for key, value in self._DIM_SCORE_RE.findall(text or ""):
+            if key in self.EVAL_CRITERIA and key not in found:
+                found[key] = float(value)
+        return found
+
     def evaluate(self, question: str, answer: str, context: dict = None) -> dict:
         """
         评估单条回答（批量模式：5 个维度合并为 1 次 LLM 调用）
@@ -74,7 +95,7 @@ class AgentEvaluator:
 
         prompt = f"""作为电商智能体评估专家，请对以下回答进行多维度评分。
 
-评估标准（每个维度给出 0-10 的分数，整数或一位小数，并简要说明理由）：
+评估标准（每个维度给出 0-10 的分数，整数或一位小数；"理由"**不超过 15 个字**，简短即可）：
 {criteria_desc}
 
 用户问题: {question}
@@ -104,9 +125,19 @@ Agent回答: {answer}
             try:
                 parsed = self._parse_json(result)
             except ValueError as e:
-                # 健壮解析仍失败, 显式标记 error, 不再用"提取第一个数字套到所有维度"的虚假降级
-                parse_error = f"解析失败: {e}"
-                parsed = {}
+                # 健壮解析仍失败时，先按维度抢救（截断输出常见）：
+                # 抢到 ≥3 个维度就标注"部分解析"继续用，否则才整条判失败。
+                # 注意：绝不用"提取第一个数字套到所有维度"那种虚假降级。
+                salvaged = self._salvage_scores(result)
+                if len(salvaged) >= 3:
+                    parse_error = f"解析不完整，已抢救 {len(salvaged)}/{len(self.EVAL_CRITERIA)} 维: {e}"
+                    parsed = {
+                        key: {"score": value, "reason": "（从截断输出按维度抢救）"}
+                        for key, value in salvaged.items()
+                    }
+                else:
+                    parse_error = f"解析失败: {e}"
+                    parsed = {}
 
             # 确保所有评估维度都存在
             for criterion in self.EVAL_CRITERIA:
@@ -143,6 +174,10 @@ Agent回答: {answer}
         if parse_error:
             # 暴露失败原因,便于排查(此前被静默吞掉)
             result["error"] = parse_error
+        # 状态三分：ok（完整解析）/ partial（抢救到部分维度，分数可用但需标注）/
+        # failed（没有可用分数，统计时必须剔除，否则会被当成 0 分拉低均值）
+        usable = [c for c in self.EVAL_CRITERIA if scores.get(c, {}).get("score")]
+        result["status"] = "ok" if not parse_error else ("partial" if usable else "failed")
         return result
 
     def run_benchmark(self, test_cases: list) -> dict:

@@ -23,6 +23,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
+from config.settings import settings
 from orchestration.router import RouterAgent
 
 # ------------------------------------------------------------------ #
@@ -426,6 +427,170 @@ class TestUserProfile:
         # 无画像时也能正常工作（向后兼容）
         result2 = agent._extract_category("有什么推荐的")
         assert result2 == "家用电器"
+
+
+# ------------------------------------------------------------------ #
+#  多轮实体复用（指代消解）测试
+# ------------------------------------------------------------------ #
+
+
+class _FakeNer:
+    """可控的 NER 桩：返回预置实体 dict。"""
+
+    def __init__(self, entities=None):
+        self.entities = entities or {}
+
+    def extract(self, query):
+        return self.entities
+
+
+class TestMultiTurnEntityReuse:
+    """多轮实体复用：追问时回填上一轮 NER 实体消解指代（不依赖模型/LLM）。"""
+
+    # -- 纯函数：merge_entity_context ---------------------------------- #
+
+    def test_merge_reuses_carried_on_anaphoric_followup(self):
+        from agents.catalog_agent import merge_entity_context
+
+        result = merge_entity_context(
+            "那有降噪的吗",
+            current_entities={"商品": [], "品牌": [], "款式": []},
+            carried_entities={"商品": ["蓝牙耳机"]},
+        )
+        assert "蓝牙耳机" in result
+
+    def test_merge_skips_when_current_has_new_entity(self):
+        from agents.catalog_agent import merge_entity_context
+
+        result = merge_entity_context(
+            "那跑步鞋呢",
+            current_entities={"商品": ["跑步鞋"]},
+            carried_entities={"商品": ["蓝牙耳机"]},
+        )
+        assert result == "那跑步鞋呢"
+
+    def test_merge_skips_when_no_carried(self):
+        from agents.catalog_agent import merge_entity_context
+
+        assert merge_entity_context("那有降噪的吗", {}, {}) == "那有降噪的吗"
+
+    def test_merge_ignores_spec_only_carried(self):
+        from agents.catalog_agent import merge_entity_context
+
+        # 规格不参与指代消解，只有规格时原样返回
+        assert merge_entity_context("那这个呢", {}, {"规格": ["512G"]}) == "那这个呢"
+
+    def test_merge_skips_long_non_followup(self):
+        from agents.catalog_agent import merge_entity_context
+
+        # 长句且无回指词 → 视为新话题，不回填
+        result = merge_entity_context(
+            "帮我找一款适合送人的生日礼物",
+            {},
+            {"商品": ["蓝牙耳机"]},
+        )
+        assert result == "帮我找一款适合送人的生日礼物"
+
+    # -- 纯函数：_is_anaphoric_followup -------------------------------- #
+
+    def test_is_anaphoric_followup_short_or_marker(self):
+        from agents.catalog_agent import _is_anaphoric_followup
+
+        assert _is_anaphoric_followup("那这个呢")
+        assert _is_anaphoric_followup("第二个")
+        assert _is_anaphoric_followup("有降噪的吗，帮我看看这个牌子还有哪些")
+        assert not _is_anaphoric_followup("帮我推荐一款适合户外露营的帐篷")
+        assert not _is_anaphoric_followup("")
+
+    # -- 记忆层：实体上下文存取 ----------------------------------------- #
+
+    def test_memory_entity_context_roundtrip_and_carry_forward(self, monkeypatch):
+        from orchestration.memory import MemoryManager
+
+        monkeypatch.setattr(settings, "memory_long_term_enabled", False)
+        mm = MemoryManager(llm=None, embedder=None)
+
+        assert mm.get_entity_context("s1") == {}
+        mm.set_entity_context("s1", {"商品": ["蓝牙耳机"], "品牌": ["华为"]})
+        assert mm.get_entity_context("s1") == {"商品": ["蓝牙耳机"], "品牌": ["华为"]}
+
+        # 空实体 no-op：链式指代不断链（推荐蓝牙耳机 → 那有降噪的吗 → 那第二个呢）
+        mm.set_entity_context("s1", {"商品": [], "品牌": [], "款式": [], "规格": []})
+        assert mm.get_entity_context("s1") == {"商品": ["蓝牙耳机"], "品牌": ["华为"]}
+
+        # 新实体替换旧实体
+        mm.set_entity_context("s1", {"商品": ["跑步鞋"]})
+        assert mm.get_entity_context("s1") == {"商品": ["跑步鞋"]}
+
+    def test_memory_clear_session_removes_entity_context(self, monkeypatch):
+        from orchestration.memory import MemoryManager
+
+        monkeypatch.setattr(settings, "memory_long_term_enabled", False)
+        mm = MemoryManager(llm=None, embedder=None)
+        mm.set_entity_context("s1", {"商品": ["蓝牙耳机"]})
+        mm.clear_session("s1")
+        assert mm.get_entity_context("s1") == {}
+
+    def test_memory_entity_context_is_session_scoped(self, monkeypatch):
+        from orchestration.memory import MemoryManager
+
+        monkeypatch.setattr(settings, "memory_long_term_enabled", False)
+        mm = MemoryManager(llm=None, embedder=None)
+        mm.set_entity_context("s1", {"商品": ["蓝牙耳机"]})
+        mm.set_entity_context("s2", {"商品": ["跑步鞋"]})
+        assert mm.get_entity_context("s1") == {"商品": ["蓝牙耳机"]}
+        assert mm.get_entity_context("s2") == {"商品": ["跑步鞋"]}
+
+    # -- CatalogAgent：实体上下文注入搜索/推荐 --------------------------- #
+
+    def test_catalog_search_injects_entity_context(self):
+        from agents.catalog_agent import CatalogAgent
+
+        search_mock = MagicMock()
+        search_mock.run.return_value = "搜索结果"
+        agent = CatalogAgent(
+            search_agent=search_mock,
+            recommend_agent=MagicMock(),
+            classify_agent=MagicMock(),
+            ner_agent=_FakeNer({"商品": [], "品牌": [], "款式": [], "规格": []}),
+        )
+        agent.search("那有降噪的吗", entity_context={"商品": ["蓝牙耳机"]})
+        search_mock.run.assert_called_once()
+        query = search_mock.run.call_args.kwargs.get("query")
+        assert query and "蓝牙耳机" in query
+
+    def test_catalog_recommend_injects_entity_context(self):
+        from agents.catalog_agent import CatalogAgent
+
+        recommend_mock = MagicMock()
+        recommend_mock.run.return_value = "推荐结果"
+        agent = CatalogAgent(
+            search_agent=MagicMock(),
+            recommend_agent=recommend_mock,
+            classify_agent=MagicMock(),
+            ner_agent=_FakeNer({"商品": [], "品牌": [], "款式": [], "规格": []}),
+        )
+        agent.recommend("那这款呢", entity_context={"商品": ["蓝牙耳机"]})
+        recommend_mock.run.assert_called_once()
+        query = recommend_mock.run.call_args.kwargs.get("query")
+        assert query and "蓝牙耳机" in query
+
+    def test_catalog_search_without_entity_context_unchanged(self):
+        from agents.catalog_agent import CatalogAgent
+
+        search_mock = MagicMock()
+        search_mock.run.return_value = "搜索结果"
+        agent = CatalogAgent(
+            search_agent=search_mock,
+            recommend_agent=MagicMock(),
+            classify_agent=MagicMock(),
+            ner_agent=_FakeNer({"商品": ["耳机"]}),
+        )
+        # 无 entity_context：仅走原有 NER 查询增强，不回填
+        agent.search("蓝牙耳机")
+        search_mock.run.assert_called_once()
+        query = search_mock.run.call_args.kwargs.get("query")
+        assert query == "蓝牙耳机 耳机"
 
 
 # ------------------------------------------------------------------ #

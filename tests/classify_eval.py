@@ -16,6 +16,7 @@
     python tests/classify_eval.py --rule-only
 """
 
+import csv
 import json
 import os
 import sys
@@ -127,6 +128,140 @@ OOD_CASES = [
 ]
 
 
+# 真实短查询用例：用户实际输入 1-3 个词，而非完整商品标题。
+# 标题型用例（IN_DOMAIN_CASES）已能拿到 ~99%，短查询才是线上真实分布，
+# 也是 OOD 门控误拒的高发区。
+SHORT_QUERY_CASES = [
+    # 手机数码
+    ("蓝牙耳机", "手机数码"),
+    ("无线鼠标", "手机数码"),
+    ("机械键盘", "手机数码"),
+    ("充电宝", "手机数码"),
+    ("数据线", "手机数码"),
+    ("平板电脑", "手机数码"),
+    ("显示器", "手机数码"),
+    ("路由器", "手机数码"),
+    ("智能手表", "手机数码"),
+    ("固态硬盘", "手机数码"),
+    ("蓝牙音箱", "手机数码"),
+    ("游戏鼠标", "手机数码"),
+    ("电竞显示器", "手机数码"),
+    ("手机壳", "手机数码"),
+    ("摄像头", "手机数码"),
+    ("内存条", "手机数码"),
+    # 家用电器
+    ("电饭煲", "家用电器"),
+    ("微波炉", "家用电器"),
+    ("洗衣机", "家用电器"),
+    ("冰箱", "家用电器"),
+    ("空调", "家用电器"),
+    ("电视机", "家用电器"),
+    ("吸尘器", "家用电器"),
+    ("扫地机器人", "家用电器"),
+    ("破壁机", "家用电器"),
+    ("豆浆机", "家用电器"),
+    ("电水壶", "家用电器"),
+    ("加湿器", "家用电器"),
+    ("电风扇", "家用电器"),
+    ("热水器", "家用电器"),
+    ("电磁炉", "家用电器"),
+    ("洗碗机", "家用电器"),
+    ("吹风机", "家用电器"),
+    ("剃须刀", "家用电器"),
+    ("净水器", "家用电器"),
+    ("挂烫机", "家用电器"),
+    # 食品生鲜
+    ("薯片", "食品生鲜"),
+    ("坚果礼盒", "食品生鲜"),
+    ("巧克力", "食品生鲜"),
+    ("咖啡豆", "食品生鲜"),
+    ("龙井茶", "食品生鲜"),
+    ("蜂蜜", "食品生鲜"),
+    ("牛肉干", "食品生鲜"),
+    ("三文鱼", "食品生鲜"),
+    ("鸡蛋", "食品生鲜"),
+    ("苹果", "食品生鲜"),
+    ("香蕉", "食品生鲜"),
+    ("酸奶", "食品生鲜"),
+    ("面包", "食品生鲜"),
+    ("食用油", "食品生鲜"),
+    ("挂面", "食品生鲜"),
+    ("螺蛳粉", "食品生鲜"),
+    ("速冻水饺", "食品生鲜"),
+    ("大闸蟹", "食品生鲜"),
+    ("火龙果", "食品生鲜"),
+    ("午餐肉", "食品生鲜"),
+    # 医药保健
+    ("维生素C", "医药保健"),
+    ("钙片", "医药保健"),
+    ("血糖仪", "医药保健"),
+    ("体温计", "医药保健"),
+    ("医用口罩", "医药保健"),
+    ("创可贴", "医药保健"),
+    ("鱼油", "医药保健"),
+    ("益生菌", "医药保健"),
+    ("蛋白粉", "医药保健"),
+    ("叶酸", "医药保健"),
+    ("感冒药", "医药保健"),
+    ("眼药水", "医药保健"),
+    ("颈椎按摩仪", "医药保健"),
+    ("血氧仪", "医药保健"),
+    ("雾化器", "医药保健"),
+    ("医用棉签", "医药保健"),
+    ("碘伏", "医药保健"),
+    ("退热贴", "医药保健"),
+    ("护膝", "医药保健"),
+    ("理疗灯", "医药保健"),
+]
+
+# 短查询形式的域外用例（4 类不覆盖的品类）
+OOD_SHORT_CASES = [
+    ("连衣裙", "连衣裙"),
+    ("牛仔裤", "牛仔裤"),
+    ("羽绒服", "羽绒服"),
+    ("口红", "口红"),
+    ("面膜", "面膜"),
+    ("精华液", "精华液"),
+    ("纸尿裤", "纸尿裤"),
+    ("婴儿奶粉", "奶粉"),
+    ("猫粮", "猫粮"),
+    ("狗粮", "狗粮"),
+    ("猫砂", "猫砂"),
+    ("宠物牵引绳", "牵引绳"),
+    ("户外帐篷", "帐篷"),
+    ("哑铃", "哑铃"),
+    ("瑜伽垫", "瑜伽垫"),
+    ("民谣吉他", "吉他"),
+    ("保温杯", "保温杯"),
+    ("雨伞", "雨伞"),
+    ("中性笔", "中性笔"),
+    ("考研教材", "教材"),
+    ("黄金项链", "项链"),
+    ("鲜花礼盒", "鲜花"),
+    ("儿童玩具", "玩具"),
+    ("汽车脚垫", "脚垫"),
+]
+
+
+def load_training_texts() -> set:
+    """加载增强训练集文本，用于判断短查询是否在训练集中出现过（区分"见过/没见过"）。
+
+    增强数据由商品标题派生出大量短查询变体，若不区分，短查询准确率会被"训练集里见过"
+    的样本拉高。缺失训练集时返回空集合（该维度不参与统计）。
+    """
+    for name in ("classify_train_real_aug_train.csv", "classify_train_real.csv"):
+        path = os.path.join(PROJECT_ROOT, "data", "processed", name)
+        if not os.path.exists(path):
+            continue
+        texts = set()
+        with open(path, encoding="utf-8-sig") as handle:
+            for row in csv.DictReader(handle):
+                texts.add(row["text"].strip())
+            return texts
+    print("  [提示] 未找到增强训练集，跳过'是否见过'维度")
+    return set()
+
+
 # ------------------------------------------------------------------ #
 #  分类评估器
 # ---------------------------------------------------------------- #
@@ -168,94 +303,109 @@ class ClassifyEvaluator:
             return "无法判断", 0.0
 
     def evaluate(self) -> dict:
-        """运行完整评估"""
-        # --- 域内评估 ---
-        in_domain_true = []
-        in_domain_pred = []
-        in_domain_conf = []
-        in_domain_correct = []
-        in_domain_titles = [c[0] for c in IN_DOMAIN_CASES]
+        """运行完整评估（分组：完整标题 / 真实短查询 / 短查询中训练集未见过）"""
 
-        for title, expected in IN_DOMAIN_CASES:
-            try:
-                top_k = self.agent.get_top_k(title, k=1)
-                pred, conf = self._parse_top_k(top_k)
-            except Exception as e:
-                pred, conf = "无法判断", 0.0
-                print(f"  [评估异常] {title[:20]}: {e}")
-
-            # 域内用例被拒识为"无法判断"视为误分类
-            in_domain_true.append(expected)
-            in_domain_pred.append(pred)
-            in_domain_conf.append(conf)
-            in_domain_correct.append(pred == expected)
-
-        # --- 域外拒识评估 ---
-        ood_titles = []
-        ood_pred_labels = []  # 模型对 OOD 样本的 top1 预测
-        ood_confs = []
-        ood_rejected = []  # 是否被拒识为"无法判断"
-
-        for title, _ in OOD_CASES:
-            try:
-                top_k = self.agent.get_top_k(title, k=1)
-                pred, conf = self._parse_top_k(top_k)
-            except Exception:
-                pred, conf = "无法判断", 0.0
-
-            ood_titles.append(title)
-            ood_pred_labels.append(pred)
-            ood_confs.append(conf)
-            ood_rejected.append(pred == "无法判断")
-
-        # --- 1. 多分类指标(域内 + 域外,统一以 ALL_LABELS 评估) ---
-        # OOD 用例期望预测="无法判断"
-        all_true = in_domain_true + ["无法判断"] * len(OOD_CASES)
-        all_pred = in_domain_pred + ood_pred_labels
-        cls_metrics = compute_classification_metrics(all_true, all_pred, ALL_LABELS)
-
-        # --- 2. 置信度校准 ECE (仅域内样本) ---
-        # 校准问的是: 模型对 top1 预测的置信度是否与真实准确率匹配
-        ece_result = compute_ece(in_domain_conf, in_domain_correct, n_bins=10)
-
-        # --- 3. OOD 检测能力 ---
-        # 二分类: OOD(应拒识=1) vs InDomain(应接收=0)
-        # 拒识置信度 = 1 - top1_conf (模型越不自信, 越倾向拒识)
-        ood_true = [1] * len(OOD_CASES) + [0] * len(IN_DOMAIN_CASES)
-        ood_pred_binary = [1 if r else 0 for r in ood_rejected] + [
-            0 if ok else 1 for ok in in_domain_correct  # 域内误分类也视为"应拒识但被接收"
-        ]
-        ood_scores = [1.0 - c for c in ood_confs] + [1.0 - c for c in in_domain_conf]
-        ood_metrics = self._compute_ood_metrics(ood_true, ood_pred_binary, ood_scores)
-
-        return {
-            "in_domain_total": len(IN_DOMAIN_CASES),
-            "ood_total": len(OOD_CASES),
-            "classification": cls_metrics,
-            "calibration": ece_result,
-            "ood_detection": ood_metrics,
-            "in_domain_errors": [
-                {"title": t, "expected": e, "predicted": p, "confidence": round(c, 4)}
-                for t, e, p, c, ok in zip(
-                    in_domain_titles,
-                    in_domain_true,
-                    in_domain_pred,
-                    in_domain_conf,
-                    in_domain_correct,
+        def run_in_domain(cases) -> list:
+            rows = []
+            for text, expected in cases:
+                try:
+                    top_k = self.agent.get_top_k(text, k=1)
+                    pred, conf = self._parse_top_k(top_k)
+                except Exception as exc:  # noqa: BLE001
+                    pred, conf = "无法判断", 0.0
+                    print(f"  [评估异常] {text[:20]}: {exc}")
+                rows.append(
+                    {
+                        "title": text,
+                        "expected": expected,
+                        "predicted": pred,
+                        "confidence": round(conf, 4),
+                        "correct": pred == expected,
+                    }
                 )
-                if not ok
-            ],
-            "ood_errors": [
-                {
-                    "title": t,
-                    "expected": "无法判断",
-                    "predicted": p,
-                    "confidence": round(c, 4),
-                }
-                for t, p, c, r in zip(ood_titles, ood_pred_labels, ood_confs, ood_rejected)
-                if not r  # 未被拒识的 OOD 样本
-            ],
+            return rows
+
+        def run_ood(cases) -> list:
+            rows = []
+            for text, _ in cases:
+                try:
+                    top_k = self.agent.get_top_k(text, k=1)
+                    pred, conf = self._parse_top_k(top_k)
+                except Exception:  # noqa: BLE001
+                    pred, conf = "无法判断", 0.0
+                rows.append(
+                    {
+                        "title": text,
+                        "expected": "无法判断",
+                        "predicted": pred,
+                        "confidence": round(conf, 4),
+                        "rejected": pred == "无法判断",
+                    }
+                )
+            return rows
+
+        def group_metrics(in_rows: list, ood_rows: list) -> dict:
+            all_true = [r["expected"] for r in in_rows] + ["无法判断"] * len(ood_rows)
+            all_pred = [r["predicted"] for r in in_rows] + [r["predicted"] for r in ood_rows]
+            ood_true = [1] * len(ood_rows) + [0] * len(in_rows)
+            ood_pred_binary = [1 if r["rejected"] else 0 for r in ood_rows] + [
+                0 if r["correct"] else 1 for r in in_rows
+            ]
+            ood_scores = [1.0 - r["confidence"] for r in ood_rows] + [
+                1.0 - r["confidence"] for r in in_rows
+            ]
+            return {
+                "in_domain_total": len(in_rows),
+                "ood_total": len(ood_rows),
+                "classification": compute_classification_metrics(all_true, all_pred, ALL_LABELS),
+                "calibration": compute_ece(
+                    [r["confidence"] for r in in_rows],
+                    [r["correct"] for r in in_rows],
+                    n_bins=10,
+                ),
+                "ood_detection": self._compute_ood_metrics(
+                    ood_true, ood_pred_binary, ood_scores
+                ),
+            }
+
+        print("  [组 1/3] 完整商品标题 ...")
+        long_in = run_in_domain(IN_DOMAIN_CASES)
+        long_ood = run_ood(OOD_CASES)
+
+        print("  [组 2/3] 真实短查询 ...")
+        short_in = run_in_domain(SHORT_QUERY_CASES)
+        short_ood = run_ood(OOD_SHORT_CASES)
+
+        # 标注短查询是否在增强训练集中出现（增强数据由标题派生大量短查询变体）
+        train_texts = load_training_texts()
+        for row in short_in:
+            row["seen_in_train"] = row["title"] in train_texts
+        unseen_in = [r for r in short_in if not r["seen_in_train"]]
+        seen_ratio = (
+            sum(1 for r in short_in if r["seen_in_train"]) / len(short_in)
+            if short_in
+            else 0.0
+        )
+
+        print(f"  [组 3/3] 短查询中训练集未见过（{len(unseen_in)} 条）...")
+        by_group = {
+            "long_title": group_metrics(long_in, long_ood),
+            "short_query": group_metrics(short_in, short_ood),
+            "short_query_unseen": group_metrics(unseen_in, short_ood),
+            "all": group_metrics(long_in + short_in, long_ood + short_ood),
         }
+
+        # 顶层字段保持与原报告同口径（完整标题组），新增 by_group 供分组对比
+        result = dict(by_group["long_title"])
+        result.update(
+            {
+                "by_group": by_group,
+                "short_query_seen_in_train_ratio": round(seen_ratio, 4),
+                "in_domain_errors": [r for r in long_in + short_in if not r["correct"]],
+                "ood_errors": [r for r in long_ood + short_ood if not r["rejected"]],
+            }
+        )
+        return result
 
     @staticmethod
     def _compute_ood_metrics(
@@ -351,9 +501,38 @@ class ClassifyEvaluator:
 
 def print_report(result: dict):
     """打印可读报告"""
-    print(f"\n  域内用例: {result['in_domain_total']}  |  域外用例: {result['ood_total']}")
+    groups = result.get("by_group") or {}
+    if groups:
+        print("\n  📊 分组结果（难易对比）:")
+        print(
+            f"    {'group':<28s}{'域内':>5s}{'域外':>5s}{'Accuracy':>10s}"
+            f"{'MacroF1':>9s}{'OOD召回':>9s}{'域内接收':>9s}"
+        )
+        for key, label in (
+            ("long_title", "完整标题"),
+            ("short_query", "真实短查询"),
+            ("short_query_unseen", "短查询·训练集未见"),
+            ("all", "合并"),
+        ):
+            group = groups.get(key)
+            if not group:
+                continue
+            group_cls = group["classification"]
+            group_ood = group["ood_detection"]
+            print(
+                f"    {label:<28s}{group['in_domain_total']:>5d}{group['ood_total']:>5d}"
+                f"{group_cls['accuracy']:>10.4f}{group_cls['macro_f1']:>9.4f}"
+                f"{group_ood['ood_recall']:>9.4f}{group_ood['indomain_accept_rate']:>9.4f}"
+            )
+        print(
+            f"    短查询中在增强训练集里出现过的比例: "
+            f"{result.get('short_query_seen_in_train_ratio', 0):.2%}"
+        )
 
-    cls = result["classification"]
+    detail = groups.get("all") or result
+    print(f"\n  明细口径: {detail['in_domain_total']} 条域内 + {detail['ood_total']} 条域外")
+
+    cls = detail["classification"]
     print("\n  📊 多分类指标 (4 类 + 无法判断):")
     print(f"    Accuracy: {cls['accuracy']:.4f}")
     print(f"    Macro-F1: {cls['macro_f1']:.4f}  (P={cls['macro_precision']:.4f}, R={cls['macro_recall']:.4f})")
@@ -371,7 +550,7 @@ def print_report(result: dict):
             f"{c['f1']:>8.4f}{c['support']:>10d}  {err_str}"
         )
 
-    cal = result["calibration"]
+    cal = detail["calibration"]
     print("\n  🎯 置信度校准 (ECE):")
     print(f"    ECE = {cal['ece']:.4f}  (0=完美校准, 越大越过度/不足自信)")
     print("    分桶明细 (置信度区间 → 实际准确率):")
@@ -384,7 +563,7 @@ def print_report(result: dict):
             f"acc={b['acc']:.4f}  gap={b['gap']:.4f}"
         )
 
-    ood = result["ood_detection"]
+    ood = detail["ood_detection"]
     print("\n  🛡️  OOD 域外拒识:")
     print(f"    OOD Recall (域外样本被拒识比例): {ood['ood_recall']:.4f}")
     print(f"    InDomain Accept (域内被正确接收): {ood['indomain_accept_rate']:.4f}")

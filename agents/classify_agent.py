@@ -204,12 +204,18 @@ class ClassifyAgent(BaseAgentTool):
 
         Args:
             title: 商品标题
-            k: 返回数量
+            k: 返回数量（超过类别总数时自动裁剪，避免 topk 越界）
 
         Returns:
             [{"category": "...", "confidence": "12.34%"}, ...]
         """
         self._ensure_loaded()
+
+        # 防御：k 不得超过模型设定的类别数，否则 torch.topk 抛
+        # "selected index k out of range"（4 类模型 + k>=5 必崩）
+        num_classes = len(self._labels) if self._labels else 0
+        if num_classes:
+            k = max(1, min(int(k), num_classes))
 
         title = self._preprocess(title)
         if self._is_junk_input(title) or self._is_out_of_domain(title):
@@ -224,7 +230,9 @@ class ClassifyAgent(BaseAgentTool):
             with torch.no_grad():
                 outputs = self._model(**inputs, output_hidden_states=True)
                 probs = torch.softmax(outputs.logits, dim=-1)
-                top_k_result = torch.topk(probs, k, dim=-1)
+                # 二次防御：以 logits 实际维度为准裁剪 k（兼容标签表与权重不一致的场景）
+                safe_k = max(1, min(k, int(probs.shape[-1])))
+                top_k_result = torch.topk(probs, safe_k, dim=-1)
 
             if self._ood_gate is not None:
                 pred_idx = top_k_result.indices[0][0].item()

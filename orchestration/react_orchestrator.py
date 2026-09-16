@@ -38,7 +38,7 @@ from langchain_core.tools import Tool
 from langchain_openai import ChatOpenAI
 
 from config.settings import settings
-from orchestration.memory import MemoryManager
+from orchestration.memory import MemoryManager, memory_namespace_key
 from orchestration.model_router import cost_optimizer
 from orchestration.observability import obs
 from orchestration.router import RouterAgent
@@ -50,12 +50,20 @@ class RepeatDetectionCallback(BaseCallbackHandler):
 
     当同一工具被以相同参数连续调用超过阈值时，抛出异常中断循环。
     这防止 LLM 陷入 "调用同一工具 → 获得相同结果 → 再次调用" 的死循环。
+
+    实现要点（易踩坑）：
+        LangChain 的 CallbackManager.handle_event 会捕获回调抛出的一切异常，
+        只有当 handler.raise_error 为 True 时才重新抛出。BaseCallbackHandler
+        默认 raise_error=False，若不显式置 True，本回调抛出的 ValueError 会被
+        静默吞掉（仅打一条 warning），防死循环保护形同虚设。
     """
 
     def __init__(self, max_repeats: int = 2):
         self.max_repeats = max_repeats
         self._call_history: List[tuple] = []  # [(tool_name, tool_input), ...]
         self._repeat_counts: dict = defaultdict(int)
+        # 关键：必须为 True，否则 on_tool_start 抛出的异常无法中断 ReAct 循环
+        self.raise_error = True
 
     def on_tool_start(self, serialized_tool: dict, input_str: str, **kwargs):
         """工具调用开始时检测重复"""
@@ -155,6 +163,8 @@ class ReactOrchestrator:
         self._fallback_orchestrator = None  # 延迟初始化
         # 线程局部变量：当前请求的用户画像（推荐工具读取，并发安全）
         self._profile_store = threading.local()
+        # 线程局部变量：当前请求可复用的上一轮 NER 实体（搜索/推荐工具读取，并发安全）
+        self._entity_store = threading.local()
 
     def _build_tools(self) -> list:
         """将所有 Agent 包装为 LangChain Tool"""
@@ -173,7 +183,10 @@ class ReactOrchestrator:
                         "注意: 如果用户表达的是推荐诉求（'推荐…'、'求推荐…'、'预算X'、'适合…'、'想买…'），"
                         "必须使用 recommend_products 工具，而不是本工具。"
                     ),
-                    func=lambda query: catalog.search(query=query),
+                    func=lambda query: catalog.search(
+                        query=query,
+                        entity_context=self._get_entity_context(),
+                    ),
                 )
             )
             tools.append(
@@ -189,6 +202,7 @@ class ReactOrchestrator:
                     func=lambda query: catalog.recommend(
                         query=query,
                         user_profile=self._get_current_profile(),
+                        entity_context=self._get_entity_context(),
                     ),
                 )
             )
@@ -322,6 +336,10 @@ class ReactOrchestrator:
     ) -> Tuple[str, dict]:
         """执行 ReAct 循环（含防死循环 + 超时保护）"""
         memory_on = self._memory_enabled(session_id)
+        # 记忆键按 user_id 命名空间隔离：多用户 session_id 碰撞不串台（user_id 来自可信头）
+        mem_key = memory_namespace_key(user_id, session_id)
+        # 多轮实体复用：读取上一轮 NER 实体，本轮追问时作为候选实体注入搜索/推荐工具
+        carried_entities = self.memory.get_entity_context(mem_key) if memory_on else {}
         with obs.trace_context("react_orchestrator") as span:
             span.set_attribute("session_id", session_id)
             span.set_attribute("input_length", len(user_input))
@@ -329,7 +347,7 @@ class ReactOrchestrator:
             # 1. 先用关键词路由快速判断意图 (用于模型分级 + 缓存 key)
             route_info = self.router.route(
                 user_input,
-                history=self.memory.get_history(session_id) if memory_on else [],
+                history=self.memory.get_history(mem_key) if memory_on else [],
             )
             intent = route_info["intent"]
             span.set_attribute("intent", intent)
@@ -345,12 +363,13 @@ class ReactOrchestrator:
                 span.set_attribute("cache_hit", True)
                 # 仍然记录到记忆（记忆关闭的会话跳过）
                 if memory_on:
-                    self.memory.add_message(session_id, "user", user_input, intent=intent)
-                    self.memory.add_message(session_id, "assistant", cached, intent=intent)
+                    self.memory.add_message(mem_key, "user", user_input, intent=intent)
+                    self.memory.add_message(mem_key, "assistant", cached, intent=intent)
+                    self._persist_entities(mem_key, user_input)
                 return cached, {"intent": intent, "mode": "react_cached", "agent": "cache"}
 
             # 3. 构建记忆上下文
-            chat_history = self._build_chat_history(session_id, user_input)
+            chat_history = self._build_chat_history(session_id, user_input, mem_key=mem_key)
 
             # 3.1 注入意图提示：关键词路由已确定业务意图时，
             #     明确引导 LLM 调用对应的业务工具，纠正误路由（如推荐→搜索）
@@ -363,9 +382,10 @@ class ReactOrchestrator:
             #     供 recommend_products 工具在线程局部读取（并发安全）
             # H1 修复：user_id 由服务端可信头注入，显式画像中的身份字段一律剥离
             request_profile = self._build_user_profile(
-                session_id, user_input, user_profile, server_user_id=user_id
+                session_id, user_input, user_profile, server_user_id=user_id, mem_key=mem_key
             )
             self._profile_store.user_profile = request_profile
+            self._set_entity_context(carried_entities)
             start_time = time.time()
             try:
                 # 按意图选择模型层级 executor（接线三级模型分级）
@@ -407,6 +427,7 @@ class ReactOrchestrator:
                         mode,
                         user_input,
                         user_profile=request_profile,
+                        entity_context=carried_entities,
                     ) or "抱歉，处理您的请求时遇到问题，请稍后重试。"
                 else:
                     response = "抱歉，处理您的请求时遇到问题，请稍后重试。"
@@ -418,8 +439,9 @@ class ReactOrchestrator:
                     "error": str(e),
                 }
             finally:
-                # 请求结束（或异常）后清理线程局部画像，避免串号
+                # 请求结束（或异常）后清理线程局部画像与实体上下文，避免串号
                 self._profile_store.user_profile = None
+                self._set_entity_context({})
 
             elapsed = time.time() - start_time
 
@@ -432,7 +454,7 @@ class ReactOrchestrator:
                     for step in intermediate_steps[:5]:
                         action, observation = step
                         self.memory.add_event(
-                            session_id,
+                            mem_key,
                             "tool_call",
                             {
                                 "tool": getattr(action, "tool", ""),
@@ -466,6 +488,7 @@ class ReactOrchestrator:
                             route_info.get("mode", "run"),
                             user_input,
                             user_profile=request_profile,
+                            entity_context=carried_entities,
                         )
                         tools_called = [agent_name]
                     except Exception as e:
@@ -478,10 +501,11 @@ class ReactOrchestrator:
 
             # 5. 记录到记忆（M2 修复：无有效会话 ID 时不写记忆，避免默认会话串味）
             if memory_on:
-                self.memory.add_message(session_id, "user", user_input, intent=intent)
+                self.memory.add_message(mem_key, "user", user_input, intent=intent)
                 self.memory.add_message(
-                    session_id, "assistant", response, intent=intent, tools=tools_called
+                    mem_key, "assistant", response, intent=intent, tools=tools_called
                 )
+                self._persist_entities(mem_key, user_input)
 
             # 6. 写入缓存 (H2 修复：order 回答含 PII，禁止入共享缓存)
             if intent not in ("chitchat", "recommend", "order"):
@@ -520,12 +544,37 @@ class ReactOrchestrator:
         """读取当前请求绑定的用户画像（线程局部），无则返回空 dict"""
         return getattr(self._profile_store, "user_profile", None) or {}
 
+    def _get_entity_context(self) -> dict:
+        """读取当前请求可复用的上一轮实体（线程局部），无则返回空 dict"""
+        return getattr(self._entity_store, "entities", None) or {}
+
+    def _set_entity_context(self, entities: dict):
+        """绑定/清理当前请求的上一轮实体上下文（线程局部）"""
+        self._entity_store.entities = entities or {}
+
+    def _persist_entities(self, mem_key: str, user_input: str):
+        """抽取本轮实体写入会话实体上下文，供下一轮指代消解复用。
+
+        set_entity_context 对空实体是 no-op（保留上一轮），因此链式指代
+        （推荐蓝牙耳机 → 那有降噪的吗 → 那第二个呢）不会断链。
+        """
+        catalog = self.agents.get("catalog_agent")
+        if catalog is None:
+            return
+        try:
+            entities = catalog.extract_entities(user_input)
+        except Exception as e:  # noqa: BLE001
+            obs.logger.warning("实体抽取失败，跳过实体上下文持久化", error=str(e))
+            return
+        self.memory.set_entity_context(mem_key, entities)
+
     def _build_user_profile(
         self,
         session_id: str,
         query: str,
         explicit: Optional[dict],
         server_user_id: Optional[str] = None,
+        mem_key: Optional[str] = None,
     ) -> dict:
         """
         构建当前请求的用户画像：
@@ -549,7 +598,7 @@ class ReactOrchestrator:
             explicit.pop(k, None)
 
         profile = self.memory.build_user_profile(
-            session_id=session_id,
+            session_id=mem_key or session_id,
             current_query=query,
             explicit=explicit,
         )
@@ -560,16 +609,28 @@ class ReactOrchestrator:
             profile.pop("user_id", None)
         return profile
 
-    def _build_chat_history(self, session_id: str, current_input: str) -> list:
+    def _build_chat_history(self, session_id: str, current_input: str, mem_key: Optional[str] = None) -> list:
         """
         从记忆系统构建聊天历史
 
         返回 LangChain Message 列表
+
+        说明：短期记忆里的 role="tool" 条目是 add_event() 写入的结构化工具结果
+        （如推荐候选列表）。历史工具结果不属于本轮 tool_call 周期，不能还原成
+        ToolMessage（缺少与之配对的 tool_call_id，会被 OpenAI 兼容接口拒绝），
+        因此统一降级为 SystemMessage 注入，保留"上一轮返回了什么"这一信息，
+        使"那第二个呢"之类的指代能在后续轮次被解析。
         """
         # M2 修复：无有效会话 ID（default/空）不注入任何历史记忆
         if not self._memory_enabled(session_id):
             return []
-        context_messages = self.memory.build_context(session_id, current_input)
+        context_messages = self.memory.build_context(mem_key or session_id, current_input)
+
+        # 只回注最近若干条工具事件，并对单条长度截断，避免上下文被工具 JSON 淹没
+        max_tool_events = 3
+        tool_truncate = 1200
+        tool_total = sum(1 for m in context_messages if m.get("role") == "tool")
+        tool_seen = 0
 
         history = []
         for msg in context_messages:
@@ -581,6 +642,15 @@ class ReactOrchestrator:
                 history.append(AIMessage(content=content))
             elif role == "system":
                 history.append(SystemMessage(content=content))
+            elif role == "tool":
+                tool_seen += 1
+                if tool_seen <= tool_total - max_tool_events:
+                    continue  # 超出保留窗口的旧工具事件直接丢弃
+                if len(content) > tool_truncate:
+                    content = content[:tool_truncate] + "…(已截断)"
+                history.append(
+                    SystemMessage(content=f"[上一轮工具执行结果]\n{content}")
+                )
 
         return history
 
@@ -649,12 +719,14 @@ class ReactOrchestrator:
             逐 token 的回答文本
         """
         memory_on = self._memory_enabled(session_id)
+        mem_key = memory_namespace_key(user_id, session_id)
+        carried_entities = self.memory.get_entity_context(mem_key) if memory_on else {}
         try:
             with obs.trace_context("react_orchestrator_stream") as span:
                 span.set_attribute("session_id", session_id)
                 route_info = self.router.route(
                     user_input,
-                    history=self.memory.get_history(session_id) if memory_on else [],
+                    history=self.memory.get_history(mem_key) if memory_on else [],
                 )
                 intent = route_info["intent"]
                 span.set_attribute("intent", intent)
@@ -666,21 +738,23 @@ class ReactOrchestrator:
                         span.set_attribute("cache_hit", True)
                         if memory_on:
                             self.memory.add_message(
-                                session_id, "user", user_input, intent=intent
+                                mem_key, "user", user_input, intent=intent
                             )
                             self.memory.add_message(
-                                session_id, "assistant", cached, intent=intent
+                                mem_key, "assistant", cached, intent=intent
                             )
+                            self._persist_entities(mem_key, user_input)
                         for i in range(0, len(cached), 20):
                             yield cached[i : i + 20]
                         return
 
                 request_profile = self._build_user_profile(
-                    session_id, user_input, user_profile, server_user_id=user_id
+                    session_id, user_input, user_profile, server_user_id=user_id, mem_key=mem_key
                 )
                 self._profile_store.user_profile = request_profile
+                self._set_entity_context(carried_entities)
 
-                chat_history = self._build_chat_history(session_id, user_input)
+                chat_history = self._build_chat_history(session_id, user_input, mem_key=mem_key)
                 intent_hint = self._build_intent_hint(intent)
                 if intent_hint:
                     chat_history.insert(0, SystemMessage(content=intent_hint))
@@ -767,7 +841,7 @@ class ReactOrchestrator:
                         )
                         if memory_on:
                             self.memory.add_event(
-                                session_id,
+                                mem_key,
                                 "tool_call",
                                 {
                                     "tool": tc["name"],
@@ -789,14 +863,15 @@ class ReactOrchestrator:
 
                 # 记忆 + 缓存（M2/H2 修复：无有效会话不写记忆；order 不入缓存）
                 if memory_on:
-                    self.memory.add_message(session_id, "user", user_input, intent=intent)
+                    self.memory.add_message(mem_key, "user", user_input, intent=intent)
                     self.memory.add_message(
-                        session_id,
+                        mem_key,
                         "assistant",
                         response,
                         intent=intent,
                         tools=tools_called,
                     )
+                    self._persist_entities(mem_key, user_input)
                 if intent not in ("chitchat", "recommend", "order"):
                     cost_optimizer.cache_set(intent, user_input, response)
 
@@ -804,6 +879,9 @@ class ReactOrchestrator:
             obs.logger.error("流式输出失败", error=str(e))
             # M4 修复：错误信息脱敏，不向客户端回传内部异常细节
             yield "抱歉，处理您的请求时出现异常，请稍后重试。"
+        finally:
+            # 清理线程局部实体上下文（画像清理沿用现状，避免改动作半径）
+            self._set_entity_context({})
 
     @staticmethod
     def _aggregate_tool_calls(tool_call_chunks: list) -> list:
@@ -880,6 +958,6 @@ class ReactOrchestrator:
                 }
         return stats
 
-    def clear_session(self, session_id: str):
-        """清除会话记忆"""
-        self.memory.clear_session(session_id)
+    def clear_session(self, session_id: str, user_id: Optional[str] = None):
+        """清除会话记忆（按 user_id 命名空间隔离，防止越权清空他人会话）"""
+        self.memory.clear_session(memory_namespace_key(user_id, session_id))

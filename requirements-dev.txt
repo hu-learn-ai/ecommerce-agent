@@ -7,6 +7,4 @@
 # --- Test ---
 pytest>=8.0
 
-# --- BM25 baseline（tests/bm25_baseline.py） ---
-jieba>=0.42.1
-rank-bm25>=0.2.2
+# --- BM25（jieba / rank-bm25）已提升为运行时依赖，见 requirements.txt ---

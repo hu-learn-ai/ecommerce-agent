@@ -1,0 +1,736 @@
+{
+  "pool_k": 10,
+  "queries": [
+    {
+      "query": "怎么退货？",
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "FAQ3541",
+          "question": "退货多久能退款？",
+          "answer": "退款会在我们收到退货商品后1-3个工作日内原路退回您的支付账户。请注意查收。",
+          "category": "退换货",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3551",
+          "question": "积分怎么用？",
+          "answer": "积分可以在结算时抵扣现金，100积分=1元。也可以在积分商城兑换商品或优惠券。",
+          "category": "优惠",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3556",
+          "question": "快递费怎么算？",
+          "answer": "单笔订单满99元免邮费，不满99元收取10元邮费。偏远地区（新疆、西藏等）可能需要额外邮费。",
+          "category": "物流",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3540",
+          "question": "如何退换货？",
+          "answer": "您可以在收到商品后7天内申请退换货。进入「我的订单」，找到对应订单，点击「申请退换货」即可。退换货商品需保持原包装完好。",
+          "category": "退换货",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3553",
+          "question": "如何投诉？",
+          "answer": "您可以通过客服热线、在线客服或「我的订单-投诉建议」进行投诉。我们会在24小时内处理并回复。",
+          "category": "售后",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0001",
+          "question": "云南白药医药保健商品954怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0012",
+          "question": "米其林汽车用品商品690怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0014",
+          "question": "米其林汽车用品商品688怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0015",
+          "question": "钙尔奇医药保健商品774怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0018",
+          "question": "老凤祥珠宝首饰商品544怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3555",
+          "question": "如何取消订单？",
+          "answer": "如果订单还未付款，可以直接取消。如果已付款未发货，请联系客服取消。已发货的订单无法取消，需收到后申请退货。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3557",
+          "question": "商品缺货怎么办？",
+          "answer": "如果商品缺货，我们会尽快补货并通知您。您也可以选择类似商品或申请退款。缺货商品的退款会优先处理。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3545",
+          "question": "如何修改收货地址？",
+          "answer": "如果订单还未发货，您可以在「我的订单」中修改收货地址。如果已经发货，请联系客服协助处理。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3554",
+          "question": "支持货到付款吗？",
+          "answer": "部分地区支持货到付款。在下单时如果地址支持货到付款，会有相应选项。货到付款需支付少量手续费。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3547",
+          "question": "如何使用优惠券？",
+          "answer": "在结算页面，选择使用优惠券，系统会自动抵扣相应金额。请注意优惠券的使用期限和适用条件。",
+          "category": "优惠",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3544",
+          "question": "订单多久发货？",
+          "answer": "一般情况下，付款后24小时内发货。节假日可能会有延迟，发货后您会收到短信通知。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3559",
+          "question": "忘记密码怎么办？",
+          "answer": "在登录页面点击「忘记密码」，通过手机验证码或邮箱重置密码即可。",
+          "category": "账户",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "退款多久到账？",
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "FAQ3541",
+          "question": "退货多久能退款？",
+          "answer": "退款会在我们收到退货商品后1-3个工作日内原路退回您的支付账户。请注意查收。",
+          "category": "退换货",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3544",
+          "question": "订单多久发货？",
+          "answer": "一般情况下，付款后24小时内发货。节假日可能会有延迟，发货后您会收到短信通知。",
+          "category": "物流",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3552",
+          "question": "商品保修多久？",
+          "answer": "不同商品保修期不同，一般为1年。具体保修期请查看商品详情页或联系客服咨询。",
+          "category": "售后",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3540",
+          "question": "如何退换货？",
+          "answer": "您可以在收到商品后7天内申请退换货。进入「我的订单」，找到对应订单，点击「申请退换货」即可。退换货商品需保持原包装完好。",
+          "category": "退换货",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3553",
+          "question": "如何投诉？",
+          "answer": "您可以通过客服热线、在线客服或「我的订单-投诉建议」进行投诉。我们会在24小时内处理并回复。",
+          "category": "售后",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0001",
+          "question": "云南白药医药保健商品954怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0012",
+          "question": "米其林汽车用品商品690怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0014",
+          "question": "米其林汽车用品商品688怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0015",
+          "question": "钙尔奇医药保健商品774怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0018",
+          "question": "老凤祥珠宝首饰商品544怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3554",
+          "question": "支持货到付款吗？",
+          "answer": "部分地区支持货到付款。在下单时如果地址支持货到付款，会有相应选项。货到付款需支付少量手续费。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3555",
+          "question": "如何取消订单？",
+          "answer": "如果订单还未付款，可以直接取消。如果已付款未发货，请联系客服取消。已发货的订单无法取消，需收到后申请退货。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3557",
+          "question": "商品缺货怎么办？",
+          "answer": "如果商品缺货，我们会尽快补货并通知您。您也可以选择类似商品或申请退款。缺货商品的退款会优先处理。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3547",
+          "question": "如何使用优惠券？",
+          "answer": "在结算页面，选择使用优惠券，系统会自动抵扣相应金额。请注意优惠券的使用期限和适用条件。",
+          "category": "优惠",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3556",
+          "question": "快递费怎么算？",
+          "answer": "单笔订单满99元免邮费，不满99元收取10元邮费。偏远地区（新疆、西藏等）可能需要额外邮费。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3551",
+          "question": "积分怎么用？",
+          "answer": "积分可以在结算时抵扣现金，100积分=1元。也可以在积分商城兑换商品或优惠券。",
+          "category": "优惠",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "运费谁出？",
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "FAQ3540",
+          "question": "如何退换货？",
+          "answer": "您可以在收到商品后7天内申请退换货。进入「我的订单」，找到对应订单，点击「申请退换货」即可。退换货商品需保持原包装完好。",
+          "category": "退换货",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3553",
+          "question": "如何投诉？",
+          "answer": "您可以通过客服热线、在线客服或「我的订单-投诉建议」进行投诉。我们会在24小时内处理并回复。",
+          "category": "售后",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0001",
+          "question": "云南白药医药保健商品954怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0012",
+          "question": "米其林汽车用品商品690怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0014",
+          "question": "米其林汽车用品商品688怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0015",
+          "question": "钙尔奇医药保健商品774怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0018",
+          "question": "老凤祥珠宝首饰商品544怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0026",
+          "question": "松下家用电器商品237怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0028",
+          "question": "钙尔奇医药保健商品193怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0029",
+          "question": "九芝堂医药保健商品463怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3556",
+          "question": "快递费怎么算？",
+          "answer": "单笔订单满99元免邮费，不满99元收取10元邮费。偏远地区（新疆、西藏等）可能需要额外邮费。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3554",
+          "question": "支持货到付款吗？",
+          "answer": "部分地区支持货到付款。在下单时如果地址支持货到付款，会有相应选项。货到付款需支付少量手续费。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3542",
+          "question": "如何查看物流信息？",
+          "answer": "您可以在「我的订单」中查看订单详情，里面有物流单号和快递公司信息。也可以直接点击物流信息查看实时物流状态。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3543",
+          "question": "支持哪些支付方式？",
+          "answer": "我们支持微信支付、支付宝、花呗、信用卡、银行卡等多种支付方式，您可以选择最方便的方式进行支付。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3544",
+          "question": "订单多久发货？",
+          "answer": "一般情况下，付款后24小时内发货。节假日可能会有延迟，发货后您会收到短信通知。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1384",
+          "question": "壳牌汽车用品商品380怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0632",
+          "question": "ZARA服装鞋包商品179怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3277",
+          "question": "壳牌汽车用品商品499怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ2074",
+          "question": "中信出版社图书音像商品398怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1453",
+          "question": "小佩宠物用品商品169怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "发货时间",
+      "pool_size": 18,
+      "candidates": [
+        {
+          "id": "FAQ3544",
+          "question": "订单多久发货？",
+          "answer": "一般情况下，付款后24小时内发货。节假日可能会有延迟，发货后您会收到短信通知。",
+          "category": "物流",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0010",
+          "question": "花点时间礼品鲜花商品460怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0445",
+          "question": "花点时间礼品鲜花商品408怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0725",
+          "question": "花点时间礼品鲜花商品416怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0778",
+          "question": "花点时间礼品鲜花商品629怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0921",
+          "question": "花点时间礼品鲜花商品574怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1142",
+          "question": "花点时间礼品鲜花商品249怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1153",
+          "question": "花点时间礼品鲜花商品416怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1218",
+          "question": "花点时间礼品鲜花商品574怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ1244",
+          "question": "花点时间礼品鲜花商品249怎么样？质量好吗？",
+          "answer": "好评！",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3541",
+          "question": "退货多久能退款？",
+          "answer": "退款会在我们收到退货商品后1-3个工作日内原路退回您的支付账户。请注意查收。",
+          "category": "退换货",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3554",
+          "question": "支持货到付款吗？",
+          "answer": "部分地区支持货到付款。在下单时如果地址支持货到付款，会有相应选项。货到付款需支付少量手续费。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3540",
+          "question": "如何退换货？",
+          "answer": "您可以在收到商品后7天内申请退换货。进入「我的订单」，找到对应订单，点击「申请退换货」即可。退换货商品需保持原包装完好。",
+          "category": "退换货",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3545",
+          "question": "如何修改收货地址？",
+          "answer": "如果订单还未发货，您可以在「我的订单」中修改收货地址。如果已经发货，请联系客服协助处理。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3556",
+          "question": "快递费怎么算？",
+          "answer": "单笔订单满99元免邮费，不满99元收取10元邮费。偏远地区（新疆、西藏等）可能需要额外邮费。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3542",
+          "question": "如何查看物流信息？",
+          "answer": "您可以在「我的订单」中查看订单详情，里面有物流单号和快递公司信息。也可以直接点击物流信息查看实时物流状态。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ2874",
+          "question": "花点时间礼品鲜花商品460怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ2118",
+          "question": "花点时间礼品鲜花商品277怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "怎么开发票？",
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "FAQ3548",
+          "question": "可以开发票吗？",
+          "answer": "可以。在下单时选择「需要发票」，填写发票抬头和税号即可。电子发票会在订单完成后发送到您的邮箱。",
+          "category": "发票",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3551",
+          "question": "积分怎么用？",
+          "answer": "积分可以在结算时抵扣现金，100积分=1元。也可以在积分商城兑换商品或优惠券。",
+          "category": "优惠",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3556",
+          "question": "快递费怎么算？",
+          "answer": "单笔订单满99元免邮费，不满99元收取10元邮费。偏远地区（新疆、西藏等）可能需要额外邮费。",
+          "category": "物流",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3540",
+          "question": "如何退换货？",
+          "answer": "您可以在收到商品后7天内申请退换货。进入「我的订单」，找到对应订单，点击「申请退换货」即可。退换货商品需保持原包装完好。",
+          "category": "退换货",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3553",
+          "question": "如何投诉？",
+          "answer": "您可以通过客服热线、在线客服或「我的订单-投诉建议」进行投诉。我们会在24小时内处理并回复。",
+          "category": "售后",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0001",
+          "question": "云南白药医药保健商品954怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0012",
+          "question": "米其林汽车用品商品690怎么样？质量好吗？",
+          "answer": "物美价廉",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0014",
+          "question": "米其林汽车用品商品688怎么样？质量好吗？",
+          "answer": "很满意",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0015",
+          "question": "钙尔奇医药保健商品774怎么样？质量好吗？",
+          "answer": "包装很好",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ0018",
+          "question": "老凤祥珠宝首饰商品544怎么样？质量好吗？",
+          "answer": "下次还会购买",
+          "category": "商品质量",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3543",
+          "question": "支持哪些支付方式？",
+          "answer": "我们支持微信支付、支付宝、花呗、信用卡、银行卡等多种支付方式，您可以选择最方便的方式进行支付。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3547",
+          "question": "如何使用优惠券？",
+          "answer": "在结算页面，选择使用优惠券，系统会自动抵扣相应金额。请注意优惠券的使用期限和适用条件。",
+          "category": "优惠",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3554",
+          "question": "支持货到付款吗？",
+          "answer": "部分地区支持货到付款。在下单时如果地址支持货到付款，会有相应选项。货到付款需支付少量手续费。",
+          "category": "支付",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3542",
+          "question": "如何查看物流信息？",
+          "answer": "您可以在「我的订单」中查看订单详情，里面有物流单号和快递公司信息。也可以直接点击物流信息查看实时物流状态。",
+          "category": "物流",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3555",
+          "question": "如何取消订单？",
+          "answer": "如果订单还未付款，可以直接取消。如果已付款未发货，请联系客服取消。已发货的订单无法取消，需收到后申请退货。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "FAQ3545",
+          "question": "如何修改收货地址？",
+          "answer": "如果订单还未发货，您可以在「我的订单」中修改收货地址。如果已经发货，请联系客服协助处理。",
+          "category": "订单",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    }
+  ]
+}

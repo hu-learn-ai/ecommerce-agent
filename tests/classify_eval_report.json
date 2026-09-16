@@ -2,40 +2,40 @@
   "in_domain_total": 40,
   "ood_total": 17,
   "classification": {
-    "accuracy": 0.7895,
-    "macro_precision": 0.9172,
-    "macro_recall": 0.76,
-    "macro_f1": 0.77,
-    "micro_precision": 0.7895,
-    "micro_recall": 0.7895,
-    "micro_f1": 0.7895,
+    "accuracy": 0.8596,
+    "macro_precision": 0.9096,
+    "macro_recall": 0.84,
+    "macro_f1": 0.8328,
+    "micro_precision": 0.8596,
+    "micro_recall": 0.8596,
+    "micro_f1": 0.8596,
     "per_class": {
       "医药保健": {
         "precision": 1.0,
-        "recall": 0.2,
-        "f1": 0.3333,
+        "recall": 0.3,
+        "f1": 0.4615,
         "support": 10,
         "errors": {
-          "无法判断": 8
+          "家用电器": 1,
+          "手机数码": 1,
+          "无法判断": 5
         }
       },
       "家用电器": {
-        "precision": 1.0,
-        "recall": 0.8,
-        "f1": 0.8889,
+        "precision": 0.9,
+        "recall": 0.9,
+        "f1": 0.9,
         "support": 10,
         "errors": {
-          "无法判断": 2
+          "无法判断": 1
         }
       },
       "手机数码": {
-        "precision": 1.0,
-        "recall": 0.8,
-        "f1": 0.8889,
+        "precision": 0.9091,
+        "recall": 1.0,
+        "f1": 0.9524,
         "support": 10,
-        "errors": {
-          "无法判断": 2
-        }
+        "errors": {}
       },
       "食品生鲜": {
         "precision": 1.0,
@@ -45,33 +45,33 @@
         "errors": {}
       },
       "无法判断": {
-        "precision": 0.5862,
+        "precision": 0.7391,
         "recall": 1.0,
-        "f1": 0.7391,
+        "f1": 0.85,
         "support": 17,
         "errors": {}
       }
     },
     "confusion_matrix": {
       "手机数码": {
-        "手机数码": 8,
-        "无法判断": 2,
+        "手机数码": 10,
         "医药保健": 0,
         "家用电器": 0,
-        "食品生鲜": 0
+        "食品生鲜": 0,
+        "无法判断": 0
       },
       "家用电器": {
-        "家用电器": 8,
-        "无法判断": 2,
+        "家用电器": 9,
+        "无法判断": 1,
         "医药保健": 0,
         "手机数码": 0,
         "食品生鲜": 0
       },
       "医药保健": {
-        "医药保健": 2,
-        "无法判断": 8,
-        "家用电器": 0,
-        "手机数码": 0,
+        "医药保健": 3,
+        "家用电器": 1,
+        "手机数码": 1,
+        "无法判断": 5,
         "食品生鲜": 0
       },
       "食品生鲜": {
@@ -91,12 +91,12 @@
     }
   },
   "calibration": {
-    "ece": 0.0008,
+    "ece": 0.0458,
     "bins": [
       {
         "bin_low": 0.0,
         "bin_high": 0.1,
-        "count": 12,
+        "count": 6,
         "avg_conf": 0.0,
         "acc": 0.0,
         "gap": 0.0
@@ -168,97 +168,1058 @@
       {
         "bin_low": 0.9,
         "bin_high": 1.0,
-        "count": 28,
-        "avg_conf": 0.9988,
-        "acc": 1.0,
-        "gap": 0.0012
+        "count": 34,
+        "avg_conf": 0.9951,
+        "acc": 0.9412,
+        "gap": 0.0539
       }
     ]
   },
   "ood_detection": {
     "ood_recall": 1.0,
-    "indomain_accept_rate": 0.7,
+    "indomain_accept_rate": 0.8,
     "fpr_at_95_tpr": 0.0,
-    "auroc": 0.85,
+    "auroc": 0.925,
     "confusion": {
       "tp": 17,
-      "fp": 12,
+      "fp": 8,
       "fn": 0,
-      "tn": 28
+      "tn": 32
     }
   },
+  "by_group": {
+    "long_title": {
+      "in_domain_total": 40,
+      "ood_total": 17,
+      "classification": {
+        "accuracy": 0.8596,
+        "macro_precision": 0.9096,
+        "macro_recall": 0.84,
+        "macro_f1": 0.8328,
+        "micro_precision": 0.8596,
+        "micro_recall": 0.8596,
+        "micro_f1": 0.8596,
+        "per_class": {
+          "医药保健": {
+            "precision": 1.0,
+            "recall": 0.3,
+            "f1": 0.4615,
+            "support": 10,
+            "errors": {
+              "家用电器": 1,
+              "手机数码": 1,
+              "无法判断": 5
+            }
+          },
+          "家用电器": {
+            "precision": 0.9,
+            "recall": 0.9,
+            "f1": 0.9,
+            "support": 10,
+            "errors": {
+              "无法判断": 1
+            }
+          },
+          "手机数码": {
+            "precision": 0.9091,
+            "recall": 1.0,
+            "f1": 0.9524,
+            "support": 10,
+            "errors": {}
+          },
+          "食品生鲜": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 10,
+            "errors": {}
+          },
+          "无法判断": {
+            "precision": 0.7391,
+            "recall": 1.0,
+            "f1": 0.85,
+            "support": 17,
+            "errors": {}
+          }
+        },
+        "confusion_matrix": {
+          "手机数码": {
+            "手机数码": 10,
+            "医药保健": 0,
+            "家用电器": 0,
+            "食品生鲜": 0,
+            "无法判断": 0
+          },
+          "家用电器": {
+            "家用电器": 9,
+            "无法判断": 1,
+            "医药保健": 0,
+            "手机数码": 0,
+            "食品生鲜": 0
+          },
+          "医药保健": {
+            "医药保健": 3,
+            "家用电器": 1,
+            "手机数码": 1,
+            "无法判断": 5,
+            "食品生鲜": 0
+          },
+          "食品生鲜": {
+            "食品生鲜": 10,
+            "医药保健": 0,
+            "家用电器": 0,
+            "手机数码": 0,
+            "无法判断": 0
+          },
+          "无法判断": {
+            "无法判断": 17,
+            "医药保健": 0,
+            "家用电器": 0,
+            "手机数码": 0,
+            "食品生鲜": 0
+          }
+        }
+      },
+      "calibration": {
+        "ece": 0.0458,
+        "bins": [
+          {
+            "bin_low": 0.0,
+            "bin_high": 0.1,
+            "count": 6,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.1,
+            "bin_high": 0.2,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.2,
+            "bin_high": 0.3,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.3,
+            "bin_high": 0.4,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.4,
+            "bin_high": 0.5,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.5,
+            "bin_high": 0.6,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.6,
+            "bin_high": 0.7,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.7,
+            "bin_high": 0.8,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.8,
+            "bin_high": 0.9,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.9,
+            "bin_high": 1.0,
+            "count": 34,
+            "avg_conf": 0.9951,
+            "acc": 0.9412,
+            "gap": 0.0539
+          }
+        ]
+      },
+      "ood_detection": {
+        "ood_recall": 1.0,
+        "indomain_accept_rate": 0.8,
+        "fpr_at_95_tpr": 0.0,
+        "auroc": 0.925,
+        "confusion": {
+          "tp": 17,
+          "fp": 8,
+          "fn": 0,
+          "tn": 32
+        }
+      }
+    },
+    "short_query": {
+      "in_domain_total": 76,
+      "ood_total": 24,
+      "classification": {
+        "accuracy": 0.75,
+        "macro_precision": 0.8384,
+        "macro_recall": 0.75,
+        "macro_f1": 0.7307,
+        "micro_precision": 0.75,
+        "micro_recall": 0.75,
+        "micro_f1": 0.75,
+        "per_class": {
+          "医药保健": {
+            "precision": 1.0,
+            "recall": 0.55,
+            "f1": 0.7097,
+            "support": 20,
+            "errors": {
+              "家用电器": 1,
+              "手机数码": 1,
+              "无法判断": 7
+            }
+          },
+          "家用电器": {
+            "precision": 0.75,
+            "recall": 0.9,
+            "f1": 0.8182,
+            "support": 20,
+            "errors": {
+              "手机数码": 1,
+              "无法判断": 1
+            }
+          },
+          "手机数码": {
+            "precision": 0.8421,
+            "recall": 1.0,
+            "f1": 0.9143,
+            "support": 16,
+            "errors": {}
+          },
+          "食品生鲜": {
+            "precision": 1.0,
+            "recall": 0.3,
+            "f1": 0.4615,
+            "support": 20,
+            "errors": {
+              "家用电器": 5,
+              "手机数码": 1,
+              "无法判断": 8
+            }
+          },
+          "无法判断": {
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1": 0.75,
+            "support": 24,
+            "errors": {}
+          }
+        },
+        "confusion_matrix": {
+          "手机数码": {
+            "手机数码": 16,
+            "医药保健": 0,
+            "家用电器": 0,
+            "食品生鲜": 0,
+            "无法判断": 0
+          },
+          "家用电器": {
+            "家用电器": 18,
+            "手机数码": 1,
+            "无法判断": 1,
+            "医药保健": 0,
+            "食品生鲜": 0
+          },
+          "食品生鲜": {
+            "食品生鲜": 6,
+            "无法判断": 8,
+            "家用电器": 5,
+            "手机数码": 1,
+            "医药保健": 0
+          },
+          "医药保健": {
+            "无法判断": 7,
+            "医药保健": 11,
+            "家用电器": 1,
+            "手机数码": 1,
+            "食品生鲜": 0
+          },
+          "无法判断": {
+            "无法判断": 24,
+            "医药保健": 0,
+            "家用电器": 0,
+            "手机数码": 0,
+            "食品生鲜": 0
+          }
+        }
+      },
+      "calibration": {
+        "ece": 0.1145,
+        "bins": [
+          {
+            "bin_low": 0.0,
+            "bin_high": 0.1,
+            "count": 16,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.1,
+            "bin_high": 0.2,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.2,
+            "bin_high": 0.3,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.3,
+            "bin_high": 0.4,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.4,
+            "bin_high": 0.5,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.5,
+            "bin_high": 0.6,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.6,
+            "bin_high": 0.7,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.7,
+            "bin_high": 0.8,
+            "count": 1,
+            "avg_conf": 0.7987,
+            "acc": 1.0,
+            "gap": 0.2013
+          },
+          {
+            "bin_low": 0.8,
+            "bin_high": 0.9,
+            "count": 1,
+            "avg_conf": 0.8914,
+            "acc": 0.0,
+            "gap": 0.8914
+          },
+          {
+            "bin_low": 0.9,
+            "bin_high": 1.0,
+            "count": 58,
+            "avg_conf": 0.9932,
+            "acc": 0.8621,
+            "gap": 0.1312
+          }
+        ]
+      },
+      "ood_detection": {
+        "ood_recall": 1.0,
+        "indomain_accept_rate": 0.6711,
+        "fpr_at_95_tpr": 0.0,
+        "auroc": 0.8947,
+        "confusion": {
+          "tp": 24,
+          "fp": 25,
+          "fn": 0,
+          "tn": 51
+        }
+      }
+    },
+    "short_query_unseen": {
+      "in_domain_total": 57,
+      "ood_total": 24,
+      "classification": {
+        "accuracy": 0.7654,
+        "macro_precision": 0.6583,
+        "macro_recall": 0.6389,
+        "macro_f1": 0.6027,
+        "micro_precision": 0.7654,
+        "micro_recall": 0.7654,
+        "micro_f1": 0.7654,
+        "per_class": {
+          "医药保健": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3,
+            "errors": {
+              "手机数码": 1,
+              "无法判断": 2
+            }
+          },
+          "家用电器": {
+            "precision": 0.7727,
+            "recall": 0.8947,
+            "f1": 0.8293,
+            "support": 19,
+            "errors": {
+              "手机数码": 1,
+              "无法判断": 1
+            }
+          },
+          "手机数码": {
+            "precision": 0.8333,
+            "recall": 1.0,
+            "f1": 0.9091,
+            "support": 15,
+            "errors": {}
+          },
+          "食品生鲜": {
+            "precision": 1.0,
+            "recall": 0.3,
+            "f1": 0.4615,
+            "support": 20,
+            "errors": {
+              "家用电器": 5,
+              "手机数码": 1,
+              "无法判断": 8
+            }
+          },
+          "无法判断": {
+            "precision": 0.6857,
+            "recall": 1.0,
+            "f1": 0.8136,
+            "support": 24,
+            "errors": {}
+          }
+        },
+        "confusion_matrix": {
+          "手机数码": {
+            "手机数码": 15,
+            "医药保健": 0,
+            "家用电器": 0,
+            "食品生鲜": 0,
+            "无法判断": 0
+          },
+          "家用电器": {
+            "家用电器": 17,
+            "手机数码": 1,
+            "无法判断": 1,
+            "医药保健": 0,
+            "食品生鲜": 0
+          },
+          "食品生鲜": {
+            "食品生鲜": 6,
+            "无法判断": 8,
+            "家用电器": 5,
+            "手机数码": 1,
+            "医药保健": 0
+          },
+          "医药保健": {
+            "手机数码": 1,
+            "无法判断": 2,
+            "医药保健": 0,
+            "家用电器": 0,
+            "食品生鲜": 0
+          },
+          "无法判断": {
+            "无法判断": 24,
+            "医药保健": 0,
+            "家用电器": 0,
+            "手机数码": 0,
+            "食品生鲜": 0
+          }
+        }
+      },
+      "calibration": {
+        "ece": 0.1356,
+        "bins": [
+          {
+            "bin_low": 0.0,
+            "bin_high": 0.1,
+            "count": 11,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.1,
+            "bin_high": 0.2,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.2,
+            "bin_high": 0.3,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.3,
+            "bin_high": 0.4,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.4,
+            "bin_high": 0.5,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.5,
+            "bin_high": 0.6,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.6,
+            "bin_high": 0.7,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.7,
+            "bin_high": 0.8,
+            "count": 1,
+            "avg_conf": 0.7987,
+            "acc": 1.0,
+            "gap": 0.2013
+          },
+          {
+            "bin_low": 0.8,
+            "bin_high": 0.9,
+            "count": 1,
+            "avg_conf": 0.8914,
+            "acc": 0.0,
+            "gap": 0.8914
+          },
+          {
+            "bin_low": 0.9,
+            "bin_high": 1.0,
+            "count": 44,
+            "avg_conf": 0.9917,
+            "acc": 0.8409,
+            "gap": 0.1508
+          }
+        ]
+      },
+      "ood_detection": {
+        "ood_recall": 1.0,
+        "indomain_accept_rate": 0.6667,
+        "fpr_at_95_tpr": 0.0,
+        "auroc": 0.9035,
+        "confusion": {
+          "tp": 24,
+          "fp": 19,
+          "fn": 0,
+          "tn": 38
+        }
+      }
+    },
+    "all": {
+      "in_domain_total": 116,
+      "ood_total": 41,
+      "classification": {
+        "accuracy": 0.7898,
+        "macro_precision": 0.8623,
+        "macro_recall": 0.78,
+        "macro_f1": 0.7786,
+        "micro_precision": 0.7898,
+        "micro_recall": 0.7898,
+        "micro_f1": 0.7898,
+        "per_class": {
+          "医药保健": {
+            "precision": 1.0,
+            "recall": 0.4667,
+            "f1": 0.6364,
+            "support": 30,
+            "errors": {
+              "家用电器": 2,
+              "手机数码": 2,
+              "无法判断": 12
+            }
+          },
+          "家用电器": {
+            "precision": 0.7941,
+            "recall": 0.9,
+            "f1": 0.8438,
+            "support": 30,
+            "errors": {
+              "手机数码": 1,
+              "无法判断": 2
+            }
+          },
+          "手机数码": {
+            "precision": 0.8667,
+            "recall": 1.0,
+            "f1": 0.9286,
+            "support": 26,
+            "errors": {}
+          },
+          "食品生鲜": {
+            "precision": 1.0,
+            "recall": 0.5333,
+            "f1": 0.6957,
+            "support": 30,
+            "errors": {
+              "家用电器": 5,
+              "手机数码": 1,
+              "无法判断": 8
+            }
+          },
+          "无法判断": {
+            "precision": 0.6508,
+            "recall": 1.0,
+            "f1": 0.7885,
+            "support": 41,
+            "errors": {}
+          }
+        },
+        "confusion_matrix": {
+          "手机数码": {
+            "手机数码": 26,
+            "医药保健": 0,
+            "家用电器": 0,
+            "食品生鲜": 0,
+            "无法判断": 0
+          },
+          "家用电器": {
+            "家用电器": 27,
+            "无法判断": 2,
+            "手机数码": 1,
+            "医药保健": 0,
+            "食品生鲜": 0
+          },
+          "医药保健": {
+            "医药保健": 14,
+            "家用电器": 2,
+            "手机数码": 2,
+            "无法判断": 12,
+            "食品生鲜": 0
+          },
+          "食品生鲜": {
+            "食品生鲜": 16,
+            "无法判断": 8,
+            "家用电器": 5,
+            "手机数码": 1,
+            "医药保健": 0
+          },
+          "无法判断": {
+            "无法判断": 41,
+            "医药保健": 0,
+            "家用电器": 0,
+            "手机数码": 0,
+            "食品生鲜": 0
+          }
+        }
+      },
+      "calibration": {
+        "ece": 0.0908,
+        "bins": [
+          {
+            "bin_low": 0.0,
+            "bin_high": 0.1,
+            "count": 22,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.1,
+            "bin_high": 0.2,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.2,
+            "bin_high": 0.3,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.3,
+            "bin_high": 0.4,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.4,
+            "bin_high": 0.5,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.5,
+            "bin_high": 0.6,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.6,
+            "bin_high": 0.7,
+            "count": 0,
+            "avg_conf": 0.0,
+            "acc": 0.0,
+            "gap": 0.0
+          },
+          {
+            "bin_low": 0.7,
+            "bin_high": 0.8,
+            "count": 1,
+            "avg_conf": 0.7987,
+            "acc": 1.0,
+            "gap": 0.2013
+          },
+          {
+            "bin_low": 0.8,
+            "bin_high": 0.9,
+            "count": 1,
+            "avg_conf": 0.8914,
+            "acc": 0.0,
+            "gap": 0.8914
+          },
+          {
+            "bin_low": 0.9,
+            "bin_high": 1.0,
+            "count": 92,
+            "avg_conf": 0.9939,
+            "acc": 0.8913,
+            "gap": 0.1026
+          }
+        ]
+      },
+      "ood_detection": {
+        "ood_recall": 1.0,
+        "indomain_accept_rate": 0.7155,
+        "fpr_at_95_tpr": 0.0,
+        "auroc": 0.9052,
+        "confusion": {
+          "tp": 41,
+          "fp": 33,
+          "fn": 0,
+          "tn": 83
+        }
+      }
+    }
+  },
+  "short_query_seen_in_train_ratio": 0.25,
   "in_domain_errors": [
-    {
-      "title": "荣耀Magic6 至臻版",
-      "expected": "手机数码",
-      "predicted": "无法判断",
-      "confidence": 0.0
-    },
-    {
-      "title": "realme GT5 240W快充",
-      "expected": "手机数码",
-      "predicted": "无法判断",
-      "confidence": 0.0
-    },
     {
       "title": "飞利浦电动牙刷 HX6730",
       "expected": "家用电器",
       "predicted": "无法判断",
-      "confidence": 0.0
-    },
-    {
-      "title": "小米扫地机器人 扫拖一体",
-      "expected": "家用电器",
-      "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
     },
     {
       "title": "欧姆龙电子体温计 红外",
       "expected": "医药保健",
-      "predicted": "无法判断",
-      "confidence": 0.0
-    },
-    {
-      "title": "Swisse深海鱼油胶囊",
-      "expected": "医药保健",
-      "predicted": "无法判断",
-      "confidence": 0.0
+      "predicted": "家用电器",
+      "confidence": 0.9991,
+      "correct": false
     },
     {
       "title": "三九感冒灵颗粒",
       "expected": "医药保健",
-      "predicted": "无法判断",
-      "confidence": 0.0
+      "predicted": "手机数码",
+      "confidence": 0.9934,
+      "correct": false
     },
     {
       "title": "同仁堂六味地黄丸",
       "expected": "医药保健",
       "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
     },
     {
       "title": "云南白药气雾剂",
       "expected": "医药保健",
       "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
     },
     {
       "title": "强生邦迪创可贴",
       "expected": "医药保健",
       "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
     },
     {
       "title": "杜蕾斯避孕套 超薄",
       "expected": "医药保健",
       "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
     },
     {
       "title": "稳健医用口罩 一次性",
       "expected": "医药保健",
       "predicted": "无法判断",
-      "confidence": 0.0
+      "confidence": 0.0,
+      "correct": false
+    },
+    {
+      "title": "电视机",
+      "expected": "家用电器",
+      "predicted": "手机数码",
+      "confidence": 0.8914,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "洗碗机",
+      "expected": "家用电器",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "坚果礼盒",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "巧克力",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "咖啡豆",
+      "expected": "食品生鲜",
+      "predicted": "家用电器",
+      "confidence": 0.9979,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "龙井茶",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "蜂蜜",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "三文鱼",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "鸡蛋",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "苹果",
+      "expected": "食品生鲜",
+      "predicted": "手机数码",
+      "confidence": 0.9587,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "香蕉",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "酸奶",
+      "expected": "食品生鲜",
+      "predicted": "家用电器",
+      "confidence": 0.9803,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "面包",
+      "expected": "食品生鲜",
+      "predicted": "家用电器",
+      "confidence": 0.9486,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "食用油",
+      "expected": "食品生鲜",
+      "predicted": "家用电器",
+      "confidence": 0.983,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "挂面",
+      "expected": "食品生鲜",
+      "predicted": "家用电器",
+      "confidence": 0.941,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "火龙果",
+      "expected": "食品生鲜",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "维生素C",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": true
+    },
+    {
+      "title": "血糖仪",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": true
+    },
+    {
+      "title": "创可贴",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": true
+    },
+    {
+      "title": "益生菌",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": true
+    },
+    {
+      "title": "蛋白粉",
+      "expected": "医药保健",
+      "predicted": "家用电器",
+      "confidence": 0.9828,
+      "correct": false,
+      "seen_in_train": true
+    },
+    {
+      "title": "眼药水",
+      "expected": "医药保健",
+      "predicted": "手机数码",
+      "confidence": 0.9879,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "医用棉签",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "退热贴",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": false
+    },
+    {
+      "title": "护膝",
+      "expected": "医药保健",
+      "predicted": "无法判断",
+      "confidence": 0.0,
+      "correct": false,
+      "seen_in_train": true
     }
   ],
   "ood_errors": []

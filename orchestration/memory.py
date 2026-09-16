@@ -53,6 +53,34 @@ def auto_ttl(category: str, importance: float) -> int:
     return base_ttl
 
 
+def memory_namespace_key(user_id: Optional[str], session_id: str) -> str:
+    """按 user_id 命名空间隔离记忆键，防止多用户 session_id 碰撞串台。
+
+    user_id 由可信反向代理注入（客户端不可自报），是安全的隔离边界；
+    匿名（无 user_id）时保持原 session_id 不变，行为与旧版一致。
+    """
+    if user_id and session_id:
+        return f"{user_id}::{session_id}"
+    return session_id
+
+
+def _user_namespace(session_id: str) -> str:
+    """从命名空间键提取用户边界。'user_id::session_id' → 'user_id'；匿名（无 '::'）→ ''。"""
+    if "::" in session_id:
+        return session_id.split("::", 1)[0]
+    return ""
+
+
+def _same_user_namespace(a: str, b: str) -> bool:
+    """两段会话键是否属于同一用户命名空间。
+
+    匿名会话（空命名空间）不参与跨会话共享——匿名用户之间只有 session_id 这一身份，
+    若允许空命名空间互相共享，等于把不同匿名用户的偏好互相泄露。
+    """
+    na, nb = _user_namespace(a), _user_namespace(b)
+    return bool(na) and na == nb
+
+
 @dataclass
 class Message:
     """单条消息"""
@@ -84,6 +112,8 @@ class ShortTermMemory:
         self.llm = llm
         self.messages: List[Message] = []
         self.summary: str = ""  # 历史摘要
+        # 上一轮 NER 抽取的实体（品牌/商品/款式/规格），供多轮指代消解复用
+        self.last_entities: dict = {}
         self._lock = threading.Lock()
 
     def add(self, role: str, content: str, **metadata):
@@ -214,6 +244,7 @@ class ShortTermMemory:
         """清空记忆"""
         self.messages.clear()
         self.summary = ""
+        self.last_entities = {}
 
 
 @dataclass
@@ -499,17 +530,18 @@ class LongTermMemory:
         """
         self._ensure_loaded()
 
-        # 去重: 检查是否已有相似记忆
-        existing = self.search(content, k=1)
-        if existing and existing[0].get("score", 0) > 0.92:
-            # 已存在: 只更新访问记录和重要性，不重复添加
-            mem = self._find_by_content(content)
-            if mem:
-                mem.touch()
-                # 如果新的重要性更高，则更新
-                if importance > mem.importance:
-                    mem.importance = importance
-                self._save()
+        # 去重: 用**原始余弦相似度**查找高度相似的已有记忆。
+        # 不能用 search() 返回的综合得分（相似度 × 重要性 × 遗忘惩罚），
+        # 那会导致 0.92 阈值几乎不可达、去重失效；也不能只做精确内容匹配，
+        # 否则相似但措辞略不同的记忆会被静默丢弃（丢写）。
+        existing = self._find_similar_memory(content, session_id=session_id)
+        if existing is not None:
+            # 已存在相似记忆: 只更新访问记录和重要性，不重复添加
+            existing.touch()
+            # 如果新的重要性更高，则更新
+            if importance > existing.importance:
+                existing.importance = importance
+            self._save()
             return
 
         # 计算 TTL
@@ -537,16 +569,66 @@ class LongTermMemory:
         self._save()
         self._build_faiss_index()
 
-    def _find_by_content(self, content: str) -> Optional[MemoryItem]:
-        """根据内容查找记忆 (用于去重时更新)"""
-        for mem in self.memories:
-            if mem.content == content:
-                return mem
+    def _find_similar_memory(self, content: str, session_id: Optional[str] = None) -> Optional[MemoryItem]:
+        """按原始余弦相似度查找与 content 高度相似的记忆（供去重使用）。
+
+        优先用 FAISS 索引取原始内积分（归一化向量下即余弦相似度）；
+        无索引或索引与内存不同步时，逐条用内存 embedding 计算。
+        找不到或相似度 < 0.92 时返回 None，调用方按"新增"处理，绝不静默丢写。
+        过期记忆不参与去重（避免把新事实写进已失效、检索不到的旧条目）。
+        session_id 传入时只在同一会话内去重（多用户隔离，防止跨用户合并事实）。
+        """
+        if not self.embedder or not self.memories:
+            return None
+
+        try:
+            import numpy as np
+
+            query_emb = self.embedder.encode(
+                [content], normalize_embeddings=True
+            ).astype(np.float32)
+
+            # 优先走 FAISS 索引（持久化，跨进程/重启后仍可用）
+            if self._faiss_index is not None and self._faiss_index.ntotal == len(
+                self.memories
+            ):
+                k = min(5, len(self.memories))
+                scores, indices = self._faiss_index.search(query_emb, k)
+                for score, idx in zip(scores[0], indices[0]):
+                    if idx < 0 or idx >= len(self.memories):
+                        continue
+                    mem = self.memories[idx]
+                    if mem.is_expired():
+                        continue
+                    if session_id is not None and mem.session_id != session_id:
+                        continue
+                    if float(score) >= 0.92:
+                        return mem
+                return None
+
+            # 降级：逐条用内存 embedding 计算余弦（仅对本次进程新增的记忆有效）
+            best, best_sim = None, 0.0
+            for mem in self.memories:
+                if not mem.embedding or mem.is_expired():
+                    continue
+                if session_id is not None and mem.session_id != session_id:
+                    continue
+                emb = np.asarray(mem.embedding, dtype=np.float32).reshape(1, -1)
+                sim = float(np.dot(query_emb, emb.T)[0][0])
+                if sim > best_sim:
+                    best, best_sim = mem, sim
+            if best is not None and best_sim >= 0.92:
+                return best
+        except Exception:
+            # 去重是尽力而为的优化，失败时按新增处理，不影响正确性
+            return None
+
         return None
 
     def search(self, query: str, k: int = 3,
                exclude_expired: bool = True,
-               use_forgetting: bool = True) -> List[dict]:
+               use_forgetting: bool = True,
+               session_id: Optional[str] = None) -> List[dict]:
         """
         检索相关记忆 (支持过期过滤和综合得分排序)
 
@@ -555,6 +637,7 @@ class LongTermMemory:
             k: 返回数量
             exclude_expired: 是否过滤过期记忆
             use_forgetting: 是否应用遗忘评分调整
+            session_id: 传入时只检索该会话的记忆（多用户隔离）
 
         Returns:
             按综合得分排序的记忆列表
@@ -588,8 +671,10 @@ class LongTermMemory:
                 query_emb = self.embedder.encode([query], normalize_embeddings=True).astype(
                     np.float32
                 )
-                # 多取一些用于重排序
-                fetch_k = min(k * 3, len(active_memories))
+                # 多取一些用于重排序；索引覆盖全部记忆（含过期项），fetch 上限
+                # 须按索引总量 ntotal 算，而非 active_memories——否则过期项占比高时，
+                # 过滤后不足 k 条会漏召回（索引里排名靠后的活跃记忆取不到）。
+                fetch_k = min(k * 3, self._faiss_index.ntotal)
                 scores, indices = self._faiss_index.search(query_emb, fetch_k)
 
                 candidates = []
@@ -599,6 +684,9 @@ class LongTermMemory:
                     mem = self.memories[idx]
                     # 跳过过期记忆
                     if exclude_expired and mem.is_expired():
+                        continue
+                    # 多用户隔离：只检索指定会话的记忆
+                    if session_id is not None and mem.session_id != session_id:
                         continue
                     # 更新访问记录
                     mem.touch()
@@ -631,6 +719,8 @@ class LongTermMemory:
         results = []
         query_lower = query.lower()
         for mem in active_memories:
+            if session_id is not None and mem.session_id != session_id:
+                continue
             score = sum(1 for kw in query_lower.split() if kw in mem.content.lower())
             if score > 0:
                 base_score = score / max(len(query_lower.split()), 1)
@@ -764,9 +854,9 @@ class LongTermMemory:
             "avg_importance": sum(m.importance for m in self.memories) / len(self.memories),
         }
 
-    def get_context_for_query(self, query: str, k: int = 3) -> str:
-        """为查询构建长期记忆上下文"""
-        memories = self.search(query, k=k)
+    def get_context_for_query(self, query: str, k: int = 3, session_id: Optional[str] = None) -> str:
+        """为查询构建长期记忆上下文（session_id 传入时只取该会话的记忆）"""
+        memories = self.search(query, k=k, session_id=session_id)
         if not memories:
             return ""
 
@@ -842,6 +932,22 @@ class MemoryManager:
         except Exception as exc:  # noqa: BLE001
             print(f"[MemoryManager] 事件写入失败: {exc}")
 
+    def get_entity_context(self, session_id: str) -> dict:
+        """读取上一轮 NER 抽取的实体，供多轮指代消解复用。"""
+        return dict(self.get_short_term(session_id).last_entities)
+
+    def set_entity_context(self, session_id: str, entities: dict):
+        """保存本轮 NER 实体，供下一轮复用。
+
+        语义：本轮抽到新实体则替换，抽不到（空实体）则**保留**上一轮的——
+        这样"推荐蓝牙耳机 → 那有降噪的吗 → 那第二个呢"这类链式指代不会断。
+        清空交给 clear_session（删除会话时整段移除）。
+        """
+        cleaned = {k: list(v) for k, v in (entities or {}).items() if v}
+        if not cleaned:
+            return
+        self.get_short_term(session_id).last_entities = cleaned
+
     def build_context(self, session_id: str, current_query: str = "") -> List[dict]:
         """
         构建 LLM 上下文消息列表 (含跨会话共享记忆)
@@ -865,9 +971,11 @@ class MemoryManager:
                     "content": shared_ctx,
                 })
 
-        # 2. 当前会话的长期记忆
+        # 2. 当前会话的长期记忆（按 session_id 隔离，防跨用户串味）
         if self._long_term and current_query:
-            long_term_ctx = self._long_term.get_context_for_query(current_query)
+            long_term_ctx = self._long_term.get_context_for_query(
+                current_query, session_id=session_id
+            )
             if long_term_ctx:
                 messages.append({
                     "role": "system",
@@ -891,9 +999,12 @@ class MemoryManager:
 
         self._long_term._ensure_loaded()
 
-        # 只在 shared 记忆中检索
+        # 只在 shared 记忆中检索，且严格限定同一用户命名空间（防止跨用户偏好泄露）；
+        # 排除当前会话（当前会话的长期记忆已由 build_context 第 2 步覆盖）
         shared_memories = [m for m in self._long_term.memories
-                          if m.shared and not m.is_expired()]
+                          if m.shared and not m.is_expired()
+                          and m.session_id != session_id
+                          and _same_user_namespace(m.session_id, session_id)]
         if not shared_memories:
             return ""
 
@@ -996,6 +1107,7 @@ class MemoryManager:
                     and m.session_id != session_id
                     and not m.is_expired()
                     and m.forget_score < 0.8
+                    and _same_user_namespace(m.session_id, session_id)
                 ]
                 shared_memories.sort(key=lambda m: m.last_accessed, reverse=True)
                 shared_notes = [m.content for m in shared_memories[:3]]

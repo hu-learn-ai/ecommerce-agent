@@ -18,6 +18,7 @@
     obs.record_tokens(model="deepseek-chat", prompt_tokens=100, completion_tokens=50)
 """
 
+import contextvars
 import functools
 import json
 import logging
@@ -202,30 +203,40 @@ class TraceSpan:
 
 
 class TraceContext:
-    """追踪上下文管理器"""
+    """追踪上下文管理器
+
+    `_current_span` / `_trace_id` 用 contextvars 隔离到每个请求/协程，
+    避免并发请求互相覆盖（原类级可变状态会串号）。`_spans` 是全局追加的
+    限长日志，供 /api/trace 汇总展示，仍为类级共享。
+    """
 
     _spans: deque = deque(maxlen=1000)  # 限长，防止长运行内存增长
-    _current_span: Optional[TraceSpan] = None
-    _trace_id: Optional[str] = None
+    _current_span: contextvars.ContextVar = contextvars.ContextVar(
+        "trace_current_span", default=None
+    )
+    _trace_id: contextvars.ContextVar = contextvars.ContextVar(
+        "trace_trace_id", default=None
+    )
 
     @classmethod
     def start_trace(cls, name: str) -> "TraceSpan":
         """启动一个新的追踪"""
-        cls._trace_id = str(uuid.uuid4())
+        trace_id = str(uuid.uuid4())
+        cls._trace_id.set(trace_id)
         span = TraceSpan(
-            trace_id=cls._trace_id,
+            trace_id=trace_id,
             span_id=str(uuid.uuid4())[:8],
             name=name,
             start_time=time.time(),
         )
         cls._spans.append(span)
-        cls._current_span = span
+        cls._current_span.set(span)
         return span
 
     @classmethod
     def start_span(cls, name: str, parent: Optional[TraceSpan] = None) -> TraceSpan:
         """启动一个子 span"""
-        parent = parent or cls._current_span
+        parent = parent or cls._current_span.get()
         trace_id = parent.trace_id if parent else str(uuid.uuid4())
         span = TraceSpan(
             trace_id=trace_id,
@@ -257,8 +268,8 @@ class TraceContext:
     @classmethod
     def clear(cls):
         cls._spans.clear()
-        cls._current_span = None
-        cls._trace_id = None
+        cls._current_span.set(None)
+        cls._trace_id.set(None)
 
 
 # ------------------------------------------------------------------ #
@@ -350,10 +361,10 @@ class Observability:
         """记录自定义事件"""
         self.logger.info(event_name, **attrs)
         if self._current_span_active():
-            TraceContext._current_span.add_event(event_name, **attrs)
+            TraceContext._current_span.get().add_event(event_name, **attrs)
 
     def _current_span_active(self) -> bool:
-        return TraceContext._current_span is not None
+        return TraceContext._current_span.get() is not None
 
     # --- Token 追踪 ---
 

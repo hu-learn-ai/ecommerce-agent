@@ -57,6 +57,14 @@ class RecommendAgent(BaseAgentTool):
         self.db_config = db_config  # MySQL 连接配置 (用于 Item-CF)
         self.search_agent = search_agent  # FAISS 向量搜索兜底（DB 不可用时）
         self.engine = engine  # SQLAlchemy 连接池（优先复用，避免每次新建连接）
+        # 是否启用"查询意图召回"（向量 + BM25 混合检索的细粒度候选）
+        # 关闭后回退到"仅按画像分类 + Item-CF"的原行为：RECOMMEND_QUERY_AWARE=false
+        try:
+            from config.settings import settings
+
+            self.query_aware_enabled = bool(getattr(settings, "recommend_query_aware", True))
+        except Exception:  # noqa: BLE001
+            self.query_aware_enabled = True
 
     # ------------------------------------------------------------------ #
     #  对外接口
@@ -96,14 +104,17 @@ class RecommendAgent(BaseAgentTool):
         # Step 2: Item-CF 协同过滤补充（基于 MySQL 订单共现）
         cf_recs = self._item_cf_recommend(query, user_profile, top_k * 2)
 
-        # 合并去重: 图推荐 + CF 推荐
-        seen_ids = set()
-        merged_recs = []
-        for item in graph_recs + cf_recs:
-            item_id = str(item.get("id", ""))
-            if item_id and item_id not in seen_ids:
-                seen_ids.add(item_id)
-                merged_recs.append(item)
+        # Step 3: 查询意图召回（细粒度，向量 + BM25 + RRF）
+        # 解决"只按画像分类推荐、忽略查询本身"的问题；可用 RECOMMEND_QUERY_AWARE=false 关闭
+        if self.query_aware_enabled:
+            query_recs = self._query_aware_candidates(query, user_profile, top_k * 2)
+        else:
+            query_recs = []
+
+        # 合并去重：查询意图召回优先，其次图推荐、最后 CF（越靠前优先级越高）
+        merged_recs = self._merge_candidates(
+            query_recs, graph_recs, cf_recs, limit=top_k * 4
+        )
 
         # 如果合并后无结果：先尝试 FAISS 向量兜底（真实商品库），再降级到宽泛查询/如实告知
         if not merged_recs:
@@ -153,7 +164,13 @@ class RecommendAgent(BaseAgentTool):
 
     @staticmethod
     def _within_budget(item: dict, budget: float) -> bool:
-        """判断商品是否在预算内；无价格信息时视为通过（无法核验不误杀）。"""
+        """判断商品是否在预算内；无价格信息或价格为模拟值时视为通过（无法核验不误杀）。
+
+        模拟价格由类目分布生成（见 scripts/fill_catalog_prices.py），只用于展示与
+        软排序，不参与硬过滤——否则会把真实相关的商品误滤掉。
+        """
+        if item.get("price_source") == "simulated":
+            return True
         price = item.get("price", "") or ""
         if not price and item.get("prices"):
             prices = [p for p in item["prices"] if p]
@@ -188,6 +205,7 @@ class RecommendAgent(BaseAgentTool):
                         "brand": brand,
                         "brands": [brand] if brand else [],
                         "price": price,
+                        "price_source": r.get("price_source", "unknown"),
                         # 相似度(0-1) 转 10 分制，便于统一展示
                         "score": round(float(r.get("score", 0)) * 10, 1),
                     }
@@ -207,6 +225,81 @@ class RecommendAgent(BaseAgentTool):
         except Exception as e:  # noqa: BLE001
             print(f"[RecommendAgent] 向量兜底推荐失败: {e}")
             return None
+
+    def _query_aware_candidates(self, query: str, user_profile: dict, top_k: int) -> list:
+        """基于**查询文本**的细粒度召回（复用搜索 Agent 的向量 + BM25 + RRF 生产入口）。
+
+        背景：原实现只用画像分类（如"手机数码"）取商品，无法区分"蓝牙耳机"与"手机"，
+        细粒度需求下推荐与查询无关。这里把与查询语义匹配的商品并入候选集合，
+        再交给 LLM 重排，使推荐真正消费查询意图。
+        """
+        if self.search_agent is None:
+            return []
+        try:
+            records = self.search_agent.search_results(query, top_k)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[RecommendAgent] 查询意图召回失败: {exc}")
+            return []
+
+        budget = user_profile.get("预算") or user_profile.get("budget")
+        price_range = self._parse_budget(budget) if budget else None
+        candidates = []
+        for record in records:
+            price = record.get("price", "")
+            brand = record.get("brand", "") or ""
+            candidates.append(
+                {
+                    "product": record.get("name", ""),
+                    "id": str(record.get("id", "")),
+                    "category": record.get("category", ""),
+                    "brand": brand,
+                    "brands": [brand] if brand else [],
+                    "price": price,
+                    # 价格来源必须随候选一起带上：否则下游无法区分真实/模拟价格，
+                    # 会把模拟价格当真实价格做硬过滤（曾导致推荐 NDCG@5 0.91→0.66）
+                    "price_source": record.get("price_source", "unknown"),
+                    "score": round(float(record.get("score", 0)) * 10, 1),
+                    "source": "query_aware",
+                }
+            )
+
+        # 预算过滤：仅当候选中存在**真实价格**时才生效。
+        # 商品库 7000 件里只有 3000 件（手机数码）是真实价格，其余 4000 件为模拟价格
+        # （见 scripts/fill_catalog_prices.py）；一律按预算过滤会让"蓝牙耳机""冰箱"
+        # 这类查询直接为空，与 _graph_based_recommend 的口径保持一致。
+        if price_range:
+            # 只有**真实价格**参与硬过滤；模拟价格原样保留（见 fill_catalog_prices.py）
+            real_priced = [
+                c
+                for c in candidates
+                if c.get("price_source") == "real" and c["price"] not in (None, "")
+            ]
+            if real_priced:
+                candidates = [
+                    c
+                    for c in candidates
+                    if c.get("price_source") != "real"
+                    or (
+                        c["price"] not in (None, "")
+                        and self._in_range(float(c["price"]), price_range[0], price_range[1])
+                    )
+                ]
+        return candidates
+
+    @staticmethod
+    def _merge_candidates(*groups, limit: int) -> list:
+        """按传入顺序合并候选并按 id 去重（越靠前的来源优先级越高）。"""
+        merged, seen = [], set()
+        for group in groups:
+            for item in group or []:
+                item_id = str(item.get("id", ""))
+                if not item_id or item_id in seen:
+                    continue
+                seen.add(item_id)
+                merged.append(item)
+                if limit and len(merged) >= limit:
+                    return merged
+        return merged
 
     def _graph_based_recommend(self, query: str, user_profile: dict, top_k: int) -> list:
         """
@@ -230,16 +323,28 @@ class RecommendAgent(BaseAgentTool):
             # 无明确偏好，返回热门商品
             return self._get_popular_products(top_k)
 
+        # 预算约束下推到 Cypher：原实现先 LIMIT 再在 Python 侧过滤，
+        # 一旦取到的候选都不在预算区间（含价格字段缺失）就会把结果整体滤空。
+        price_range = self._parse_budget(budget) if budget else None
+        min_price, max_price = price_range if price_range else (None, None)
+
         cypher = """
         MATCH (p:SPU)-[:Belong]->(c:Category3)
         WHERE ($category IS NULL OR c.name CONTAINS $category)
         OPTIONAL MATCH (p)-[:Have]->(t:Trademark)
         WHERE ($brand IS NULL OR t.name CONTAINS $brand OR t.tm_name CONTAINS $brand)
         OPTIONAL MATCH (p)-[:Have]->(sku:SKU)
+        WITH p, c,
+             collect(DISTINCT t.name)[0..2] AS brands,
+             collect(DISTINCT sku.price) AS raw_prices
+        WITH p, c, brands, [price IN raw_prices WHERE price IS NOT NULL] AS prices
+        WHERE $min_price IS NULL
+           OR size(prices) = 0
+           OR any(price IN prices
+                  WHERE toFloat(price) >= $min_price AND toFloat(price) <= $max_price)
         RETURN p.name AS product, p.id AS id,
                c.name AS category,
-               collect(DISTINCT t.name)[0..2] AS brands,
-               collect(DISTINCT sku.price)[0..3] AS prices
+               brands, prices[0..3] AS prices
         LIMIT $top_k
         """
 
@@ -251,6 +356,8 @@ class RecommendAgent(BaseAgentTool):
                         "category": preferred_category,
                         "brand": preferred_brand,
                         "top_k": top_k,
+                        "min_price": min_price,
+                        "max_price": max_price,
                     },
                 )
                 records = []
@@ -267,7 +374,7 @@ class RecommendAgent(BaseAgentTool):
                         "brand": brands[0] if brands else "",
                         "price": prices[0] if prices else "",
                     }
-                    # 价格过滤
+                    # 预算已在 Cypher 侧过滤；此处仅挑选区间内的价格用于展示
                     if budget:
                         price_range = self._parse_budget(budget)
                         if price_range:
@@ -277,9 +384,8 @@ class RecommendAgent(BaseAgentTool):
                                 for p in prices
                                 if p and self._in_range(float(p), min_p, max_p)
                             ]
-                            if not valid_prices:
-                                continue
-                            record["price"] = valid_prices[0]
+                            if valid_prices:
+                                record["price"] = valid_prices[0]
                     records.append(record)
                 return records
         except Exception as e:
@@ -420,6 +526,10 @@ class RecommendAgent(BaseAgentTool):
         LLM 重排序：基于用户画像对候选商品进行推理重排
 
         输入候选商品列表 → LLM 评估每个商品的匹配度 → 按匹配度排序
+
+        ⚠️ 默认关闭（`RECOMMEND_LLM_RERANK=false`）：8 用例人工标注下只 +0.061 NDCG@5
+        （0.7500 → 0.8107），但延迟从 92ms 涨到 4.9s（约 53 倍）。关闭时本方法原样
+        返回候选（= 查询意图召回的排序），生产链路不额外付出 LLM 调用。
         """
         if not candidates:
             return []

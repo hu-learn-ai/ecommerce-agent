@@ -34,6 +34,13 @@ import tempfile
 import time
 from typing import List
 
+# Windows GBK 控制台下打印 emoji 会抛 UnicodeEncodeError（评估跑完才崩、报告不落盘）
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(errors="replace")
+    except Exception:  # noqa: BLE001 - 流不支持 reconfigure 时忽略
+        pass
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -296,10 +303,13 @@ class MemorySystemEvaluator:
 
         from orchestration.memory import MemoryManager
 
-        # 在临时目录创建 MemoryManager
-        # 通过 monkey-patch 让它用临时存储
+        # 用**独立的**临时目录建 MemoryManager，避免同一轮评估里别的测试（如摘要质量用了
+        # test_session）写进去的记忆串进来——否则"跨会话迁移"会命中别的话题的记忆，
+        # 指标看起来是命中、实际上是记忆串味（旧实现就出现过：上下文里混进 Java/Spring Boot，
+        # 而本用例期望的是 Python/FastAPI，却仍然判 migration_hit=true）。
         original_path = settings.memory_store_path
-        settings.memory_store_path = self._temp_dir
+        isolated_dir = tempfile.mkdtemp(prefix="memory_eval_cross_session_")
+        settings.memory_store_path = isolated_dir
         try:
             mm = MemoryManager(llm=self.llm, embedder=self.embedder)
         finally:
@@ -318,15 +328,21 @@ class MemorySystemEvaluator:
         ctx = mm.build_context(session_b, current_query="我平时用什么编程语言")
         ctx_text = "".join(m.get("content", "") for m in ctx)
 
-        migration_hit = "Python" in ctx_text or "FastAPI" in ctx_text
-        # 验证: session_B 不应直接访问 session_A 的非共享记忆
-        # 但 preference/decision 类型的 shared 记忆应能迁移
+        # 命中 = 期望事实被召回；同时必须检查**没有把无关记忆灌进上下文**，
+        # 否则"召回了正确信息 + 顺手带一堆别的"也会被算成成功。
+        expected_terms = ("Python", "FastAPI")
+        leaked_terms = [t for t in ("Java", "Spring Boot") if t in ctx_text]
+        migration_hit = any(t in ctx_text for t in expected_terms)
+        strict_hit = migration_hit and not leaked_terms
+        shutil.rmtree(isolated_dir, ignore_errors=True)
 
         return {
             "available": True,
             "session_a_said": "Python 开发者, FastAPI",
             "session_b_query": "我平时用什么编程语言",
             "migration_hit": migration_hit,
+            "strict_hit": strict_hit,
+            "leaked_terms": leaked_terms,
             "context_built": ctx_text[:300],
             "linked_sessions": [
                 getattr(m, "linked_sessions", [])
@@ -471,7 +487,9 @@ def print_report(result: dict):
     cs = result["cross_session_migration"]
     if cs.get("available"):
         print("\n  🔗 跨会话画像迁移:")
-        print(f"    迁移命中: {cs['migration_hit']}")
+        print(f"    迁移命中(期望事实被召回): {cs['migration_hit']}")
+        print(f"    严格命中(无无关记忆串入): {cs['strict_hit']}"
+              + (f"   ⚠️ 串入: {cs['leaked_terms']}" if cs.get("leaked_terms") else ""))
         print(f"    context: {cs['context_built'][:120]}")
     else:
         print(f"\n  🔗 跨会话迁移: {cs.get('note')}")

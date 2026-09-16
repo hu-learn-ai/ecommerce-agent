@@ -124,6 +124,26 @@ class RouterAgent:
         "chitchat": ["你好", "您好", "早上好", "下午好", "晚上好", "hi", "hello", "谢谢", "再见"],
     }
 
+    # 匹配优先级（前者优先）。抽成类属性，便于调参脚本复用同一套顺序
+    KEYWORD_PRIORITY = [
+        "order",
+        "customer_service",
+        "analytics",
+        "kg_qa",  # kg_qa 优先于 classify：问句式分类查询走知识图谱
+        "classify",  # classify 仅处理直接分类请求
+        "recommend",
+        "search",
+        "chitchat",
+    ]
+
+    # 弱关键词：这些词在多个意图里都会出现，**不足以单独定意图**——
+    # 命中它们时不直接返回，继续交给 Level-2 的 LLM 语义路由判断。
+    # 依据（2026-09-16，209 条用例的误判归因）：单一个"买"字就造成 15 次误判
+    # （"想给男朋友买个生日礼物"→被判 search、"我买的东西现在到哪儿了"→被判 search），
+    # "卖/找/价格"同样把 analytics/customer_service 请求抢成 search。
+    # 准入过程见 tests/tune_router.py（留出集 + 4 折交叉验证）。
+    WEAK_KEYWORDS = frozenset({"买", "卖", "找", "价格"})
+
     def __init__(self, llm: ChatOpenAI):
         self.llm = llm
 
@@ -158,6 +178,13 @@ class RouterAgent:
 - chitchat: 问候/闲聊/其他
   例: "你好" "今天天气不错" "谢谢"
 
+【对话历史】（可能为空）
+{history}
+
+判断规则补充：如果用户输入是**简短的追问或省略句**（如"那平板呢""第二个呢""有降噪吗""能改地址吗"），
+必须结合【对话历史】判断他在延续哪件事，并按**延续的那个意图**回答——不要只看这几个字本身。
+例如上文在推荐耳机，用户说"那平板呢"，意图仍是 recommend。
+
 只回复意图类型关键词(从上述列表中选择)，不要加其他任何文字。""",
                 ),
                 ("user", "{input}"),
@@ -178,17 +205,23 @@ class RouterAgent:
         # Level 1: 关键词快速匹配
         intent = self._keyword_route(user_input)
 
-        # Level 2: LLM 语义路由（Level 1 无结果时）
+        # Level 2: LLM 语义路由（Level 1 无结果时）——**带上对话历史**，
+        # 否则"那平板呢"这类省略式追问只能看到这几个字本身，会被判成别的意图
         if not intent:
-            intent = self._llm_route(user_input)
+            intent = self._llm_route(user_input, history=history)
 
-        # Level 3: 上下文感知（追问场景：复用最近的非闲聊意图）
+        # Level 3: LLM 不可用时，退回复用最近一次有效意图（追问场景）
+        # 注：此前这段是**死代码**——_llm_route 失败也返回 "chitchat"（非空），
+        # 所以 `if not intent and history` 永远不成立，上下文感知从未生效。
         if not intent and history:
             for item in reversed(history):
                 it = item.get("intent") if isinstance(item, dict) else None
                 if it and it != "chitchat":
                     intent = it
                     break
+
+        # Level 4: 兜底闲聊（避免 None 进入标准化导致异常）
+        intent = intent or "chitchat"
 
         # 清理与验证
         intent = self._normalize_intent(intent)
@@ -213,38 +246,57 @@ class RouterAgent:
         """
         text = user_input.lower().strip()
 
-        # 按优先级检查（订单和客服优先级较高，kg_qa 在 classify 之前）
-        priority_order = [
-            "order",
-            "customer_service",
-            "analytics",
-            "kg_qa",  # kg_qa 优先于 classify：问句式分类查询走知识图谱
-            "classify",  # classify 仅处理直接分类请求
-            "recommend",
-            "search",
-            "chitchat",
-        ]
-
-        for intent in priority_order:
+    # 按优先级检查（订单和客服优先级较高，kg_qa 在 classify 之前）
+        has_weak = False
+        for intent in self.KEYWORD_PRIORITY:
             for keyword in self.KEYWORD_RULES.get(intent, []):
-                if keyword in text:
-                    return intent
+                if keyword not in text:
+                    continue
+                if keyword in self.WEAK_KEYWORDS:
+                    has_weak = True
+                    continue
+                # 问候语与购物诉求混说（"你好,我想买耳机"）：只剩 chitchat 一个强命中、
+                # 但句子里还有购物弱词时，不要判闲聊，交给 LLM（chitchat 在优先级最后，
+                # 走到这里说明前面几类都没有强命中）
+                if intent == "chitchat" and has_weak:
+                    continue
+                return intent
 
         return None
 
-    def _llm_route(self, user_input: str) -> str:
+    @staticmethod
+    def _format_history(history: list, turns: int = 3) -> str:
+        """把最近几轮对话压成简短文本，供 LLM 判断省略式追问的意图。"""
+        if not history:
+            return "（无）"
+        lines = []
+        for item in history[-turns * 2:]:
+            if not isinstance(item, dict):
+                continue
+            role = "用户" if item.get("role") == "user" else "客服"
+            content = str(item.get("content", ""))[:80]
+            if content:
+                lines.append(f"{role}: {content}")
+        return "\n".join(lines) or "（无）"
+
+    def _llm_route(self, user_input: str, history: list = None) -> Optional[str]:
         """
         Level 2: LLM 语义路由
 
-        当关键词匹配失败时，使用 LLM 进行语义理解
+        当关键词匹配失败时，使用 LLM 进行语义理解；**带对话历史**，
+        以便把"那平板呢"这类省略式追问归到它真正延续的意图上。
+
+        返回 None 表示 LLM 不可用/失败，由调用方决定是否复用历史意图。
         """
         try:
             chain = self.router_prompt | self.llm
-            result = chain.invoke({"input": user_input})
+            result = chain.invoke(
+                {"input": user_input, "history": self._format_history(history)}
+            )
             return result.content.strip().lower()
         except Exception as e:
             print(f"[Router] LLM 路由失败: {e}")
-            return "chitchat"
+            return None
 
     def _normalize_intent(self, intent: str) -> str:
         """标准化意图类型"""

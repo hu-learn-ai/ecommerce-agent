@@ -10,6 +10,8 @@
 import json
 import re
 
+from neo4j import READ_ACCESS
+
 from agents.tools.base import BaseAgentTool
 
 
@@ -65,6 +67,14 @@ class KGQAAgent(BaseAgentTool):
         self.llm = llm
         self._schema_cache = None
 
+    def _read_session(self):
+        """返回只读会话：LLM 生成的 Cypher 只能在只读事务中执行。
+
+        这是对 _entity_alignment 黑名单校验的纵深防御——即使校验被绕过，
+        只读事务在服务端也无法执行写操作，Neo4j 会直接拒绝。
+        """
+        return self.neo4j_driver.session(default_access_mode=READ_ACCESS)
+
     def _schema_desc(self) -> str:
         """返回给 LLM 的 schema 描述: 优先用运行时探测的真实结构, 失败用静态默认。"""
         if self.neo4j_driver is None:
@@ -72,7 +82,7 @@ class KGQAAgent(BaseAgentTool):
         if self._schema_cache:
             return self._schema_cache
         try:
-            with self.neo4j_driver.session() as session:
+            with self._read_session() as session:
                 labels = [
                     r[0]
                     for r in session.run(
@@ -213,8 +223,10 @@ Cypher查询:"""
         if not cypher:
             return ""
 
-        # Level 0: 剥离 // 注释，拒绝分号多语句注入
+        # Level 0: 剥离 // 与 /* */ 注释，拒绝分号多语句注入
+        # 块注释同样剥离，防止用 /* ... */ 把禁止关键词拆开绕过黑名单
         cypher = re.sub(r"//.*", "", cypher)
+        cypher = re.sub(r"/\*.*?\*/", "", cypher, flags=re.DOTALL)
         stripped = cypher.strip().rstrip(";")
         if ";" in stripped:
             print("[KGQAAgent] L0: 检测到多语句注入（;），拒绝执行")
@@ -253,6 +265,9 @@ Cypher查询:"""
             "PROFILE",
             "-schema",
             "SCHEMA",
+            # 补充：UNWIND 可做数据展开（DoS 面），UNION 可拼接第二条子查询绕过白名单
+            "UNWIND",
+            "UNION",
         ]
         for kw in forbidden_keywords:
             if re.search(r"\b" + re.escape(kw) + r"\b", cypher_upper):
@@ -312,59 +327,63 @@ Cypher查询:"""
         return cypher
 
     def _execute_cypher(self, cypher: str) -> list:
-        """执行 Cypher 查询并返回记录列表（带超时和结果集上限保护）"""
+        """执行 Cypher 查询并返回记录列表（只读事务 + 超时 + 结果集上限保护）"""
         if not cypher or not self.neo4j_driver:
             return []
 
         try:
-            with self.neo4j_driver.session() as session:
-                result = session.run(cypher, timeout=self.QUERY_TIMEOUT_SECONDS)
-                records = []
-                row_count = 0
-                for r in result:
-                    row_count += 1
-                    # 二次防御：即使 LIMIT 被绕过，也在此截断
-                    if row_count > self.MAX_RESULT_ROWS:
-                        print(f"[KGQAAgent] 结果集截断: 超过 {self.MAX_RESULT_ROWS} 行上限")
-                        break
-                    record_dict = {}
-                    for key in r.keys():
-                        val = r[key]
-                        if hasattr(val, "items"):
-                            record_dict[key] = dict(val)
-                        else:
-                            record_dict[key] = str(val)
-                    records.append(record_dict)
-                return records
+            with self._read_session() as session:
+                # neo4j 6.x 中 session.run(..., timeout=) 会被当作查询参数而非
+                # 事务超时，因此用 begin_transaction 显式传 timeout（DoS 防护）。
+                with session.begin_transaction(timeout=self.QUERY_TIMEOUT_SECONDS) as tx:
+                    result = tx.run(cypher)
+                    records = []
+                    row_count = 0
+                    for r in result:
+                        row_count += 1
+                        # 二次防御：即使 LIMIT 被绕过，也在此截断
+                        if row_count > self.MAX_RESULT_ROWS:
+                            print(f"[KGQAAgent] 结果集截断: 超过 {self.MAX_RESULT_ROWS} 行上限")
+                            break
+                        record_dict = {}
+                        for key in r.keys():
+                            val = r[key]
+                            if hasattr(val, "items"):
+                                record_dict[key] = dict(val)
+                            else:
+                                record_dict[key] = str(val)
+                        records.append(record_dict)
+                    return records
         except Exception as e:
             print(f"[KGQAAgent] Cypher 执行失败: {e}")
             print(f"  Cypher: {cypher[:200]}")
             return []
 
     def _execute_cypher_with_params(self, cypher: str, params: dict) -> list:
-        """执行带参数的 Cypher 查询（防止注入，带超时和结果集上限）"""
+        """执行带参数的 Cypher 查询（只读事务 + 参数化 + 超时 + 结果集上限）"""
         if not cypher or not self.neo4j_driver:
             return []
 
         try:
-            with self.neo4j_driver.session() as session:
-                result = session.run(cypher, params, timeout=self.QUERY_TIMEOUT_SECONDS)
-                records = []
-                row_count = 0
-                for r in result:
-                    row_count += 1
-                    if row_count > self.MAX_RESULT_ROWS:
-                        print(f"[KGQAAgent] 结果集截断: 超过 {self.MAX_RESULT_ROWS} 行上限")
-                        break
-                    record_dict = {}
-                    for key in r.keys():
-                        val = r[key]
-                        if hasattr(val, "items"):
-                            record_dict[key] = dict(val)
-                        else:
-                            record_dict[key] = str(val)
-                    records.append(record_dict)
-                return records
+            with self._read_session() as session:
+                with session.begin_transaction(timeout=self.QUERY_TIMEOUT_SECONDS) as tx:
+                    result = tx.run(cypher, params)
+                    records = []
+                    row_count = 0
+                    for r in result:
+                        row_count += 1
+                        if row_count > self.MAX_RESULT_ROWS:
+                            print(f"[KGQAAgent] 结果集截断: 超过 {self.MAX_RESULT_ROWS} 行上限")
+                            break
+                        record_dict = {}
+                        for key in r.keys():
+                            val = r[key]
+                            if hasattr(val, "items"):
+                                record_dict[key] = dict(val)
+                            else:
+                                record_dict[key] = str(val)
+                        records.append(record_dict)
+                    return records
         except Exception as e:
             print(f"[KGQAAgent] Cypher 执行失败: {e}")
             print(f"  Cypher: {cypher[:200]}")

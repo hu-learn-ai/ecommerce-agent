@@ -307,21 +307,28 @@ async def verify_api_key(request: Request, call):
     if request.url.path.startswith("/api/") and request.url.path != "/api/health":
         if not _API_ACCESS_KEY:
             return JSONResponse(
-                503,
                 {
                     "detail": (
                         "服务未配置 API_ACCESS_KEY，已拒绝处理业务请求（安全默认）。"
                         "请设置环境变量 API_ACCESS_KEY 后重启服务。"
                     )
                 },
+                status_code=503,
             )
         api_key = request.headers.get("X-API-Key")
         if not secrets.compare_digest(api_key or "", _API_ACCESS_KEY):
-            return JSONResponse(401, {"detail": "Unauthorized: invalid or missing API key"})
+            return JSONResponse(
+                {"detail": "Unauthorized: invalid or missing API key"}, status_code=401
+            )
     return await call(request)
 
 
 # 限流
+# 注意：内存态限流，仅在单进程部署下生效。
+# - 使用 `uvicorn --workers N` 等多进程部署时，每个 worker 各自计数 → 额度放大 N 倍；
+# - 进程重启后计数清零。
+# 因此生产环境要么保持单进程（默认 `uvicorn.run` 即单进程），要么在网关/Nginx 或
+# Redis 层做集中限流。参见 README「部署约束」。
 _RATE_LIMIT = int(os.getenv("API_RATE_LIMIT", "60"))
 _RATE_WINDOW = 60
 _rate_buckets: dict = defaultdict(list)
@@ -329,7 +336,7 @@ _rate_buckets: dict = defaultdict(list)
 
 @app.middleware("http")
 async def rate_limit(request: Request, call):
-    """IP 限流中间件"""
+    """IP 限流中间件（内存态，仅单进程部署下正确）"""
     if not request.url.path.startswith("/api/") or request.url.path == "/api/health":
         return await call(request)
 
@@ -356,7 +363,9 @@ async def rate_limit(request: Request, call):
     _rate_buckets[client_ip] = [ts for ts in bucket if now - ts < _RATE_WINDOW]
 
     if len(_rate_buckets[client_ip]) >= _RATE_LIMIT:
-        return JSONResponse(429, {"detail": f"请求过于频繁，每分钟限 {_RATE_LIMIT} 次"})
+        return JSONResponse(
+            {"detail": f"请求过于频繁，每分钟限 {_RATE_LIMIT} 次"}, status_code=429
+        )
 
     _rate_buckets[client_ip].append(now)
     return await call(request)
@@ -616,10 +625,11 @@ async def get_trace(session_id: str = None):
 
 
 @app.delete("/api/session/{session_id}")
-async def clear_session(session_id: str):
-    """清除会话记忆"""
+async def clear_session(session_id: str, request: Request):
+    """清除会话记忆（按服务端可信 user_id 命名空间隔离，防止越权清空他人会话）"""
     if hasattr(orchestrator, "clear_session"):
-        orchestrator.clear_session(session_id)
+        user_id = _resolve_user_id(request)
+        orchestrator.clear_session(session_id, user_id=user_id)
         return {"status": "ok", "session_id": session_id}
     raise HTTPException(404, "会话管理不可用")
 

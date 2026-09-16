@@ -46,7 +46,32 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+LABELED_GT_PATH = os.path.join(PROJECT_ROOT, "tests", "retrieval_gt_labeled.json")
+
+
+def load_labeled_gt() -> dict:
+    """加载人工标注的检索 GT（tests/retrieval_gt_labeled.json）。
+
+    结构: {"查询": ["JD000001", ...]}
+    由 `python tests/build_retrieval_gt.py` 生成候选池、人工判定相关性后回填。
+    存在该文件时，检索指标改用人工 GT —— 这是唯一能同时避免"向量自举"与
+    "关键词偏向 BM25"两种偏置的口径。文件不存在时回落到原伪标注流程。
+    """
+    if not os.path.exists(LABELED_GT_PATH):
+        return {}
+    try:
+        with open(LABELED_GT_PATH, encoding="utf-8") as handle:
+            data = json.load(handle)
+        print(f"[RAG] 已加载人工标注 GT: {len(data)} 个查询（{LABELED_GT_PATH}）")
+        return data
+    except Exception as exc:  # noqa: BLE001
+        print(f"[RAG] 人工 GT 读取失败，回落到伪标注: {exc}")
+        return {}
+
+
 from tests._eval_env import TokenRecordingLLM, ensure_project_root, require_assets
+from tests._faq_corpus import id_by_text as faq_id_by_text
+from tests._faq_corpus import load_faq_items, load_labeled_faq_gt
 
 ensure_project_root()
 
@@ -278,8 +303,10 @@ class GenerationMetrics:
 请只回复 JSON 格式:
 {{"faithfulness": 0.00, "answer_relevance": 0.00, "context_precision": 0.00, "context_recall": 0.00}}"""
 
-    def __init__(self, llm: ChatOpenAI):
+    def __init__(self, llm: ChatOpenAI, repeat: int = 2):
         self.llm = llm
+        # Judge 重复采样次数：缓解单次采样的高方差（默认 2 次取均值）
+        self.repeat = max(1, int(repeat))
 
     @staticmethod
     def _parse_json_response(result: str) -> dict:
@@ -327,24 +354,63 @@ class GenerationMetrics:
 
         raise ValueError(f"无法解析 LLM 返回为 JSON: {result[:200]!r}")
 
+    DIMS = ("faithfulness", "answer_relevance", "context_precision", "context_recall")
+
     def evaluate(
         self,
         query: str,
         answer: str,
         context: str,
+        repeat: int = None,
     ) -> dict:
-        """评估单条回答"""
+        """评估单条回答。
+
+        LLM Judge 打分存在明显采样噪声（同脚本重跑 faithfulness 波动 0.70~0.97），
+        因此默认重复采样 `self.repeat` 次取均值，并把每次的最大差值作为 `spread` 一并返回。
+        """
         prompt = self.EVAL_PROMPT.format(
             query=query,
             context=context[:2000],  # 限制 context 长度
             answer=answer[:1000],
         )
+        times = max(1, int(repeat or self.repeat))
+        samples: dict = {dim: [] for dim in self.DIMS}
+        last_error = None
 
+        for _ in range(times):
+            parsed = self._judge_once(prompt)
+            if "error" in parsed:
+                last_error = parsed["error"]
+                continue
+            for dim in self.DIMS:
+                value = parsed.get(dim)
+                if isinstance(value, (int, float)):
+                    samples[dim].append(float(value))
+
+        if not any(samples.values()):
+            # 失败必须可见 — 不再静默返回全 0, 显式标记 error 便于排查
+            print(f"[GenerationMetrics] 评估失败: {last_error}")
+            return {**{dim: 0.0 for dim in self.DIMS}, "error": last_error or "unknown"}
+
+        result = {}
+        for dim in self.DIMS:
+            values = samples[dim]
+            result[dim] = round(sum(values) / len(values), 4) if values else 0.0
+            result[f"{dim}_spread"] = round(max(values) - min(values), 4) if values else 0.0
+        result["repeats"] = times
+        return result
+
+    def _judge_once(self, prompt: str) -> dict:
+        """单次 Judge 调用；失败返回 {"error": ...} 而不抛错。"""
         try:
             msg = self.llm.invoke(prompt)
             # 记录 LLM Judge 的 token 用量到全局 obs
             try:
-                model_name = getattr(self.llm, "model_name", "") or getattr(self.llm, "model", "") or "unknown"
+                model_name = (
+                    getattr(self.llm, "model_name", "")
+                    or getattr(self.llm, "model", "")
+                    or "unknown"
+                )
                 usage = _extract_token_usage(msg, model_name)
                 if usage["prompt_tokens"] or usage["completion_tokens"]:
                     obs.record_tokens(
@@ -355,19 +421,10 @@ class GenerationMetrics:
             except Exception:
                 # token 提取失败不影响评估主流程
                 pass
-            result = msg.content.strip()
-            parsed = self._parse_json_response(result)
-            return parsed
-        except Exception as e:
-            # 失败必须可见 — 不再静默返回全 0, 显式标记 error 便于排查
+            return self._parse_json_response(msg.content.strip())
+        except Exception as e:  # noqa: BLE001
             print(f"[GenerationMetrics] 评估失败: {type(e).__name__}: {e}")
-            return {
-                "faithfulness": 0.0,
-                "answer_relevance": 0.0,
-                "context_precision": 0.0,
-                "context_recall": 0.0,
-                "error": f"{type(e).__name__}: {str(e)[:200]}",
-            }
+            return {"error": f"{type(e).__name__}: {str(e)[:200]}"}
 
 
 # ------------------------------------------------------------------ #
@@ -388,12 +445,19 @@ class RAGEvaluator:
         search_agent=None,
         cs_agent=None,
         kg_qa_agent=None,
+        judge_repeat: int = 2,
     ):
         self.llm = llm
         self.search_agent = search_agent
         self.cs_agent = cs_agent
         self.kg_qa_agent = kg_qa_agent
-        self.gen_metrics = GenerationMetrics(llm)
+        self.judge_repeat = max(1, int(judge_repeat))
+        self.gen_metrics = GenerationMetrics(llm, repeat=self.judge_repeat)
+        # 人工标注检索 GT（存在则优先于伪标注）
+        self.labeled_gt = load_labeled_gt()
+        # 人工标注 FAQ GT（客服链路）
+        self.labeled_faq_gt = load_labeled_faq_gt()
+        self._faq_id_map = None
         # 评估开始前重置 token 统计,确保本次评估的用量独立计数
         obs.tokens.reset()
 
@@ -447,10 +511,10 @@ class RAGEvaluator:
         context_str = ""
 
         try:
-            # 调用内部搜索方法获取结构化结果
+            # 走生产检索入口的结构化返参：覆盖价格解析、关键词后端选择与 RRF 融合，
+            # 避免评估与线上逻辑不一致（此前直接拼 _vector_search + Neo4j 全文，未启用价格解析）
             vec_results = self.search_agent._vector_search(query, top_k)
-            cypher_results = self.search_agent._neo4j_keyword_search(query, top_k, None, None, None)
-            merged = self.search_agent._reciprocal_rank_fusion(vec_results, cypher_results)
+            merged = self.search_agent.search_results(query, top_k)
 
             retrieved_ids = [r["id"] for r in merged[:top_k]]
             context_str = "\n".join(
@@ -462,9 +526,20 @@ class RAGEvaluator:
 
         retrieval_latency_ms = (time.time() - start_time) * 1000
 
-        # 动态构建 ground truth (当 relevant_ids 为 ["auto"] 时)
+        # Ground truth 优先级: 人工标注 > 伪标注(向量 Top-3 + 关键词匹配, 自举)
         if relevant_ids == ["auto"]:
-            relevant_ids = self._build_ground_truth(merged, vec_results, relevant_keywords or [])
+            if query in self.labeled_gt:
+                # 已人工标注：相关集可能为空（该品类在商品库中确实不存在）。
+                # 空集不能回落伪标注，否则等于用自举 GT 覆盖人工判断。
+                relevant_ids = [str(i) for i in self.labeled_gt[query]]
+                gt_source = "human" if relevant_ids else "human_empty"
+            else:
+                relevant_ids = self._build_ground_truth(
+                    merged, vec_results, relevant_keywords or []
+                )
+                gt_source = "pseudo"
+        else:
+            gt_source = "explicit"
 
         # 计算检索指标
         retrieval_metrics = RetrievalMetrics.compute_all(retrieved_ids, relevant_ids)
@@ -486,6 +561,7 @@ class RAGEvaluator:
             "query": query,
             "retrieved_ids": retrieved_ids,
             "relevant_ids": relevant_ids,
+            "gt_source": gt_source,
             "retrieval_metrics": retrieval_metrics,
             "generation_metrics": gen_metrics,
             "retrieval_latency_ms": round(retrieval_latency_ms, 2),
@@ -545,6 +621,22 @@ class RAGEvaluator:
         context_str = "\n".join(d.page_content for d in docs) if docs else ""
         retrieval_latency_ms = (time.time() - start_time) * 1000
 
+        # 人工标注 FAQ GT 存在时，额外算检索指标（评估用 Top-5，生成仍用 Top-3）
+        retrieval_metrics = None
+        gt_source = "none"
+        gt_ids = self.labeled_faq_gt.get(query)
+        if gt_ids:
+            if self._faq_id_map is None:
+                self._faq_id_map = faq_id_by_text(load_faq_items())
+            eval_docs = self.cs_agent._retrieve(query, k=5)
+            retrieved = [
+                self._faq_id_map.get(d.page_content.strip())
+                for d in eval_docs
+            ]
+            retrieved = [i for i in retrieved if i]
+            retrieval_metrics = RetrievalMetrics.compute_all(retrieved, list(gt_ids))
+            gt_source = "human_faq"
+
         # 生成回答 (真实 LLM 生成, 单独计时)
         gen_start = time.time()
         answer = self.cs_agent.policy_qa(query)
@@ -567,6 +659,12 @@ class RAGEvaluator:
             "query": query,
             "retrieved_docs": len(docs),
             "keyword_hit_rate": round(keyword_hit_rate, 2),
+            "retrieved_ids": [
+                self._faq_id_map.get(d.page_content.strip()) for d in docs
+            ] if self._faq_id_map else [],
+            "relevant_ids": list(gt_ids) if gt_ids else [],
+            "gt_source": gt_source,
+            **({"retrieval_metrics": retrieval_metrics} if retrieval_metrics else {}),
             "generation_metrics": gen_metrics,
             "retrieval_latency_ms": round(retrieval_latency_ms, 2),
             "gen_latency_ms": round(gen_latency_ms, 2),
@@ -633,7 +731,10 @@ class RAGEvaluator:
         """
         strategies = ["keyword_only", "vector_only", "hybrid"]
         per_strategy = {s: [] for s in strategies}
+        per_strategy_by_source = {s: {"human": [], "pseudo": []} for s in strategies}
         case_count = 0
+        human_cases = 0
+        empty_gt_cases: list = []
 
         for case in test_cases:
             if case.get("type") != "search":
@@ -641,10 +742,25 @@ class RAGEvaluator:
             case_count += 1
             query = case["query"]
             try:
+                # 三种策略在同一价格约束下比较（与生产链路一致：解析查询里的预算条件）
+                price = self.search_agent._parse_price_constraints(query)
+                min_p, max_p = price if price else (None, None)
                 vec = self.search_agent._vector_search(query, 10)
-                cypher = self.search_agent._neo4j_keyword_search(query, 10, None, None, None)
-                merged = self.search_agent._reciprocal_rank_fusion(vec, cypher)
-                gt = self._build_ground_truth(merged, vec, case.get("relevant_keywords", []))
+                if min_p is not None or max_p is not None:
+                    vec = self.search_agent._filter_by_price(vec, min_p, max_p)
+                keyword = self.search_agent.keyword_search(query, 10, None, min_p, max_p)
+                merged = self.search_agent.search_results(query, 10)
+                if query in self.labeled_gt:
+                    gt = [str(i) for i in self.labeled_gt[query]]
+                    if not gt:
+                        # 人工判定"商品库内无相关商品"，无法计算排序指标，跳过
+                        empty_gt_cases.append(query)
+                        continue
+                    gt_source = "human"
+                    human_cases += 1
+                else:
+                    gt = self._build_ground_truth(merged, vec, case.get("relevant_keywords", []))
+                    gt_source = "pseudo"
             except Exception as e:
                 print(f"  [Baseline] 检索失败 {query[:20]}: {e}")
                 continue
@@ -653,10 +769,12 @@ class RAGEvaluator:
                 if strategy == "vector_only":
                     ids = [r["id"] for r in vec[:10]]
                 elif strategy == "keyword_only":
-                    ids = [r["id"] for r in cypher[:10]]
+                    ids = [r["id"] for r in keyword[:10]]
                 else:
                     ids = [r["id"] for r in merged[:10]]
-                per_strategy[strategy].append(RetrievalMetrics.compute_all(ids, gt))
+                metrics = RetrievalMetrics.compute_all(ids, gt)
+                per_strategy[strategy].append(metrics)
+                per_strategy_by_source[strategy][gt_source].append(metrics)
 
         summary = {}
         metric_names = [
@@ -674,9 +792,29 @@ class RAGEvaluator:
                 for m in metric_names
             }
 
+        # 按 GT 来源拆分（人工标注才是无偏口径）
+        summary_by_source = {}
+        for source, label in (("human", "human"), ("pseudo", "pseudo")):
+            if not per_strategy_by_source["hybrid"][source]:
+                continue
+            summary_by_source[label] = {
+                strategy: {
+                    m: round(
+                        sum(r.get(m, 0) for r in per_strategy_by_source[strategy][source])
+                        / len(per_strategy_by_source[strategy][source]),
+                        4,
+                    )
+                    for m in metric_names
+                }
+                for strategy in strategies
+            }
+
         return {
             "cases": case_count,
+            "human_gt_cases": human_cases,
+            "empty_gt_cases": empty_gt_cases,
             "summary": summary,
+            "summary_by_gt_source": summary_by_source,
         }
 
     def _compute_summary(self, results: list) -> dict:
@@ -685,8 +823,16 @@ class RAGEvaluator:
             return {}
 
         # 检索指标汇总
+        # 人工标注为"无相关商品"（该品类商品库未覆盖）的用例不参与排序指标平均
+        empty_gt_queries = [
+            r.get("query") for r in results if r.get("gt_source") == "human_empty"
+        ]
         search_results = [
-            r for r in results if r.get("type") == "search" and "retrieval_metrics" in r
+            r
+            for r in results
+            if r.get("type") == "search"
+            and "retrieval_metrics" in r
+            and r.get("gt_source") != "human_empty"
         ]
 
         summary = {}
@@ -706,6 +852,26 @@ class RAGEvaluator:
                 values = [r["retrieval_metrics"].get(metric, 0) for r in search_results]
                 summary["retrieval"][metric] = round(sum(values) / len(values), 4) if values else 0
 
+            # 按 GT 来源分组汇总：人工标注（可信口径）与伪标注（自举）不能混在一起解读
+            summary["retrieval_by_gt_source"] = {}
+            for source in ("human", "pseudo", "explicit"):
+                group = [r for r in search_results if r.get("gt_source") == source]
+                if not group:
+                    continue
+                summary["retrieval_by_gt_source"][source] = {
+                    "cases": len(group),
+                    **{
+                        metric: round(
+                            sum(r["retrieval_metrics"].get(metric, 0) for r in group)
+                            / len(group),
+                            4,
+                        )
+                        for metric in ret_metrics
+                    },
+                }
+            if empty_gt_queries:
+                summary["empty_gt_queries"] = empty_gt_queries
+
         # 生成指标汇总
         gen_metrics = ["faithfulness", "answer_relevance", "context_precision", "context_recall"]
         summary["generation"] = {}
@@ -716,6 +882,47 @@ class RAGEvaluator:
         # 显式标注生成指标有效性 — 有 error 时不可信
         summary["generation"]["valid"] = gen_error_count == 0
         summary["generation"]["error_count"] = gen_error_count
+
+        # Judge 重复采样的波动（各维度逐用例最大差值的均值），用于说明指标噪声
+        spread_dims = ["faithfulness", "answer_relevance", "context_precision", "context_recall"]
+        spreads = {}
+        for dim in spread_dims:
+            values = [
+                r["generation_metrics"].get(f"{dim}_spread")
+                for r in results
+                if isinstance(r.get("generation_metrics", {}).get(f"{dim}_spread"), (int, float))
+            ]
+            if values:
+                spreads[dim] = round(sum(values) / len(values), 4)
+        if spreads:
+            summary["generation_spread"] = {**spreads, "judge_repeat": self.judge_repeat}
+
+        # 客服（FAQ）检索指标：仅统计有人工标注 GT 的用例，与搜索链路分开呈现
+        cs_with_gt = [
+            r
+            for r in results
+            if r.get("gt_source") == "human_faq" and "retrieval_metrics" in r
+        ]
+        if cs_with_gt:
+            summary["retrieval_cs"] = {
+                "cases": len(cs_with_gt),
+                **{
+                    metric: round(
+                        sum(r["retrieval_metrics"].get(metric, 0) for r in cs_with_gt)
+                        / len(cs_with_gt),
+                        4,
+                    )
+                    for metric in [
+                        "recall@1",
+                        "recall@3",
+                        "recall@5",
+                        "precision@5",
+                        "mrr",
+                        "ndcg@5",
+                        "hit_rate@5",
+                    ]
+                },
+            }
         if gen_error_count:
             summary["generation"]["first_error"] = next(
                 (
@@ -790,78 +997,271 @@ class RAGEvaluator:
 #  测试用例集 (带 ground truth)
 # ------------------------------------------------------------------ #
 
+# ⚠️ 用例要求：查询必须能被当前商品库覆盖（库内只有 4 个品类：手机数码/家用电器/食品生鲜/医药保健）。
+# 2026-09-15 复核发现原用例中 5 个（婴儿纸尿裤/运动鞋/面膜护肤/宠物狗粮/户外帐篷）在库内无任何相关商品，
+# 人工标注结果为空集、无法计算排序指标，已替换为库内可覆盖的查询。
+# Ground truth 由人工标注维护：tests/retrieval_gt_labeled.json（pooling 候选池见 tests/build_retrieval_gt.py）。
 SEARCH_TEST_CASES = [
     {
         "type": "search",
         "query": "蓝牙耳机",
-        # Ground truth: 人工标注 — 查询"蓝牙耳机"时, 包含"蓝牙"且品类为"手机数码"的商品为相关
-        # 使用关键词锚定法: 向量检索 Top-3 作为高置信相关, 关键词包含"蓝牙"的作为相关
-        "relevant_ids": ["auto"],  # "auto" = 运行时从向量检索 Top-3 + 关键词匹配动态构建
+        # "auto" = 有标注时用人工 GT，无标注时回落伪标注
+        "relevant_ids": ["auto"],
         "relevant_keywords": ["蓝牙", "耳机", "无线"],
-        "description": "搜索蓝牙耳机",
+        "description": "手机数码·耳机",
     },
     {
         "type": "search",
-        "query": "500元以下手机",
+        "query": "打游戏用的手机",
         "relevant_ids": ["auto"],
-        "relevant_keywords": ["手机", "智能手机"],
-        "description": "价格过滤搜索",
+        "relevant_keywords": ["游戏", "骁龙", "高刷", "电竞"],
+        "description": "手机数码·意图型(游戏手机)",
     },
     {
         "type": "search",
-        "query": "婴儿纸尿裤",
+        "query": "平板电脑",
         "relevant_ids": ["auto"],
-        "relevant_keywords": ["纸尿裤", "婴儿", "宝宝"],
-        "description": "母婴商品搜索",
-    },
-    {
-        "type": "search",
-        "query": "运动鞋",
-        "relevant_ids": ["auto"],
-        "relevant_keywords": ["运动鞋", "跑鞋", "篮球鞋"],
-        "description": "服装鞋包搜索",
-    },
-    {
-        "type": "search",
-        "query": "面膜护肤",
-        "relevant_ids": ["auto"],
-        "relevant_keywords": ["面膜", "护肤", "精华"],
-        "description": "美妆护肤搜索",
+        "relevant_keywords": ["平板", "电脑", "pad"],
+        "description": "手机数码·平板",
     },
     {
         "type": "search",
         "query": "笔记本电脑",
         "relevant_ids": ["auto"],
         "relevant_keywords": ["笔记本", "电脑", "laptop"],
-        "description": "手机数码搜索",
+        "description": "手机数码·笔记本",
     },
     {
         "type": "search",
-        "query": "食品零食",
+        "query": "1.5匹空调",
         "relevant_ids": ["auto"],
-        "relevant_keywords": ["零食", "食品", "坚果"],
-        "description": "食品生鲜搜索",
-    },
-    {
-        "type": "search",
-        "query": "宠物狗粮",
-        "relevant_ids": ["auto"],
-        "relevant_keywords": ["狗粮", "宠物", "猫粮"],
-        "description": "宠物用品搜索",
+        "relevant_keywords": ["空调", "1.5匹", "变频"],
+        "constraint": "1.5匹",
+        "description": "家用电器·空调(规格约束)",
     },
     {
         "type": "search",
         "query": "家用吸尘器",
         "relevant_ids": ["auto"],
         "relevant_keywords": ["吸尘器", "除尘", "家用"],
-        "description": "家用电器搜索",
+        "description": "家用电器·吸尘器",
     },
     {
         "type": "search",
-        "query": "户外帐篷",
+        "query": "滚筒洗衣机",
         "relevant_ids": ["auto"],
-        "relevant_keywords": ["帐篷", "户外", "露营"],
-        "description": "运动户外搜索",
+        "relevant_keywords": ["洗衣机", "滚筒"],
+        "constraint": "滚筒",
+        "description": "家用电器·洗衣机(类型约束)",
+    },
+    {
+        "type": "search",
+        "query": "对开门冰箱",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["冰箱", "对开门", "对开"],
+        "constraint": "对开",
+        "description": "家用电器·冰箱(类型约束)",
+    },
+    {
+        "type": "search",
+        "query": "食品零食",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["零食", "食品", "坚果"],
+        "description": "食品生鲜·零食",
+    },
+    {
+        "type": "search",
+        "query": "进口水果礼盒",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["水果", "进口", "礼盒"],
+        "constraint": "进口",
+        "description": "食品生鲜·水果(场景约束)",
+    },
+    {
+        "type": "search",
+        "query": "海鲜",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["海鲜", "水产", "鲜活"],
+        "description": "食品生鲜·海鲜",
+    },
+    {
+        "type": "search",
+        "query": "火锅食材",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["火锅", "底料", "食材"],
+        "description": "食品生鲜·火锅食材",
+    },
+    {
+        "type": "search",
+        "query": "按摩椅",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["按摩椅", "按摩", "理疗"],
+        "description": "医药保健·按摩椅",
+    },
+    {
+        "type": "search",
+        "query": "泡脚桶",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["泡脚", "足浴", "足疗"],
+        "description": "医药保健·足浴",
+    },
+    {
+        "type": "search",
+        "query": "充电款颈椎按摩仪",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["颈椎", "按摩仪", "充电"],
+        "constraint": "充电",
+        "description": "医药保健·颈椎按摩(属性约束)",
+    },
+    {
+        "type": "search",
+        "query": "儿童护眼仪",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["护眼", "儿童", "眼部按摩"],
+        "constraint": "儿童",
+        "description": "医药保健·眼部按摩(人群约束)",
+    },
+    # ---- 2026-09-15 扩充（为 RRF 自适应加权提供 ≥30 个标注查询）----
+    {
+        "type": "search",
+        "query": "相机",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["相机", "摄像", "单反", "微单"],
+        "description": "手机数码·相机",
+    },
+    {
+        "type": "search",
+        "query": "显示器",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["显示器", "屏幕", "2K", "144Hz"],
+        "description": "手机数码·显示器",
+    },
+    {
+        "type": "search",
+        "query": "机械键盘",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["键盘", "机械", "轴"],
+        "description": "手机数码·键盘",
+    },
+    {
+        "type": "search",
+        "query": "蓝牙音箱",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["音箱", "蓝牙", "音响"],
+        "description": "手机数码·音箱",
+    },
+    {
+        "type": "search",
+        "query": "智能手表",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["手表", "智能", "运动手环"],
+        "description": "手机数码·智能穿戴",
+    },
+    {
+        "type": "search",
+        "query": "电饭煲",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["电饭煲", "电饭锅", "球釜"],
+        "description": "家用电器·电饭煲",
+    },
+    {
+        "type": "search",
+        "query": "电视",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["电视", "平板电视", "4K"],
+        "description": "家用电器·电视",
+    },
+    {
+        "type": "search",
+        "query": "热水器",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["热水器", "燃热", "电热"],
+        "description": "家用电器·热水器",
+    },
+    {
+        "type": "search",
+        "query": "电磁炉",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["电磁炉", "灶", "火锅"],
+        "description": "家用电器·电磁炉",
+    },
+    {
+        "type": "search",
+        "query": "大闸蟹",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["大闸蟹", "蟹", "阳澄湖"],
+        "description": "食品生鲜·大闸蟹",
+    },
+    {
+        "type": "search",
+        "query": "牛肉",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["牛肉", "牛排", "牛腱"],
+        "description": "食品生鲜·牛肉",
+    },
+    {
+        "type": "search",
+        "query": "牛奶",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["牛奶", "纯牛奶", "乳"],
+        "description": "食品生鲜·牛奶",
+    },
+    {
+        "type": "search",
+        "query": "巧克力",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["巧克力", "可可", "糖果"],
+        "description": "食品生鲜·巧克力",
+    },
+    {
+        "type": "search",
+        "query": "筋膜枪",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["筋膜枪", "按摩枪", "肌肉放松"],
+        "description": "医药保健·筋膜枪",
+    },
+    {
+        "type": "search",
+        "query": "按摩枕",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["按摩枕", "颈椎", "热敷"],
+        "description": "医药保健·按摩枕",
+    },
+    {
+        "type": "search",
+        "query": "刮痧",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["刮痧", "拔罐", "经络"],
+        "description": "医药保健·刮痧",
+    },
+    {
+        "type": "search",
+        "query": "足疗机",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["足疗", "足浴", "脚底按摩"],
+        "description": "医药保健·足疗机",
+    },
+    # ---- 意图型查询（用于验证"按查询类型自适应 RRF 加权"，与属性约束型形成对照）----
+    {
+        "type": "search",
+        "query": "送给长辈的礼物",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["按摩", "足浴", "保健", "理疗"],
+        "description": "医药保健·意图型(送礼)",
+    },
+    {
+        "type": "search",
+        "query": "学生用的笔记本电脑",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["笔记本", "轻薄", "学生"],
+        "description": "手机数码·意图型(学生本)",
+    },
+    {
+        "type": "search",
+        "query": "运动时戴的耳机",
+        "relevant_ids": ["auto"],
+        "relevant_keywords": ["耳机", "运动", "防水"],
+        "description": "手机数码·意图型(运动耳机)",
     },
 ]
 
@@ -906,8 +1306,20 @@ CS_TEST_CASES = [
 
 def main():
     """运行 RAG 评估"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="RAG 评估")
+    parser.add_argument(
+        "--judge-repeat",
+        type=int,
+        default=2,
+        help="LLM Judge 重复采样次数（默认 2；取均值并输出采样波动）",
+    )
+    args = parser.parse_args()
+
     print("=" * 60)
     print("  RAG 评估系统 — 检索质量 + 生成质量")
+    print(f"  LLM Judge 采样次数: {args.judge_repeat}")
     print("=" * 60)
 
     llm = ChatOpenAI(
@@ -943,6 +1355,7 @@ def main():
         search_agent=agents.get("catalog_agent").search_agent,
         cs_agent=agents.get("cs_agent"),
         kg_qa_agent=agents.get("kg_qa_agent"),
+        judge_repeat=args.judge_repeat,
     )
 
     # 运行评估
@@ -975,6 +1388,20 @@ def main():
             if metric in ("valid", "error_count", "first_error"):
                 continue
             print(f"  {metric:20s}: {value:.4f}")
+        spread = summary.get("generation_spread") or {}
+        if spread:
+            repeat = spread.get("judge_repeat", 1)
+            detail = ", ".join(
+                f"{dim}={value:.4f}" for dim, value in spread.items() if dim != "judge_repeat"
+            )
+            print(f"  （Judge 采样 {repeat} 次取均值；采样波动最大值均值: {detail}）")
+
+    if "retrieval_cs" in summary:
+        cs = summary["retrieval_cs"]
+        print(f"\n📚 客服（FAQ）检索指标（人工标注 GT，{cs.get('cases', 0)} 个用例）:")
+        for metric in ["recall@1", "recall@3", "recall@5", "precision@5", "mrr", "ndcg@5", "hit_rate@5"]:
+            if metric in cs:
+                print(f"  {metric:20s}: {cs[metric]:.4f}")
 
     if "performance" in summary:
         print("\n⚡ 性能指标:")
@@ -1028,6 +1455,30 @@ def main():
             f"{ret_baseline['summary'][s][m]:>14.4f}" for s in strategy_names
         )
         print(row)
+
+    by_source = ret_baseline.get("summary_by_gt_source") or {}
+    for source, block in by_source.items():
+        label = "人工标注 GT" if source == "human" else "伪标注 GT（自举）"
+        print(f"\n  —— {label} 子集 ——")
+        print(header)
+        for m in baseline_metrics:
+            row = f"{m:<14s}" + "".join(
+                f"{block[s][m]:>14.4f}" for s in strategy_names
+            )
+            print(row)
+    human_cases = ret_baseline.get("human_gt_cases", 0)
+    empty_cases = ret_baseline.get("empty_gt_cases") or []
+    if human_cases or empty_cases:
+        note = (
+            f"\n  （{human_cases}/{ret_baseline.get('cases', 0)} 个搜索用例有人工标注且可计算排序指标"
+        )
+        if empty_cases:
+            note += (
+                f"；另 {len(empty_cases)} 个人工标注为「商品库内无相关商品」不参与指标："
+                f"{'、'.join(empty_cases)}"
+            )
+        note += "；未标注的才回落伪标注）"
+        print(note)
 
     result["retrieval_baseline"] = ret_baseline
 

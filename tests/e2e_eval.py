@@ -166,6 +166,7 @@ class E2EEvaluator:
             "latency_ms": round(latency_ms, 2),
             "judge": {
                 "overall_score": judge_result["overall_score"],
+                "status": judge_result.get("status", "ok"),
                 "error": judge_result.get("error"),
             },
             "error": error,
@@ -240,7 +241,16 @@ class E2EEvaluator:
             return {}
 
         latencies = [r["latency_ms"] for r in results]
-        scores = [r["judge"]["overall_score"] for r in results]
+        # 质量分只统计"有可用分数"的样本（ok / partial）；judge 彻底失败时 evaluate.py
+        # 返回 0 分，直接计入平均会把质量分系统性拉低（此前 15 条里 2 条失败 → 6.43，剔除后 7.42）。
+        # 注意 partial（抢救到部分维度）要计入——它有可用分数，只是标注出来。
+        valid_scores = [
+            r["judge"]["overall_score"]
+            for r in results
+            if r["judge"].get("status", "ok") != "failed"
+        ]
+        all_scores = [r["judge"]["overall_score"] for r in results]
+        scores = valid_scores or all_scores
         intent_correct = sum(1 for r in results if r["intent_correct"])
         fallback_count = sum(1 for r in results if r["fallback"]["triggered"])
         error_count = sum(1 for r in results if r["error"])
@@ -279,6 +289,15 @@ class E2EEvaluator:
                 "avg_score": round(sum(scores) / len(scores), 2),
                 "min_score": min(scores),
                 "max_score": max(scores),
+                "valid_count": len(valid_scores),
+                "partial_count": sum(
+                    1 for r in results if r["judge"].get("status") == "partial"
+                ),
+                "failed_count": sum(
+                    1 for r in results if r["judge"].get("status") == "failed"
+                ),
+                # 保留"含失败样本"的口径，方便对比与排查
+                "avg_score_including_failures": round(sum(all_scores) / len(all_scores), 2),
                 "judge_error_count": judge_errors,
             },
             "latency": {
@@ -326,7 +345,11 @@ def print_report(result: dict):
 
     q = s["quality"]
     print("\n  📝 答案质量 (LLM Judge):")
-    print(f"    平均分: {q['avg_score']}/10  (min={q['min_score']}, max={q['max_score']})")
+    print(
+        f"    平均分: {q['avg_score']}/10  (min={q['min_score']}, max={q['max_score']})"
+        f"  [有效 {q.get('valid_count', 0)} 条，其中部分解析 {q.get('partial_count', 0)} 条；"
+        f"彻底失败 {q.get('failed_count', 0)} 条；含失败样本口径 {q.get('avg_score_including_failures')}]"
+    )
     if q["judge_error_count"]:
         print(f"    ⚠️  Judge 失败 {q['judge_error_count']} 次")
 
@@ -374,7 +397,9 @@ def main():
         api_key=settings.deepseek_api_key,
         base_url=settings.deepseek_base_url,
         temperature=0.1,
-        max_tokens=1024,
+        # 该实例同时用于链路与 LLM Judge；judge 要输出 5 个维度带理由的 JSON，
+        # 1024 会把输出截断（实测 15 条里 2 条解析失败），这里放宽到 2048
+        max_tokens=2048,
     )
 
     # 初始化 Agent 与编排器

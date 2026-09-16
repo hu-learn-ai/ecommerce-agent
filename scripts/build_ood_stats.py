@@ -85,6 +85,20 @@ def parse_args():
         help="训练数据 CSV（text,label）",
     )
     ap.add_argument("--sample", type=int, default=6000, help="抽样条数")
+    ap.add_argument(
+        "--short_csv",
+        type=str,
+        default=os.path.join(
+            PROJECT_ROOT, "data", "processed", "classify_train_real_aug_train.csv"
+        ),
+        help="短查询参照来源 CSV（增强训练集含大量短查询变体）",
+    )
+    ap.add_argument(
+        "--short_sample",
+        type=int,
+        default=2000,
+        help="短查询参照条数（不足则取全部）",
+    )
     ap.add_argument("--max_length", type=int, default=64, help="编码最大长度（特征用）")
     ap.add_argument("--batch", type=int, default=128, help="编码批次大小")
     ap.add_argument(
@@ -127,6 +141,35 @@ def load_sample(csv_path: str, sample: int, seed: int = 42):
     return [t for t, _ in sampled], [lbl for _, lbl in sampled]
 
 
+def load_short_queries(
+    csv_path: str, per_class: int, seed: int = 42, max_chars: int = 10
+):
+    """从增强训练集抽取短查询参照（长度 ≤ max_chars，按类均衡）。
+
+    背景：门控用"训练标题"估计类内分布，而线上输入多为 2-8 字的短查询，
+    二者嵌入分布不同，导致真实短查询被大量误拒（实测域内接受率仅 23.7%）。
+    增强训练集本身包含由标题派生的短查询变体，用它做参照既覆盖真实输入风格，
+    又不依赖评估用例（避免拿测试集调参）。
+    """
+    if not os.path.isfile(csv_path):
+        print(f"[OOD] 短查询来源不存在，跳过: {csv_path}")
+        return [], []
+    by_label: dict = {}
+    with open(csv_path, "r", encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            text = row["text"].strip()
+            if len(text) <= max_chars:
+                by_label.setdefault(row["label"].strip(), []).append(text)
+    rng = random.Random(seed)
+    texts, labels = [], []
+    for lbl, items in sorted(by_label.items()):
+        picked = rng.sample(items, min(per_class, len(items)))
+        texts.extend(picked)
+        labels.extend([lbl] * len(picked))
+    print(f"[OOD] 短查询参照 {len(texts)} 条: {dict(Counter(labels))}")
+    return texts, labels
+
+
 def main() -> None:
     args = parse_args()
     import numpy as np
@@ -156,6 +199,13 @@ def main() -> None:
         ref_indices.extend(range(len(texts), len(texts) + len(qs)))
         texts = texts + qs
         labels = labels + [cat] * len(qs)
+
+    # 追加从增强训练集抽样的短查询参照（覆盖真实短输入分布）
+    short_texts, short_labels = load_short_queries(args.short_csv, args.short_sample)
+    if short_texts:
+        ref_indices.extend(range(len(texts), len(texts) + len(short_texts)))
+        texts = texts + short_texts
+        labels = labels + short_labels
 
     def encode_with_logits(texts_batch: list):
         # 动态量化的激活缩放与批内组成有关；为保证与运行时（单条推理）一致，默认逐条编码
@@ -251,17 +301,24 @@ def main() -> None:
         )
 
     # 短查询参照距离（保证真实短查询不被误拒）
-    ref_dist_by_class = {c: 0.0 for c in range(len(label_list))}
+    # 取 p99.5 而非 max：参照样本已达数千条，用 max 会被个别离群点把阈值抬得过高、削弱 OOD 拒识
+    ref_dists: dict = {c: [] for c in range(len(label_list))}
     for i in ref_indices:
         c = int(pred_ids[i])
-        ref_dist_by_class[c] = max(ref_dist_by_class[c], float(in_scores[i]))
+        ref_dists[c].append(float(in_scores[i]))
+    ref_dist_by_class = {
+        c: (float(np.quantile(v, 0.995)) if v else 0.0) for c, v in ref_dists.items()
+    }
     for c in range(len(label_list)):
         # 阈值至少覆盖该类所有短查询参照（×1.05 余量）
         per_class_thr[c] = max(per_class_thr[c], ref_dist_by_class[c] * 1.05)
 
-    print("[OOD] 短查询参照最大距离 / 修正后阈值:")
+    print("[OOD] 短查询参照 p99.5 距离 / 修正后阈值:")
     for c in range(len(label_list)):
-        print(f"  {label_list[c]}: ref_max={ref_dist_by_class[c]:.2f} thr={per_class_thr[c]:.2f}")
+        print(
+            f"  {label_list[c]}: ref_p99.5={ref_dist_by_class[c]:.2f} "
+            f"n_ref={len(ref_dists[c])} thr={per_class_thr[c]:.2f}"
+        )
 
     # 4. 域外探针 OOD 分数（预测类 -> 该类马氏距离，逐类阈值判定）
     ood_feats, ood_logits = encode_with_logits(OOD_PROBES)
@@ -293,6 +350,8 @@ def main() -> None:
             {
                 "method": "per_class_mahalanobis",
                 "sample": len(texts),
+                "short_query_refs": len(ref_indices),
+                "short_query_source": args.short_csv,
                 "max_length": args.max_length,
                 "thresholds": {label_list[c]: float(thresholds[c]) for c in range(len(label_list))},
                 "in_domain_reject_rate": in_reject,

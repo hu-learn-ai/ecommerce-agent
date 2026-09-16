@@ -56,6 +56,24 @@ class Settings:
         default_factory=lambda: os.getenv("EMBEDDING_MODEL", "BAAI/bge-base-zh-v1.5")
     )
     embedding_dim: int = field(default_factory=lambda: int(os.getenv("EMBEDDING_DIM", "768")))
+
+    # === 检索 ===
+    # 关键词检索后端：bm25（jieba + BM25Okapi，默认）| neo4j（Neo4j 全文索引）
+    # 实测 16 用例人工标注 GT：BM25 NDCG@5 0.8995 vs Neo4j 全文 0.7672
+    search_keyword_backend: str = field(
+        default_factory=lambda: os.getenv("SEARCH_KEYWORD_BACKEND", "bm25")
+    )
+    # 按查询类型自适应 RRF 权重（属性/规格约束型偏关键词，意图型偏向量）
+    # 默认开启：已在 36 个标注查询上验证（全量 NDCG@5 0.8598 → 0.8833，留出集同向提升，
+    # 4 折交叉验证 4/4 折占优；见 tests/tune_rrf.py 与 tests/rrf_tuning_report.json）
+    rrf_adaptive_weights: bool = (
+        os.getenv("RRF_ADAPTIVE_WEIGHTS", "true").lower() == "true"
+    )
+    # 推荐链路是否消费查询意图（向量+BM25 细粒度召回并入候选）
+    # 关闭后回退"仅按画像分类 + Item-CF"的原行为
+    recommend_query_aware: bool = (
+        os.getenv("RECOMMEND_QUERY_AWARE", "true").lower() == "true"
+    )
     hf_endpoint: str = field(
         default_factory=lambda: os.getenv("HF_ENDPOINT", "https://hf-mirror.com")
     )
@@ -153,7 +171,10 @@ class Settings:
     streaming_enabled: bool = os.getenv("STREAMING_ENABLED", "true").lower() == "true"
 
     # === 推荐 ===
-    recommend_rerank_enabled: bool = os.getenv("RECOMMEND_LLM_RERANK", "true").lower() == "true"
+    # LLM 重排默认关闭：8 用例人工标注下只 +0.061 NDCG@5（0.7500 → 0.8107），
+    # 却把延迟从 92ms 拉到 4.9s（约 53 倍）。默认走"查询意图召回"，
+    # 需要更高排序质量时用 RECOMMEND_LLM_RERANK=true 打开。
+    recommend_rerank_enabled: bool = os.getenv("RECOMMEND_LLM_RERANK", "false").lower() == "true"
 
     def get_mysql_config(self) -> dict:
         """返回 PyMySQL 连接字典"""

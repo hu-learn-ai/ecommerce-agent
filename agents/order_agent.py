@@ -75,7 +75,8 @@ class OrderAgent(BaseAgentTool):
                 if not order:
                     return f"未找到订单 {order_id}，请确认订单号是否正确。"
                 if user_id and str(order.get("user_id", "")) != str(user_id):
-                    return f"无权查看订单 {order_id}（非本人订单）。"
+                    # 与"未找到订单"返回相同措辞，避免泄露"订单存在但非本人"（防订单号枚举）
+                    return f"未找到订单 {order_id}，请确认订单号是否正确。"
                 logistics = self._fetch_logistics_sa(conn, order_id)
                 return self._format_order(
                     order, logistics, show_pii=bool(user_id and str(order.get("user_id", "")) == str(user_id))
@@ -88,7 +89,8 @@ class OrderAgent(BaseAgentTool):
                     if not order:
                         return f"未找到订单 {order_id}，请确认订单号是否正确。"
                     if user_id and str(order.get("user_id", "")) != str(user_id):
-                        return f"无权查看订单 {order_id}（非本人订单）。"
+                        # 与"未找到订单"返回相同措辞，避免泄露"订单存在但非本人"（防订单号枚举）
+                        return f"未找到订单 {order_id}，请确认订单号是否正确。"
                     logistics = self._fetch_logistics(cursor, order_id)
                     return self._format_order(
                         order,
@@ -227,12 +229,16 @@ class OrderAgent(BaseAgentTool):
             order.get("create_time") or order.get("created_at") or order.get("order_time") or "未知"
         )
         user_id = order.get("user_id") or order.get("uid") or "未知"
+        # 用户 ID 同属 PII：未获授权（show_pii=False）时同样脱敏，防止横向越权枚举
+        user_id_display = (
+            user_id if show_pii or user_id == "未知" else self._mask_pii(str(user_id))
+        )
 
         lines.append(f"订单号: {order_id}")
         lines.append(f"状态: {status}")
         lines.append(f"金额: ¥{total_amount}")
         lines.append(f"下单时间: {create_time}")
-        lines.append(f"用户ID: {user_id}")
+        lines.append(f"用户ID: {user_id_display}")
 
         # 收货人/地址（PII，默认打码；show_pii=True 时才明文）
         address = order.get("consignee") or order.get("receiver_address") or order.get("address")

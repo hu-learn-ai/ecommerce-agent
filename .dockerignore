@@ -25,6 +25,15 @@ models
 docs
 tests
 
+# 原始数据集与本地独占资产（与 .gitignore 对齐）：
+# 缺了这些，本地构建上下文会被 1.7GB 的原始 JData 数据撑爆
+新建文件夹
+finetune
+outputs
+评估结果2
+面试深挖题库_电商Agent项目.html
+mysql_gmall.sql
+
 *.tar.gz
 *.log
 structure.txt

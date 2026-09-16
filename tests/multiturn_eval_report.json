@@ -7,15 +7,15 @@
         {
           "turn": 1,
           "user": "有没有蓝牙耳机推荐",
-          "answer": "为您找到了几款蓝牙耳机，以下是整理后的结果（均已去除耳机套/耳帽等配件类商品）：\n\n## 🎧 蓝牙耳机推荐\n\n**1. JBL MINI NC 黑色**（真无线 · 主动降噪）\n- 主动降噪、防水防汗，运动通勤两相宜，苹果/华为/小米/安卓通用\n\n**2. JBL TUNE215BT 曜石黑**（半入耳 · 无线）\n- 蓝牙5.0、Type-C极速充电、超长续航，支持苹果安卓\n\n**3. 酷狗（KUGOU）M2 星空灰**（真无线 · 半入耳）\n- 柄式半入耳设计，适合运动游戏，超长续航智能版\n\n**4. 联想（Lenovo）TC09 锖色**（无线）\n- 联想品牌无线蓝牙耳机\n\n**5. 纽曼（Newmine）V28**（运动蓝牙耳机）\n- 支持对讲机防丢、音乐播放、可录音，持久续航，磁吸收纳，手机通用\n\n**6. Masentek F808**（骨传导 · 挂耳式）\n- 不入耳式设计，",
+          "answer": "为您找到以下几款蓝牙耳机，供参考：\n\n| 序号 | 商品名称 | 品牌 | 价格 |\n|---|---|---|---|\n| 1 | 联想蓝牙耳机无线 TC09 锖色 | 联想 | ¥386.5 |\n| 2 | 纽曼 V28 微鳯运动蓝牙耳机（对讲/防丢/可录音） | 纽曼 | ¥226.06 |\n| 3 | 兰士顿 挂脖式无线运动耳麦 L5C 黑色（超长续航、磁吸开关） | 兰士顿 | ¥700.68 |\n| 4 | Masentek F808 骨传导概念挂耳式耳机（不入耳，运动/通话/游戏） | Masentek | ¥339.72 |\n| 5 | 德燚 双耳入耳式迷你蓝牙耳机（智能触控+HIFI音质，宇航员款） | 德燚 | ¥729.03 |\n\n简单建议：\n- **预算有限、日常通勤**：纽曼 V28（¥226）或联想 TC09（¥386）比较实惠。\n- **运动跑步、想不入耳**",
           "expected_keywords": [
             "蓝牙",
             "耳机"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 8.8,
-          "latency_ms": 22158.37,
-          "judge_latency_ms": 2986.39,
+          "judge_score": 9.1,
+          "latency_ms": 10765.68,
+          "judge_latency_ms": 1117.25,
           "intent": "recommend",
           "evaluation_type": "relevance",
           "needs_context": false,
@@ -24,12 +24,12 @@
         {
           "turn": 2,
           "user": "第一款多少钱",
-          "answer": "我为您查询了 **JBL MINI NC 黑色** 蓝牙耳机的信息，搜索结果中找到了这款商品，但**很抱歉，工具返回的结果中没有包含这款耳机的具体价格信息**。\n\n从搜索结果来看，这款商品的信息如下：\n\n**JBL MINI NC 黑色** 蓝牙耳机\n- 品牌：JBL\n- 分类：手机数码\n- 特点：主动降噪真无线耳机、无线运动耳机、防水防汗、苹果华为小米安卓通用\n\n---\n\n📌 由于当前商品库中未提供该款耳机的具体售价，我暂时无法告诉您准确的价格。\n\n如果您需要，我可以：\n1. 帮您**查询其他几款蓝牙耳机的价格**（比如 JBL TUNE215BT、酷狗 M2 等）\n2. 或者根据您的**预算**为您重新推荐合适的蓝牙耳机\n\n请问您希望怎么处理呢？😊",
+          "answer": "🔍 共找到 10 个相关商品：\n\n1. **联想（Lenovo） 联想蓝牙耳机无线TC09 锖色** | 品牌: 联想 | 分类: 手机数码 | 价格: ¥386.5 | 相似度: 0.5691\n2. **金陵声宝 适用Beats Solo2 Solo3 Wireless蓝牙耳机套海绵套耳罩 小羊皮 红色蓝牙版（赠收纳盒）** | 品牌: 金陵声宝 | 分类: 手机数码 | 价格: ¥51.05 | 相似度: 0.5360\n3. **酷狗（KUGOU）M2真无线蓝牙耳机柄式半入耳运动游戏耳机超长续航智能版 星空灰** | 品牌: 酷狗 | 分类: 手机数码 | 价格: ¥144.7 | 相似度: 0.5624\n4. **适用华为B6/B5/B3青春版B2硅胶耳机套耳帽手环配件耳塞商务蓝牙耳机耳套智能硅胶套耳机帽 B5耳塞【中码M号】一只，带【收纳盒】** | 品牌: 适用华为 | 分类: ",
           "expected_keywords": [],
           "keyword_coverage": 1.0,
-          "judge_score": 8.3,
-          "latency_ms": 4160.97,
-          "judge_latency_ms": 3372.8,
+          "judge_score": 2.4,
+          "latency_ms": 31.57,
+          "judge_latency_ms": 941.2,
           "intent": "search",
           "evaluation_type": "coreference",
           "needs_context": true,
@@ -38,21 +38,21 @@
         {
           "turn": 3,
           "user": "有降噪功能吗",
-          "answer": "我来为您查询一下 **JBL MINI NC 黑色** 这款蓝牙耳机的降噪功能信息。\n\n根据搜索结果，这款商品的信息如下：\n\n**JBL MINI NC 黑色** 蓝牙耳机\n- 品牌：JBL\n- 分类：手机数码\n- 特点：**主动降噪**真无线耳机、无线运动耳机、防水防汗、苹果华为小米安卓通用\n\n---\n\n✅ **是的，这款 JBL MINI NC 黑色 蓝牙耳机具备主动降噪功能！**\n\n从商品标题和描述来看，它明确标注了\"**主动降噪**\"特性，属于真无线降噪耳机，同时具备防水防汗功能，适合运动通勤等场景使用。\n\n请问还需要了解其他信息吗？比如它的续航、佩戴方式，或者需要我帮您对比其他几款耳机的降噪情况？😊",
+          "answer": "关于您问的第一款 **联想蓝牙耳机无线 TC09（¥386.5）**：\n\n**它没有主动降噪（ANC）功能。** ❌\n\n具体说明：\n- 它属于入门级真无线耳机，主要功能是蓝牙无线连接、触控操作、通话麦克风。\n- 通话时会有一定的麦克风收音降噪（ENC，让对方听清你说话），但这**不是**听歌时隔绝外界噪音的主动降噪。\n- 如果您想在地铁、办公室等嘈杂环境里屏蔽噪音，TC09 达不到这个效果。\n\n如果您确实需要**主动降噪（ANC）**，建议在购买前重点确认商品详情页是否明确标注「ANC 主动降噪」，这类功能通常出现在中高端型号上。\n\n需要我帮您按「带主动降噪」的需求重新推荐一批蓝牙耳机吗？可以告诉我您的预算～",
           "expected_keywords": [
             "降噪"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 9.2,
-          "latency_ms": 1899.81,
-          "judge_latency_ms": 2729.38,
-          "intent": "chitchat",
+          "judge_score": 9.6,
+          "latency_ms": 7282.07,
+          "judge_latency_ms": 1308.01,
+          "intent": "recommend",
           "evaluation_type": "context_inherit",
           "needs_context": true,
           "error": null
         }
       ],
-      "session_id": "multiturn_eval_1_1787747706"
+      "session_id": "multiturn_eval_1_1789537124"
     },
     {
       "scenario_name": "偏好记忆 + 后续推荐",
@@ -61,14 +61,14 @@
         {
           "turn": 1,
           "user": "我对价格敏感,预算500以内",
-          "answer": "根据您\"预算500元以内、价格敏感\"的需求，我为您找到了以下商品推荐：\n\n## 🛒 为您推荐的商品\n\n### 📱 手机数码类\n1. **VIMAI 无线监听耳机**（适用mivsn魅声/十盏灯/iCON艾肯/Ickb so8声卡）\n   - 特点：无延迟、HiFi音质、兼容性强，含监听耳机2个+发射器\n   - 适用场景：直播、录音等\n\n### 🏠 家用电器类\n2. **美的烘干机 家用小型速干衣机**\n   - 特点：风干烘干、折叠设计、大容量，适合家庭日常使用\n\n### 💆 医药保健类\n3. **华为通用足浴盆 全自动按摩洗脚盆**\n   - 特点：电动恒温加热、高深桶设计，旋钮标准款，泡脚养生好物\n\n### 🍤 食品生鲜类\n4. **京鲜生 冷冻黑虎虾 海鲜礼盒**（1kg，8-10个头，长23cm）\n5. **椰子冻 新鲜椰奶冻**（330g×6盒整箱）\n\n---\n\n💡 **温馨提",
+          "answer": "根据您的预算（500 元以内），我为您找到了以下商品：\n\n| # | 商品 | 分类 | 价格 | 匹配度 |\n|---|------|------|------|--------|\n| 1 | （勿拍）随机抽取小礼品一份（单拍不发货） | 食品生鲜 | ¥210.31 | 5.2/10 |\n| 2 | 【法国医美】提拉紧致美容仪 面部按摩导入仪（支持 HUAWEI HiLink） | 医药保健 | ¥151.51 | 4.9/10 |\n| 3 | 风幕机商用 0.9/1.2/1.5/1.8/2 米 门口隔风机感应风帘机 | 家用电器 | ¥485.78 | 4.8/10 |\n| 4 | 超广角镜头 10-22mm（适用佳能 800D/550D/600D 等） | 手机数码 | ¥57.58 | 4.7/10 |\n| 5 | 本来生活网 300 元礼品卡 / 购物卡 | 食品生鲜 | ¥1",
           "expected_keywords": [
             "500"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 6.7,
-          "latency_ms": 13698.32,
-          "judge_latency_ms": 3228.01,
+          "judge_score": 7.7,
+          "latency_ms": 5983.98,
+          "judge_latency_ms": 1387.12,
           "intent": "recommend",
           "evaluation_type": "relevance",
           "needs_context": false,
@@ -77,12 +77,12 @@
         {
           "turn": 2,
           "user": "推荐个手机",
-          "answer": "很抱歉，根据系统查询结果，目前没有找到符合您**预算500元以内**的手机商品。😔\n\n### 📋 查询结果说明\n\n在售的手机商品价格如下：\n- **Apple iPhone 13 mini**（二手，128G）：¥1449\n- **Apple iPhone 16**（128GB）：¥4476.61\n- **Apple iPhone 17**（256GB）：¥5469.01\n\n这些手机的最低价格也达到了 **¥1449**，超出了您的500元预算较多。\n\n### 💡 小建议\n1. 如果您能适当**提高预算**（比如1000-1500元），可以考虑二手的 iPhone 13 mini；\n2. 或者您也可以考虑**儿童电话手表**等价格较低的智能通讯设备；\n3. 如果有其他需求，比如千元机推荐或特定用途，我可以帮您进一步查询！\n\n请问需要我帮您调整搜索方向吗？😊",
+          "answer": "在这个价位（500 元以内）帮您筛选到了以下手机类商品：\n\n| # | 商品 | 品牌 | 价格 | 匹配度 |\n|---|------|------|------|--------|\n| 1 | 酷派锋尚 50 Lite 八核智能手机 64G 星烁镜（大屏/长续航/学生老人备用机） | 酷派 | ¥245.65 | 6.0/10 |\n| 2 | 2025 新款 24+2TB 骁龙 888 十核 5G 全网通二合一办公游戏学习平板 曜夜蓝 | 三星 | ¥448.00 | 6.2/10 |\n| 3 | 朵唯 学生老人手机 无游戏 4G 全网通 超长待机 深海蓝 | 朵唯 | ¥65.55 | 5.9/10 |\n| 4 | 朵唯 S9 学生手机 戒网瘾专用 4G 全网通 迷你超长待机 星空蓝 | 朵唯 | ¥126.00 | 5.8/10 |\n| 5 | WJHH 智能手表（可插卡/双摄，非",
           "expected_keywords": [],
           "keyword_coverage": 1.0,
-          "judge_score": 8.5,
-          "latency_ms": 13200.02,
-          "judge_latency_ms": 3666.5,
+          "judge_score": 7.9,
+          "latency_ms": 7245.64,
+          "judge_latency_ms": 1326.5,
           "intent": "recommend",
           "evaluation_type": "long_term_recall",
           "needs_context": true,
@@ -91,19 +91,19 @@
         {
           "turn": 3,
           "user": "再推荐一款平板",
-          "answer": "非常抱歉，经过系统查询，**没有找到符合条件的平板电脑**。😔\n\n### 📋 查询结果说明\n\n系统为您匹配到的\"手机数码\"类商品中，实际没有平板电脑，包括：\n- 新科广场舞蓝牙音箱（8吋+双话筒）\n- 中信出版社图书音像\n- 帮宝适母婴用品\n- 新秀丽箱包配饰\n- 花王母婴用品\n\n以上商品均与平板电脑需求**完全无关**，无法为您推荐。\n\n### 💡 小建议\n1. 如果您能**放宽预算**或**降低要求**，我可以换个方向帮您查询；\n2. 或者您可以告诉我平板的具体用途（如看剧、学习、办公）和期望品牌，我再试试看；\n3. 如果系统有新的货源，后续也可以再为您查询。\n\n请问需要我调整查询条件，或者帮您看看其他类型的数码产品吗？😊",
+          "answer": "在 500 元以内帮您找到以下平板相关商品：\n\n| # | 商品 | 品牌 | 价格 | 匹配度 |\n|---|------|------|------|--------|\n| 1 | 2025 新款 24+2TB 骁龙 888 十核 4K 全面屏 5G 可插卡 二合一办公游戏学习平板（曜夜蓝，512G，120Hz） | 三星 | ¥448.00 | 5.8/10 |\n| 2 | 平板电脑 12 吋 iPad 2021 新款 5G 高清游戏二合一学生网课学习机（太空银，128G） | — | ¥22.46 | 5.7/10 |\n| 3 | 至诺小天才 学习机平板电脑 K16 家教机点读机（八核金属外壳护眼版 32G+64G 套餐二） | 至诺小天才 | ¥9.71 | 5.5/10 |\n| 4 | 酷派锋尚 50 Lite 八核智能手机 64G（学生/老人备用机） | 酷派 | ¥245.",
           "expected_keywords": [],
           "keyword_coverage": 1.0,
-          "judge_score": 6.6,
-          "latency_ms": 9644.34,
-          "judge_latency_ms": 2729.8,
+          "judge_score": 8.6,
+          "latency_ms": 6403.66,
+          "judge_latency_ms": 1113.02,
           "intent": "recommend",
           "evaluation_type": "long_term_recall",
           "needs_context": true,
           "error": null
         }
       ],
-      "session_id": "multiturn_eval_2_1787747744"
+      "session_id": "multiturn_eval_2_1789537146"
     },
     {
       "scenario_name": "话题切换",
@@ -112,12 +112,12 @@
         {
           "turn": 1,
           "user": "你好",
-          "answer": "你好！😊 很高兴为你服务。\n\n我是你的电商智能助手，可以帮你：\n\n- 🔍 **搜索商品** — 查找你想要的商品\n- 🛍️ **个性化推荐** — 根据你的需求推荐合适商品\n- 📦 **订单查询** — 追踪订单和物流信息\n- 🏷️ **商品分类** — 识别商品所属分类\n- 📊 **数据分析** — 了解销售趋势和热销排行\n- 💬 **售后服务** — 解答退换货等政策问题\n\n有什么我可以帮你的吗？无论是想买东西、查订单，还是了解售后政策，尽管告诉我！😊",
+          "answer": "你好！我是你的电商智能助手 😊\n\n我可以帮你：\n- 🔍 **搜索商品** — 找具体商品，比如\"蓝牙耳机\"\"iPhone 15\"\n- 🎁 **个性化推荐** — 告诉我预算和用途，帮你挑合适的\n- 📦 **订单查询** — 查订单状态和物流\n- 🏷️ **商品分类/品牌关系** — 了解商品归属和品牌信息\n- 📊 **数据分析** — 看销售趋势、热销排行\n- 🛠️ **售后咨询** — 退换货政策等问题\n\n请问有什么可以帮你的？",
           "expected_keywords": [],
           "keyword_coverage": 1.0,
-          "judge_score": 8.4,
-          "latency_ms": 1747.13,
-          "judge_latency_ms": 2784.67,
+          "judge_score": 9.6,
+          "latency_ms": 1560.93,
+          "judge_latency_ms": 1396.25,
           "intent": "chitchat",
           "evaluation_type": "relevance",
           "needs_context": false,
@@ -126,14 +126,14 @@
         {
           "turn": 2,
           "user": "搜索无线鼠标",
-          "answer": "我为你搜索了\"无线鼠标\"，找到了以下相关商品：\n\n### 🖱️ 搜索结果\n\n1. **联想电脑外接无线键盘鼠标蓝牙双模套装**（冰河银 2.4G充电版）\n   - 键鼠套装，办公打字专用，静音无声，适合笔记本/台式机\n\n2. **黑峡谷x3同款青轴机械键盘87键 + 游戏鼠标套装**\n   - 电竞游戏专用，黑灰拼色，青轴87键\n\n3. **创乐博 树莓派4B 显示器无线鼠标键盘套件**（两个套餐可选）\n   - 适合树莓派开发板用户，含无线键鼠\n\n---\n\n不过需要说明的是，搜索结果中**没有找到单独的\"无线鼠标\"单品**，找到的多为**键鼠套装**或相关配件。如果你需要的是：\n\n- 🎯 **单独的无线鼠标**（比如罗技、雷蛇等品牌）\n- 💰 **特定预算范围**的无线鼠标\n- 🎮 **游戏专用**或💼 **办公专用**的无线鼠标\n\n可以告诉我你的具体需求，我可以帮你进一步搜索或推荐！😊",
+          "answer": "我帮你搜索了\"无线鼠标\"，共找到 10 个相关商品，不过需要说明的是，**结果中并没有单独的无线鼠标商品**，大多是键鼠套装或配件类商品：\n\n| 序号 | 商品名称 | 价格 |\n|---|---|---|\n| 1 | 联想电脑外接无线键盘鼠标蓝牙双模套装（冰河银 2.4G充电版） | ¥6696.29 |\n| 2 | 黑峡谷x3同款青轴机械键盘87键+游戏鼠标套装 | ¥9567.46 |\n| 3 | 超霸（GP）7号电池40节（鼠标键盘遥控器适用） | ¥244.32 |\n| 4 | 创乐博 树莓派4B 显示器无线鼠标键盘套件（无卡基础套餐） | ¥2942.73 |\n| 5 | 笔记本电脑包15.6英寸（含鼠标垫套餐） | ¥28.75 |\n| 6 | 创乐博 树莓派4B 无线鼠标键盘套件（入门套件B套餐） | ¥2121.13 |\n| 7 | K800粉色键盘 无线套装版 | ¥4",
           "expected_keywords": [
             "鼠标"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 8.2,
-          "latency_ms": 4362.07,
-          "judge_latency_ms": 3421.51,
+          "judge_score": 6.2,
+          "latency_ms": 31.35,
+          "judge_latency_ms": 1300.88,
           "intent": "search",
           "evaluation_type": "topic_switch",
           "needs_context": false,
@@ -142,21 +142,21 @@
         {
           "turn": 3,
           "user": "怎么退货",
-          "answer": "好的，我为你整理了退货政策，请查收：\n\n### 📦 退货/退换货政策\n\n**⏰ 退货时限**\n- 收到商品后 **7天内** 可申请退换货\n\n**📝 操作步骤**\n1. 进入「我的订单」\n2. 找到对应订单\n3. 点击「申请退换货」\n\n**⚠️ 注意事项**\n- 退换货商品需保持 **原包装完好**\n- 退款将在收到退货商品后 **1-3个工作日内** 原路退回你的支付账户\n\n**🔍 不同订单状态的处理方式**\n| 订单状态 | 处理方式 |\n|---------|---------|\n| 未付款 | 可直接取消 |\n| 已付款未发货 | 联系客服取消 |\n| 已发货 | 无法取消，需收到商品后再申请退货 |\n\n---\n\n如果你遇到**商品质量问题、包装破损**等特殊情况，建议直接联系人工客服，我们会尽快帮你处理！😊\n\n还有什么需要帮忙的吗？",
+          "answer": "关于退货，我们的规则和流程如下 👇\n\n**📋 退换货流程：**\n1. 收到商品后 **7天内** 申请退换货\n2. 进入「我的订单」，找到对应订单\n3. 点击「申请退换货」即可\n\n**📌 退换货规则：**\n- 商品需保持 **原包装完好**\n- 退款会在我们收到退货商品后 **1-3个工作日内** 原路退回您的支付账户，请注意查收\n\n**💡 补充说明：**\n- 如果已付款但**订单还未发货**，可以联系客服帮忙取消订单\n- 如果**订单已发货**，则无法取消，需要收到商品后再申请退货\n\n如果还有其他问题，欢迎随时问我～ 😊",
           "expected_keywords": [
             "退货"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 9.6,
-          "latency_ms": 5459.75,
-          "judge_latency_ms": 3011.98,
+          "judge_score": 9.4,
+          "latency_ms": 33.86,
+          "judge_latency_ms": 1184.01,
           "intent": "customer_service",
           "evaluation_type": "topic_switch",
           "needs_context": false,
           "error": null
         }
       ],
-      "session_id": "multiturn_eval_3_1787747790"
+      "session_id": "multiturn_eval_3_1789537169"
     },
     {
       "scenario_name": "对比咨询",
@@ -165,16 +165,16 @@
         {
           "turn": 1,
           "user": "iPhone 15 和华为 Mate60 哪个好",
-          "answer": "我为您搜索了这两款手机的相关信息，下面为您整理对比结果：\n\n## 📱 iPhone 15 vs 华为Mate60 对比\n\n### 关于搜索结果\n我在商品库中找到了 **iPhone 15** 的相关商品，但**没有找到华为Mate60** 的直营商品（搜索到的主要是华为Mate X6折叠屏、手表、耳机等配件类产品）。\n\n---\n\n### iPhone 15 在售商品（部分）\n| 型号 | 配置 | 价格 |\n|------|------|------|\n| Apple iPhone 15 (A3092) | 128GB 粉色 | ¥3509.1 |\n| Apple iPhone 15 (A3092) | 128GB 蓝色 | ¥3509.1 |\n| Apple iPhone 15 (A3092) | 256GB 粉色 | ¥4409.1 |\n| 美版 iPhone 15 | 128GB 全",
+          "answer": "我帮你查了商品库，先说明一个情况：**iPhone 15 找到了真实在售商品，但\"华为 Mate60\"在商品库中没有找到对应机型**（返回的华为商品里没有 Mate60，只有 Mate X6、Mate70 Pro、畅享80 等其他型号）。所以严格来说，我无法基于商品库给你做 Mate60 的对比。\n\n以下是商品库中 **iPhone 15** 的真实在售信息：\n\n| 型号 | 存储 | 颜色 | 价格 |\n|---|---|---|---|\n| iPhone 15 (A3092) | 128GB | 蓝色 | ¥3399.0 |\n| iPhone 15 (A3092) | 128GB | 粉色 | ¥3509.1 |\n| iPhone 15 (A3092) | 128GB | 黑色 | ¥3509.1 |\n| iPhone 15 (A3092) | 256GB | 粉色 | ¥4409.1",
           "expected_keywords": [
             "iPhone",
             "华为"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 7.6,
-          "latency_ms": 8869.58,
-          "judge_latency_ms": 2825.05,
-          "intent": "chitchat",
+          "judge_score": 8.8,
+          "latency_ms": 4446.36,
+          "judge_latency_ms": 1240.21,
+          "intent": "search",
           "evaluation_type": "relevance",
           "needs_context": false,
           "error": null
@@ -182,15 +182,15 @@
         {
           "turn": 2,
           "user": "前者的电池怎么样",
-          "answer": "根据查询结果，我为您整理了 **iPhone 15 电池** 的详细情况：\n\n## 🔋 iPhone 15 电池续航详解\n\n### 官方标称续航（苹果官方数据）\n| 使用场景 | 续航时长 |\n|---------|---------|\n| 视频播放 | 最长 **20小时** |\n| 流媒体视频 | 最长 **16小时** |\n| 音频播放 | 最长 **80小时** |\n\n### 电池容量（第三方拆解估算）\n- **iPhone 15**：约 **3349 mAh**（比iPhone 14略有增加）\n- 全系改用 **USB-C接口**，但充电速度仍为 **20W-27W**（需自购快充头），充满约1.5-2小时\n\n---\n\n### 📊 实际体验评价\n\n**优点：**\n- ✅ A16芯片 + 高效OLED屏，日常中度使用（微信、刷视频、导航）**能撑一天**\n- ✅ 标准版续航属于中上",
+          "answer": "iPhone 15 的电池情况如下：\n\n### 电池容量\n- **3349mAh**（典型值）\n- 苹果官方不公开具体 mAh 数值，这个数据来自拆解和认证信息，属于业界公认值\n\n### 续航表现（苹果官方标称）\n- **视频播放**：最长 20 小时\n- **流媒体视频播放**：最长 16 小时\n- **音频播放**：最长 80 小时\n\n### 充电\n- 有线：USB-C 接口，最高约 **20W** 快充（约 30 分钟充至 50%）\n- 无线：**MagSafe 15W**、Qi 7.5W\n- **不附赠充电头**，需另购\n\n### 几点补充\n- 实际续航受使用习惯、屏幕亮度、5G/Wi-Fi、系统版本影响较大。\n- 相比 iPhone 14（3279mAh）容量略有提升，官方标称续航基本持平。\n- 电池健康度随循环次数下降，苹果标称 500 次循环后仍可保持 80% 以上容量。\n\n",
           "expected_keywords": [
             "电池"
           ],
           "keyword_coverage": 1.0,
-          "judge_score": 9.3,
-          "latency_ms": 11974.01,
-          "judge_latency_ms": 3519.91,
-          "intent": "chitchat",
+          "judge_score": 9.1,
+          "latency_ms": 871.54,
+          "judge_latency_ms": 1131.48,
+          "intent": "kg_qa",
           "evaluation_type": "coreference",
           "needs_context": true,
           "error": null
@@ -198,65 +198,890 @@
         {
           "turn": 3,
           "user": "后者呢",
-          "answer": "您问的是 **华为Mate60** 的电池情况。不过很抱歉，我在当前商品库中**没有找到华为Mate60** 的在售商品信息，因此无法为您提供该机型的官方电池数据。\n\n为了不误导您，我不会凭空编造华为Mate60的电池参数。\n\n---\n\n### 我可以这样帮您：\n\n1. **如果您想了解华为Mate60的电池**，建议您提供具体的**商品链接或型号**，我可以帮您查询对应商品详情。\n\n2. **如果您想找其他华为手机**，可以告诉我具体型号（比如 Mate60 Pro、Pura 70、nova系列等），我帮您搜索在售商品。\n\n3. **如果您想对比续航**，我可以帮您搜索 **iPhone 15 Plus**（续航更强的苹果机型）来做参考。\n\n---\n\n请问您更倾向于哪种方式呢？或者您想了解哪款具体的华为机型？😊",
+          "answer": "你这句话缺少上下文，我无法确定“后者”具体指什么。\n\n请把前一句或前几句一起发来，比如你是在问：\n- 两个平台/两种模式（如“淘宝和京东，后者呢？”）\n- 两种推广方式（如“直通车和引力魔方，后者呢？”）\n- 两种岗位/指标（如“GMV和ROI，后者呢？”）\n\n你把完整问题补一下，我就能基于电商知识继续回答“后者”的情况。",
           "expected_keywords": [],
           "keyword_coverage": 1.0,
-          "judge_score": 8.5,
-          "latency_ms": 2472.87,
-          "judge_latency_ms": 2757.53,
-          "intent": "chitchat",
+          "judge_score": 9.4,
+          "latency_ms": 859.73,
+          "judge_latency_ms": 1320.85,
+          "intent": "kg_qa",
           "evaluation_type": "coreference",
           "needs_context": true,
           "error": null
         }
       ],
-      "session_id": "multiturn_eval_4_1787747811"
+      "session_id": "multiturn_eval_4_1789537175"
+    },
+    {
+      "scenario_name": "订单查询 + 追问时效",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "我的订单到哪了",
+          "answer": "请提供您的订单号，格式如: ORD123456 或 纯数字订单号",
+          "expected_keywords": [
+            "订单"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.6,
+          "latency_ms": 1324.83,
+          "judge_latency_ms": 1166.19,
+          "intent": "order",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "那大概还要几天能到",
+          "answer": "请提供您的订单号，格式如: ORD123456 或 纯数字订单号",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.0,
+          "latency_ms": 1856.55,
+          "judge_latency_ms": 1184.84,
+          "intent": "order",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "能改成别的收货地址吗",
+          "answer": "关于修改收货地址，平台规则如下：\n\n- **订单未发货**：您可以在「我的订单」中自行修改收货地址。\n- **订单已发货**：无法直接修改，需要联系人工客服协助处理，具体能否成功需客服根据物流实际情况跟进。\n\n由于我这边需要先确认您订单的具体状态，才能判断属于哪种情况，**请提供您的订单号**（格式如 ORD123456 或纯数字），我帮您查询后再进一步说明。\n\n如果订单已发货且您比较着急，建议尽快联系人工客服处理哦～",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.6,
+          "latency_ms": 4914.96,
+          "judge_latency_ms": 1156.4,
+          "intent": "order",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_5_1789537184"
+    },
+    {
+      "scenario_name": "售后流程 + 追问时效",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "我想退货",
+          "answer": "您好，关于退货，为您说明如下：\n\n**退货流程：**\n1. 需在收到商品后 **7天内** 申请退换货；\n2. 进入「我的订单」，找到对应订单；\n3. 点击「申请退换货」即可。\n\n**退货规则：**\n- 退换货商品需保持 **原包装完好**；\n- 退款会在商家收到退货商品后 **1-3个工作日内** 原路退回您的支付账户，请注意查收。\n\n如果您方便的话，可以告诉我具体的订单号，我帮您查询订单状态，确认是否还在可退换货期限内。如有其他问题，也欢迎随时联系人工客服～",
+          "expected_keywords": [
+            "退货"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 30.29,
+          "judge_latency_ms": 1175.56,
+          "intent": "customer_service",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "运费谁承担",
+          "answer": "您好，关于运费承担的问题，根据我们的规则：\n\n- 单笔订单满99元即可免邮费，邮费由我们承担；\n- 若订单不满99元，则需要您承担10元邮费；\n- 偏远地区（如新疆、西藏等）可能需要额外邮费，具体以结算页面显示为准。\n\n如果您对具体订单的运费有疑问，建议您联系人工客服进一步核实哦～",
+          "expected_keywords": [
+            "运费"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 30.31,
+          "judge_latency_ms": 1150.64,
+          "intent": "customer_service",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "那钱多久能退回来",
+          "answer": "您好，退款会在我们收到退货商品后1-3个工作日内原路退回您的支付账户，请您注意查收哦～如有其他问题，随时联系我们。",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.2,
+          "latency_ms": 762.1,
+          "judge_latency_ms": 1211.31,
+          "intent": "customer_service",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_6_1789537196"
+    },
+    {
+      "scenario_name": "图谱问答 + 指代追问",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "华为有哪些产品",
+          "answer": "根据知识图谱的查询结果，华为目前主要有以下产品：\n\n**📱 智能手机**\n- HUAWEI Pura 80（12GB+512GB，丝绒黑，鸿蒙AI）\n- 华为 Mate 70 Pro 智选 80s（5G旗舰，8GB+256GB，曜石黑）\n\n**💻 平板电脑（MatePad 系列）**\n- HUAWEI MatePad Mini 悦读版（8.8英寸 OLED 屏，SIM卡版可通话，12GB+256GB，雪域白 / 曜石黑）\n- HUAWEI MatePad Air 12英寸 2025（鸿蒙AI，2.8K高刷全面屏，8GB+256GB，羽砂白 / 烟云灰）\n- HUAWEI MatePad Pro 13.2英寸 2025（OLED柔性护眼屏，12+256GB WiFi，宣白）\n- HUAWEI MatePad 11.5'S 灵动款（2.8K全面屏，12+256GB WiFi，深空灰）\n- HU",
+          "expected_keywords": [
+            "华为"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 6.4,
+          "latency_ms": 32.53,
+          "judge_latency_ms": 1237.83,
+          "intent": "kg_qa",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "它们大概都是什么价位",
+          "answer": "我帮你查到了这些产品的价格，大致整理如下：\n\n## 📱 智能手机\n\n| 型号 | 参考价格 |\n|------|---------|\n| HUAWEI Pura 80（12GB+512GB 丝绒黑） | ¥4409.1 |\n| HUAWEI Mate 70 Pro（12GB+512GB 曜石黑） | ¥5299.0 |\n| 华为 Mate 70 Pro 智选 80s（8GB+256GB 曜石黑） | ¥1649.0 |\n\n## 💻 平板电脑（MatePad 系列）\n\n| 型号 | 参考价格 |\n|------|---------|\n| MatePad Mini 悦读版（8.8英寸 OLED，12+256GB） | ¥2945.3 起 |\n| MatePad Air 12英寸 2025（8+256GB） | ¥1988.91 起 |\n| MatePad Pro 13.2英寸 2025（12+",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 778.1,
+          "judge_latency_ms": 1319.4,
+          "intent": "kg_qa",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "小米也有这些产品吗",
+          "answer": "小米的产品情况我帮你查到了，和华为相比，**品类覆盖不太一样**：\n\n## 📱 智能手机（小米的主力品类）\n\n**小米数字系列（旗舰）**\n- 小米14 — 徕卡光学镜头，第三代骁龙8，16+512，白色\n- 小米15 Pro — 徕卡 Summilux 镜头，骁龙8至尊版，徕卡潜望长焦，16+512，白色\n\n**红米系列（中端/入门）**\n- REDMI K80 — 第三代骁龙8，6550mAh 大电池，12+256，玄夜黑\n- REDMI Note15 Pro — 天玑7400-Ultra，7000mAh，IP68，8+256，子夜黑\n- REDMI Note15 — 第三代骁龙6，5800mAh，IP66，8+128，子夜黑\n- REDMI Note14 5G — 5110mAh，大光圈超感相机，6+128，子夜黑\n\n## 💡 智能家居\n\n- 米家 LED 筒灯（蓝牙 mesh 版）",
+          "expected_keywords": [
+            "小米"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.6,
+          "latency_ms": 887.33,
+          "judge_latency_ms": 1172.14,
+          "intent": "kg_qa",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_7_1789537200"
+    },
+    {
+      "scenario_name": "闲聊 → 转具体需求",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "你好",
+          "answer": "你好！我是你的电商智能助手 😊\n\n我可以帮你：\n- 🔍 **搜索商品** — 找具体的商品，比如\"蓝牙耳机\"\"iPhone 15\"\n- 🎁 **个性化推荐** — 告诉我预算和需求，帮你挑合适的商品\n- 📦 **订单查询** — 查订单状态和物流\n- 🏷️ **商品分类/品牌关系** — 了解商品分类、品牌旗下产品\n- 📊 **数据分析** — 看销售趋势、热销排行\n- 💬 **售后咨询** — 退换货政策、常见问题\n\n请问有什么可以帮你的？",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.6,
+          "latency_ms": 1600.0,
+          "judge_latency_ms": 1163.94,
+          "intent": "chitchat",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "你们最近有什么活动吗",
+          "answer": "你好！关于最近的促销活动，我这边可以帮你从**销售趋势和热销排行**的角度看看最近哪些品类/商品比较火，但具体的活动优惠信息（比如满减、折扣券）我这边没有直接的查询工具哦。\n\n我可以帮你做这些：\n- 📊 **查最近什么品类卖得最好 / 销售趋势** — 帮你了解当下热门\n- 🎁 **按你的需求推荐商品** — 告诉我预算和用途，我帮你挑\n\n要不要我先帮你看看最近的热销趋势？或者你直接告诉我想要什么商品，我来帮你推荐～",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 6.4,
+          "latency_ms": 2456.16,
+          "judge_latency_ms": 1429.81,
+          "intent": "chitchat",
+          "evaluation_type": "topic_switch",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "那给我挑个扫地机器人",
+          "answer": "为你挑到了以下几款扫地机器人 👇\n\n| # | 商品 | 品牌 | 价格 |\n|---|------|------|------|\n| 1 | 小米米家集尘扫地机器人（扫拖一体·三合一·全自动集尘） | 小米 | ¥1165.84 |\n| 2 | 科沃斯 地宝 T9 Power 扫拖一体机（销量王·皓月白） | 科沃斯 | ¥556.74 |\n| 3 | 美的 智能扫地机器人（大吸力·激光导航·曜石黑） | 美的 | ¥4262.95 |\n| 4 | 科沃斯 X1 扫拖洗一体智能扫地机（全自动·超薄·DS35银润黑） | 科沃斯 | ¥5016.56 |\n\n💡 **小提示：**\n- 追求**性价比**：科沃斯 T9 Power（¥556.74）和小米米家集尘款（¥1165.84）比较划算\n- 想要**全自动洗拖布+集尘**的高端体验：科沃斯 X1 或美的激光导航款\n\n另外，结果里还有一款\"",
+          "expected_keywords": [
+            "扫地"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 6048.85,
+          "judge_latency_ms": 1308.52,
+          "intent": "recommend",
+          "evaluation_type": "topic_switch",
+          "needs_context": false,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_8_1789537206"
+    },
+    {
+      "scenario_name": "数据问答 + 追问第二名",
+      "total_turns": 2,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "最近什么品类卖得最好",
+          "answer": "根据数据分析返回的**商品销量 TOP 10** 榜单，我按品类做了汇总，结果如下：\n\n**各品类上榜情况（按上榜商品数与累计销量）**\n\n| 品类 | 上榜商品数 | 累计销量 |\n|---|---|---|\n| 🥇 美妆护肤 | 3 款（珀莱雅、SK-II、雅诗兰黛） | 166 |\n| 🥈 食品生鲜 | 2 款（金龙鱼、伊利） | 130 |\n| 🥉 家用电器 | 2 款（苏泊尔 ×2） | 116 |\n| 运动户外 | 1 款（探路者） | 54 |\n| 母婴用品 | 1 款（强生） | 52 |\n| 图书音像 | 1 款（中信出版社） | 52 |\n\n**结论：**\n- **卖得最好的品类是「美妆护肤」** —— 不仅上榜商品数量最多（3 款），累计销量也最高（166 件）。\n- 单看**单品销量冠军**，则是「金龙鱼食品生鲜商品891」，销量 66 件。\n- 若从**销售额**",
+          "expected_keywords": [
+            "品类"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 30.95,
+          "judge_latency_ms": 1198.24,
+          "intent": "analytics",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "第二名是哪个",
+          "answer": "如果是指我上一条回答里的**品类排名**，那第二名是：\n\n🥈 **食品生鲜**\n\n- 上榜商品：2 款 —— **金龙鱼食品生鲜商品891**（销量 66）、**伊利食品生鲜商品295**（销量 64）\n- 累计销量：**130 件**\n- 排在第一名「美妆护肤」（166 件）之后、第三名「家用电器」（116 件）之前\n\n顺带一提，如果你问的是**单品销量榜**的第二名，那就是：\n\n🥈 **伊利食品生鲜商品295**（销量 64，销售额 ¥12,625.78），仅次于冠军「金龙鱼食品生鲜商品891」（66 件）。\n\n需要我继续展开哪一项吗？😊",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.2,
+          "latency_ms": 758.54,
+          "judge_latency_ms": 1104.5,
+          "intent": "analytics",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_9_1789537220"
+    },
+    {
+      "scenario_name": "预算偏好 → 换品类仍生效",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "我预算1000左右",
+          "answer": "根据您「预算 1000 左右」的需求，我为您找到了以下几款商品：\n\n| # | 商品 | 品牌 | 分类 | 价格 |\n|---|------|------|------|------|\n| 1 | （勿拍）随机抽取小礼品一份，与主商品分开发货 | 随机抽取小礼品 | 食品生鲜 | ¥210.31 |\n| 2 | 【法国医美】提拉紧致美容仪 面部按摩仪导入仪（支持 HUAWEI HiLink） | — | 医药保健 | ¥151.51 |\n| 3 | 宇科电动按摩防静电护发梳（充电款，二个装） | 电动按摩梳充电 | 医药保健 | ¥307.57 |\n| 4 | 本来生活网 礼品卡 300 元（购物卡/员工福利） | 本来生活网 | 食品生鲜 | ¥140.79 |\n| 5 | 芝华仕按摩椅 女王纤体家用全身自动按摩沙发 MZ200 | — | 医药保健 | ¥453.93 |\n\n温馨提示",
+          "expected_keywords": [
+            "1000"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 6.8,
+          "latency_ms": 5503.52,
+          "judge_latency_ms": 1193.27,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "推荐个耳机",
+          "answer": "根据您「预算 1000 左右 + 耳机」的需求，我为您筛选到以下 5 款：\n\n| # | 商品 | 品牌 | 价格 | 匹配度 |\n|---|------|------|------|--------|\n| 1 | 联想 th10 头戴式蓝牙耳机（无线运动游戏耳麦，内置麦克风+40mm喇叭+可折叠） | 联想 | ¥332.26 | 6.1/10 |\n| 2 | 英酷 INCOOL 挂脖式蓝牙耳机（38小时续航，幸运红） | 英酷 | ¥36.66 | 6.0/10 |\n| 3 | 笔记本耳机头戴式（单插头版，多设备通用，白色） | — | ¥486.31 | 5.9/10 |\n| 4 | 索尼 WF-1000XM3 真无线蓝牙降噪耳机（铂金银） | 索尼 | ¥48.63 | 5.8/10 |\n| 5 | KO-STAR T19 真无线蓝牙耳机（TWS双耳降噪，象牙白） | KO-STA",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.4,
+          "latency_ms": 5921.05,
+          "judge_latency_ms": 1419.84,
+          "intent": "recommend",
+          "evaluation_type": "long_term_recall",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "那平板呢",
+          "answer": "根据您「预算 1000 左右 + 平板」的需求，我为您找到以下 5 款：\n\n| # | 商品 | 品牌 | 价格 | 匹配度 |\n|---|------|------|------|--------|\n| 1 | 联想 小新平板 11【国家补贴】护眼 2.5K 超清大屏 天玑 6300 AI 平板电脑（8+128GB WiFi，深空灰） | 联想 | ¥687.73 | 6.7/10 |\n| 2 | Apple iPad Pro 10.5 寸 2017 款 1 代 **二手**（深空灰 64G） | 苹果 | ¥561.0 | 6.3/10 |\n| 3 | HUAWEI MatePad SE 活力版 11 英寸 2024 款（8+128GB WiFi，星海蓝） | 华为 | ¥758.7 | 6.4/10 |\n| 4 | HUAWEI MatePad SE 活力版 11 英寸 2024 款",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 5836.19,
+          "judge_latency_ms": 854.5,
+          "intent": "recommend",
+          "evaluation_type": "long_term_recall",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_10_1789537223"
+    },
+    {
+      "scenario_name": "多候选 + 这一个指代",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "推荐几款蓝牙耳机",
+          "answer": "为你找到了以下几款蓝牙耳机，供你参考：\n\n| # | 商品 | 品牌 | 价格 | 分类 |\n|---|------|------|------|------|\n| 1 | 德燚 蓝牙耳机无线通用双耳入耳式（智能触控+HIFI音质，宇航员 高配升级版） | 德燚 | ¥729.03 | 手机数码 |\n| 2 | 联想（Lenovo）蓝牙耳机无线 TC09 锖色 | 联想 | ¥386.50 | 手机数码 |\n| 3 | 纽曼（Newmine）V28 微鳯运动蓝牙耳机（对讲、防丢、可录音、磁吸收纳） | 纽曼 | ¥226.06 | 家用电器 |\n| 4 | 兰士顿 蓝牙耳机挂脖式无线运动耳麦（跑步超长续航，磁吸开关，半入耳，L5C 黑色） | 兰士顿 | ¥700.68 | 手机数码 |\n| 5 | KO-STAR T19 真无线蓝牙耳机（TWS双耳降噪，运动跑步游戏，象牙白） | KO-",
+          "expected_keywords": [
+            "耳机"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.7,
+          "latency_ms": 5177.49,
+          "judge_latency_ms": 1365.95,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "这一个的续航怎么样",
+          "answer": "💡 为您推荐 5 个商品：\n\n1. **无人机航拍成人高清6k超长续航折叠飞行器小学生遥控飞机航模布谷鸟 灰【6K单镜5G六面避障防抖】5千米 四块电池+多送1电+备用+多充+换新** | 分类: 手机数码 | 价格: ¥414.8 | 匹配度: 4.3/10\n2. **大疆通用入门级无刷8K无人机5000米GPS高清航拍飞行器小型遥控飞机布谷鸟 黑色8K超清-GPS返航-无刷电机 5000米 7 双电池(续航60分钟++保修)** | 分类: 手机数码 | 价格: ¥313.25 | 匹配度: 4.3/10\n3. **一加 13 16GB+512GB 白露晨曦 国家补贴 高通骁龙?8至尊版 6000mAh 冰川电池 oppo智能AI游戏5G手机** | 品牌: OPPO | 分类: 手机数码 | 价格: ¥3670.21 | 匹配度: 4.6/10\n4. **道通智能 道通无人机EVO ",
+          "expected_keywords": [
+            "续航"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 2.4,
+          "latency_ms": 5331.48,
+          "judge_latency_ms": 1232.1,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "那另一个呢",
+          "answer": "抱歉，我不太确定你说的\"另一个\"具体指哪一款——前面给你的蓝牙耳机有好几款，我可以按续航帮你梳理一下工具返回结果里能看到的信息：\n\n| 商品 | 价格 | 续航相关信息（来源：商品标题） |\n|------|------|------|\n| 英酷 INCOOL 挂脖式 | ¥36.66 | 标注 **38小时续航** + 千元音质（旗舰高配） |\n| 兰士顿 L5C 挂脖式 | ¥700.68 | 标注 **跑步超长续航**、磁吸开关、半入耳 |\n| JBL TUNE215BT | ¥776.51 | 标注 **超长续航**、Type-C 极速充电、5.0 传输 |\n| 捷波朗 Jabra Elite 85t | ¥464.18 | 主打四重深度降噪，标题含\"长续航\" |\n| 纽曼 V28 运动 | ¥226.06 | 主打对讲、防丢、可录音、磁吸收纳（标题未提续航数值） |\n| 德燚 高",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.6,
+          "latency_ms": 25953.61,
+          "judge_latency_ms": 1215.93,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_11_1789537244"
+    },
+    {
+      "scenario_name": "代词它回指单品",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "iPhone 15 有哪些颜色",
+          "answer": "iPhone 15 共有 **5 种颜色**：\n\n1. 粉色\n2. 黄色\n3. 绿色\n4. 蓝色\n5. 黑色\n\n补充说明：\n- **iPhone 15 / 15 Plus**：粉、黄、绿、蓝、黑（共 5 种）\n- **iPhone 15 Pro / Pro Max**：原色钛金属、蓝色钛金属、白色钛金属、黑色钛金属（共 4 种）\n\n如果你是在电商平台选购，建议以具体商品页标注的颜色为准，不同版本或渠道可能会有细微差异。需要我帮你搜一下 iPhone 15 的在售商品吗？",
+          "expected_keywords": [
+            "iPhone"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 10.0,
+          "latency_ms": 803.85,
+          "judge_latency_ms": 1046.08,
+          "intent": "kg_qa",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "它的续航表现如何",
+          "answer": "您好！关于“它的续航表现如何”这个问题，我需要先说明一下：**您没有具体说明是哪款产品**，所以我暂时无法给出准确回答。\n\n不过，我可以从电商知识的角度，帮您梳理一下判断续航表现时通常需要关注的信息：\n\n**1. 需要明确产品品类**\n- 如果是**手机/平板**：看电池容量（mAh）、官方标称的续航时长、充电功率。\n- 如果是**笔记本电脑**：看电池瓦时（Wh）、官方续航小时数、实际评测。\n- 如果是**蓝牙耳机/智能手表**：看单次续航 + 配合充电仓的总续航。\n- 如果是**电动车/平衡车**：看电池容量（Ah）、标称续航里程、实际路况影响。\n- 如果是**充电宝**：看容量（mAh）、额定输出容量、转化率。\n\n**2. 电商页面常见的续航描述套路**\n- “最长可达XX小时”——通常是实验室理想条件，实际使用会打折扣。\n- “续航XX天”——可能指待机时间，不是重度使用时间。\n-",
+          "expected_keywords": [
+            "续航"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.2,
+          "latency_ms": 549.72,
+          "judge_latency_ms": 1268.81,
+          "intent": "kg_qa",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "有快充吗",
+          "answer": "这个问题需要结合具体商品来看，我没法直接给出“有”或“没有”的确定答案。\n\n因为“快充”在不同品类里含义差别很大：\n\n- **手机/平板**：通常指是否支持 18W 以上有线快充，或是否支持特定协议（如 PD、QC、VOOC、SuperCharge 等）。同一款手机不同版本、不同地区版本可能不一样。\n- **充电器/充电宝**：指输出功率和协议，比如 20W、30W、65W、100W，以及是否支持 PD/QC 等。\n- **数据线**：需要看是否支持大电流（如 3A、5A、6A）和对应协议，普通线插上快充头也快不起来。\n- **笔记本**：看是否支持 PD 快充以及功率是否够（一般 45W/65W/100W）。\n- **电动车/其他**：快充含义又不同。\n\n所以建议你补充一下：\n\n1. **具体是什么商品**（型号/链接/标题）\n2. **你关心的“快充”是指充电头、手机本身，还是数据线*",
+          "expected_keywords": [
+            "快充"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 861.48,
+          "judge_latency_ms": 1129.86,
+          "intent": "kg_qa",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_12_1789537284"
+    },
+    {
+      "scenario_name": "同款 / 一样的东西",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "我上次买了小米手环",
+          "answer": "请提供您的订单号，格式如: ORD123456 或 纯数字订单号",
+          "expected_keywords": [
+            "手环"
+          ],
+          "keyword_coverage": 0.0,
+          "judge_score": 6.2,
+          "latency_ms": 1911.53,
+          "judge_latency_ms": 1266.0,
+          "intent": "order",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "再给我推荐个同款的",
+          "answer": "根据您之前购买的小米手环，为您推荐以下几款同款/相似商品：\n\n| 序号 | 商品 | 品牌 | 价格 | 匹配度 |\n|---|---|---|---|---|\n| 1 | 小米（MI）同款智能手环 大屏 心率血压睡眠跑步走路步行运动手腕式 银色 | 小米 | ¥489.46 | 8.3/10 |\n| 2 | 小米（MI）适用手环6/5 运动智能 心率血压睡眠监测 运动计步蓝牙彩屏 耳机二合一 分离式手环 色皮带【旗舰版】 | 小米 | ¥41.85 | 7.9/10 |\n| 3 | 米布斯（mijobs）适用 NFC 小米手环3/4 腕带 同款硅胶替换带 运动版双色透气 | 米布斯 | ¥18.56 | 7.3/10 |\n| 4 | 华为(HUAWEI) 通用智能手环 多功能测血压运动计时 适配小米苹果 黑色 | 华为 | ¥543.65 | 7.3/10 |\n| 5 | 计步器 适用小",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.9,
+          "latency_ms": 5345.7,
+          "judge_latency_ms": 1376.9,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "要便宜一点的",
+          "answer": "已为您筛选出更便宜的小米手环相关商品，都在 ¥50 以内：\n\n| 序号 | 商品 | 品牌 | 价格 | 匹配度 |\n|---|---|---|---|---|\n| 1 | 米布斯（mijobs）适用 NFC 小米手环3/4 腕带同款硅胶替换带 运动版双色透气【运动双色-黑白】 | 米布斯 | ¥18.56 | 6.7/10 |\n| 2 | 计步器 适用小米手环5NFC 心率监测蓝牙运动计步器手环6代 小米手环6 | 计步器 | ¥28.7 | 6.3/10 |\n| 3 | 小米手环3/4/5/6/NFC 卡通硅胶腕带 黄色-皮卡丘（小米手环6/6NFC腕带+高清膜*2） | 小米手环 | ¥37.67 | 6.4/10 |\n| 4 | 小米（MI）适用于手环6/5 运动智能 心率血压睡眠监测 运动计步 蓝牙彩屏 耳机二合一分离式手环【旗舰版】 | 小米 | ¥41.85 | 7.0/10",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 5687.94,
+          "judge_latency_ms": 1245.75,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_13_1789537290"
+    },
+    {
+      "scenario_name": "序号指代第一款第二款",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "推荐三款洗衣机",
+          "answer": "根据搜索结果，为您挑选了三款洗衣机（含套餐类商品），供您参考：\n\n1. **统帅(Leader) 海尔出品 全自动波轮洗衣机 EB80M20Mate1**\n   - 类型：全自动波轮 / 8公斤大容量\n   - 适用：宿舍、租房、家用\n   - 价格：¥2007.69\n   - 亮点：海尔出品，洗漂甩二合一，大容量性价比高\n\n2. **新款工业洗衣机 水洗机（锐涤）出口型 50公斤洗脱机**\n   - 类型：商用/工业洗脱机\n   - 适用：工厂洗衣房、宾馆酒店专用\n   - 价格：¥4016.1\n   - 亮点：大容量商用机型，适合机构批量洗涤\n\n3. **TCL 全自动波轮洗衣机（10公斤）+ 三门节能冰箱 套餐**\n   - 类型：10公斤波轮洗衣机 + 200升冰箱套购\n   - 价格：¥950.48\n   - 亮点：洗衣+储鲜一站式套装，价格实惠\n\n如果您能告诉我**预算范围、容",
+          "expected_keywords": [
+            "洗衣机"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.4,
+          "latency_ms": 4794.61,
+          "judge_latency_ms": 1140.97,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "第一款是几公斤的",
+          "answer": "💡 为您推荐 5 个商品：\n\n1. **第二件9.9 2件带箱合发10斤 红富士苹果现货 孕妇鲜果5斤一整箱脆甜 时令新鲜 水果 果径约80-85mm** | 品牌: 第二件 | 分类: 食品生鲜 | 价格: ¥139.77 | 匹配度: 4.5/10\n2. **（勿拍）随机抽取小礼品一份，与主商品分开发货，可先行发货，收到不要着急哦。单拍不做发货。** | 品牌: 随机抽取小礼品一份 | 分类: 食品生鲜 | 价格: ¥210.31 | 匹配度: 4.9/10\n3. **生日礼物 一抬手，便是江山千里-千里江山图双色表带手表** | 分类: 手机数码 | 价格: ¥2189.19\n4. **大号30CM称重190KG体重秤家用充电电子秤成人称重人体称耐用 中国红7PLUS USB充电** | 分类: 手机数码 | 价格: ¥3146.12 | 匹配度: 4.7/10\n5. **佳能200",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 0.4,
+          "latency_ms": 3679.25,
+          "judge_latency_ms": 1098.05,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "第二款呢",
+          "answer": "第二款是 **新款工业洗衣机（锐涤）商用洗脱机**，容量为 **50公斤**，属于大容量商用机型，适合工厂洗衣房、宾馆酒店等批量洗涤场景，价格 ¥4016.1。\n\n需要说明的是，这款是**商用/工业级**洗衣机，容量远大于普通家用机型（家用常见为 8~10公斤）。如果您其实是想找家用洗衣机，我可以帮您重新筛选。另外，如果您方便告诉我预算和容量需求，我也能更精准地帮您对比推荐。",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 15019.88,
+          "judge_latency_ms": 1280.05,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_14_1789537306"
+    },
+    {
+      "scenario_name": "比较级贵一点便宜一点",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "推荐一款1000块左右的手机",
+          "answer": "根据您的预算（1000元左右），为您找到以下几款手机：\n\n| 序号 | 商品 | 品牌 | 价格 |\n|------|------|------|------|\n| 1 | 华为 智选系列 畅享80s 5G手机（曜石黑 12GB+128GB 官方标配） | 华为 | ¥738.0 |\n| 2 | 三星 2025新款 二合一办公游戏平板（曜夜蓝 512G 高配120Hz） | 三星 | ¥448.0 |\n| 3 | 小米 REDMI Note15（第三代骁龙6 / 5800mAh / IP66防水 8+128 子夜黑） | 小米 | ¥825.44 |\n| 4 | ORPO P70pro 5G手机（冰晶蓝 12G+256G 旗舰版） | ORPO | ¥828.0 |\n| 5 | 小米 REDMI Note15 Pro（天玑7400-Ultra / 7000mAh / IP68 8+256 ",
+          "expected_keywords": [
+            "手机"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.0,
+          "latency_ms": 4909.73,
+          "judge_latency_ms": 1221.28,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "有没有贵一点的",
+          "answer": "为您找到更高价位的手机，覆盖 1500–2500 元档，供您挑选：\n\n| 序号 | 商品 | 品牌 | 价格 |\n|---|---|---|---|\n| 1 | Hi nova x70i 华为智选 5G手机（6000mAh，12+256GB，幻夜黑） | 华为 | ¥1558.0 |\n| 2 | vivo S20（6500mAh轻薄长续航，前后5000万双柔光，12+256GB，凤羽金） | vivo | ¥1745.13 |\n| 3 | 小米 REDMI 红米K80 5G手机（第三代骁龙8，IP68，6550mAh，12+256GB，玄夜黑） | 小米 | ¥1792.1 |\n| 4 | vivo S30（5000万索尼潜望长焦，第四代骁龙7，6500mAh，12+256GB，桃桃粉） | vivo | ¥1919.73 |\n| 5 | 摩托罗拉 联想moto X70 Air（超轻薄直屏",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.3,
+          "latency_ms": 29.17,
+          "judge_latency_ms": 1220.21,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "那便宜一点的也行",
+          "answer": "好的，为您找了更便宜的几款（均在 1000 元以内）：\n\n| 序号 | 商品 | 品牌 | 价格 |\n|---|---|---|---|\n| 1 | 酷派 锋尚50 Lite（超薄八核，大屏长续航，64G 星烁镜） | 酷派 | ¥245.65 |\n| 2 | 华为 智选系列 畅享80s 5G（鸿蒙，耐摔防水，红外遥控，12+128GB 曜石黑） | 华为 | ¥738.0 |\n| 3 | 小米 REDMI Note15（第三代骁龙6，5800mAh，IP66，8+128 子夜黑） | 小米 | ¥825.44 |\n| 4 | ORPO P70pro（144Hz高刷，16G运行，1TB大内存，7900mAh，12+256 冰晶蓝） | ORPO | ¥828.0 |\n| 5 | 三星 二合一办公游戏平板（24+2TB，骁龙888，4K全面屏，曜夜蓝 512G） | 三星 | ¥448.0 ",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.9,
+          "latency_ms": 7327.29,
+          "judge_latency_ms": 1389.19,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_15_1789537333"
+    },
+    {
+      "scenario_name": "容量比较级更大更小",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "推荐一款冰箱",
+          "answer": "为您找到了以下几款冰箱，供您参考：\n\n| 序号 | 商品 | 价格 |\n|---|---|---|\n| 1 | 海尔冰箱405升 一级能效四开门 + 10公斤滚筒洗衣机（冰洗套装） | ¥6734.17 |\n| 2 | 小鸭家用冰箱 迷你双门 42升 拉丝银（一级能效加厚款） | ¥4990.01 |\n| 3 | 申花小冰箱 双开门 42L 银（一级能效标准款，单人用） | ¥3325.39 |\n| 4 | 志高冰箱 双门小型 43A128（两天约一度电） | ¥2311.17 |\n| 5 | 云米冰箱洗衣机套装 630L对开门 + 10KG洗烘一体机 | ¥16883.59 |\n\n简单提示：\n- **小户型/单人/租房**：可看申花 42L（¥3325.39）或志高双门（¥2311.17），体积小、省电；\n- **家庭大容量**：海尔 405升四开门（¥6734.17，含洗衣机套装）或云",
+          "expected_keywords": [
+            "冰箱"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 7.8,
+          "latency_ms": 5041.04,
+          "judge_latency_ms": 1322.26,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "有没有容量更大一点的",
+          "answer": "为您筛选出**容量更大**的几款冰箱，按容量从大到小排列：\n\n| 容量 | 商品 | 价格 |\n|---|---|---|\n| **630L** | 云米 对开门变频冰箱 + 10KG 洗烘一体机 冰洗套装（智能语音） | ¥16883.59 |\n| **589L** | 容声 BCD-589WD11HP 对开门冰箱（钛空金） | ¥4056.76 |\n| **475L** | 海尔 风冷无霜双变频对开门冰箱（净味防串味/环绕送风） | ¥7977.01 |\n| **405L** | 海尔 405升 一级能效四开门冰箱 + 10公斤滚筒洗衣机 冰洗套餐 | ¥6734.17 |\n\n几点建议：\n- **追求大容量 + 高性价比**：**容声 589L 对开门**（¥4056）容量大、价格实惠，很适合家庭使用。\n- **想要顶配大容量 + 洗烘套装**：**云米 630L 套装**（¥1688",
+          "expected_keywords": [
+            "容量"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 36.57,
+          "judge_latency_ms": 1112.19,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "双开门的呢",
+          "answer": "为您筛选出**双开门/对开门**相关的冰箱，如下：\n\n| 商品 | 容量/类型 | 价格 |\n|---|---|---|\n| 海尔 风冷无霜双变频**对开门**冰箱（净味防串味/环绕送风） | 475升 | ¥7977.01 |\n| 海尔 冰洗套餐（双门/三开门冰箱 + 8公斤波轮洗衣机） | 216升三开门 | ¥9013.02 |\n| 小鸭 迷你双门冰箱（一级能效加厚款，拉丝银） | 42升 | ¥4990.01 |\n| 雪花 双温双门冰柜（商用卧式，冷藏冷冻两用） | 192L | ¥606.32 |\n| 容声 三开门冰箱（风冷无霜/直冷节能） | 206升 | ¥8369.37 |\n\n说明：\n- **真正的对开门大容量**目前是 **海尔 475升对开门**（¥7977.01），风冷无霜、净味防串味，比较符合您之前\"容量大 + 双开门\"的需求。\n- 小鸭 42升、雪花 192L 属",
+          "expected_keywords": [
+            "双开门"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 7303.8,
+          "judge_latency_ms": 1346.69,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_16_1789537350"
+    },
+    {
+      "scenario_name": "属性指代这个颜色",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "有没有黑色羽绒服",
+          "answer": "抱歉，我在商品库中没有找到符合\"黑色羽绒服\"的商品。\n\n搜索结果里返回的多是手机、相机包、笔记本电脑、烘干机等不相关商品，其中几款 The North Face 外套是米色、灰色/绿色等配色的休闲夹克，并非黑色羽绒服。\n\n建议您可以：\n- 换个关键词试试，比如\"羽绒服\"、\"黑色外套\"、\"冬季保暖外套\"；\n- 或者告诉我您的预算、尺码、用途（如户外/通勤），我帮您做个性化推荐。\n\n需要我帮您重新搜索吗？",
+          "expected_keywords": [
+            "羽绒服"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 30.25,
+          "judge_latency_ms": 1131.88,
+          "intent": "search",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "这个颜色有别的款式吗",
+          "answer": "🔍 共找到 10 个相关商品：\n\n1. **一鹿有你 商家服务链接 此链接只做DIY定制补邮等服务 拍下请联系客服 商家服务-168** | 品牌: 一鹿有你 | 分类: 手机数码 | 价格: ¥1652.84 | 相似度: 0.3994\n2. **小导师（xiaodaoshi） 晒单有礼 联系客服领取 单拍无效【每个订单只送一个】 晒单有礼30元 联系客服领取 单拍无效** | 品牌: 小导师 | 分类: 手机数码 | 价格: ¥1467.48 | 相似度: 0.3474\n3. **The North Face北面男款外套连帽休闲服拉链运动服NF0A4ALI TWILL BEIGE L** | 品牌: The | 分类: 手机数码 | 价格: ¥3353.62 | 相似度: 0.3564\n4. **美的烘干机家用小型速干衣机风干烘干器烤衣服的烘衣机折叠大容量 蓝色** | 分类: 家用电",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 1.0,
+          "latency_ms": 725.5,
+          "judge_latency_ms": 1440.0,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "白色呢",
+          "answer": "🔍 共找到 10 个相关商品：\n\n1. **一鹿有你 商家服务链接 此链接只做DIY定制补邮等服务 拍下请联系客服 商家服务-168** | 品牌: 一鹿有你 | 分类: 手机数码 | 价格: ¥1652.84 | 相似度: 0.4399\n2. **The North Face北面男款外套连帽休闲服拉链运动服NF0A4ALI TWILL BEIGE L** | 品牌: The | 分类: 手机数码 | 价格: ¥3353.62 | 相似度: 0.4324\n3. **衣服烘干机小型家用衣物烘干机静音省电干衣机洪衣机衣服烘干器we 不折叠+蓝色标准款(无脚轮)** | 分类: 家用电器 | 价格: ¥631.02 | 相似度: 0.4325\n4. **The North Face北面女士外套轻薄拉链连帽休闲运动服NF0A2VCV TIN GREY / KELPIE GREEN XXL** | ",
+          "expected_keywords": [
+            "白色"
+          ],
+          "keyword_coverage": 0.0,
+          "judge_score": 2.0,
+          "latency_ms": 748.25,
+          "judge_latency_ms": 1177.46,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_17_1789537366"
+    },
+    {
+      "scenario_name": "追加再来一个",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "给我推荐一个保温杯",
+          "answer": "为您找到以下几款相关商品 👇\n\n| 商品 | 品牌 | 分类 | 价格 |\n|---|---|---|---|\n| 三界茶具 保温底座黑金加热杯垫恒温保温座 | 三界茶具 | 家用电器 | ¥83.96 |\n| Meyou名友 ME-B30D 陶瓷杯保温杯垫电热杯垫（磨砂黑+350ml高硼硅牛奶杯） | — | 家用电器 | ¥158.57 |\n| 小米（MI）米家通用加热杯垫保温底座（月满白+倾耳壶） | 小米 | 家用电器 | ¥67.91 |\n| 华为智选保温杯 智能316不锈钢 温度显示 白色 | 华为 | 手机数码 | ¥2323.2 |\n| 禾伴 数显保温杯+按摩仪+眼罩礼盒 | — | 医药保健 | ¥4911.12 |\n\n⚠️ 小提示：前 3 款其实是**加热杯垫/暖杯器**，属于「保温底座」类产品，并不是真正的保温杯；后面 2 款虽然包含保温杯，但属于套装或高价位礼品组合",
+          "expected_keywords": [
+            "保温杯"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.5,
+          "latency_ms": 5525.04,
+          "judge_latency_ms": 1333.75,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "再来一个不同品牌的",
+          "answer": "为您找到以下不同品牌的商品，供您参考：\n\n| 序号 | 商品 | 品牌 | 价格 | 分类 |\n|---|---|---|---|---|\n| 1 | 禾伴 圣诞节礼物颈椎按摩神器护颈仪智能保温杯礼盒（白色数显保温杯+按摩仪+眼罩） | 禾伴 | ¥4911.12 | 医药保健 |\n| 2 | Meyou名友 ME-B30D 陶瓷杯保温杯垫电热杯垫（磨砂黑+350ml高硼硅牛奶杯） | Meyou名友 | ¥158.57 | 家用电器 |\n| 3 | 智美环球 年会礼品商务礼品定制logo记事本保温杯套装（两用玻璃杯+雨伞两件套） | 智美环球 | ¥2230.87 | 手机数码 |\n| 4 | 三界茶具 保温底座黑金加热杯垫温茶器恒温保温座暖杯器垫 | 三界茶具 | ¥83.96 | 家用电器 |\n\n需要说明的是：\n- 第 1 款是**保温杯+按摩仪+眼罩的礼盒套装**，属于礼品组合，价",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.2,
+          "latency_ms": 27.62,
+          "judge_latency_ms": 1358.98,
+          "intent": "kg_qa",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "这两个哪个更保温",
+          "answer": "💡 为您推荐 5 个商品：\n\n1. **三界茶具 保温底座黑金加热杯垫温茶器恒温保温座暖杯器垫保温杯垫 小白+黑金 持续温暖您** | 品牌: 三界茶具 | 分类: 家用电器 | 价格: ¥83.96 | 匹配度: 4.2/10\n2. **【12.12】雪花双温冰柜家用双门小型 商用冷柜 冷藏冷冻保鲜两用卧式冰柜大容量节能 双温 192L加厚双门** | 品牌: 雪花双温冰柜家用双门小型 | 分类: 家用电器 | 价格: ¥606.32 | 匹配度: 4.0/10\n3. **德国斯宝亚创取暖器全屋制热居浴两用CNS系列办公室客厅卧室家用电暖器智能恒温不干燥静音节能省电可移动 1830W脚轮款(适合20㎡以内，场景:卧室)** | 分类: 家用电器 | 价格: ¥333.98 | 匹配度: 4.7/10\n4. **更大更好吃巨无霸大果南非红心西柚 葡萄柚新鲜水果生鲜现货 巨无霸大西柚300-",
+          "expected_keywords": [
+            "保温"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 1.2,
+          "latency_ms": 5947.89,
+          "judge_latency_ms": 1246.12,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_18_1789537371"
+    },
+    {
+      "scenario_name": "修改替换不要这个了",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "推荐一款戴尔的笔记本",
+          "answer": "很抱歉，我帮您搜索了「戴尔笔记本」相关商品，但**没有找到任何戴尔（Dell）品牌的笔记本电脑**。\n\n工具返回的结果中出现的都是其他品牌的笔记本，例如：\n- 联想 ThinkBook 系列（¥4939 起）\n- 华为 MateBook D 系列（¥3312 起）\n- 苹果 MacBook Pro 系列（¥8645 起）\n\n按照规则，我不能把这些非戴尔商品当作戴尔的推荐给您。\n\n如果您愿意，可以告诉我：\n1. 是否接受**其他品牌**的笔记本推荐（比如上面这些）？\n2. 或者您的**预算、用途**（办公/游戏/剪辑）等需求，我帮您重新筛选合适的机型。\n\n请问您想怎么做呢？",
+          "expected_keywords": [
+            "戴尔"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.0,
+          "latency_ms": 9111.06,
+          "judge_latency_ms": 1290.26,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "不要这个了，换成华为的",
+          "answer": "好的，为您找到了华为笔记本，以下是几款热门机型：\n\n| 型号 | 配置亮点 | 价格 |\n|------|---------|------|\n| **华为 MateBook D14**（2025新品） | i5-13420H / 16G+512G / 护眼全面屏 | ¥3554.1 |\n| **华为 MateBook D14**（2025新品） | i5-13420H / 16G+1TB / 护眼全面屏 | ¥3671.1 |\n| **华为 MateBook D 14** | 13代酷睿 i5 / 16G+1TB / 皓月银 | ¥3849.76 |\n| **华为 MateBook D 16** | 13代标压 i5 / 16G+1TB / 大屏 | ¥3849.76 |\n| **华为 MateBook 14** | Ultra 5 / 16G+1TB / 2.8K OLED触控屏 | ¥",
+          "expected_keywords": [
+            "华为"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.4,
+          "latency_ms": 4288.65,
+          "judge_latency_ms": 1160.73,
+          "intent": "search",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "华为这款多少钱",
+          "answer": "🔍 共找到 10 个相关商品：\n\n1. **华为智选手机 新品5G上市 80 s 地震预警 大电池大内存 抗摔防水耐用双五星 红外遥控 鸿蒙防诈 mate 曜石黑【6+128GB】 蓝牙套装版丨送3年保修+180天只换...** | 品牌: 华为 | 分类: 手机数码 | 价格: ¥1258.0 | 相似度: 0.6105\n2. **魅英 适用华为a2手环腕带华为荣耀畅玩手环A2表带多彩替换防水防汗硅胶多彩防水创意腕带 A2花色003款腕带** | 分类: 手机数码 | 关键词相关度: 4.70\n3. **华为手机华为Mate70pro 选购智选5G新品80 s 新机2025上市 地震预警 大电池大内存 抗摔防水 红外遥控 曜石黑【6+128GB】 蓝牙套装版丨送3年保修+180天只换...** | 品牌: 华为 | 分类: 手机数码 | 价格: ¥1259.0 | 相似度: 0.6027",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 3.2,
+          "latency_ms": 38.21,
+          "judge_latency_ms": 1208.93,
+          "intent": "search",
+          "evaluation_type": "context_inherit",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_19_1789537386"
+    },
+    {
+      "scenario_name": "对比之后者前者追加",
+      "total_turns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "小米和OPPO的手机怎么选",
+          "answer": "我来帮你梳理一下。根据平台上的真实商品数据，我把「小米」和「OPPO」的手机分别列出来，方便你对比选择：\n\n## 📱 小米手机\n\n| 商品 | 配置 | 价格 |\n|---|---|---|\n| 小米 REDMI Note14 5G | 6GB+128GB | ¥636.65 |\n| 小米 REDMI Note15 Pro | 8GB+256GB 子夜黑 | ¥984.69 |\n| 小米 REDMI Turbo 4 Pro | 12GB+256GB，7550mAh 长续航 | ¥1278.49 |\n| 小米 REDMI K80 | 12GB+256GB 玄夜黑 | ¥1592.19 |\n| 小米 REDMI Turbo4 Pro（补贴款） | 16GB+256GB 粉金色 | ¥1799.1 |\n| 小米 红米K80至尊版 | 12GB+256GB 月岩白 | ¥1894.65 |\n| 小",
+          "expected_keywords": [
+            "小米",
+            "OPPO"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 8.8,
+          "latency_ms": 9250.51,
+          "judge_latency_ms": 1307.9,
+          "intent": "recommend",
+          "evaluation_type": "relevance",
+          "needs_context": false,
+          "error": null
+        },
+        {
+          "turn": 2,
+          "user": "后者的拍照怎么样",
+          "answer": "关于 OPPO 的拍照表现，我结合知识图谱和平台真实在售的商品数据给你梳理一下：\n\n## 📸 OPPO 影像的整体定位\n\nOPPO 一直把「人像 / 拍照」作为核心卖点，主要分三个梯队：\n\n- **Find X 系列（旗舰）**：影像配置最强，通常是哈苏联名调校、大底主摄 + 潜望长焦 + 超广角，适合对拍照要求高的用户。\n- **Reno 系列（中高端）**：主打人像和轻薄，长焦人像、实况照片（Live 图）是重点，自拍不错，规格低于 Find 系列。\n- **A 系列（入门）**：基础配置，满足日常记录。\n\n## 🛒 平台在售的「OPPO 拍照机型」\n\n| 商品 | 影像亮点 | 价格 |\n|---|---|---|\n| OPPO Reno14（12+256GB 人鱼姬） | 高清长焦实况照片、Live 图、AI 拍照 | ¥2056.24 |\n| OPPO Reno14（12+256",
+          "expected_keywords": [
+            "拍照"
+          ],
+          "keyword_coverage": 1.0,
+          "judge_score": 5.2,
+          "latency_ms": 14744.88,
+          "judge_latency_ms": 1082.72,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        },
+        {
+          "turn": 3,
+          "user": "前者的呢",
+          "answer": "小米这边（前者）的拍照表现，我结合平台真实商品和品牌影像定位给你梳理一下：\n\n## 📸 小米影像的定位分层\n\n小米自从和**徕卡联名**后，旗舰影像风格化明显，主要分这几个梯队：\n\n| 系列 | 定位 | 影像水平 |\n|---|---|---|\n| **小米数字 Ultra** | 影像旗舰 | 顶级，1英寸大底 + 双长焦 |\n| **小米数字 Pro / 标准版** | 全能旗舰 | 主摄强，徕卡调色 |\n| **Redmi K 系列** | 性能性价比 | 主摄不错，副摄偏凑数 |\n| **Redmi Note 系列** | 千元走量 | 入门到中端，夜景/变焦较弱 |\n\n**核心特点：**\n- **徕卡联名**（2022 起）：提供「徕卡经典」「徕卡生动」两种影调，色彩风格突出\n- **大底 + 高像素**：Ultra 用 1 英寸大底，部分机型 2 亿像素\n- **计算摄影**",
+          "expected_keywords": [],
+          "keyword_coverage": 1.0,
+          "judge_score": 9.1,
+          "latency_ms": 15074.87,
+          "judge_latency_ms": 1307.23,
+          "intent": "recommend",
+          "evaluation_type": "coreference",
+          "needs_context": true,
+          "error": null
+        }
+      ],
+      "session_id": "multiturn_eval_20_1789537403"
     }
   ],
   "summary": {
-    "total_scenarios": 4,
-    "total_turns": 12,
-    "avg_judge_score": 8.31,
-    "avg_keyword_coverage": 1.0,
+    "total_scenarios": 20,
+    "total_turns": 59,
+    "avg_judge_score": 7.73,
+    "avg_keyword_coverage": 0.9661,
     "by_evaluation_type": {
       "relevance": {
-        "count": 4,
-        "avg_score": 7.88
+        "count": 20,
+        "avg_score": 8.46
       },
       "coreference": {
-        "count": 3,
-        "avg_score": 8.7
+        "count": 24,
+        "avg_score": 6.89
       },
       "context_inherit": {
-        "count": 1,
-        "avg_score": 9.2
+        "count": 7,
+        "avg_score": 8.2
       },
       "long_term_recall": {
-        "count": 2,
-        "avg_score": 7.55
+        "count": 4,
+        "avg_score": 8.32
       },
       "topic_switch": {
-        "count": 2,
-        "avg_score": 8.9
+        "count": 4,
+        "avg_score": 7.78
       }
     },
     "latency": {
-      "p50_ms": 7164.66,
-      "p90_ms": 13648.49,
-      "p95_ms": 17505.34,
-      "avg_ms": 8303.94
+      "p50_ms": 3679.25,
+      "p90_ms": 9138.95,
+      "p95_ms": 14772.38,
+      "avg_ms": 4229.92
     },
     "token_usage": {
-      "total_calls": 54,
-      "total_tokens": 87242,
-      "total_cost_usd": 0.014695,
+      "total_calls": 246,
+      "total_tokens": 261797,
+      "total_cost_usd": 0.041413,
       "by_model": {
         "deepseek-chat": {
-          "prompt_tokens": 69519,
-          "completion_tokens": 17723,
-          "total_tokens": 87242,
-          "cost_usd": 0.014695100000000004,
-          "calls": 54
+          "prompt_tokens": 227790,
+          "completion_tokens": 34007,
+          "total_tokens": 261797,
+          "cost_usd": 0.041412560000000036,
+          "calls": 246
         }
       }
     }

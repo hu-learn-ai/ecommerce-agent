@@ -203,14 +203,14 @@
       {
         "query": "连衣裙 红色 韩版",
         "type": "款式",
-        "true": "韩版",
+        "true": "红色",
         "pred": null,
         "error_type": "false_negative"
       },
       {
         "query": "连衣裙 红色 韩版",
         "type": "款式",
-        "true": "红色",
+        "true": "韩版",
         "pred": null,
         "error_type": "false_negative"
       },
@@ -287,7 +287,7 @@
       {
         "query": "运动鞋篮球鞋跑步鞋推荐",
         "type": "商品",
-        "true": "跑步鞋",
+        "true": "篮球鞋",
         "pred": null,
         "error_type": "false_negative"
       },
@@ -301,7 +301,7 @@
       {
         "query": "运动鞋篮球鞋跑步鞋推荐",
         "type": "商品",
-        "true": "篮球鞋",
+        "true": "跑步鞋",
         "pred": null,
         "error_type": "false_negative"
       }

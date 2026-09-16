@@ -134,6 +134,168 @@ MULTITURN_SCENARIOS = [
             },
         ],
     },
+    {
+        "name": "订单查询 + 追问时效",
+        "turns": [
+            {"user": "我的订单到哪了", "expected_keywords": ["订单"], "evaluation": "relevance"},
+            {"user": "那大概还要几天能到", "expected_keywords": [], "evaluation": "context_inherit",
+             "needs_context": True},
+            {"user": "能改成别的收货地址吗", "expected_keywords": [], "evaluation": "context_inherit",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "售后流程 + 追问时效",
+        "turns": [
+            {"user": "我想退货", "expected_keywords": ["退货"], "evaluation": "relevance"},
+            {"user": "运费谁承担", "expected_keywords": ["运费"], "evaluation": "context_inherit",
+             "needs_context": True},
+            {"user": "那钱多久能退回来", "expected_keywords": [], "evaluation": "context_inherit",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "图谱问答 + 指代追问",
+        "turns": [
+            {"user": "华为有哪些产品", "expected_keywords": ["华为"], "evaluation": "relevance"},
+            {"user": "它们大概都是什么价位", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},  # "它们" 应指上一轮列出的华为产品
+            {"user": "小米也有这些产品吗", "expected_keywords": ["小米"], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "闲聊 → 转具体需求",
+        "turns": [
+            {"user": "你好", "expected_keywords": [], "evaluation": "relevance"},
+            {"user": "你们最近有什么活动吗", "expected_keywords": [], "evaluation": "topic_switch",
+             "needs_context": False},
+            {"user": "那给我挑个扫地机器人", "expected_keywords": ["扫地"], "evaluation": "topic_switch",
+             "needs_context": False},
+        ],
+    },
+    {
+        "name": "数据问答 + 追问第二名",
+        "turns": [
+            {"user": "最近什么品类卖得最好", "expected_keywords": ["品类"], "evaluation": "relevance"},
+            {"user": "第二名是哪个", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},  # "第二名" 依赖上一轮排行
+        ],
+    },
+    {
+        "name": "预算偏好 → 换品类仍生效",
+        "turns": [
+            {"user": "我预算1000左右", "expected_keywords": ["1000"], "evaluation": "relevance"},
+            {"user": "推荐个耳机", "expected_keywords": [], "evaluation": "long_term_recall",
+             "needs_context": True},
+            {"user": "那平板呢", "expected_keywords": [], "evaluation": "long_term_recall",
+             "needs_context": True},  # 换品类后预算偏好仍应生效
+        ],
+    },
+
+    # ---- 以下为扩充场景（2026-09，指代消解 / 回指专项）----
+
+    {
+        "name": "多候选 + 这一个指代",
+        "turns": [
+            {"user": "推荐几款蓝牙耳机", "expected_keywords": ["耳机"], "evaluation": "relevance"},
+            {"user": "这一个的续航怎么样", "expected_keywords": ["续航"], "evaluation": "coreference",
+             "needs_context": True},  # "这一个" 应指代上一轮所列中的某款
+            {"user": "那另一个呢", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "代词它回指单品",
+        "turns": [
+            {"user": "iPhone 15 有哪些颜色", "expected_keywords": ["iPhone"], "evaluation": "relevance"},
+            {"user": "它的续航表现如何", "expected_keywords": ["续航"], "evaluation": "coreference",
+             "needs_context": True},  # "它" 指 iPhone 15
+            {"user": "有快充吗", "expected_keywords": ["快充"], "evaluation": "context_inherit",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "同款 / 一样的东西",
+        "turns": [
+            {"user": "我上次买了小米手环", "expected_keywords": ["手环"], "evaluation": "relevance"},
+            {"user": "再给我推荐个同款的", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},  # "同款" 应指代小米手环
+            {"user": "要便宜一点的", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "序号指代第一款第二款",
+        "turns": [
+            {"user": "推荐三款洗衣机", "expected_keywords": ["洗衣机"], "evaluation": "relevance"},
+            {"user": "第一款是几公斤的", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+            {"user": "第二款呢", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "比较级贵一点便宜一点",
+        "turns": [
+            {"user": "推荐一款1000块左右的手机", "expected_keywords": ["手机"], "evaluation": "relevance"},
+            {"user": "有没有贵一点的", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+            {"user": "那便宜一点的也行", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "容量比较级更大更小",
+        "turns": [
+            {"user": "推荐一款冰箱", "expected_keywords": ["冰箱"], "evaluation": "relevance"},
+            {"user": "有没有容量更大一点的", "expected_keywords": ["容量"], "evaluation": "coreference",
+             "needs_context": True},
+            {"user": "双开门的呢", "expected_keywords": ["双开门"], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "属性指代这个颜色",
+        "turns": [
+            {"user": "有没有黑色羽绒服", "expected_keywords": ["羽绒服"], "evaluation": "relevance"},
+            {"user": "这个颜色有别的款式吗", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},  # "这个颜色" 指黑色
+            {"user": "白色呢", "expected_keywords": ["白色"], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "追加再来一个",
+        "turns": [
+            {"user": "给我推荐一个保温杯", "expected_keywords": ["保温杯"], "evaluation": "relevance"},
+            {"user": "再来一个不同品牌的", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},
+            {"user": "这两个哪个更保温", "expected_keywords": ["保温"], "evaluation": "coreference",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "修改替换不要这个了",
+        "turns": [
+            {"user": "推荐一款戴尔的笔记本", "expected_keywords": ["戴尔"], "evaluation": "relevance"},
+            {"user": "不要这个了，换成华为的", "expected_keywords": ["华为"], "evaluation": "coreference",
+             "needs_context": True},
+            {"user": "华为这款多少钱", "expected_keywords": [], "evaluation": "context_inherit",
+             "needs_context": True},
+        ],
+    },
+    {
+        "name": "对比之后者前者追加",
+        "turns": [
+            {"user": "小米和OPPO的手机怎么选", "expected_keywords": ["小米", "OPPO"],
+             "evaluation": "relevance"},
+            {"user": "后者的拍照怎么样", "expected_keywords": ["拍照"], "evaluation": "coreference",
+             "needs_context": True},  # "后者" 指 OPPO
+            {"user": "前者的呢", "expected_keywords": [], "evaluation": "coreference",
+             "needs_context": True},  # "前者" 指小米
+        ],
+    },
 ]
 
 

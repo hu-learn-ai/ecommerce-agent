@@ -53,7 +53,12 @@ data/memory_store/
 # ============================================
 # 大模型文件（自行训练/下载，不随仓库分发）
 # ============================================
-models/best/
+# 分类模型：只保留训练溯源配置（920B，无权重、无隐私），
+# 它是 models/persistence.py 的 MODEL_REQUIRED_FILES 之一，
+# 也是 tests/check_readme_consistency.py 校验"同分布验证集 acc/F1"的数据源——
+# 整目录忽略会让 CI 的 docs job 在干净检出下直接判 2 项不一致。
+models/best/*
+!models/best/training_config.json
 models/bge-base-zh-v1.5/
 models/*.tar.gz
 *.safetensors
@@ -115,3 +120,23 @@ models/ner/
 /面试深挖题库_电商Agent项目.html
 # 内部项目执行计划（含本地绝对路径），不公开
 /docs/微调项目执行计划.md
+
+# ============================================
+# 本地复核备份与评估归档（2026-09-15 复核时新增）
+# ============================================
+# 重跑评估前的旧报告归档（避免新旧数字混淆）
+tests/reports/
+# 重跑前的数据/模型备份
+finetune/backup_*/
+models/best/*.bak_*
+
+# ============================================
+# 2026-09-16 公开上传前的仓库卫生修复
+# ============================================
+# 测试运行时产生的缓存与记忆库（含真实 LLM 回答与评估会话内容，无代码引用）
+tests/data/cache/
+tests/data/memory_store/
+# 原始 JData 数据集（jdata_action.csv 1.6GB 等，超出 GitHub 单文件 100MB 限制）
+新建文件夹/
+# 评估中间产物（可重跑生成）
+tests/router_llm_cache.json

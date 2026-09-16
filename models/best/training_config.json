@@ -1,0 +1,38 @@
+{
+  "model_name": "bert-base-chinese",
+  "num_labels": 4,
+  "labels": [
+    "医药保健",
+    "家用电器",
+    "手机数码",
+    "食品生鲜"
+  ],
+  "train_samples": 652662,
+  "val_samples": 186119,
+  "epochs": 5,
+  "batch_size": 32,
+  "learning_rate": 2e-05,
+  "max_length": 128,
+  "loss_function": "weighted_cross_entropy",
+  "class_weights": {
+    "医药保健": 2.2128803730010986,
+    "家用电器": 0.5295249819755554,
+    "手机数码": 0.529510498046875,
+    "食品生鲜": 0.7280839681625366
+  },
+  "label_distribution": {
+    "医药保健": 52645,
+    "家用电器": 220003,
+    "手机数码": 220009,
+    "食品生鲜": 160005
+  },
+  "eval_result": {
+    "eval_loss": 0.02059771493077278,
+    "eval_accuracy": 0.996303440272084,
+    "eval_f1": 0.9958946421143425,
+    "eval_runtime": 49.694,
+    "eval_samples_per_second": 3745.301,
+    "eval_steps_per_second": 58.538,
+    "epoch": 5.0
+  }
+}

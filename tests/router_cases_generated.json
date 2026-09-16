@@ -1,0 +1,890 @@
+[
+ {
+  "query": "我想看看华为最新款手机",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "mate60现在能买到吗",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "小米14还有货没有",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我看下苹果15多少钱",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个电饭煲怎么卖",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "索尼降噪耳机有吗",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "给我找款儿童手表",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我想买个空气炸锅",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "戴森吹风机什么价",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "联想拯救者今天能下单吗",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "有没有牛奶玻璃杯",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "看看那款无线键盘",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "华为平板在哪买",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个洗衣液卖多少",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我查查这款鞋还有没有我的码",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想入手switcholed游戏机",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "问下这个面霜多少钱",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "充电宝哪个链接可以拍",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "儿童书包有现货吗",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我搜一下保温杯",
+  "expected": "search",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我挑个适合送妈妈的礼物",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "适合油皮的洗面奶帮我选一个",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想给男朋友买个生日礼物不知道选啥",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "学生党入手哪款笔记本好",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "夏天到了给我推点清凉好物",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "家里有小宝宝该买什么洗衣机",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我选个适合送长辈的保健品",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "厨房小白买什么锅比较合适",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "租房用的小冰箱帮我挑一个",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想开始健身该入手哪些装备",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我选个适合通勤的背包",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想买个吹风机送闺蜜选哪款好",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "老人用的智能机帮我挑部简单的",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我选个适合熬夜党的眼霜",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想给猫挑款好吃的猫粮",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "预算两百左右能买什么耳机",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我挑个适合露营的帐篷",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "送女朋友七夕礼物帮我选一个",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "想买个入门相机选哪个好",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我选台适合打游戏的显示器",
+  "expected": "recommend",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个扫地机器人应该归到哪一类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "空调扇算是什么类型的产品",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；问句式分类，按项目约定归 kg_qa"
+ },
+ {
+  "query": "请把这个电热毯归下类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我归类一下这款儿童滑板车",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个空气净化器应该分到哪一类目",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "把这款投影仪放到合适的分类里",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "请问这款按摩椅属于哪个类目",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；问句式分类，按项目约定归 kg_qa"
+ },
+ {
+  "query": "把这个智能门锁分到正确的类别",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个保温饭盒该归到哪一类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我看看这款游戏手柄该分到哪类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个婴儿推车属于哪个商品类目",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；问句式分类，按项目约定归 kg_qa"
+ },
+ {
+  "query": "把这款咖啡机归入正确的分类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个蓝牙音箱属于哪种类别",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；问句式分类，按项目约定归 kg_qa"
+ },
+ {
+  "query": "请给这款护肤精华归类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个扫地机拖一体的归到哪个类目",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我把这款运动手表分下类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个电动窗帘应该放在哪个分类",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 kg_qa（难例：规则可能误路由）"
+ },
+ {
+  "query": "这款折叠桌应归入哪个类别",
+  "expected": "classify",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 kg_qa（难例：规则可能误路由）"
+ },
+ {
+  "query": "海尔旗下有哪些子牌子",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "华为和荣耀现在是什么关系",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "苹果的手机都有哪些系列",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "小米生态链都做些什么产品",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "戴森这个牌子来自哪个国家",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "花王旗下都有哪些牌子",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "特斯拉和松下之间有什么合作",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "波司登主要做哪些品类",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "美的集团旗下有哪几个牌子",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "雅诗兰黛和倩碧什么关系",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "安踏旗下收购了哪些牌子",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "雀巢这家公司都生产什么",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "索尼和爱立信以前是什么关系",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "格力和大松是什么关系",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "伊利旗下有哪些牛奶牌子",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "松下电器都有哪些产品线",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "农夫山泉都有哪些饮品",
+  "expected": "kg_qa",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我买的东西现在到哪儿了",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "昨天下单的什么时候能到",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我查下我的包裹状态",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "买的手机怎么还没发",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "我的单子什么时候能收到",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "麻烦看下我买的东西走到哪了",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "前天拍的那单怎么还没动静",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我下的单现在什么情况",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "包裹显示已发出怎么还没到",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我看看我的东西寄出来没有",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我买的货怎么一直没更新",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "那个单子现在在路上吗",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我买的东西预计几天能到",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我查下我拍的那件到哪了",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "下单三天了怎么还没送到",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我买的那单什么时候能派送",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "麻烦查下我的包裹到哪一站了",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我下的单什么时候能到家",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我看看货走到哪了",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我的东西怎么还没送来",
+  "expected": "order",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个东西我不想要了能退吗",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "收到的东西坏了怎么处理",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "买错尺码了想换一个",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "我要求开个报销凭证",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "东西有质量问题怎么办",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我要投诉你们这个服务",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "买的鞋子不合脚能不能换",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "多收的邮费能退给我吗",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个订单能开发票吗",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 order（难例：规则可能误路由）"
+ },
+ {
+  "query": "刚买就降价了能退差价吗",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "收到货不满意想处理一下",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我不想要了怎么申请",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "买的东西有瑕疵怎么解决",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "能不能帮我开个增值税专用票",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这个能不能无理由换货",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我要投诉这个卖家",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "东西寄过来是坏的怎么办",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "买的电器坏了找谁处理",
+  "expected": "customer_service",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "最近哪个品类卖得比较火",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我看看上月各品类占比",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这周哪款手机出货最多",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "哪个价位的商品最受欢迎",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "给我看下本季度销售情况",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "哪类家电最近增长最快",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我统计下各品牌的销售情况",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 kg_qa（难例：规则可能误路由）"
+ },
+ {
+  "query": "最近一个月哪些商品比较热",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "哪个地区的购买力最强",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "帮我看看各品类的增长情况",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "哪款产品最近卖得比较好",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "这个月跟上月比怎么样",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我分析下各渠道的表现",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "哪个年龄段买得最多",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "最近什么品类在涨",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我看看各价格段的分布",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审；含其他意图关键词 search（难例：规则可能误路由）"
+ },
+ {
+  "query": "哪个牌子的销售额领先",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "这季度哪类商品最走俏",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "帮我统计下各门店的业绩",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "最近哪款家电最抢手",
+  "expected": "analytics",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "谢谢你的帮助",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "今天天气真不错",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你是机器人还是真人",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我心情不太好想聊聊天",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你吃饭了吗",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你叫什么名字",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "周末过得怎么样",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "我无聊死了",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你能陪我聊会天吗",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "今天好累啊",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你会唱歌吗",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你来自哪里",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "给我讲个笑话吧",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "你最喜欢什么颜色",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ },
+ {
+  "query": "拜拜下次再聊",
+  "expected": "chitchat",
+  "source": "llm_generated",
+  "note": "LLM 生成（build_router_cases.py），人工过审"
+ }
+]

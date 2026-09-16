@@ -38,7 +38,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
       - name: Unit tests
-        run: python -m pytest tests/test_agents.py -q
+        run: >-
+          python -m pytest
+          tests/test_agents.py
+          tests/test_regression_fixes.py
+          tests/test_security_hardening.py
+          tests/test_api_security.py
+          tests/test_robustness.py
+          tests/test_eval_data.py
+          -q
 
   docker:
     name: Docker build（公共源可构建校验）
@@ -48,3 +56,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build image
         run: docker build -t ecommerce-agent:ci .
+
+  docs:
+    name: README 数字一致性（防止文档与产物脱节）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # 纯读 tests/*_report.json 与 README.md，不装任何依赖
+      - name: Check README numbers vs reports
+        run: python tests/check_readme_consistency.py

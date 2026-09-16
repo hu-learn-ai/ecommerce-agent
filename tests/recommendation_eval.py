@@ -340,6 +340,23 @@ class RecommendationEvaluator:
         # popularity_map — 用于 Novelty 指标; 评估时根据所有推荐结果出现频率动态构建
         # (被多个策略推荐的商品更热门, 推荐冷门商品比例越高 novelty 越高)
         self._popularity_map: dict = {}
+        # 人工标注推荐 GT（存在则优先于关键词动态 GT）
+        self.labeled_gt = self._load_labeled_gt()
+
+    @staticmethod
+    def _load_labeled_gt() -> dict:
+        """读取人工标注的推荐 GT：{查询: [商品 ID, ...]}；不存在时返回空 dict。"""
+        path = os.path.join(PROJECT_ROOT, "tests", "recommendation_gt_labeled.json")
+        if not os.path.exists(path):
+            return {}
+        try:
+            with open(path, encoding="utf-8") as handle:
+                data = json.load(handle)
+            print(f"[RecommendEval] 已加载人工标注 GT: {len(data)} 个用例（{path}）")
+            return data
+        except Exception as exc:  # noqa: BLE001
+            print(f"[RecommendEval] 人工 GT 读取失败: {exc}")
+            return {}
 
     def _load_catalog_size(self) -> int:
         """加载商品总数(用于 Coverage 分母)"""
@@ -514,6 +531,42 @@ class RecommendationEvaluator:
                 else:
                     recommended_items = self.agent._get_popular_products(top_k)
 
+            elif strategy == "query_aware":
+                # 仅查询意图召回（向量 + BM25 混合检索）
+                recommended_items = self.agent._query_aware_candidates(
+                    test_case.query, test_case.user_profile, top_k * 2
+                )[:top_k]
+
+            elif strategy == "graph+query_aware":
+                # 图协同 + 查询意图召回（无 LLM 重排）
+                graph_recs = self.agent._graph_based_recommend(
+                    test_case.query, test_case.user_profile, top_k * 2
+                )
+                query_recs = self.agent._query_aware_candidates(
+                    test_case.query, test_case.user_profile, top_k * 2
+                )
+                recommended_items = self.agent._merge_candidates(
+                    query_recs, graph_recs, limit=top_k
+                )
+
+            elif strategy == "graph+query_aware+llm_rerank":
+                # 查询意图感知的完整管线（与生产 recommend() 一致）
+                graph_recs = self.agent._graph_based_recommend(
+                    test_case.query, test_case.user_profile, top_k * 2
+                )
+                query_recs = self.agent._query_aware_candidates(
+                    test_case.query, test_case.user_profile, top_k * 2
+                )
+                merged = self.agent._merge_candidates(
+                    query_recs, graph_recs, limit=top_k * 4
+                )
+                if merged:
+                    recommended_items = self.agent._llm_rerank(
+                        test_case.query, merged, test_case.user_profile, top_k
+                    )
+                else:
+                    recommended_items = self.agent._get_popular_products(top_k)
+
         except Exception as e:
             return {"error": f"推荐失败: {e}"}
 
@@ -526,6 +579,10 @@ class RecommendationEvaluator:
         relevant_ids = test_case.purchased_ids + test_case.viewed_ids
         if relevant_ids:
             gt_source = "explicit"
+        elif test_case.query in self.labeled_gt:
+            # 人工标注优先（pooling 流程见 tests/build_recommendation_gt.py）
+            relevant_ids = [str(i) for i in self.labeled_gt[test_case.query]]
+            gt_source = "human"
         elif test_case.use_dynamic_gt:
             relevant_ids = self._build_ground_truth(test_case)
             gt_source = "dynamic"
@@ -584,10 +641,22 @@ class RecommendationEvaluator:
             "item_cf_only",  # Baseline: 仅 Item-CF
             "graph+item_cf",  # Baseline: 图 + CF 融合，无重排
             "graph+item_cf+llm_rerank",  # 完整管线（图 + CF + LLM 重排）
+            "query_aware",  # 仅查询意图召回（向量 + BM25）
+            "graph+query_aware",  # 图 + 查询意图召回（无重排）＝ 生产默认配置
+            "graph+query_aware+llm_rerank",  # 可选增强：LLM 重排（默认关闭，本脚本强制打开）
         ]
         all_results = {}
+        skipped_strategies = {}
+        item_cf_reason = self._item_cf_unavailable_reason()
 
         for strategy in strategies:
+            if "item_cf" in strategy and item_cf_reason:
+                print(f"\n{'=' * 40}")
+                print(f"  [SKIP] {strategy}: {item_cf_reason}")
+                print(f"{'=' * 40}")
+                skipped_strategies[strategy] = item_cf_reason
+                continue
+
             print(f"\n{'=' * 40}")
             print(f"  评估策略: {strategy}")
             print(f"{'=' * 40}")
@@ -632,7 +701,40 @@ class RecommendationEvaluator:
         return {
             "strategies": all_results,
             "comparison": comparison,
+            "skipped": skipped_strategies,
         }
+
+    def _item_cf_unavailable_reason(self) -> str:
+        """Item-CF 依赖 MySQL 订单数据；若订单商品 ID 与商品库/GT 完全无交集，指标恒为 0 且无意义。
+
+        返回空字符串表示可用，否则返回跳过原因。
+        """
+        agent = self.agent
+        engine = getattr(agent, "engine", None)
+        if engine is None:
+            return "MySQL 引擎不可用（Item-CF 无法取数）"
+        try:
+            from sqlalchemy import text
+
+            with engine.connect() as conn:
+                rows = conn.execute(
+                    text("SELECT DISTINCT product_id FROM order_detail")
+                ).fetchall()
+        except Exception as exc:  # noqa: BLE001
+            return f"订单数据不可读: {exc}"
+
+        mysql_ids = {str(row[0]) for row in rows}
+        if not mysql_ids:
+            return "order_detail 无数据"
+
+        catalog_ids = {str(p.get("id", "")) for p in self._load_catalog()}
+        overlap = mysql_ids & catalog_ids
+        if not overlap:
+            return (
+                f"MySQL 订单商品 ID 与商品库无交集（订单 {len(mysql_ids)} 个 vs 商品库 "
+                f"{len(catalog_ids)} 个，交集 0），Item-CF 结果无法与 GT 对齐，指标恒为 0"
+            )
+        return ""
 
     def _compute_comparison(self, all_results: dict) -> dict:
         """计算策略对比汇总"""
@@ -765,43 +867,48 @@ class RecommendationEvaluator:
 
 
 def generate_test_cases() -> List[RecommendationTestCase]:
-    """生成推荐评估测试用例（含动态 ground truth 关键词）"""
+    """生成推荐评估测试用例（含动态 ground truth 关键词）。
+
+    ⚠️ 用例的"偏好分类"必须落在图谱 Category3 的实际取值内（医药保健/家用电器/手机数码/食品生鲜，
+    由 scripts/import_taobao_data.py 生成）。此前用例使用 15 类旧标签（运动户外/母婴用品等），
+    图内商品数为 0，导致 8 个用例中 6 个必然返回空结果。
+    """
     return [
         RecommendationTestCase(
             user_id="user_001",
-            query="推荐一些适合户外的装备",
-            user_profile={"偏好分类": "运动户外", "预算": "200-500"},
-            purchased_ids=[],
-            viewed_ids=[],
-            preferred_categories=["运动户外"],
-            relevant_keywords=["户外", "运动", "登山", "露营", "跑步"],
-        ),
-        RecommendationTestCase(
-            user_id="user_002",
-            query="预算200以内的母婴用品",
-            user_profile={"偏好分类": "母婴用品", "预算": "200"},
-            purchased_ids=[],
-            viewed_ids=[],
-            preferred_categories=["母婴用品", "母婴"],
-            relevant_keywords=["婴儿", "奶粉", "纸尿裤", "母婴", "宝宝"],
-        ),
-        RecommendationTestCase(
-            user_id="user_003",
-            query="有什么好的手机推荐",
+            query="推荐一款拍照好的手机",
             user_profile={"偏好分类": "手机数码", "预算": "2000-5000"},
             purchased_ids=[],
             viewed_ids=[],
             preferred_categories=["手机数码", "手机"],
-            relevant_keywords=["手机", "智能", "数码", "蓝牙", "充电"],
+            relevant_keywords=["手机", "智能", "数码"],
+        ),
+        RecommendationTestCase(
+            user_id="user_002",
+            query="预算200以内的蓝牙耳机",
+            user_profile={"偏好分类": "手机数码", "预算": "200"},
+            purchased_ids=[],
+            viewed_ids=[],
+            preferred_categories=["手机数码", "耳机"],
+            relevant_keywords=["耳机", "蓝牙", "无线"],
+        ),
+        RecommendationTestCase(
+            user_id="user_003",
+            query="推荐笔记本电脑",
+            user_profile={"偏好分类": "手机数码", "预算": "3000-8000"},
+            purchased_ids=[],
+            viewed_ids=[],
+            preferred_categories=["手机数码", "电脑"],
+            relevant_keywords=["笔记本", "电脑", "laptop"],
         ),
         RecommendationTestCase(
             user_id="user_004",
-            query="推荐美妆护肤品",
-            user_profile={"偏好分类": "美妆护肤", "预算": "100-300"},
+            query="推荐冰箱和洗衣机",
+            user_profile={"偏好分类": "家用电器", "预算": "3000-8000"},
             purchased_ids=[],
             viewed_ids=[],
-            preferred_categories=["美妆护肤", "美妆"],
-            relevant_keywords=["护肤", "面膜", "精华", "口红", "化妆品"],
+            preferred_categories=["家用电器", "家电"],
+            relevant_keywords=["冰箱", "洗衣机", "空调", "电视"],
         ),
         RecommendationTestCase(
             user_id="user_005",
@@ -814,12 +921,12 @@ def generate_test_cases() -> List[RecommendationTestCase]:
         ),
         RecommendationTestCase(
             user_id="user_006",
-            query="帮我选个礼物",
-            user_profile={"偏好分类": "礼品鲜花", "预算": "100-300"},
+            query="推荐牛奶和水果",
+            user_profile={"偏好分类": "食品生鲜"},
             purchased_ids=[],
             viewed_ids=[],
-            preferred_categories=["礼品鲜花", "礼品"],
-            relevant_keywords=["礼盒", "鲜花", "礼物", "巧克力", "礼"],
+            preferred_categories=["食品生鲜", "生鲜"],
+            relevant_keywords=["牛奶", "水果", "生鲜", "乳品"],
         ),
         RecommendationTestCase(
             user_id="user_007",
@@ -832,12 +939,12 @@ def generate_test_cases() -> List[RecommendationTestCase]:
         ),
         RecommendationTestCase(
             user_id="user_008",
-            query="宠物用品推荐",
-            user_profile={"偏好分类": "宠物用品", "预算": "100-200"},
+            query="推荐血压计和维生素",
+            user_profile={"偏好分类": "医药保健", "预算": "300"},
             purchased_ids=[],
             viewed_ids=[],
-            preferred_categories=["宠物用品", "宠物"],
-            relevant_keywords=["猫粮", "狗粮", "宠物", "猫砂", "牵引"],
+            preferred_categories=["医药保健", "保健品"],
+            relevant_keywords=["血压", "血糖", "维生素", "保健"],
         ),
     ]
 
@@ -852,6 +959,15 @@ def main():
     print("=" * 60)
     print("  推荐 Agent 离线评估系统")
     print("=" * 60)
+
+    # 评估口径：本脚本要量化"可选 LLM 重排"的收益与代价，因此强制打开重排。
+    # 生产默认已关闭（RECOMMEND_LLM_RERANK 默认 false）——表格里
+    # `graph+query_aware`（无重排）= 生产默认行为，`..._+llm_rerank` = 可选增强。
+    settings.recommend_rerank_enabled = True
+    print(
+        "\n[口径] LLM 重排为可选增强（生产默认关闭），本次评估强制开启以量化其收益；"
+        "\n      生产默认行为对应 `graph+query_aware` 一行。\n"
+    )
 
     llm = ChatOpenAI(
         model=settings.deepseek_model,
@@ -890,6 +1006,13 @@ def main():
     # 全策略 baseline 对比
     baseline = evaluator.compare_strategies(test_cases)
     result["baseline_comparison"] = baseline.get("comparison", {})
+    result["skipped_strategies"] = baseline.get("skipped", {})
+    if result["skipped_strategies"]:
+        print(f"\n{'=' * 60}")
+        print("  已跳过（口径不可用）的策略")
+        print(f"{'=' * 60}")
+        for name, reason in result["skipped_strategies"].items():
+            print(f"  [SKIP] {name}: {reason}")
 
     # 打印对比汇总
     print(f"\n{'=' * 60}")

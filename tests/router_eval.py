@@ -126,6 +126,25 @@ ROUTER_TEST_CASES = [
     {"query": "你好,我想买耳机", "expected": "search", "note": "问候+搜索混合"},
     {"query": "这个耳机多少钱", "expected": "search", "note": "价格询问,但无品类词触发"},
     {"query": "纸尿裤多少钱", "expected": "search", "note": "品类词但询问价格"},
+
+    # --- 口语化 / 换说法：**故意不命中 Level-1 关键词**，用于真正测 LLM 兜底层 ---
+    # 旧用例（含上面 47 条）与 Level-1 规则同源，100% 只反映规则覆盖；
+    # 这一组不含任何规则词，全部会落到 Level-2，得出的才是 LLM 路由的真实准确率。
+    {"query": "我上周下的那个东西，怎么到现在还没动静？", "expected": "order",
+     "note": "口语化: 无 订单/物流/快递 字样"},
+    {"query": "包裹现在在哪儿了", "expected": "order", "note": "口语化: 包裹"},
+    {"query": "我想知道包裹啥时候能到", "expected": "order", "note": "口语化: 啥时候能到"},
+    {"query": "收到的货有瑕疵，我要走什么流程？", "expected": "customer_service", "note": "口语化: 瑕疵"},
+    {"query": "这个能七天无理由吗？", "expected": "customer_service", "note": "口语化: 七天无理由"},
+    {"query": "上个月哪个品类表现最好？", "expected": "analytics", "note": "口语化: 表现最好"},
+    {"query": "近期的经营情况怎么样？", "expected": "analytics", "note": "口语化: 经营情况"},
+    {"query": "小米和红米是一家的吗？", "expected": "kg_qa", "note": "口语化: 关系问法"},
+    {"query": "耐克是做什么的", "expected": "kg_qa", "note": "口语化: 问品牌"},
+    {"query": "帮我判断一下这个商品该归到哪一类", "expected": "classify", "note": "口语化: 不用 分类/类别 字样"},
+    {"query": "我想给女朋友挑个礼物", "expected": "recommend", "note": "口语化: 挑个"},
+    {"query": "iphone 15 pro max 钛金属", "expected": "search", "note": "纯商品词,无搜索动词"},
+    {"query": "在忙吗", "expected": "chitchat", "note": "口语化寒暄"},
+    {"query": "哈哈你们真逗", "expected": "chitchat", "note": "口语化闲聊"},
 ]
 
 
@@ -140,6 +159,131 @@ class ClassificationMetrics:
     @staticmethod
     def compute(y_true: List[str], y_pred: List[str], labels: List[str]) -> dict:
         return compute_classification_metrics(y_true, y_pred, labels)
+
+
+# ------------------------------------------------------------------ #
+#  准确率的置信区间（n 小的时候,必须报区间而不是只报一个点）
+# ---------------------------------------------------------------- #
+
+
+def _betacf(a: float, b: float, x: float, itmax: int = 200, eps: float = 3e-12) -> float:
+    """连分式展开（Numerical Recipes 的 betacf），用于正则化不完全 Beta。"""
+    qab, qap, qam = a + b, a + 1.0, a - 1.0
+    c = 1.0
+    d = 1.0 - qab * x / qap
+    if abs(d) < 1e-30:
+        d = 1e-30
+    d = 1.0 / d
+    h = d
+    for m in range(1, itmax + 1):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d
+        if abs(d) < 1e-30:
+            d = 1e-30
+        c = 1.0 + aa / c
+        if abs(c) < 1e-30:
+            c = 1e-30
+        d = 1.0 / d
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d
+        if abs(d) < 1e-30:
+            d = 1e-30
+        c = 1.0 + aa / c
+        if abs(c) < 1e-30:
+            c = 1e-30
+        d = 1.0 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < eps:
+            break
+    return h
+
+
+def _betainc(a: float, b: float, x: float) -> float:
+    """正则化不完全 Beta 函数 I_x(a, b)（纯标准库实现,避免引入 scipy 依赖）。"""
+    import math
+
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    front = math.exp(
+        math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b)
+        + a * math.log(x) + b * math.log(1.0 - x)
+    )
+    if x < (a + 1.0) / (a + b + 2.0):
+        return front * _betacf(a, b, x) / a
+    return 1.0 - front * _betacf(b, a, 1.0 - x) / b
+
+
+def _beta_ppf(p: float, a: float, b: float) -> float:
+    """Beta 分布分位数的二分求根（用于 Clopper-Pearson 精确区间）。"""
+    lo, hi = 0.0, 1.0
+    for _ in range(120):
+        mid = (lo + hi) / 2
+        if _betainc(a, b, mid) < p:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def accuracy_ci(correct: int, total: int, alpha: float = 0.05) -> dict:
+    """准确率的 95% 置信区间：Wilson（常规）与 Clopper-Pearson（精确,保守）。
+
+    61/61 = 100% 看起来很漂亮，但精确区间的下界只有 94.1%——
+    小样本上"100%"必须带区间一起报，否则是过度声称。
+    """
+    import math
+
+    if total == 0:
+        return {}
+    p = correct / total
+    z = 1.959963985
+    denom = 1 + z * z / total
+    center = p + z * z / (2 * total)
+    margin = z * math.sqrt(p * (1 - p) / total + z * z / (4 * total * total))
+    wilson = ((center - margin) / denom, (center + margin) / denom)
+    cp_low = 0.0 if correct == 0 else _beta_ppf(alpha / 2, correct, total - correct + 1)
+    cp_high = 1.0 if correct == total else _beta_ppf(1 - alpha / 2, correct + 1, total - correct)
+    return {
+        "wilson_95": [round(wilson[0], 4), round(wilson[1], 4)],
+        "clopper_pearson_95": [round(cp_low, 4), round(cp_high, 4)],
+    }
+
+
+def _group_by(rows: list, key: str) -> dict:
+    """按字段分组（保持插入顺序）。"""
+    grouped = {}
+    for row in rows:
+        grouped.setdefault(row.get(key), []).append(row)
+    return grouped
+
+
+GENERATED_CASES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "router_cases_generated.json")
+
+
+def load_all_test_cases() -> list:
+    """手写用例 + 生成用例（若 `router_cases_generated.json` 存在）。
+
+    生成用例会带 `source: llm_generated` 标记，报告里按来源分开统计——
+    手写用例与生成用例的可信度不同，不能混成一个数字对外说。
+    """
+    cases = [dict(c, source=c.get("source", "handwritten")) for c in ROUTER_TEST_CASES]
+    if os.path.exists(GENERATED_CASES):
+        try:
+            with open(GENERATED_CASES, encoding="utf-8") as handle:
+                extra = json.load(handle)
+            cases += [
+                {**c, "source": c.get("source", "llm_generated")}
+                for c in extra
+                if c.get("query") and c.get("expected")
+            ]
+        except Exception as exc:  # noqa: BLE001
+            print(f"[RouterEval] 生成用例读取失败，仅用手写用例: {exc}")
+    return cases
 
 
 # ------------------------------------------------------------------ #
@@ -190,9 +334,10 @@ class RouterEvaluator:
                 "errors": [{query, expected, predicted, note}, ...],
             }
         """
-        test_cases = test_cases or ROUTER_TEST_CASES
+        test_cases = test_cases or load_all_test_cases()
         y_true, y_pred = [], []
         errors = []
+        rows = []
         level1_hits = 0
         level1_correct = 0
 
@@ -227,6 +372,17 @@ class RouterEvaluator:
                 if pred == expected:
                     level1_correct += 1
 
+            rows.append(
+                {
+                    "query": query,
+                    "expected": expected,
+                    "predicted": pred,
+                    "correct": pred == expected,
+                    "level1_hit": level1_hit,
+                    "source": case.get("source", "handwritten"),
+                    "note": case.get("note", ""),
+                }
+            )
             if pred != expected:
                 errors.append(
                     {
@@ -244,6 +400,27 @@ class RouterEvaluator:
             "total": len(test_cases),
             "metrics": metrics,
             "errors": errors,
+            "rows": rows,
+            "accuracy_ci": accuracy_ci(sum(1 for r in rows if r["correct"]), len(rows)),
+            # 按来源分组（手写用例 vs 生成用例），避免把两者混成一个数字
+            "by_source": {
+                source: {
+                    "total": len(items),
+                    "correct": sum(1 for r in items if r["correct"]),
+                    "accuracy": round(sum(1 for r in items if r["correct"]) / len(items), 4),
+                    "accuracy_ci": accuracy_ci(sum(1 for r in items if r["correct"]), len(items)),
+                }
+                for source, items in _group_by(rows, "source").items()
+            },
+            # 按“是否由关键词层命中”分组：这两层的能力完全不同，必须分开看
+            "by_layer": {
+                ("keyword" if hit else "llm"): {
+                    "total": len(items),
+                    "correct": sum(1 for r in items if r["correct"]),
+                    "accuracy": round(sum(1 for r in items if r["correct"]) / len(items), 4),
+                }
+                for hit, items in _group_by(rows, "level1_hit").items()
+            },
         }
 
         # Level 1 分层指标(只在 keyword/both 模式有意义)
@@ -263,7 +440,20 @@ class RouterEvaluator:
         m = result["metrics"]
         print(f"\n  路由模式: {level}")
         print(f"  测试用例: {result['total']}")
-        print(f"  Accuracy: {m['accuracy']:.4f}")
+        ci = result.get("accuracy_ci") or {}
+        ci_txt = ""
+        if ci:
+            ci_txt = "  95%%CI %.4f~%.4f（Wilson）/ %.4f~%.4f（精确）" % (
+                ci["wilson_95"][0], ci["wilson_95"][1],
+                ci["clopper_pearson_95"][0], ci["clopper_pearson_95"][1],
+            )
+        print(f"  Accuracy: {m['accuracy']:.4f}{ci_txt}")
+        for source, info in (result.get("by_source") or {}).items():
+            label = "手写用例" if source == "handwritten" else "生成用例"
+            print(f"  [{label}] {info['correct']}/{info['total']} = {info['accuracy']:.4f}")
+        for layer, info in (result.get("by_layer") or {}).items():
+            label = "关键词层命中" if layer == "keyword" else "LLM 兜底层"
+            print(f"  [{label}] {info['correct']}/{info['total']} = {info['accuracy']:.4f}")
         print(f"  Macro-F1: {m['macro_f1']:.4f}  (Macro-P={m['macro_precision']:.4f}, Macro-R={m['macro_recall']:.4f})")
         print(f"  Micro-F1: {m['micro_f1']:.4f}")
 

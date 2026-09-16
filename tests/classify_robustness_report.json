@@ -1,0 +1,28 @@
+{
+  "prefix_len": 12,
+  "sample_per_group": 2000,
+  "groups": {
+    "balanced": {
+      "n": 4000,
+      "accuracy": 0.9988,
+      "macro_f1": 0.9987
+    },
+    "val_near_dup": {
+      "n": 2000,
+      "accuracy": 0.998,
+      "macro_f1": 0.9967
+    },
+    "val_clean": {
+      "n": 2000,
+      "accuracy": 0.9905,
+      "macro_f1": 0.9901
+    },
+    "keyword_rule": {
+      "n": 2000,
+      "accuracy": 0.45,
+      "macro_f1": 0.3528,
+      "no_hit_ratio": 0.3595
+    }
+  },
+  "dup_ratio": 0.8208
+}

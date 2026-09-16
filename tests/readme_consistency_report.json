@@ -1,0 +1,230 @@
+{
+  "checks": [
+    {
+      "name": "RAG hybrid NDCG@5",
+      "status": "ok",
+      "expected": "0.9110",
+      "marker": "RAG 检索（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "三策略 hybrid",
+      "status": "ok",
+      "expected": "0.9110",
+      "marker": "RAG 检索·三策略",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "三策略 vector_only",
+      "status": "ok",
+      "expected": "0.9017",
+      "marker": "RAG 检索·三策略",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "三策略 keyword_only",
+      "status": "ok",
+      "expected": "0.8384",
+      "marker": "RAG 检索·三策略",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "BM25 NDCG@5",
+      "status": "ok",
+      "expected": "0.8362",
+      "marker": "RAG 检索·BM25 对照",
+      "matched_rows": 1,
+      "report": "tests/bm25_baseline_report.json"
+    },
+    {
+      "name": "向量 NDCG@5（BM25 对照）",
+      "status": "ok",
+      "expected": "0.9017",
+      "marker": "RAG 检索·BM25 对照",
+      "matched_rows": 1,
+      "report": "tests/bm25_baseline_report.json"
+    },
+    {
+      "name": "分类同分布验证集 acc",
+      "status": "ok",
+      "expected": "99.63%",
+      "marker": "商品分类 | 验证集 Accuracy",
+      "matched_rows": 1,
+      "report": "models/best/training_config.json"
+    },
+    {
+      "name": "分类同分布验证集 macro-F1",
+      "status": "ok",
+      "expected": "99.59%",
+      "marker": "商品分类 | 验证集 Accuracy",
+      "matched_rows": 1,
+      "report": "models/best/training_config.json"
+    },
+    {
+      "name": "分类去重干净子集 acc",
+      "status": "ok",
+      "expected": "99.05%",
+      "marker": "商品分类（鲁棒性对照）",
+      "matched_rows": 1,
+      "report": "tests/classify_robustness_report.json"
+    },
+    {
+      "name": "分类无模型关键词基线",
+      "status": "ok",
+      "expected": "45.00%",
+      "marker": "商品分类（无模型对照）",
+      "matched_rows": 1,
+      "report": "tests/classify_robustness_report.json"
+    },
+    {
+      "name": "分类真实短查询 acc",
+      "status": "ok",
+      "expected": "0.7500",
+      "marker": "分类评估·真实短查询",
+      "matched_rows": 1,
+      "report": "tests/classify_eval_report.json"
+    },
+    {
+      "name": "分类合并 acc",
+      "status": "ok",
+      "expected": "0.7898",
+      "marker": "分类评估·合并",
+      "matched_rows": 1,
+      "report": "tests/classify_eval_report.json"
+    },
+    {
+      "name": "OOD 召回",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "分类评估·合并",
+      "matched_rows": 1,
+      "report": "tests/classify_eval_report.json"
+    },
+    {
+      "name": "OOD 域内接受率",
+      "status": "ok",
+      "expected": "0.7155",
+      "marker": "分类评估·合并",
+      "matched_rows": 1,
+      "report": "tests/classify_eval_report.json"
+    },
+    {
+      "name": "OOD AUROC",
+      "status": "ok",
+      "expected": "0.9052",
+      "marker": "分类评估·合并",
+      "matched_rows": 1,
+      "report": "tests/classify_eval_report.json"
+    },
+    {
+      "name": "路由准确率",
+      "status": "ok",
+      "expected": "0.9665",
+      "marker": "路由（209 用例）",
+      "matched_rows": 1,
+      "report": "tests/router_eval_report.json"
+    },
+    {
+      "name": "端到端意图准确率",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "端到端（15 用例）",
+      "matched_rows": 1,
+      "report": "tests/e2e_eval_report.json"
+    },
+    {
+      "name": "KGQA 注入拦截率",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "KG-QA（8 用例）",
+      "matched_rows": 1,
+      "report": "tests/kgqa_eval_report.json"
+    },
+    {
+      "name": "RAG 生成 faithfulness",
+      "status": "ok",
+      "expected": "0.7451",
+      "marker": "RAG 生成",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "RAG 生成 answer_relevance",
+      "status": "ok",
+      "expected": "0.6811",
+      "marker": "RAG 生成",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "FAQ 检索 NDCG@5",
+      "status": "ok",
+      "expected": "0.9839",
+      "marker": "FAQ 客服检索（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "FAQ 检索 MRR",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "FAQ 客服检索（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "FAQ 检索 Recall@3",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "FAQ 客服检索（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "FAQ 检索 HitRate@5",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "FAQ 客服检索（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/rag_evaluation_report.json"
+    },
+    {
+      "name": "推荐 NDCG@5（生产默认，无重排）",
+      "status": "ok",
+      "expected": "0.7500",
+      "marker": "推荐排序（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/recommendation_eval_report.json"
+    },
+    {
+      "name": "推荐 HitRate@5（生产默认，无重排）",
+      "status": "ok",
+      "expected": "1.0000",
+      "marker": "推荐排序（**人工标注 GT**",
+      "matched_rows": 1,
+      "report": "tests/recommendation_eval_report.json"
+    },
+    {
+      "name": "推荐 NDCG@5（可选 LLM 重排）",
+      "status": "ok",
+      "expected": "0.7943",
+      "marker": "推荐排序·可选 LLM 重排",
+      "matched_rows": 1,
+      "report": "tests/recommendation_eval_report.json"
+    },
+    {
+      "name": "自适应加权全量 NDCG@5",
+      "status": "ok",
+      "expected": "0.8833",
+      "marker": "自适应 (0.5,1.5)",
+      "matched_rows": 1,
+      "report": "tests/rrf_tuning_report.json"
+    }
+  ],
+  "failures": [],
+  "warnings": []
+}

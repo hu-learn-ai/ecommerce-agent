@@ -1,0 +1,5165 @@
+{
+  "note": "人工标注候选池：请在 relevant 字段填写相关商品 ID；填写完成后另存为 retrieval_gt_labeled.json（结构：{query: [id, ...]}）",
+  "pool_k": 10,
+  "queries": [
+    {
+      "query": "蓝牙耳机",
+      "description": "手机数码·耳机",
+      "keywords_hint": [
+        "蓝牙",
+        "耳机",
+        "无线"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD002845",
+          "name": "纽曼（Newmine）V28微鳯运动蓝牙耳机对讲机防丢通话器音乐耳机可录音持久续航磁吸收纳手机通用 纽曼微鳯蓝牙耳机V28",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003075",
+          "name": "比博欧（biboou） 适用小米项圈运动蓝牙耳机硅胶套小米mini降噪耳机耳帽耳机套耳塞套耳机配件 透明【大中小各一对，送收纳盒】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001408",
+          "name": "捷波朗JabraElite85t真无线主动降噪蓝牙耳机 四重深度降噪 长续航立体声 华为苹果游戏音乐耳机 钛黑色",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003879",
+          "name": "酷狗（KUGOU）M2真无线蓝牙耳机柄式半入耳运动游戏耳机超长续航智能版 星空灰",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001565",
+          "name": "联想（Lenovo） 联想蓝牙耳机无线TC09 锖色",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000431",
+          "name": "JBL MINI NC黑色 蓝牙耳机 主动降噪真无线耳机 无线运动耳机 防水防汗 苹果华为小米安卓通用",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000832",
+          "name": "适用华为B6/B5/B3青春版B2硅胶耳机套耳帽手环配件耳塞商务蓝牙耳机耳套智能硅胶套耳机帽 B5耳塞【中码M号】一只，带【收纳盒】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001684",
+          "name": "索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能耳机 触控面板 适用于苹果/安卓系统 铂金银",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001457",
+          "name": "金陵声宝 适用Beats Solo2 Solo3 Wireless蓝牙耳机套海绵套耳罩 小羊皮 红色蓝牙版（赠收纳盒）",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001811",
+          "name": "JBL TUNE215BT 无线蓝牙耳机 半入耳式运动耳麦 5.0高效传输 Type-C极速充电 超长续航 苹果安卓耳机 曜石黑",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002514",
+          "name": "兰士顿 蓝牙耳机挂脖式无线运动耳麦 跑步超长续航磁吸开关半入耳式 苹果华为oppo小米vivo手机通用 L5C 黑色",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003443",
+          "name": "英酷（INCOOL） 挂脖式蓝牙耳机无线运动耳机跑步入耳挂脖式适用于苹果华为小米VIVO\\/OPPO 顶配版【38小时续航+千元音质 】幸运红 【INCOOL 旗舰高配】",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001214",
+          "name": "德燚 蓝牙耳机无线通用双耳入耳式可爱迷你华为OPPO华为vivo苹果耳塞卡通女生情侣款 【智能触控+HIFI音质】宇航员 高配升级版",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001305",
+          "name": "KO-STAR T19真无线蓝牙耳机TWS双耳降噪运动跑步游戏适用于华为苹果vivo小米oppo手机 【高清镜面/进口芯片/智能触控】象牙白",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001881",
+          "name": "Masentek F808无线蓝牙耳机骨传导概念挂耳式不入耳式耳麦 运动跑步听歌通话游戏 苹果华为安卓手机电脑通用",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "打游戏用的手机",
+      "description": "手机数码·意图型(游戏手机)",
+      "keywords_hint": [
+        "游戏",
+        "骁龙",
+        "高刷",
+        "电竞"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "JD002084",
+          "name": "【专业46级考试】英语听力考试学生收音机大学英语四六级收音机调频fm考试用的四级六级三级ab级收音机 白色FM调频收音机+送五号电池",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002281",
+          "name": "热得快烧水棒神器安全桶烧电热棒加热管热水洗澡家用烧水器热的快 所有的款不能用于水壶，暖水瓶",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002586",
+          "name": "云腾80三脚架单反相机微单摄像机拍摄专业支架便携 手机直播拍照落地三角架 三脚架+相机遥控器 佳能R5/6D2/7D2相机用",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001581",
+          "name": "中秋节送礼教师节礼物送老师男朋友情侣纪念一对女生日定制创意实用的小礼品 照片定制 宝宝绒45x45cm",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001718",
+          "name": "中秋节送礼教师节礼物送老师男朋友情侣纪念一对女生日定制创意实用的小礼品 照片定制 宝宝绒40x60cm",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002460",
+          "name": "小米华为同款电子称体重秤家用精准耐用的充电款量人体智能测脂肪体脂称重小型 冰晶绿 USB充电",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001948",
+          "name": "【达茂旗馆】古的草原 羊蝎子火锅 内蒙古牧区羔羊脊骨 浓汤肉多火锅食材加热即食 1200g*1盒",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003377",
+          "name": "笔记本耳机头戴式iPad苹果Macbook平板Pro一体机台式机学习用网课耳麦学习机点读机家教机耳机 白色--单插头版-单孔笔记本/手机/ ipad通用",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000291",
+          "name": "于小米（MI）模拟家用1200线半球型高清监控摄像机红外夜视室内用探头 3.6mm 其他",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001361",
+          "name": "富士（FUJIFILM） X-T30 数码相机 自动对焦 人脸检测 蓝牙传输 精确的AF和人脸检测 碳银",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD002809",
+          "name": "小米REDMI K80 手机游戏性能小米手机 白色 12GB+256GB（直播专享） 官方标配",
+          "category": "手机数码",
+          "price": "1689.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002761",
+          "name": "小米REDMI K80 手机游戏性能小米手机 白色 12GB+256GB（直播专享） 官方标配",
+          "category": "手机数码",
+          "price": "1689.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001865",
+          "name": "小米REDMI K80 手机游戏性能小米手机 白色 12GB+256GB（直播专享） 官方标配",
+          "category": "手机数码",
+          "price": "1689.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003375",
+          "name": "荣耀通用晓龙处理器【官方旗舰】新5G三星护眼屏平板电脑iPad Pro安卓手机二合一学生学习机网课画 奔驰黑5G双卡双待WiFi版 【13英寸移动联通版 】 64GB 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD002334",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002024",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001615",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001558",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001294",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001007",
+          "name": "realme真我GT8 Pro 第五代骁龙8至尊版 电竞独显芯片 2K 144Hz高刷直屏 2亿潜望 游戏电竞手机16+256白",
+          "category": "手机数码",
+          "price": "3869.1",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "平板电脑",
+      "description": "手机数码·平板",
+      "keywords_hint": [
+        "平板",
+        "电脑",
+        "pad"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "KD000256",
+          "name": "Apple 苹果平板电脑 iPad Air4 二手平板电脑 绿色 64G",
+          "category": "手机数码",
+          "price": "1188.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000578",
+          "name": "Apple 苹果平板电脑 iPad Air4 二手平板电脑 绿色 64G",
+          "category": "手机数码",
+          "price": "1188.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000640",
+          "name": "Apple 苹果平板电脑 iPad Air4 二手平板电脑 绿色 64G",
+          "category": "手机数码",
+          "price": "1188.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000933",
+          "name": "Apple 苹果平板电脑 iPad Air4 二手平板电脑 绿色 64G",
+          "category": "手机数码",
+          "price": "1188.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002084",
+          "name": "Apple 苹果平板电脑 iPad Air4 二手平板电脑 绿色 64G",
+          "category": "手机数码",
+          "price": "1188.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002201",
+          "name": "Xiaomi/平板4 plus电脑4G版平板电脑WiFi版新品新款 平板4plus金色10.1寸 128GB 4G 套餐二",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000037",
+          "name": "Apple 苹果平板电脑 iPad 10代 （22款）二手平板电脑 粉色 64G",
+          "category": "手机数码",
+          "price": "1268.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000375",
+          "name": "Apple 苹果平板电脑 iPad 10代 （22款）二手平板电脑 粉色 64G",
+          "category": "手机数码",
+          "price": "1268.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD001151",
+          "name": "Apple 苹果平板电脑 iPad 10代 （22款）二手平板电脑 粉色 64G",
+          "category": "手机数码",
+          "price": "1268.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002247",
+          "name": "Apple 苹果平板电脑 iPad 10代 （22款）二手平板电脑 粉色 64G",
+          "category": "手机数码",
+          "price": "1268.0",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002711",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000934",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000854",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000746",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000669",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000530",
+          "name": "Apple 苹果平板电脑 iPad mini6 2021新款 8.3英寸 二手平板电脑 深空灰色 64G",
+          "category": "手机数码",
+          "price": "1468.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002619",
+          "name": "Apple 苹果平板电脑 iPad Pro 11英寸 2018款 二手平板电脑 银色 256G WiFi",
+          "category": "手机数码",
+          "price": "1729.0",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD002518",
+          "name": "Apple 苹果平板电脑 iPad Pro 11英寸 2018款 二手平板电脑 银色 256G WiFi",
+          "category": "手机数码",
+          "price": "1729.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001909",
+          "name": "Apple 苹果平板电脑 iPad Pro 11英寸 2018款 二手平板电脑 银色 256G WiFi",
+          "category": "手机数码",
+          "price": "1729.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001593",
+          "name": "Apple 苹果平板电脑 iPad Pro 11英寸 2018款 二手平板电脑 银色 256G WiFi",
+          "category": "手机数码",
+          "price": "1729.0",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "笔记本电脑",
+      "description": "手机数码·笔记本",
+      "keywords_hint": [
+        "笔记本",
+        "电脑",
+        "laptop"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "KD000503",
+          "name": "新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记本电脑 设计剪辑编程15寸Pro丨i7独显-16G1TB",
+          "category": "手机数码",
+          "price": "3395.99",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000708",
+          "name": "新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记本电脑 设计剪辑编程15寸Pro丨i7独显-16G1TB",
+          "category": "手机数码",
+          "price": "3395.99",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD001701",
+          "name": "新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记本电脑 设计剪辑编程15寸Pro丨i7独显-16G1TB",
+          "category": "手机数码",
+          "price": "3395.99",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002554",
+          "name": "新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记本电脑 设计剪辑编程15寸Pro丨i7独显-16G1TB",
+          "category": "手机数码",
+          "price": "3395.99",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002609",
+          "name": "新款Apple苹果笔记本电脑 MacBook Pro Air 商务办公 设计 剪辑 游戏 二手笔记本 苹果笔记本电脑 设计剪辑编程15寸Pro丨i7独显-16G1TB",
+          "category": "手机数码",
+          "price": "3395.99",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000031",
+          "name": "联想小新16SE 16英寸轻薄笔记本电脑 锐龙标压R7-8745HS 16G 512G",
+          "category": "手机数码",
+          "price": "3149.1",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000422",
+          "name": "联想小新16SE 16英寸轻薄笔记本电脑 锐龙标压R7-8745HS 16G 512G",
+          "category": "手机数码",
+          "price": "3149.1",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD001010",
+          "name": "联想小新16SE 16英寸轻薄笔记本电脑 锐龙标压R7-8745HS 16G 512G",
+          "category": "手机数码",
+          "price": "3149.1",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD001708",
+          "name": "联想小新16SE 16英寸轻薄笔记本电脑 锐龙标压R7-8745HS 16G 512G",
+          "category": "手机数码",
+          "price": "3149.1",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD002857",
+          "name": "联想小新16SE 16英寸轻薄笔记本电脑 锐龙标压R7-8745HS 16G 512G",
+          "category": "手机数码",
+          "price": "3149.1",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000172",
+          "name": "联想ThinkPad笔记本电脑新款正品补贴20%酷睿i5/i7超轻薄商务办公本 新酷睿i5六代处理器 DDR4 16G+1TB疾速固态",
+          "category": "手机数码",
+          "price": "1999.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000162",
+          "name": "联想ThinkPad笔记本电脑新款正品补贴20%酷睿i5/i7超轻薄商务办公本 新酷睿i5六代处理器 DDR4 16G+1TB疾速固态",
+          "category": "手机数码",
+          "price": "1999.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000099",
+          "name": "联想ThinkPad笔记本电脑新款正品补贴20%酷睿i5/i7超轻薄商务办公本 新酷睿i5六代处理器 DDR4 16G+1TB疾速固态",
+          "category": "手机数码",
+          "price": "1999.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002413",
+          "name": "联想展机ThinkPad笔记本电脑商务办公超轻薄本新款正品酷睿i5/i7 酷睿I5 处理器 中国大陆 16G-1T高速固态",
+          "category": "手机数码",
+          "price": "1688.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001715",
+          "name": "联想展机ThinkPad笔记本电脑商务办公超轻薄本新款正品酷睿i5/i7 酷睿I5 处理器 中国大陆 16G-1T高速固态",
+          "category": "手机数码",
+          "price": "1688.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002476",
+          "name": "联想展机Thinkpad E系列轻薄商务笔记本电脑学生设计手提办公本游戏本 酷睿I5 处理器 中国大陆 8G-512G 高速固态",
+          "category": "手机数码",
+          "price": "1370.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002448",
+          "name": "联想展机Thinkpad E系列轻薄商务笔记本电脑学生设计手提办公本游戏本 酷睿I5 处理器 中国大陆 8G-512G 高速固态",
+          "category": "手机数码",
+          "price": "1370.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002444",
+          "name": "联想展机Thinkpad E系列轻薄商务笔记本电脑学生设计手提办公本游戏本 酷睿I5 处理器 中国大陆 8G-512G 高速固态",
+          "category": "手机数码",
+          "price": "1370.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002097",
+          "name": "联想展机Thinkpad E系列轻薄商务笔记本电脑学生设计手提办公本游戏本 酷睿I5 处理器 中国大陆 8G-512G 高速固态",
+          "category": "手机数码",
+          "price": "1370.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000827",
+          "name": "联想展机Thinkpad E系列轻薄商务笔记本电脑学生设计手提办公本游戏本 酷睿I5 处理器 中国大陆 8G-512G 高速固态",
+          "category": "手机数码",
+          "price": "1370.0",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "1.5匹空调",
+      "description": "家用电器·空调(规格约束)",
+      "keywords_hint": [
+        "空调",
+        "1.5匹",
+        "变频"
+      ],
+      "pool_size": 13,
+      "candidates": [
+        {
+          "id": "JD001557",
+          "name": "美的（Midea）空调1匹1.5匹ECO节能 i青春Ⅱ新一级能效APP控制变频冷暖壁挂式防直吹空调 极酷大1.5P 35GW/N8VHA1",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000335",
+          "name": "海尔（Haier）空调套装 新能效 1.5匹变频挂机先行者+3匹柜机静悦",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001973",
+          "name": "美菱(MeiLing)空调 家用移动立式一体机 1匹1.5匹2匹轻音 客厅宿舍强效制冷 无外机免安装 小1匹单冷",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000767",
+          "name": "格力品质东宝空调省电挂机1匹2匹1.5匹单/冷小大一匹冷/暖两用1p3匹壁挂式变/频/奔雅 大2匹冷暖柜机（全铜管）无安装",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000140",
+          "name": "Haier/海尔空调大1匹/1.5匹挂机壁挂式 家用卧室新能效 快速制冷 一键舒适节能省电 以旧换新 大1P匹冷暖新三级KFR-26GW/EDS83",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001890",
+          "name": "新款电梯空调专用机单.冷专用1匹冷暖1.5P轿厢一体机无滴水负离子消毒静音随行电缆无滴水轿厢迈森睿厨 单.冷小1匹（别墅电梯用）",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000936",
+          "name": "日立 HITACHI 适用14-22㎡ 新3级能效 1.5匹 变频冷暖 空调挂机 以旧换新 RAS/C-35PVZ",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000173",
+          "name": "【自营款】华凌空调挂机变频一级 能效大1.5匹大一匹冷暖壁挂式空调家用手机智能控制 防直吹美的售后 一级能效/大1.5匹冷暖变频带安装",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000826",
+          "name": "海尔（Haier）空调挂机壁挂式智能自清洁卧室冷暖空调变频新一级能效家用冷暖 新一级能效1.5匹+内外机自清洁+PMV+手机物联",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001272",
+          "name": "美的（Midea）新能效1.5匹 变频3级 壁挂式空调KFR-35GW/BP3DN8Y-DH400(3)一价全包（包7米铜管）企业购",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000557",
+          "name": "新科（Shinco）移动空调大1P/1.5P家用 一体机 免安装 厨房机房 整机保三年 压缩机保5年 1.5匹单冷KY-35/F2",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000575",
+          "name": "TCL中央空调家用挂机一拖多一级能效节能变频多联机 大6匹一拖四",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003760",
+          "name": "Hitachi/日立中央空调一拖四 小5匹隐藏家用空调 RAS-125HRN5QB 白色",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "家用吸尘器",
+      "description": "家用电器·吸尘器",
+      "keywords_hint": [
+        "吸尘器",
+        "除尘",
+        "家用"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD000292",
+          "name": "德尔玛（Deerma）吸尘器小型手持吸尘器家用立式吸尘机 DX129C",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000963",
+          "name": "苏泊尔家用手持吸尘器吸拖一体大功率吸尘器家庭宠物毛发吸尘VCS63S-C8 PRO 白色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002830",
+          "name": "飞利浦（PHILIPS）卧式吸尘器大功率家用强劲吸力高效过滤无尘袋FC9588/81 吸尘器FC8760升级款",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002186",
+          "name": "德尔玛（Deerma）吸尘器 家用无线立式吸尘器 手持吸尘机 宠物家庭适用 吸拖一体清洁机 VC20PRO吸拖一体机",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001054",
+          "name": "充电无线工业级吸尘器大功率电瓶户外吸尘器车间车家仓库商用工厂 套餐六",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002190",
+          "name": "乡米适配美的手持床上家用吸尘器除螨仪B1配件 HEPA",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003519",
+          "name": "美的（Midea）吸尘器家用小型手持推杆二合一 强劲吸力",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000295",
+          "name": "乡米适配美的手持床上家用吸尘器除螨仪B1配件 尘杯HEPA滤网",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001889",
+          "name": "海尔（Haier）智能家用洗地机D3-Pro吸拖洗一体电动拖把扫地拖地清洁吸尘器",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003871",
+          "name": "必胜（BISSELL）有线大吸力洗地机2.0（2225Z）家用扫拖洗地一体清洁吸尘器",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000921",
+          "name": "车载吸尘器车用无线充电汽车家用手持小型车内大功率吸力强力迷你新款 (10000PA吸力)无线版",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001876",
+          "name": "扬子（YANGZI）吸尘器手持家用小型静低音地毯迷你大功率吸尘除螨强力大吸力商用车用吸尘机 墨绿色升级款",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003574",
+          "name": "艾美特 手持式吸尘器家用清洁大吸力轻便除尘吸尘机 尘螨分离 粉色X29TM [600W大吸力 专业尘螨分离器]",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001805",
+          "name": "【旗舰新品】德国普维克PUWEIKE无线吸尘器家用小型手持式大吸力强力除螨除菌超长续航吸尘拖地一体机 高配版+电动拖把",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000254",
+          "name": "【扫吸拖一体】全自动充电扫地机器人家用智能吸尘器扫地机三合一weili 黑色 水箱+遥控器+升级款",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "滚筒洗衣机",
+      "description": "家用电器·洗衣机(类型约束)",
+      "keywords_hint": [
+        "洗衣机",
+        "滚筒"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD002963",
+          "name": "Haier/海尔洗烘一体滚筒洗衣机10公斤全自动大容量变频洗衣机家用祛味空气洗 蒸汽除菌 海尔10kg滚筒洗衣机+空气洗+烘干除螨",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002299",
+          "name": "宜百利 通用全自动滚筒洗衣机排水管出水管延长管 2米 带卡箍和转接头 下水管洗衣机配件7103",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001456",
+          "name": "贝石 洗衣机排水管 适用全自动波轮滚筒洗衣机多口径带卡箍万能下水管出水管延长管 海尔/美的/小天鹅 1.5M装",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002984",
+          "name": "云米（VIOMI）家用智能变频大屏对开门电冰箱11KG滚筒洗烘一体全自动洗衣机冰洗套米云米 对开门630+尊享版10公斤洗衣机",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002290",
+          "name": "洗衣机罩适用于海尔小天鹅西门子美的滚筒洗衣机罩波轮上开盖防水防晒防尘防护套 小猫咪(上开盖) 大码L【7-8.5公斤】",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003706",
+          "name": "小天鹅（LittleSwan）洗烘套装滚筒洗衣机 热泵烘干机洗衣机套装TG100-1436MUADT +H32Y 10洗10烘 热泵柔烘 双重除菌防护",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003569",
+          "name": "丹琼适用于海尔滚筒洗衣机配件大全皮带6EPJ1216 5EPJ1208 5J1195 14号V 1245 0020300054",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002947",
+          "name": "松下（Panasonic）超薄滚筒洗衣机带烘干全自动10公斤除螨洗烘干一体拉丝银 XQG100-SD139",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001638",
+          "name": "松下(Panasonic)10kg滚筒洗衣机+9kg热泵烘干机洗烘套装免熨烫即干即穿 【洗烘套装】L165+9095T",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003374",
+          "name": "小天鹅(LittleSwan)洗烘套装 热泵干衣机蒸汽免熨 紫外线除菌除螨 全自动滚筒洗衣机 智能洗 低温柔烘 1452WDY+H36WT",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000904",
+          "name": "新款工业洗衣机水洗机商用工厂洗衣房20 /30公斤大型洗脱机宾馆酒店专用锐涤 出口型50公斤洗脱机",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003506",
+          "name": "新款迷你涡轮洗衣器大功率便携式洗衣机小型单涡轮超声波清洗迷你家用出差旅行洗碗器皮谱 60w白色大功率洗衣器",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003236",
+          "name": "志高（CHIGO）6.5KG全自动洗衣机 波轮 智能洗涤 家用大容量洗衣机 带风干蓝光功能【企业采购】",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001850",
+          "name": "【全国联保】志高全自动洗衣机波轮迷你小型家用宿舍预约快洗婴儿童锁轻音洗脱一体十种程序易操作滚筒带风干 9.0公斤咖啡金【蓝光洗护+风干洁桶+强电机】",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001210",
+          "name": "巧手婴儿迷你洗衣机全自动3.5kg高温煮洗杀菌消毒波轮洗脱一体小型儿童宝宝母婴专用5.6kg洗烘一体 3.5公斤军绿色 高温煮洗+风干+桶自洁",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "对开门冰箱",
+      "description": "家用电器·冰箱(类型约束)",
+      "keywords_hint": [
+        "冰箱",
+        "对开门",
+        "对开"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "JD003418",
+          "name": "容声（Ronshen）BCD-589WD11HP 589升 对开门冰箱 钛空金 钛空金",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002321",
+          "name": "云米（VIOM）冰洗套装 458L冰箱对开门超薄嵌入式10kg洗衣机洗烘一体机家电组合冰箱洗衣机套餐 458+10KG纤薄洗烘机 纤薄高颜值套装",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000695",
+          "name": "海尔（Haier）冰箱家用风冷无霜双变频双开门双门对开门电冰箱大容量 475升丨风冷无霜丨净味防串味丨双变频丨环绕送风",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002247",
+          "name": "【Haier海尔冰箱洗衣机套餐】双门三开门小型迷你家用超薄电冰箱+波轮洗衣机全自动8公斤智能洗护 216升三开门无霜冰箱+8公斤洗衣机M208",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001382",
+          "name": "云米冰箱洗衣机套装630L对开门变频一级能效节能风冷大容量电冰箱洗烘一体机洗衣机超薄家用组合冰洗套装 630L+10KG 语音洗烘机 智能语音套装",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002984",
+          "name": "云米（VIOMI）家用智能变频大屏对开门电冰箱11KG滚筒洗烘一体全自动洗衣机冰洗套米云米 对开门630+尊享版10公斤洗衣机",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002361",
+          "name": "容声(Ronshen) 冰箱小型家用三开门冰箱风冷无霜节能/直冷迷你电冰箱节能保鲜电冰箱 206升三门直冷节能 BCD-206D11N",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000540",
+          "name": "海尔冰箱405升一级能效四开门四门多门家用电冰箱银河灰+10公斤滚筒洗衣机冰洗套餐冰洗套购冰洗套装 405升冰箱+2021款专供10公斤1级洗烘变频机",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003611",
+          "name": "AUX奥克斯实标冰箱小冷冻冷藏保鲜小冰箱家用租房办公室旅馆宿舍节能冰箱 BCD-50AD 50升蓝色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001877",
+          "name": "志高（CHIGO）【送货入户】冰箱小型家用双门小冰箱迷你宿舍冷冻冷藏双开门冰箱电冰箱租房节能 43A128【两天仅约一度电+强效锁鲜】",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001949",
+          "name": "【旗舰店】申花（SHENHUA）小冰箱小型家用宿舍租房寝室节能迷你冷藏冷冻特价双开门两门电冰箱 一级能效-42L-银【标准款】单人用",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002039",
+          "name": "西门子博世两门双门三门冰箱冷冻室储物抽屉 原厂配件665867",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000075",
+          "name": "小鸭家用冰箱小型大容量 迷你电冰箱双门冷藏冷冻保鲜宿舍租房二门节能省电低噪送货上门双开一级节能不占地 【一级能效 加厚款】42升拉丝银",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003450",
+          "name": "【耐用10年】雪花双温冰柜家用双门小型 商用冷柜 冷藏冷冻保鲜两用卧式冰柜大容量节能 双温245L加厚双门",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003527",
+          "name": "【官方旗舰】海尔冰柜自营 冷柜 家用商用 卧式冰箱 冷藏冷冻 一级能效 无需除霜 带脚轮和食品框 100升低霜高配白色",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002343",
+          "name": "【12.12】雪花双温冰柜家用双门小型 商用冷柜 冷藏冷冻保鲜两用卧式冰柜大容量节能 双温 192L加厚双门",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000669",
+          "name": "海尔（Haier）商用冷柜大容量冰柜 卧式冷藏冷冻转换冷柜 顶开速冻冰柜BC/BD-829HEZ",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "食品零食",
+      "description": "食品生鲜·零食",
+      "keywords_hint": [
+        "零食",
+        "食品",
+        "坚果"
+      ],
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "JD000031",
+          "name": "手撕风干内蒙古草原特产黄牛肉干零食休闲小零食 五香+香辣各250g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002072",
+          "name": "火宫殿 休闲零食大礼包 送女友女生湖南特产豆干鸭翅 网红零食 538g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002710",
+          "name": "妙可奶酪棒儿童零食营养零食高钙棒棒奶酪即食干酪乳酪一件特价 芒果味*16支",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002507",
+          "name": "山药桃酥无糖精整箱独小包装铁棍糖尿人食品零食 无蔗糖(3斤装) 燕麦坚果酥",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000717",
+          "name": "旺旺 太大颗果肉果冻 白桃 200g*2 网红零食 休闲下午茶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001037",
+          "name": "芝洛洛 咸蛋黄味爆浆肉松小贝160g4枚 2.0升级版 网红糕点新鲜甜点蛋糕 营养早餐下午茶零食食品",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000085",
+          "name": "雪媚娘 酥蛋糕 咸蛋黄休闲食品零食整箱批发 糕点心下午茶 40枚【红豆20+紫薯20】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001812",
+          "name": "[淅川馆] 农家自制吊柿饼 独立包装霜降柿干 办公室休闲零食 1000g装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000840",
+          "name": "鲨鱼菲特 鹰嘴豆 开袋即食 饱腹杂粮宿舍休闲小吃 低脂健身零食代餐10袋装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002351",
+          "name": "陈皮杨梅罐装360g古早味蜜饯杨梅干休闲零食闽南特产茶伴侣 原味杨梅360g*1罐",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003559",
+          "name": "（勿拍）随机抽取小礼品一份，与主商品分开发货，可先行发货，收到不要着急哦。单拍不做发货。",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000743",
+          "name": "补运费差价",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002142",
+          "name": "【严选好物】木糖醇蛋糕糖尿人食品孕妇老人糖尿饼无添加糖精整箱专用面包零食病人 【中礼盒装】小圆满蛋糕【2斤】送礼大气",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003550",
+          "name": "广式月饼传统手工月饼零食糕点多口味2个到1000g 哈密瓜 1000g【买2斤送2斤发4斤】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001280",
+          "name": "本来生活网 礼品卡 300元 预付卡/ 购物卡/礼金卡/实体卡/员工福利/节日礼券 团购",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003823",
+          "name": "火锅丸子底料全套搭配组合批发牛肉丸烧烤麻辣烫关东煮食材 四斤钜惠装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "进口水果礼盒",
+      "description": "食品生鲜·水果(场景约束)",
+      "keywords_hint": [
+        "水果",
+        "进口",
+        "礼盒"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD003467",
+          "name": "水果礼盒新鲜水果礼盒 多种水果组合装进口高档水果 春节年货节日员工福利送礼 尊享暖意",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002794",
+          "name": "集优港新鲜水果礼盒混合装组合套餐进口生鲜水果春节年货礼盒大礼包 金尊礼盒6.655kg",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002515",
+          "name": "【顺丰空运】首粮年货进口水果礼盒新鲜水果提货券 果桶A款588型",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001880",
+          "name": "智利车厘子樱桃生鲜进口水果礼盒新年礼品 车厘子樱桃双JJ级2斤精品装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001030",
+          "name": "水果礼盒水果礼箱 节日礼盒 多种水果 鲜水果送礼 员工福利重阳节水果礼盒 禾人 臻尊礼箱 水果礼箱 20斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003406",
+          "name": "越南进口红肉菠萝蜜红心6-18斤新鲜一整个波萝蜜当季水果整箱水果礼盒时令圣诞节送礼品礼物 【实惠装】10-12斤 超香爆甜",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000828",
+          "name": "越南进口红肉菠萝蜜新鲜红心6-18斤一整个波萝蜜当季水果整箱水果礼盒时令圣诞节送礼品礼物 【实惠装】12-15斤 出果率高",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003216",
+          "name": "墨西哥进口牛油果 特级巨无霸牛油果水果新鲜水果进口当季整箱特级鲜果大果 8个精选超级巨无霸【单果210g起】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003524",
+          "name": "泰国进口山竹 水果净重5斤新鲜5A大果新鲜应季热带孕妇油麻竹孕妇水果 生鲜水果 【4A中果】2斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003066",
+          "name": "泰国进口龙眼京东生鲜2-4斤装进口新鲜桂圆水果 4斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002994",
+          "name": "丹东草莓礼盒装 新鲜水果奶油草莓 香甜可口节日礼盒水果礼盒 红色烫金草莓盒（30粒装）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002383",
+          "name": "【顺丰空运】智利进口车厘子礼盒装当季现摘现发新鲜水果整箱大樱桃 JJJJ4斤礼盒装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003446",
+          "name": "【JD速运礼盒装】红心猕猴桃 12粒装精选果 当季生鲜奇异果水果礼盒 坏果包赔",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003895",
+          "name": "华圣苹果年货礼盒陕西洛川红富士新鲜水果5.6斤9枚水果礼盒装大果 J",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000250",
+          "name": "新疆阿克苏冰糖心水果礼盒 5斤/8斤/9斤装新鲜水果 5斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "海鲜",
+      "description": "食品生鲜·海鲜",
+      "keywords_hint": [
+        "海鲜",
+        "水产",
+        "鲜活"
+      ],
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "JD003583",
+          "name": "【现货】浙江舟山海鲜礼盒海鲜大礼包 鲜活冷冻东海海鲜礼包套装混合礼盒宁波海鲜礼盒大礼包水产礼品 1499型含19件海鲜约9200g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001592",
+          "name": "海鲜鲜活 大赤贝鲜活海鲜水产欧因 1斤(4-5个左右) 4斤划算装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001470",
+          "name": "扇贝肉 新鲜冷冻扇贝贝类海鲜瑶柱海鲜水产 精选扇贝肉5斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003588",
+          "name": "扇贝肉 新鲜冷冻扇贝贝类海鲜瑶柱海鲜水产 精选扇贝肉1斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001451",
+          "name": "柯瓜子海鲜铺 温州特产鱿鱼嘴新鲜海鲜水产干货鱿鱼干东海捕捞淡晒海味500g/包 中号 500g/包 （300-400粒）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003096",
+          "name": "麻辣小海鲜蒜蓉鲜扇贝肉100g开袋即食罐装海鲜罐头熟食新鲜下饭菜零食小海 香辣扇贝2罐",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002159",
+          "name": "（活鲜）乐食港 鲜活大鲍鱼贝类海鲜新鲜鲍鱼活海鲜水产 活鲍鱼1斤（6只）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001035",
+          "name": "海鲜干货年货海鲜礼盒组合套餐海产品广东湛江特产 共2斤 瑶柱+蚝干+虾米+银鱼 广东特产家庭装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000398",
+          "name": "【满199 减100专区】大希地牛肉烧烤/海鲜三角披萨pizza加热即食 100g/片 海鲜披萨3片装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001492",
+          "name": "【顺丰快递】新鲜八爪鱼海鲜鲜活爆头八爪鱼火锅食材海鲜水产 十字丽日 迷你小八爪【去牙去内脏】 4斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003271",
+          "name": "海鲜鱿鱼大鱿鱼鲜活鲜鱿鱼鱿鱼头整只 五斤大鱿鱼",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003590",
+          "name": "海鲜海产干货大礼包 煲汤食材干货海产品组合礼盒装 虾皮 干贝 浦鱼鳍干 墨鱼干 对虾干 马鲛鱼干",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003511",
+          "name": "甲鱼活体生鲜水产龟王八散养中华鳖苗批发海鲜水产 艾黎迪尚 七天保价服务（赠品单拍不发货）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000470",
+          "name": "【鱼肉细嫩鲜香 适合宝宝辅食】海宏盈 鳕鱼 500g 法国银鳕鱼尾巴深海鱼海鲜生鲜已核酸检测",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001017",
+          "name": "超值海鱼大礼包 海鲜礼品送礼黄鱼多宝鱼石斑鱼带鱼礼盒 海鱼套餐二带鱼段",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000008",
+          "name": "京鲜生 冷冻黑虎虾 海鲜礼盒 大虾巨型虎虾 1kg 8-10个头 长23cm",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "火锅食材",
+      "description": "食品生鲜·火锅食材",
+      "keywords_hint": [
+        "火锅",
+        "底料",
+        "食材"
+      ],
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "JD000657",
+          "name": "安井 火锅丸子鱼籽福袋5斤大袋关东煮麻辣烫煮串串香食材大包装火锅食材速食半成品",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003986",
+          "name": "【免清理大鱿鱼】新鲜整只鱿鱼筒火锅食材海鲜水产鱿鱼圈烧烤食材 5斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000846",
+          "name": "雄丰鱼肉卷500g关东煮麻辣烫食材火锅配菜冷冻食品批发",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002056",
+          "name": "润聚鲜冷冻鱿鱼圈鱿鱼花关东煮食材麻辣烫火锅鱼海鲜鱿鱼卷食材 鱿鱼花600g(200gx3袋)",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001997",
+          "name": "趣十八番 正宗潮汕牛肉丸 手打牛筋丸 烧烤火锅食材 火锅丸料 500g每包 1斤牛肉丸",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001170",
+          "name": "盛源来 釜山鱼饼 韩国鱼糕海鲜串 韩式部队火锅食材 辣炒年糕关东煮食材 400g*1袋",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003908",
+          "name": "西峡鲜香菇新鲜花菇菌类火锅食材蔬菜现摘现发 新鲜香菇1500g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003823",
+          "name": "火锅丸子底料全套搭配组合批发牛肉丸烧烤麻辣烫关东煮食材 四斤钜惠装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001639",
+          "name": "小卓 火锅食材 黑毛肚230g 牛百叶 新鲜脆 四川重庆涮火锅内脏类生鲜菜品配菜 230g*2袋",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001948",
+          "name": "【达茂旗馆】古的草原 羊蝎子火锅 内蒙古牧区羔羊脊骨 浓汤肉多火锅食材加热即食 1200g*1盒",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001475",
+          "name": "（生鲜）毛肚牛百叶500g 涮火锅配菜食材脆爽新鲜火锅冷冻牛杂牛百叶牛肚内脏类 生鲜 毛肚2袋(500g/袋)",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001624",
+          "name": "小卓 火锅生鲜食材丸子套餐组合混搭火锅菜品涮火锅配菜配料虾滑潮汕牛肉丸龙虾球芝士包福袋 牛肉丸180g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001410",
+          "name": "高品质毛肚2斤装牛百叶鲜毛肚新鲜火锅食材黄牛毛肚1斤 素馨依水 黑千层1斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002107",
+          "name": "新鲜牛腩肉5斤装正宗黄牛肉火锅食材批发整切清真调理生牛肉2/5斤 姒桀 5斤【高品质】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000188",
+          "name": "新鲜菌菇组合菌汤包煲汤材料银耳火锅食材 虫草花250g+竹荪30g+猴头菇200g",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000845",
+          "name": "圆白菜 火锅食材 包菜 卷心菜 绿甘蓝 新鲜蔬菜1枚装 禾人 1枚装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "按摩椅",
+      "description": "医药保健·按摩椅",
+      "keywords_hint": [
+        "按摩椅",
+        "按摩",
+        "理疗"
+      ],
+      "pool_size": 18,
+      "candidates": [
+        {
+          "id": "JD003692",
+          "name": "巴斯帝亚按摩椅巴斯蒂亚智能按摩椅家用多功能电动按摩椅懊袔玛 巴斯帝亚按摩椅一台",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002054",
+          "name": "践程电动按摩椅太空舱按摩椅全自动多功能按摩椅全身按摩器S150",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001097",
+          "name": "按摩椅保护套罩 按摩椅套子 按摩椅脚套 按摩椅皮革翻新换皮 皮套更换修复耐磨弹性布外套宁内 上半身布套",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001765",
+          "name": "按摩椅4D家用太空舱零重力全身按摩椅电动按摩沙发多功能老年人智能电动沙发椅按摩椅靠垫 浅灰色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000306",
+          "name": "美国西屋3D按摩椅S500家用按摩椅太空舱按摩椅电动全身自动多功能零重力揉捏智能型沙发奥克斯 灰蓝色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001351",
+          "name": "芝华仕按摩椅 家用多功能全身全自动中医养生按摩椅豪华太空舱 MZ200 浅灰色-15天内发货",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002173",
+          "name": "欧利华4D按摩椅OL8500家用按摩椅太空舱按摩椅电动老人全身自动多功能零重力揉捏智能型沙发按摩座椅 活力橙",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000794",
+          "name": "美国西屋3D按摩椅S540家用按摩椅太空舱按摩椅电动老人全身自动多功能零重力揉捏智能型沙发按摩座椅 凡尔赛红",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002923",
+          "name": "倍嘉尔BJE-999按摩椅全自动家用全身揉捏多功能电动按摩椅电视同款授权经销商 电视同款倍嘉尔按摩椅金刚黑",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000562",
+          "name": "按摩椅4D家用太空舱零重力全身按摩椅电动按摩沙发多功能老年人智能电动沙发椅大屏按摩椅靠垫 顶配大屏款米蓝色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002678",
+          "name": "按摩椅家用小型多功能全身豪华全自动颈椎腰肩部老年新款按摩器垫小秋家 豪华黑-定点按摩-震动-加热-腿部",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000863",
+          "name": "按摩椅家用全身小型折叠靠背垫子豪华全自动豪华颈椎按摩器多功能小秋家 旗舰(红)",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002220",
+          "name": "鸣仁堂按摩椅家用全身小型多功能电动椅 家居灰旗舰款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002704",
+          "name": "（）按摩椅家用全身豪华零重力全自动多功能电动按摩沙发椅子3D智能语音奥克斯 灰色H",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000989",
+          "name": "【品牌直销】豪华电动按摩椅家用全身小型折叠多功能简易全自动按摩器颈椎肩腰杰霆 套餐一",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000549",
+          "name": "鸣仁堂按摩椅家用沙发按摩机电动按摩座椅子全身多功能全自动老年人椅家庭腰背颈部 【标准款】黑棕色2380",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003175",
+          "name": "按摩椅家用自动太空舱全身揉捏多功能老年人按摩器电动沙发布谷鸟 标准款-【功能较少-无品】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003915",
+          "name": "姿秒迪康佳按摩椅 家用全身小型多功能电动太空豪华舱全自动老人沙发通用 【殊享白】上市集团/智能感知机械手/全身全方位按摩",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "泡脚桶",
+      "description": "医药保健·足浴",
+      "keywords_hint": [
+        "泡脚",
+        "足浴",
+        "足疗"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "JD001861",
+          "name": "电动按摩泡脚桶可折叠小型 新·飞可折叠家用养生泡脚桶全自动加热电动按摩足浴盆家用泡脚神器皮谱 升级气泡款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002136",
+          "name": "皮谱双人泡脚桶 大号加高洗脚盆泡脚桶双人用家用简易冬天泡脚盆足浴盆 睿智蓝+【50撕一次性抹布】 无盖",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000458",
+          "name": "皮谱双人泡脚桶 大号加高洗脚盆泡脚桶双人用家用简易冬天泡脚盆足浴盆 珊瑚粉泡脚桶+【艾草足浴粉30 袋】 无盖",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001760",
+          "name": "泰昌（Taicn）足浴盆全自动按摩足浴洗脚泡脚桶加热恒温洗脚机家用电动泡脚桶 TC-5196 足浴盆",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001764",
+          "name": "华为通用足浴盆全自动加热按摩折叠泡脚桶电动泡脚桶恒温洗脚盆便携过小腿 S49-电子遥控款遥控调节/",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001368",
+          "name": "智汇 生日礼物送妈妈泡脚桶按摩父亲节老人礼物足浴盆实用礼品老年人新年礼物送长辈见面礼创意父母全自动 全自动足浴盆泡脚桶遥控智能款墨绿+足浴包",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001990",
+          "name": "艾美特泡脚桶足浴盆智能按摩家用洗脚盆全自动加热恒温 白色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002112",
+          "name": "京东健康甄选 折叠泡脚桶足浴盆全自动按摩加热 洗脚盆高深桶沐足疗泡脚浴机足浴按摩器送父母礼品物男女士 【折叠易收纳泡脚桶】小米灰紫外灭菌+APP控制",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001974",
+          "name": "华为通用可折叠泡脚桶电动按摩全自动加热恒温家用桶足浴盆洗脚神器 深红色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002406",
+          "name": "蓓慈（BEICI）BZ521A 足浴盆全自动洗脚盆电动按摩泡脚桶自动加热恒温",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002938",
+          "name": "洗脚木桶泡脚盆21cm养生家用木质足浴桶小盆带盖自带按摩珠足疗桶 21cm平底单桶+按摩器",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001101",
+          "name": "泡脚桶家用过小腿宿舍养生按摩塑料加高加厚深足浴桶洗脚盆神器旦榄 墨绿色(高款)",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002099",
+          "name": "洗脚木桶泡脚盆21cm养生家用木质足浴桶小盆带盖自带按摩珠足疗桶 21cm带珠单桶+盖",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003257",
+          "name": "家用泡脚桶可折叠脚底按摩便携式保温足浴盆宿舍加高养生足浴桶旦榄 有提手 粉色方形脚底按摩",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002901",
+          "name": "皮谱泡脚桶按摩 泡脚鞋足浴鞋高筒家用小型泡脚桶按摩迷你足浴桶女洗脚盆泡脚 12.5cm高42码 透明蓝 带挂钩",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003078",
+          "name": "泡脚桶带盖加厚塑料洗脚桶带滚轮按摩泡脚盆足浴盆置物四季可用 大号绿色有盖【加厚】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001667",
+          "name": "足浴盆自动按摩恒温加热泡脚桶洗脚盆电动脚底高深桶 升级款【有盖有排水管有气泡增氧】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001786",
+          "name": "皮谱泡脚桶按摩 可折叠泡脚桶保温按摩过小腿家用足浴桶塑料便携式泡脚 深蓝【加大加宽】泡脚效果更佳",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001385",
+          "name": "皮谱泡脚桶按摩 泡脚桶家用过小腿塑料洗脚盆加大高深桶宿舍养生按摩泡脚盆大深桶 加高款芒果黄",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000246",
+          "name": "瑶妹橡木泡脚桶木桶泡到膝盖高深足浴桶电热恒温洗脚盆木桶熏蒸汗蒸按摩养生足浴盆 毛巾",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "充电款颈椎按摩仪",
+      "description": "医药保健·颈椎按摩(属性约束)",
+      "keywords_hint": [
+        "颈椎",
+        "按摩仪",
+        "充电"
+      ],
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "JD002949",
+          "name": "顺庭家用按摩器多功能肩颈椎腰椎语音经络按摩仪电子数码经络仪颈椎电疗脉冲针灸按摩器 颈部按摩蓝屏夜光 升级版充电语音10贴片双线输出款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001393",
+          "name": "攀高（PANGAO）颈椎按摩器 颈部按摩仪脖子热敷按摩枕 颈椎按摩 充电便携 护颈仪 旗舰款：B11【礼品礼物】",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001800",
+          "name": "OTO 肩颈颈椎按摩器按摩枕按摩仪车载家用肩颈部腰部颈椎按摩器按摩仪按摩枕头颈部护理靠枕正反揉捏热敷 充电版 菱纹灰",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002176",
+          "name": "小米有品颈椎按摩仪同款颈部按摩仪器脖子揉捏发热6头颈椎仪电磁电击脉冲颈部理疗仪智能护颈仪杰霆 白色 6头充电加热款(默认中文)",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000555",
+          "name": "充电款眼部按摩仪缓解疲劳视力黑眼圈神器热敷眼罩智能护眼仪黑色款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002733",
+          "name": "南极人颈椎按摩器 呵护颈仪颈部肩腰椎部 按摩枕颈椎仪垫披肩膀脖子肩颈按摩仪 圣诞节送父母礼品物男女士 【支持国货】小米白豪华升级充电款-男女可用",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001277",
+          "name": "【升级四头】茗振颈椎按摩仪 颈椎按摩器颈部肩部脖子按摩披肩枕垫肩颈颈肩按摩器仪富贵包肩膀按摩器 语音播报豪华款（4倍脉冲按摩+遥控器）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000905",
+          "name": "英国VDEMO威德摩手持式按摩器棒颈椎穴位按摩仪全身多功能迷你小型电动便携无线充电震动肌肉海豚按摩棒 日本技术经典款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000938",
+          "name": "【百亿补贴】美菱中科颈椎按摩器智能按摩器呵护肩颈部按摩枕颈椎仪腰椎部垫膀脖子护颈仪男女 美菱官方指定特卖款-小米白旗舰充电折叠佩戴更方便",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002133",
+          "name": "SKG 颈椎按摩器 颈椎按摩仪 肩颈按摩器 颈椎经络电脉冲护颈仪 4098 蓝牙款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001333",
+          "name": "康佳颈椎按摩器充电肩颈脖子缓解酸痛揉捏推拿捶打智能热敷护颈仪 全配旗舰/12挡/脉冲理疗热敷/语音",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001235",
+          "name": "凯宾斯颈椎按摩器仪劲肩部颈部按摩枕 按摩仪多功能全身脖子电动热敷家用脖子 全身家用 按摩靠垫护颈仪 典雅黑气囊遥控",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001114",
+          "name": "知茗颈椎按摩器按摩仪情人节礼物送男友女友生日礼物女送老公老婆纪念日送男士母亲老师老人礼物员工福利礼品 低头族神器（白色6头）+充电款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003191",
+          "name": "日本鲸式腾跃 颈椎按摩器 肩颈按摩仪多功能护颈仪家用办公室车载颈部按摩器 脖子肩颈按摩器富贵包U型枕 充电白色款（基础脉冲功能）",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000390",
+          "name": "安尚按摩枕双开关无线充电电动颈椎肩颈部腰部按摩仪器颈部全身按摩器家车两用按摩靠垫靠背按摩椅 12头双键插电家车两用",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001751",
+          "name": "顺庭家用按摩器多功能肩颈椎腰椎语音经络按摩仪电子数码经络仪颈椎电疗脉冲针灸按摩器 颈部按摩蓝屏夜光 电池语音10贴片双线输出款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "儿童护眼仪",
+      "description": "医药保健·眼部按摩(人群约束)",
+      "keywords_hint": [
+        "护眼",
+        "儿童",
+        "眼部按摩"
+      ],
+      "pool_size": 13,
+      "candidates": [
+        {
+          "id": "JD000351",
+          "name": "美国西屋眼部按摩仪热敷护眼仪儿童护眼仪眼睛按摩仪眼部按摩护眼仪眼罩充电生日礼物送女友送男友 奶油黄",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000318",
+          "name": "何浩明 眼部按摩仪 眼部按摩器震动揉捏器护眼仪儿童护眼保仪生日礼物 蓝牙无线款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001049",
+          "name": "Blaupunkt德国蓝宝眼部按摩仪眼睛按摩器眼罩儿童护眼仪美容仪成人润眼仪眼镜熬夜神器男生日礼物 夜幕蓝",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002294",
+          "name": "倍轻松（breo）眼部按摩仪 护眼仪 眼部按摩器眼保仪热敷气压 倍轻松按摩眼罩肖战代言同款 isee J儿童款护眼仪",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000022",
+          "name": "Aerpul/阿尔普儿童护眼仪中小学生智能按摩器恒温热敷眼罩眼部按摩仪眼保仪男孩女孩生日礼物 儿童款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002441",
+          "name": "石崎秀儿（SURE）日本按摩仪眼部按摩器热敷眼罩音乐蓝牙儿童护眼仪开学礼物 套装D",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003059",
+          "name": "知茗 新款眼部按摩仪热敷儿童智能按摩器电动蓝牙眼睛护眼仪 S10-C白色（热敷+蓝牙+震动）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001130",
+          "name": "【网课推荐】德国凯伦诗（CLORIS）专用儿童护眼仪 学生眼部按摩仪 青少年眼保仪器 生日礼物 炫彩粉",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002363",
+          "name": "【官方旗舰】艾益生多功能眼鼻 眼鼻仪熏蒸器鼻炎理疗仪电子无烟艾灸仪儿童护眼仪温灸器艾灸眼罩中松 BABY粉",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001450",
+          "name": "【品牌授权】Aerpul阿尔普儿童护眼仪AR-1086学生礼品眼部家用按摩q器眼罩61儿童节生日礼物 黄色猪",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002152",
+          "name": "阿瞳三代护眼仪眼睛眼部按摩仪青少年儿童学生眼保仪贝茨锻炼【旗舰店】 月套装：主机6A+眼贴*6+叶黄素*1",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002549",
+          "name": "眼部按摩仪器眼睛热敷护眼保仪护眼仪智能眼罩 白色 经典款-变频震动",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000555",
+          "name": "充电款眼部按摩仪缓解疲劳视力黑眼圈神器热敷眼罩智能护眼仪黑色款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "相机",
+      "description": "手机数码·相机",
+      "keywords_hint": [
+        "相机",
+        "摄像",
+        "单反",
+        "微单"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "JD003993",
+          "name": "劲码 小米小蚁运动相机迷你三脚架山狗相机章鱼支架GoPro8配件hero 7 6 5相机三脚架",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003880",
+          "name": "相机背带相机带肩带相机挂绳微单肩带复古挂脖单反快拆肩带适用于索尼富士拍立得佳能g7x2相机背带文艺绳 005黑白条纹 38mm加宽+背带扣一对",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001467",
+          "name": "相机肩带快拆 相机背带扣转换连接器快拆绳尾扣微单反肩带佳能尼康 粗绳扣x2",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002971",
+          "name": "相机镜头清洁纸 擦镜纸光学拭镜纸相机镜头纸眼镜纸清洁湿纸巾蔡司 蔡司擦镜纸120片装",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000910",
+          "name": "富士拍立得相机 mini9套餐二含相纸男女学生款便宜7c/7+升款相机 mini11黑色 套餐五",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002165",
+          "name": "富士拍立得相机 mini9套餐二含相纸男女学生款便宜7c/7+升款相机 mini9草木绿 套餐三",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001981",
+          "name": "vbnm【新品】GO袖珍型即时成像相机全新拍立得相机迷你时尚 标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002914",
+          "name": "佳能相机（Canon）EOS r5 专微相机 全画幅微单 Vlog相机 8K高清视频记录 8级防抖 R5单机+R转接环套装 套餐四【适合高清视频爱好者，可拍摄8K超高清视频】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000361",
+          "name": "橙影智能摄影机云台稳定运动相机360°旋转手持vlog云台相机 玄晶黑经典套装 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001953",
+          "name": "索尼微单相机镜头遮光罩 ALC-SH128(索尼18-105镜头遮光罩）",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002318",
+          "name": "微单相机包 小单反包 适用于佳能索尼尼康相机 佳能微单包【R5/R6】",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002373",
+          "name": "佳能相机包 单反相机包单肩 佳能原装摄影包 佳能微单 M6II M50II M200",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002226",
+          "name": "佳能（Canon） EOS 850D 单反相机照相机 4K摄像 vlog拍摄 腾龙18-200mm II VC防抖套装 套餐四 大师摄影礼包",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000382",
+          "name": "佳能（Canon）数码相机 便携高清卡片机 长焦数码照相机 高清家用旅游相机 无线WiFi便携相机 PowerShot SX720 HS（40倍变焦） 套餐三【升级128G卡 备用电池 三脚架等配件】",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003935",
+          "name": "佳能相机 ixus285 数码相机 卡片机 照相机 学生入门便携式家用照像机 IXUS285 HS 紫色 套餐一",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000761",
+          "name": "佳能相机包单反包 单肩摄影包 照相机背包 6d2 6d 5d4 800d单反背包 摄影背包防潮微单包 R3 R5 R6 5D4 6D2 佳能摄影单肩包",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003655",
+          "name": "佳能（Canon）EOS 6D Mark II 6D2 单反相机 单反机身 套机 全画幅 EOS 6D2 机身(含卡包）",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003468",
+          "name": "佳能 EOS R5 微单相机 数码相机 全画幅专业微单 Vlog相机 8K视频拍摄 单机身【独立包装 赠价值1599元配件大礼包】 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001265",
+          "name": "尼康（Nikon）Z 50 微单相机 入门级微单套机 轻便 Vlog（Z DX 18-140mm f/3.5-6.3 VR）",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000953",
+          "name": "佳能 EOS 5DS R/5dsr 专业全画幅单反相机 （约5060万像素) 5DSR+85F1.4 人像镜头 标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "显示器",
+      "description": "手机数码·显示器",
+      "keywords_hint": [
+        "显示器",
+        "屏幕",
+        "2K",
+        "144Hz"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "KD000775",
+          "name": "机械革命 无界M5s/M7s系列i5/i7商用办公台式电脑主机套装23.8英寸显示器套装 i5-13420H/16G/512G SSD标配 单主机+23.8英寸显示器",
+          "category": "手机数码",
+          "price": "2688.0",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000863",
+          "name": "机械革命 无界M5s/M7s系列i5/i7商用办公台式电脑主机套装23.8英寸显示器套装 i5-13420H/16G/512G SSD标配 单主机+23.8英寸显示器",
+          "category": "手机数码",
+          "price": "2688.0",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002565",
+          "name": "机械革命 无界M5s/M7s系列i5/i7商用办公台式电脑主机套装23.8英寸显示器套装 i5-13420H/16G/512G SSD标配 单主机+23.8英寸显示器",
+          "category": "手机数码",
+          "price": "2688.0",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002906",
+          "name": "爱奇艺vr Cosmos VR体感游戏机 虚拟现实智能VR眼镜套装 pcvr2Q2R1P210 i7旗舰主机+27英寸显示器",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003690",
+          "name": "创乐博 树莓派4B Raspberry Pi 4 显示器无线鼠标键盘套件电脑AI开发板python 无卡基础套餐 pi 4B/8G(现货)",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002703",
+          "name": "创乐博 树莓派4B Raspberry Pi 4 显示器无线鼠标键盘套件 开发板python电脑AI 树莓派入门套件B套餐 pi 4B/8G(现货)",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "KD000215",
+          "name": "惠普（HP）星Desk 商用办公台式电脑主机 财务开票 公司前台 14代i5 16G D5 1T+23.8显示器 WiFi6 蓝牙 注册升级五年上门",
+          "category": "手机数码",
+          "price": "3914.1",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD000556",
+          "name": "惠普（HP）星Desk 商用办公台式电脑主机 财务开票 公司前台 14代i5 16G D5 1T+23.8显示器 WiFi6 蓝牙 注册升级五年上门",
+          "category": "手机数码",
+          "price": "3914.1",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD000845",
+          "name": "惠普（HP）星Desk 商用办公台式电脑主机 财务开票 公司前台 14代i5 16G D5 1T+23.8显示器 WiFi6 蓝牙 注册升级五年上门",
+          "category": "手机数码",
+          "price": "3914.1",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD000951",
+          "name": "惠普（HP）星Desk 商用办公台式电脑主机 财务开票 公司前台 14代i5 16G D5 1T+23.8显示器 WiFi6 蓝牙 注册升级五年上门",
+          "category": "手机数码",
+          "price": "3914.1",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD002945",
+          "name": "华硕（ASUS）品牌【14代酷睿i7】台式电脑主机商用办公独显政府企业采购设计渲染补贴家用游戏电脑整机全套 三：酷睿i7/16G/1TB/旗舰显卡 华硕主机+24寸显示屏全套【高清蓝光护眼】",
+          "category": "手机数码",
+          "price": "1967.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001493",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001176",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000681",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000604",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000558",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000267",
+          "name": "华硕（asus）【14代酷睿i7】台式电脑主机独显商务办公家用游戏设计渲染企业补贴电脑整机全套 d：酷睿i7/16g/1tb/4g超清独显 华硕主机+24寸显示器(蓝光...",
+          "category": "手机数码",
+          "price": "2168.0",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "机械键盘",
+      "description": "手机数码·键盘",
+      "keywords_hint": [
+        "键盘",
+        "机械",
+        "轴"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD003296",
+          "name": "罗技同款键盘真机械键盘青104键108电竞游戏有线青釉个性台式笔记本电脑外接键盘安格里 169白蓝配色(混彩光)青轴",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001791",
+          "name": "黑峡谷x3同款青轴机械键盘87键短款小型便携无数字键笔记本电脑外接打字电竞游戏专用键盘鼠标套装安格里 黑灰拼色(青轴 87键)+游戏鼠标 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003170",
+          "name": "K800粉色键盘 少女心生朋克USB有线外接发夜光机械手感可爱办公家用商务复古圆帽冰怡 无线套装版(圆键复古糖果色口红键帽 海洋蓝充电版 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001917",
+          "name": "Blackmagicdesign BMD调色剪辑键盘 DaVinci Resolve 达芬奇剪辑键盘 Speed Editor剪辑键盘【送达芬奇软件】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003720",
+          "name": "联想电脑外接无线键盘鼠标蓝牙双模套装无限键鼠台式办公打字专用静音无声机械巧克力笔记本和小便携女生冰怡 冰河银【2.4G充电版】-键鼠套装 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002982",
+          "name": "超霸（GP） 7号电池40节无汞环保高功率1.5V碳性七号AAA电视机空调遥控器玩具鼠标键盘R03",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001641",
+          "name": "【次日达】南孚电池聚能环3代碱性干电池适用儿童玩具/血压计/血糖仪/挂钟/键盘鼠标/遥控器 5号20粒",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD001497",
+          "name": "联想（Lenovo）YOGAPadPro14.5AI元启版【张凌赫同款平板】高抗反OLED 3K真彩显示16+512G浅海贝【含笔+键盘】",
+          "category": "手机数码",
+          "price": "4969.01",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD000286",
+          "name": "WIKO Hi MateBook 14 酷睿Ultra 2 华为 智选轻薄笔记本电脑 二代酷睿Ultra 5 24G 1T极夜灰 圆形键盘",
+          "category": "手机数码",
+          "price": "5904.52",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD000319",
+          "name": "WIKO Hi MateBook 14 酷睿Ultra 2 华为 智选轻薄笔记本电脑 二代酷睿Ultra 5 24G 1T极夜灰 圆形键盘",
+          "category": "手机数码",
+          "price": "5904.52",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD002231",
+          "name": "WIKO Hi MateBook 14 锐龙 200系列 华为智选轻薄笔记本电脑 AMD锐龙7 H 255 32G 1T晨曦金 圆形键盘",
+          "category": "手机数码",
+          "price": "5568.01",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD002152",
+          "name": "WIKO Hi MateBook 14 锐龙 200系列 华为智选轻薄笔记本电脑 AMD锐龙7 H 255 32G 1T晨曦金 圆形键盘",
+          "category": "手机数码",
+          "price": "5568.01",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD001898",
+          "name": "WIKO Hi MateBook 14 锐龙 200系列 华为智选轻薄笔记本电脑 AMD锐龙7 H 255 32G 1T晨曦金 圆形键盘",
+          "category": "手机数码",
+          "price": "5568.01",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD001230",
+          "name": "WIKO Hi MateBook 14 锐龙 200系列 华为智选轻薄笔记本电脑 AMD锐龙7 H 255 32G 1T晨曦金 圆形键盘",
+          "category": "手机数码",
+          "price": "5568.01",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "KD000701",
+          "name": "WIKO Hi MateBook 14 锐龙 200系列 华为智选轻薄笔记本电脑 AMD锐龙7 H 255 32G 1T晨曦金 圆形键盘",
+          "category": "手机数码",
+          "price": "5568.01",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "蓝牙音箱",
+      "description": "手机数码·音箱",
+      "keywords_hint": [
+        "音箱",
+        "蓝牙",
+        "音响"
+      ],
+      "pool_size": 14,
+      "candidates": [
+        {
+          "id": "JD003331",
+          "name": "漫步者（EDIFIER）R1080BT 2.0声道 电脑音箱 多媒体音箱 蓝牙音箱 木质音响 白色",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000639",
+          "name": "久好 招财猫摆件音箱店铺开业家居开业贺礼创意礼品送老板收款提示器蓝牙音箱支付到账收款播报神器创意家居 招财猫蓝牙音响（金色）",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000138",
+          "name": "小度 智能屏1s百度人工智能音箱触屏AI语音遥控蓝牙音箱wifi迷你音响闹钟低音炮向往的生活同款 小度在家1s-珊瑚红",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001661",
+          "name": "声擎（Audioengine）A2+ Wireless 高级桌面式蓝牙音箱 北极白",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000564",
+          "name": "漫步者（EDIFIER） HECATE G2000无线蓝牙音箱2.0电脑桌面音响客厅家用游戏低音炮 黑色",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001676",
+          "name": "AVANCE AW450 丹麦皇冠音响蓝牙发烧hifi功放组合音箱cd播放机hifi家用台式组合音响 AW450红色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003178",
+          "name": "ZGP JT80音箱支架音箱架子加厚十字架牢固稳定音箱落地支架 单支",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001813",
+          "name": "索尼无线蓝牙音箱影视音效插卡优盘HiFi音响FM收音 银色+32G优盘+热门歌曲 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000209",
+          "name": "松下（Panasonic）零重力太空舱3D按摩 AI语音控制蓝牙音箱全自动智能按摩椅 EP-MAC9 浅蓝色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003980",
+          "name": "索爱（soaiy）S-318小蜜蜂扩音器教师蓝牙音箱小喇叭腰挂麦克风导游插卡便携式喊话器教学讲课 青铜翡",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000943",
+          "name": "拼搏者 便携蓝牙音箱低音炮大音量户外小型广场舞音响迷你手提家用带麦克风手机微信收款语音播报器 升级版+无线话筒",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000790",
+          "name": "华为（HUAWEI） sound se智能蓝牙音箱帝瓦雷低音炮音响电脑立体声家用户外播放器ai小艺 sound se 黑色【送晒单大礼包六选一】",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002988",
+          "name": "喜马拉雅 好声音小雅Nano 智能WIFI音箱AI助手语音控制 早教陪伴学习机迷你儿童故事 天蓝色 音箱+喜马会员年卡",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000745",
+          "name": "TD-V26插卡音箱收音机U盘便携式迷你小音响 随身听 黑色标配+充电器 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "智能手表",
+      "description": "手机数码·智能穿戴",
+      "keywords_hint": [
+        "手表",
+        "智能",
+        "运动手环"
+      ],
+      "pool_size": 16,
+      "candidates": [
+        {
+          "id": "JD000345",
+          "name": "华为（HUAWEI） WATCH 3智能手表 运动智能手表 鸿蒙HarmonyOS eSIM独立通话 黑色 活力款",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001051",
+          "name": "贝乐星辉适用华米手表amazfit verge智能手表硅胶纯色表带 A1801替换腕带 【白色】 华米 verge",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001181",
+          "name": "罗能多功能智能手表旗舰店g28pro二代运动健康测血压2021男女手表新品新款 G3 高清款 高清360*360",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001240",
+          "name": "【直降300】华为手表watch gt2e运动智能手表两周续航防水心率监测NFC支付男女3pro 曜石黑丨送贴膜+充电头+表带+晒单蓝牙耳机",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001104",
+          "name": "【无游戏双摄像头】4G儿童电话手表中小学生旋转翻盖智能手表全网通防水定位视频通话男女孩初中生手机手表 粉色【4G全网通+精准定位+视频通话】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001944",
+          "name": "小米（MI） 小米手表 Watch Color 2 运动智能手表 心率检测 蓝牙通话 星耀黑",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002003",
+          "name": "适用于华为智能手表gt gt2 GT2 pro男款 米兰尼斯黑色银色金属表带22mm 非原装配件 米兰尼斯【黑色】22mm接口",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001261",
+          "name": "智能电击闹钟强力创意叫起床响多组高中生神器叫醒网红手表 电击手表 8档电击档位 -待机10天左右 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003717",
+          "name": "黑沙（HEISHA） 儿童电话手表智能gps定位移动联通多功能手机防水触屏2g男女孩中小学生视频通话 H4211-01-儿童手表粉色",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000617",
+          "name": "运动智能华强北手表男多功能充电触屏跑步手表女学生电子表女防水 【UI动态彩屏 心率 血压 天气】-6 黑色-(自定义界面 震动闹钟 彩屏 智能提醒 心率",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001919",
+          "name": "智能手环蓝牙通话手表触屏拨号多功能男女学生情侣运动信息闹钟防 神秘黑全触屏蓝牙通话+自定义表盘",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000384",
+          "name": "智能手环运动腕表男女血压心率防水全触控纯圆屏蓝牙电子计步器多运动模式vivo小米oppo苹果手机通用 黑色胶带全圆屏全触控自定义表盘旗舰版",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000603",
+          "name": "智能运动手环手表测心率血压睡眠多功能彩屏计步器健康测量闹钟男女通用 典雅黑【自定义表盘+天气推送+音乐控制】",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001721",
+          "name": "小米（MI）华为通用智能手表男电子表女学生简约韩版时尚潮流青少年防水运动计步 字母黑",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003431",
+          "name": "智能手环男女多功能运动计步器时尚防水手表闹钟震动提醒监测心率血压血氧跑步小米5华为安卓苹果通用 旗舰版(中国红)",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002455",
+          "name": "【微信抖音】 天才学生儿童电话手表初高中生青少年学习4G全网通智能GPS定位男女孩苹果小米手机通用 黑曜【QQ微信抖音】学习APP+咪咕音乐+扫码支付",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "电饭煲",
+      "description": "家用电器·电饭煲",
+      "keywords_hint": [
+        "电饭煲",
+        "电饭锅",
+        "球釜"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "JD001534",
+          "name": "半球（PESKOE）电饭煲 商用电饭煲 10升酒店食堂大容量商用西施电饭锅CFXB100-B1",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003614",
+          "name": "美的（Midea）电饭煲带蒸笼机械式电饭锅5L大容量5-6人家用自动电饭锅 5L大容量电饭煲",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002551",
+          "name": "电视同款懊袔玛格立纳柴火迷你电饭煲家用小容量电饭锅+章丘铁锅+节电器 电饭煲+节电器+章丘铁锅",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003423",
+          "name": "苏泊尔（SUPOR）电饭煲迷你2L 球釜IH电磁加热 智能电饭锅 小型触控面板 24小时智能预约 2L球釜电饭煲",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002802",
+          "name": "半球智能电压力锅家用高压锅双胆迷你多功能电饭煲全自动- 古铜色6L单胆",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000569",
+          "name": "奕创美的电饭煲蒸笼MB-FS4013 FS409 FS509 SCF4005F蒸格4L5L升蒸架",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000996",
+          "name": "适用九阳电饭煲上盖配件FH988-5L/FT888-5L锅盖开关按钮开盖配件",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003876",
+          "name": "奕创美的电饭煲1.6升密封胶座FD161B MB-FD16/FD161防溢板密封圈",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000973",
+          "name": "苏泊尔 SUPOR 香槟金色 4L球釜IH电饭煲SF40HC69(企业采购）",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000883",
+          "name": "美的（Midea）电饭煲 5L升家用多功能涡轮防溢 大容量黄晶内胆智能预约电饭锅WFS5017TM",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002676",
+          "name": "美的(Midea)电饭煲家用智能大容量3L电饭锅多功能煲煮粥蒸饭预约定时迷你煮饭锅黑晶聚能内胆煮饭煲 (粉色/白色随机发货)3L大容量",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001571",
+          "name": "电热饭盒插电加热保温饭盒优益蒸菜迷你电饭煲礼品团购公司采购之选 双层咖啡色升级款+3件套",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000423",
+          "name": "美的（Midea）电饭煲电饭锅智能家用5L升大容量预约气动涡轮防溢锅金属机身圆灶釜蜂窝内胆 【轻奢款4L】香槟金",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000792",
+          "name": "ObOWAI电饭锅多功能机械式家用大容量老人学生简单操作迷你小电饭煲煮饭煲煮饭锅熬粥稀饭锅 升级版豪华金色4L（高配）有蒸笼",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000094",
+          "name": "海尔（Haier）电饭煲锅 大容量多功能 全自动4L5升 家用预约 智能蒸 米饭锅 一锅多用HRC-F4292N 企业采购",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002302",
+          "name": "志高（CHIGO）商用电饭煲电饭锅食堂饭店酒店工厂保温蒸饭锅老式大容量电饭锅10人20人以上 10L不粘胆+蒸笼(可供10-15人)4.5斤米",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003008",
+          "name": "三角牌（Triangle）电饭煲食堂商用电饭锅大容量8升-40升老式大型酒店饭店10-40人以上 14L花型大锅（适合14-19人）带蒸笼",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "电视",
+      "description": "家用电器·电视",
+      "keywords_hint": [
+        "电视",
+        "平板电视",
+        "4K"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "JD000346",
+          "name": "小米（MI）全面屏电视 EA65英寸 金属边框远场语音人工智能小爱控制网络液晶平板卧室电视 全面屏电视 EA65英寸",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002139",
+          "name": "小米电视 4S75 75英寸金属机身 4K超高清 HDR 蓝牙语音遥控 内置小爱 2GB+8GB 智能网络教育电视 L75M5-4S",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000213",
+          "name": "海缔力(HDEngine) 幻影系列 2.0光纤HDMI电视投影高清连接线电视投影4K数据线影院 15米",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002923",
+          "name": "倍嘉尔BJE-999按摩椅全自动家用全身揉捏多功能电动按摩椅电视同款授权经销商 电视同款倍嘉尔按摩椅金刚黑",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001887",
+          "name": "友信适用乐视电视遥控器3 LETVMAX70/X60S/X55/S50/S40第三代红外版不支持鼠标",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000613",
+          "name": "吉寿邦人工智能按摩足疗机全自动穴位揉捏推顶刮按摩家用足疗仪全家共享智能识别脚部大小电视同款 电视同款吉寿邦足疗仪+肩背按摩仪金色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000406",
+          "name": "京科适用于TOSHIBA东芝电视遥控器板 55U6780C 65U6780C",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000064",
+          "name": "小米电视EA43 2022款金属全面屏ES43英寸智能远场语音遥控 4K超高清平板液晶电视机 【标配版】ES43 金属全面屏 远场语音（高颜值）",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000367",
+          "name": "TCL电视遥控器L32E09 LE32D99 LE32D29 D59 LE32D39 L32C11",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002448",
+          "name": "HSHONG适用海尔模卡MOOKA电视遥控器HTR-A07M 43A3 40A3 48A6 43A6",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002797",
+          "name": "夏普 (SHARP) 50英寸4K超高清 手机投屏 智能网络WIFI 液晶 平板电视机",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003002",
+          "name": "智邦适用于创维酷开网络电视机遥控器通用YK-76HB YK-76LB YK-76JB YK-76HL",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003719",
+          "name": "先科（SAST）家用智能网络平板液晶电视机超高清金属窄边框超大屏超薄智慧语音投屏平板电视机 55英寸液晶电视（网络版）",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000791",
+          "name": "长虹（ChangHong） 唱戏机老人看戏机广场舞视频机播放器老年人收音机移动小电视跳舞音响带显示屏 22吋旗舰版 64G内存+广场舞套餐",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000210",
+          "name": "TCL电话机 HCD37 家用固定座机 免电池有绳来电显示电话 免提时尚小翻盖办公固话 37米白",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002045",
+          "name": "长虹（CHANGHONG）65Q7ART 65英寸4K 双平面艺 AI慧眼 儿童观影模式 杜比视听 JBL音响艺术电视",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000914",
+          "name": "智邦适用于海尔模卡液晶电视机语音遥控器板HTR-U16M通用HTR-U16 LS48G51注意型号",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "热水器",
+      "description": "家用电器·热水器",
+      "keywords_hint": [
+        "热水器",
+        "燃热",
+        "电热"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD000586",
+          "name": "海尔（Haier）天燃气热水器家用变频恒温速热式热水器智能防冻强排式燃气热水器 30千瓦16升天然气燃气热水器",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000016",
+          "name": "华凌燃气热水器 16升燃气热水器家用 天然气智能WIFI变频恒温 安全 即热强排式 【16升-天然气】L3 摩卡金",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003508",
+          "name": "Gree/格力空气能热水器家用200升大容量热泵热水器水之盈一级 水之盈一级能效200L",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001162",
+          "name": "领派壁挂炉天然气家用取暖锅炉采暖炉洗浴热水器两用地暖炉特价燃气热水器 分段控温24KW 天然气",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002009",
+          "name": "海尔（Haier）燃气热水器精准恒温智能蓝火节能天然气热水器 智控变升零冷水-16升",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003429",
+          "name": "樱雪 (INSE) 热水器液化气 13升燃气热水器 触控数码恒温无氧铜水箱 JSQ25-13QH2020",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003369",
+          "name": "樱花（ SAKURA ）A101燃气热水器家用洗澡天然气低水压启动燃气热水器 JSQ25-A101（13升）天然气",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001843",
+          "name": "万和（Vanward）零冷水燃气热水器一级能效16升 冷凝式 智能恒温强排式天然气热水器 JSLQ27-LS5T16 晨曦金",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001062",
+          "name": "长城（changcheng）燃气热水器家用强排式煤气热水器即热煤气速热式节能厨房数显促热特价低水压 (上门安装)-12升强排款+数显（天然气）",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001821",
+          "name": "太阳能热水器家用一体式不锈钢太阳能智能全自动光电两用 标努 全自动加热36管",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000425",
+          "name": "【上门安装】长城 储水式电热水器家用即热速热40升50L60 80厨房出租房小型卫生间电洗澡机热水器 60升圆桶+出水断电+防电场（上门安装）",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000277",
+          "name": "电热水龙头家用即热式厨卫两用MI速热厨宝热水龙头自来水热水器 升级数显【白色】+漏保 下进水",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002281",
+          "name": "热得快烧水棒神器安全桶烧电热棒加热管热水洗澡家用烧水器热的快 所有的款不能用于水壶，暖水瓶",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002882",
+          "name": "美菱（MeLng）即热式电热水器电家用小型卫生间厨房加热快速热智能变频恒温电免储水小厨宝淋浴器洗澡机 香槟金标准款【6050+接线端子】",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001551",
+          "name": "奥普（AUPU）即热式电热水器 速热变频智能恒温家用过水热淋浴洗澡免储水8500W DSFH-M8-85 灰色",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "电磁炉",
+      "description": "家用电器·电磁炉",
+      "keywords_hint": [
+        "电磁炉",
+        "灶",
+        "火锅"
+      ],
+      "pool_size": 14,
+      "candidates": [
+        {
+          "id": "JD003340",
+          "name": "尚朋堂双头电磁炉双灶电磁炉套装电磁灶家用嵌入式电磁炉灶电陶炉大功率电磁炉商用电灶 34H22",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003282",
+          "name": "半球（Peskoe） 电磁炉 触控微晶面板多功能家用智能电磁炉大功率爆炒火锅电磁炉 人气套餐（配汤锅）",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003776",
+          "name": "美的（Midea）电磁炉十档大火力面板触控家用电磁炉火锅RH2268 高配置黑色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001729",
+          "name": "美的（Midea）电磁炉火锅炒菜电磁炉家用智能火锅电磁炉灶大火力爆炒 曜石黑",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001851",
+          "name": "半球家用3500w电磁炉省电防水节能炒菜多功能电池炉炒锅套装 靐套餐1 电磁炉",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003556",
+          "name": "志高（CHIGO）嵌入式电磁炉双灶日本进口NEG家用智能大功率内嵌式电陶炉 NL2521台嵌两用电磁炉",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001364",
+          "name": "九阳 Joyoung C22-LC6 电磁炉多功能定时火锅烧水",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002076",
+          "name": "半球大功率触频家用电磁炉2200W智能防水省电定时火锅 套餐四+碗筷",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003345",
+          "name": "半球电磁炉家用2200W大功率触摸式防水节能爆炒火锅炉灶 套餐二+5L饭煲",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD004000",
+          "name": "西屋（Westinghouse）电磁灶家用嵌入式台式两用 大功率双头灶电磁炉 ICooker6",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001411",
+          "name": "电陶炉茶炉家用小型旋钮迷你电茶炉电热茶具光波磁炉煮茶器小米粥爱士顿 小黑炉_蒸煮双胆二用玻璃壶",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001200",
+          "name": "半球(PESKOE）电磁炉3500W大功率多功能家用炒菜锅一体节能电池炉全套餐 3500W套餐5+鸳鸯锅",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001741",
+          "name": "时尚蚂蚁经典电陶炉家用煮茶器煮茶炉光波炉茶道电磁炉不挑壶 玻璃壶+飞天酷炫黑煮茶炉",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003215",
+          "name": "志高嵌入式电磁炉双灶电陶炉3500W大功率电磁灶家用双灶大火力双头灶爆炒双头电灶台套装 2517",
+          "category": "家用电器",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "大闸蟹",
+      "description": "食品生鲜·大闸蟹",
+      "keywords_hint": [
+        "大闸蟹",
+        "蟹",
+        "阳澄湖"
+      ],
+      "pool_size": 13,
+      "candidates": [
+        {
+          "id": "JD002594",
+          "name": "【活蟹】神行大闸蟹现货 全母蟹 大蟹 鲜活螃蟹 六月黄大闸蟹现货鲜活香辣蟹河蟹 生鲜水产礼盒装 全公蟹5.0-5.3两 8只装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002814",
+          "name": "【活蟹】蟹品煌大闸蟹 全母固城湖大蟹 现货 特大鲜活的大蟹 生鲜 螃蟹水产河蟹 活体实物全公母大闸蟹 公蟹5.5-5.8两母蟹4.3-4.6两6对12只",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001987",
+          "name": "【活蟹】蟹品煌大闸蟹 全母固城湖大蟹 现货 特大鲜活的大蟹 生鲜 螃蟹水产河蟹 活体实物全公母大闸蟹 公蟹5.5-5.8两母蟹4.3-4.6两4对 8只",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000239",
+          "name": "【活蟹】掌昕鲜大闸蟹鲜活螃蟹现货 全母蟹2.3-2.6两 8只 生鲜活鲜送礼盒装年货海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000751",
+          "name": "【活蟹】乾澄大闸蟹鲜活螃蟹现货 公蟹3.3两 母蟹2.0两 4对8只 生鲜鲜活螃蟹礼盒海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000911",
+          "name": "【礼券】云笙水榭固城湖大闸蟹礼券公蟹4只母蟹4只螃蟹礼券大闸蟹礼券螃蟹券蟹卡 【家宴款】588型2.5两公蟹1.5两母蟹（4对）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003665",
+          "name": "【礼券】新孟河大闸蟹卡券官方店 提货券 螃蟹券集团企业团购集采 黄满膏肥 2398型公蟹5.5两母蟹3.5两4对8只",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003571",
+          "name": "【活蟹】掌昕鲜大闸蟹鲜活螃蟹现货 公蟹6.0-6.3两 母蟹3.8-4.1两 4对8只 7888型 生鲜送礼盒装年货海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001350",
+          "name": "【活蟹】蟹品煌大闸蟹 全母鲜活大蟹 固城湖活体实物特大水产 超大固城湖螃蟹活的生鲜批发海鲜年货礼盒装 全母（2.3-2.6两）12只",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002075",
+          "name": "【活蟹 】蟹爵全公蟹鲜活大闸蟹礼盒生鲜现货螃蟹 全公5-5.3两8只",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000660",
+          "name": "【活蟹】巨惠 现货大闸蟹 鲜活礼盒 公蟹3.5-3.8两 母蟹2.5-2.8两 4对8只螃蟹 海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000019",
+          "name": "【礼券】澄大 阳澄湖大闸蟹礼券蟹券 礼盒礼品卡 1528型(公4.5两 母3.5两 4对8只) 生鲜螃蟹礼盒 礼品卡 海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003419",
+          "name": "【活蟹】碱地宝 鲜活大闸蟹现货螃蟹公2.3-2.6两 母1.8-2.1两 4对8只盘锦河蟹生鲜礼盒海鲜水产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "牛肉",
+      "description": "食品生鲜·牛肉",
+      "keywords_hint": [
+        "牛肉",
+        "牛排",
+        "牛腱"
+      ],
+      "pool_size": 13,
+      "candidates": [
+        {
+          "id": "JD002576",
+          "name": "恒都 精选牛肉丝150g*5牛肉生鲜 国产",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002655",
+          "name": "大希地 牛肉粒黑椒生鲜牛肉138g*3速冻半成品",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000932",
+          "name": "潮牛文举 正宗潮汕火锅牛肉本地黄牛雪花肉脖仁五花肥牛新鲜牛肉片250g可发整块",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003065",
+          "name": "银蕨农场1.5kg家庭礼盒 新西兰进口原切肉眼牛排西冷牛排 牛肉块 过年春节送礼佳品牛肉礼盒",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003223",
+          "name": "真牛馆澳洲和牛 原切牛肉 牛腱子肉 整条进口整腱 健身牛肉 牛腱肉整条4kg",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002107",
+          "name": "新鲜牛腩肉5斤装正宗黄牛肉火锅食材批发整切清真调理生牛肉2/5斤 姒桀 5斤【高品质】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000398",
+          "name": "【满199 减100专区】大希地牛肉烧烤/海鲜三角披萨pizza加热即食 100g/片 海鲜披萨3片装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000040",
+          "name": "密农人家 牛腱子国产牛肉新鲜整切 生鲜1kg急冻锁鲜装 急冻锁鲜",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000561",
+          "name": "汇柒鲜 酱烧牛大骨580g/袋 红烧牛肉红焖牛肉牛蝎子火锅食材卤味熟食",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001329",
+          "name": "谷言咖喱牛肉冷冻料理包190g半成品菜肴土豆烧牛腩盖浇饭方便速食拌饭外卖简餐",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001343",
+          "name": "[商南助农馆]新鲜腌制调理牛腿肉生鲜冷冻保鲜帆儿庄园 牛腿肉5斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001401",
+          "name": "潮味码头 正宗潮汕手打牛肉丸 牛肉含量95% 手工牛筋丸 火锅食材 关东煮烧烤丸料 纯牛肉丸1斤+纯牛筋丸1斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001997",
+          "name": "趣十八番 正宗潮汕牛肉丸 手打牛筋丸 烧烤火锅食材 火锅丸料 500g每包 1斤牛肉丸",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "牛奶",
+      "description": "食品生鲜·牛奶",
+      "keywords_hint": [
+        "牛奶",
+        "纯牛奶",
+        "乳"
+      ],
+      "pool_size": 19,
+      "candidates": [
+        {
+          "id": "JD000781",
+          "name": "牛奶释迦果 新鲜佛头果 释迦水果 5斤大果礼盒装（6个）",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002217",
+          "name": "正宗贵妃枣牛奶枣 脆甜大青枣 当季新鲜孕妇水果5 七天保价【赠品不发货】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000411",
+          "name": "福建漳州大青枣新鲜贵妃蜜枣牛奶大枣应季脆甜大枣青新鲜水果 10斤",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000718",
+          "name": "采提 海南红心牛奶木瓜新超鲜甜孕妇下奶水果整箱5斤三亚木瓜顺丰",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003974",
+          "name": "电炖杯煮粥杯养生壶烧水杯牛奶加热杯办公室养生杯陶瓷电热水杯 白色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002842",
+          "name": "福建大青枣 新鲜时令水果 脆甜牛奶大青枣 精选3斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003199",
+          "name": "[5支]新品奥雪大冰桶95g 夏威夷甜橙牛奶雪糕冰淇淋 童年天冰大果",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000939",
+          "name": "福建贵妃蜜枣牛奶青枣冬枣新鲜水果时令当季应季 脆甜现摘现发 贵妃蜜枣3斤精选",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000489",
+          "name": "【JD空运】大凉山牛奶草莓新鲜水果3斤5斤当季草梅红颜草莓礼盒包装送礼大方 5斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000922",
+          "name": "冬枣脆甜 现货沾化冬枣 时令新鲜水果生鲜 年货节应季脆枣子牛奶青 5斤装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000080",
+          "name": "【0运费】三元鲜牛乳72℃鲜奶巴氏杀菌乳儿童孕妇早餐鲜牛奶低温纯牛奶 72℃鲜牛乳450ml*6瓶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001322",
+          "name": "每日鲜语巴氏杀菌鲜牛奶250ml*12瓶 全脂鲜牛奶12瓶*250ml 250ml*12瓶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002533",
+          "name": "伊利增加25%钙原味酸奶袋装100g袋装风味发酵乳早餐营养早餐奶 伊利增加25%钙酸奶100gx10袋",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001507",
+          "name": "味全优酪乳低温酸牛奶230g*6瓶 生牛乳风味发酵酸奶 芒果黄桃味6瓶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002235",
+          "name": "蒙牛大果粒酸奶260g杯黄桃芦荟 蓝莓 草莓 桑葚椰果水果发酵乳 桑葚+椰果味 12杯",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000678",
+          "name": "卡士酸奶 007原味无添加家庭装 1kg 低温冷藏纯新鲜酸牛奶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001135",
+          "name": "畅轻伊利酸奶蔗糖减半早餐牛奶pet8瓶实惠装蔓越莓奇亚籽风味发酵乳范丞丞同款 四种口味各2共8瓶",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003930",
+          "name": "简爱酸奶 儿童酸奶父爱配方0添加剂0蔗糖2%糖4%糖无蔗糖精准控糖 低温酸奶生鲜 024精准控糖组合100g*3*2袋",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001795",
+          "name": "中粮福临门大黄油500g 蛋糕面包饼干煎牛排植物黄奶油烘焙家用原料",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "巧克力",
+      "description": "食品生鲜·巧克力",
+      "keywords_hint": [
+        "巧克力",
+        "可可",
+        "糖果"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "JD003312",
+          "name": "和路雪迷你可爱多10只小蛋筒网红冰激凌冰糕雪糕冰淇淋 【一盒】香草+巧克力",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003877",
+          "name": "整箱32支奥雪椰子灰冰淇淋巧克力椰子口味雪糕65g冷饮 澳雪椰子灰20支",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003292",
+          "name": "中街1946巧思流心系列10支装流心巧巧*3阿棕*3半巧*4巧克力冰淇淋冷饮雪糕",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003132",
+          "name": "可米酷 无蔗糖冰淇淋 经典杯装系列 单口味90g*10 冰激凌冰激淋健康轻食 巧克力味",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003902",
+          "name": "蜜芒 水果生日蛋糕定制同城配送巧克力儿童网红定制全国配送爸妈北京上海广州天津深圳东莞8寸",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001416",
+          "name": "陕西脆柿子硬柿子巧克力苹果甜柿子当季新鲜水果整箱批发3/5/10斤 带箱10斤【精选中果】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002928",
+          "name": "玛琪摩尔新西兰进口冰淇淋小杯装系列(120mL)4口味组合装 香草巧克力芒果海盐焦糖冰激凌 香草味120ml*4杯",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002795",
+          "name": "笔记本电脑包15.6英寸女双肩包适用联想小新拯救者air华为冰怡恋 【鼠标垫套餐】果仁巧克力+灰色鼠标垫60*30cm 14寸",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001168",
+          "name": "妙可蓝多 棒棒奶酪 汪汪队奶酪棒棒 即食儿童高钙零食500g 原味+巧克力味【50支1000克】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003720",
+          "name": "联想电脑外接无线键盘鼠标蓝牙双模套装无限键鼠台式办公打字专用静音无声机械巧克力笔记本和小便携女生冰怡 冰河银【2.4G充电版】-键鼠套装 官方标配",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000337",
+          "name": "麦巧园 动物奶油新鲜水果蛋糕送老公送老婆送女友送闺蜜",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000054",
+          "name": "麦巧园 新鲜水果6寸卡通蛋糕皮卡丘儿童蛋糕同城配送北京上海广州深圳",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003193",
+          "name": "芙瑞多 动物奶油祝寿水果生日蛋糕贺寿聚会预定新鲜奶油生日蛋糕全国同城配送当日送达12寸",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002755",
+          "name": "芙瑞多 6寸乳脂动物奶油水果生日蛋糕儿童独角兽蛋糕送女友送女朋友送老婆创意北京上海广州全国同城配送",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000086",
+          "name": "芙瑞多 16寸新鲜水果奶油生日蛋糕订做乳脂动物奶油网红创意当日送达儿童祝寿全国同城配送",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002142",
+          "name": "【严选好物】木糖醇蛋糕糖尿人食品孕妇老人糖尿饼无添加糖精整箱专用面包零食病人 【中礼盒装】小圆满蛋糕【2斤】送礼大气",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD000085",
+          "name": "雪媚娘 酥蛋糕 咸蛋黄休闲食品零食整箱批发 糕点心下午茶 40枚【红豆20+紫薯20】",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "筋膜枪",
+      "description": "医药保健·筋膜枪",
+      "keywords_hint": [
+        "筋膜枪",
+        "按摩枪",
+        "肌肉放松"
+      ],
+      "pool_size": 17,
+      "candidates": [
+        {
+          "id": "JD000201",
+          "name": "奥克斯（AUX）筋膜枪按摩器筋膜肌肉按摩仪放松器肌膜枪肩颈腿部腰部筋膜机按摩枪颈膜枪健身运动A1 枪灰色【升级款-液晶触控】",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000550",
+          "name": "荣康RK-216MINI筋膜枪按摩枪按摩器静音高频震动电动放松肌肉健身运动全身筋膜枪 红色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002781",
+          "name": "SKG筋膜枪 全身按摩仪器 健身器材按摩器运动按摩枪肌肉放松器肌膜枪按摩锤筋膜机筋膜仪迷你 F5 F5白色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003899",
+          "name": "PHYSIOMER按摩枪筋膜仪肌肉放松震动枪棒按摩健身器材颈膜枪筋膜枪按摩器 TY602蓝色 国内充电器",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003937",
+          "name": "PHYSIOMER迷你按摩枪筋膜仪肌肉放松震动枪棒按摩健身器材颈膜枪筋膜枪 灰色 BX720液晶款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002536",
+          "name": "简诚 专业级6档筋膜枪迷你颈膜枪按摩枪家用健身筋膜机肌肉放松器深层筋膜抢肌肉冲击按摩仪 jm11A灰色A版",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002487",
+          "name": "南极人筋膜枪按摩器筋膜肌肉按摩仪放松器肌膜枪颈椎肩颈腿部腰部筋膜机按摩枪按摩器颈膜枪健身运动按摩棒锤 【健身达人旗舰款】多档力度+全身按摩",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002163",
+          "name": "匹克筋膜枪按摩器筋膜肌肉按摩仪放松器肌膜枪肩颈腿部腰部筋膜机按摩枪颈膜枪健身运动按摩棒锤 充电款+赠4组按摩头+超长续航",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002384",
+          "name": "【电视同款】优活筋膜枪肌肉按摩器优活老年筋膜枪肌肉按摩器必阳优活肌肉放松专用按摩器官方直销 【官方直销】优活筋膜枪黑色1台",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003799",
+          "name": "品善筋摩枪按摩器肌肉放松筋膜抢按摩枪筋膜机颈膜枪深层肌肉紧绷放松器 卓跃红",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003195",
+          "name": "华为（HUAWEI)通用多功能电动筋膜迷你肌肉放松枪胫膜按摩枪大功率肌膜枪家用皇迎 小粉枪",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000447",
+          "name": "简诚 筋膜枪按摩器颈膜枪全身颈部腰部肩部肌肉筋膜健身按摩运动训练器 jm12A黑色",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001814",
+          "name": "筋膜枪肌肉放松按摩器颈膜机多功能健身经膜抢mini专业级肌膜新款 (8头至尊绿)6800转强劲动力+8个按摩头+8小",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002660",
+          "name": "【精选好货】MINI筋膜枪高频震动按摩器肌肉放松器迷你按摩枪女生颈膜枪便携长续航节日生日礼物 星空灰",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000954",
+          "name": "【德国品牌】闽辰迷你筋膜枪筋膜肌肉放松肌膜枪肩颈腿腰部按摩器电动按摩仪颈膜枪健身运动训练手持按摩棒锤 豪华充电款绿色（液晶操控+电量显示+手提包）",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002025",
+          "name": "千禧康乐 筋膜枪肌肉放松器按摩器颈膜枪经膜枪筋摩抢按摩仪肌肉放松器 少女粉",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001264",
+          "name": "美的筋膜枪肌肉按摩器颈膜机放松器电动多功能经膜迷你小型按摩枪",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "按摩枕",
+      "description": "医药保健·按摩枕",
+      "keywords_hint": [
+        "按摩枕",
+        "颈椎",
+        "热敷"
+      ],
+      "pool_size": 18,
+      "candidates": [
+        {
+          "id": "JD003825",
+          "name": "小米生态凯意德充气按摩枕颈椎按摩器旅行便携式颈部按摩仪颈椎按摩仪旅行颈部按摩器充气按摩枕 充气按摩枕-粉色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001857",
+          "name": "德国凯伦诗（CLORIS）颈椎按摩器U型枕按摩护颈枕 颈部按摩仪揉捏热敷震动按摩仪器飞行枕旅行枕圣诞 蓝灰色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003412",
+          "name": "德国凯伦诗（CLORIS）无线按摩器 按摩抱枕 腰部背部颈椎多功能按摩仪 家用靠垫办公室全身按摩枕 咖啡色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002785",
+          "name": "本博颈椎按摩器按摩枕按摩仪背部腰部按摩垫多功能揉捏家用肩颈仪全身头颈部枕脖子神器靠垫送老人礼物 独立遥控+艾草热敷+防痛弹簧设计+四位一体全身按摩",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003007",
+          "name": "日本颂孚颈椎按摩器腰部背部多功能按摩枕脉冲电疗气压牵引家用颈椎脉冲气压枕 高级黑",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000747",
+          "name": "奥佳华LINE FRIENDS颈椎按摩器多功能U型枕颈椎枕旅行午睡便携振动按摩头枕OG-2612 黄色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001777",
+          "name": "何浩明 HOPHYSIO低频脉冲颈椎按摩器 颈椎按摩仪 肩颈按摩枕 保健按摩机按摩披肩 颈椎按摩仪(电疗式)",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003526",
+          "name": "恩隆车载颈椎按摩器颈部腰部背部肩部汽车按摩坐垫按摩靠垫腰靠车用按摩垫按摩枕全身腰部按摩仪震动按摩椅垫 尊贵款毛绒+12V小车家用+加热+气囊",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001800",
+          "name": "OTO 肩颈颈椎按摩器按摩枕按摩仪车载家用肩颈部腰部颈椎按摩器按摩仪按摩枕头颈部护理靠枕正反揉捏热敷 充电版 菱纹灰",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002333",
+          "name": "荣事达（Royalstar）按摩枕颈椎按摩器按摩垫腰部背部肩部按摩仪按摩椅垫腰部 按摩靠垫按摩坐垫 深空灰【家用版】8D按摩+正反揉捏+温感热敷 旗舰版",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003992",
+          "name": "欧菲丽美 电动按摩枕头颈椎按摩器 充电家用车载电动按摩枕全身肩颈背部腰部正反揉捏热敷靠枕按摩仪 充电版18头 仿真人揉捏+立体顶揉+温感热敷",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002407",
+          "name": "南极人颈椎按摩器按摩靠垫全身肩部颈部腰部背部按摩椅垫肩周肩颈护颈肩膀脖子按摩仪按摩枕头按摩锤 （仿真人揉捏+推拿指压热敷）送礼品物女",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001815",
+          "name": "日本ATEX HCL258W薄型按摩枕 加热揉捏颈椎腰部按摩器全身多功能电动靠枕头节日礼物送长辈女生 NEW! 粉色【9CM纤薄贴身 专业指压】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000390",
+          "name": "安尚按摩枕双开关无线充电电动颈椎肩颈部腰部按摩仪器颈部全身按摩器家车两用按摩靠垫靠背按摩椅 12头双键插电家车两用",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000906",
+          "name": "【京选好物】按摩枕头按摩器按摩仪家用颈椎多功能背部腰部颈部神器腰椎肩颈仪枕靠垫送家人老人好礼杰霆 灰色基础款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000110",
+          "name": "南极人（NANJIREN）颈椎按摩器 按摩枕靠垫全身颈部腰部肩部背部按摩椅垫肩颈脊椎头脖子按摩仪 小米古铜色+仿真人揉捏+立体顶揉+温感热敷",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000979",
+          "name": "同福茂 颈椎按摩器颈肩部腰部背部多功能全身家用揉捏按摩靠垫枕头 香槟色子母球温热款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001516",
+          "name": "古稀 小狗按摩枕头会按摩的哈士奇按摩狗抱枕毛绒玩具腿部颈部按摩颈椎生日礼物女送女友出差神器实用礼品 插电款萌宠小狗-毛绒靠枕-多功能仿真",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "刮痧",
+      "description": "医药保健·刮痧",
+      "keywords_hint": [
+        "刮痧",
+        "拔罐",
+        "经络"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD001934",
+          "name": "电动刮痧仪经络 刷疏通淋巴全身 多功能家用智能美容仪器加热拔罐CEOOL 豪华版",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002274",
+          "name": "福然客 电动刮痧仪器真空拔罐器家用砭石温灸仪负压经络刷热敷刮痧板片疏通纤体艾灸吸痧 无线奢华款金+2瓶精油",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003606",
+          "name": "满得利 电动刮痧仪器疏通经络家用负压器按摩神器脉冲刮痧大吸力拔罐 【基础-蓝色插电款】2个精油",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001839",
+          "name": "小米生态乐范乐伽揉捏足疗机 足部脚底按摩器 家用按摩仪 足底刮痧揉捏热敷按摩 全包裹按摩 揉捏刮痧 乐伽脚部揉捏按摩仪",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003727",
+          "name": "老角匠白水牛角1cm加厚刮痧板 面部美容按摩舒筋活络 肩颈背部女全身通用拨筋按摩棒 七夕节优选送爱人 白水牛角刮痧片（1.5cm）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000023",
+          "name": "美国迪斯（Desleep）足部脚底按摩器DE-F601足疗机全包裹热敷刮痧脚部足底按摩仪 礼物 【足疗机】全包仿真按摩+温感热敷+足底刮痧",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003020",
+          "name": "酸枝木按摩梳子头部颈部经络疏通乳房腺淋巴结刮痧礼品梳礼品 酸枝章鱼款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003487",
+          "name": "玛可蓓莉 脸部按摩仪 提拉紧致美容按摩仪微电流刮痧板瘦脸神器 磨砂金",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000349",
+          "name": "迪斯（Desleep）足疗机按摩器脚底按摩器抖抖震动足部按摩器刮痧气囊按摩DE-F19礼品小米珍珠白",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000684",
+          "name": "穆诗按摩椅小型太空舱全自动豪华家用全身多功能老人机格先者 款-全配置-足底滚轮刮痧-蓝灰色",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002616",
+          "name": "左点（Zdeer）2022款 电动刮痧仪器砭石拔火罐器按摩仪气罐热敷吸痧走罐按摩器黑砭石 气罐【10个】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003146",
+          "name": "福然客 电动刮痧仪器家用全身通用经络瘦身刷按摩器疏通仪淋巴排毒热敷神器 插电升级mini款红",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002376",
+          "name": "乐范（LERAVAN）乐伽智能拔罐刮痧仪 降暑去湿 家用养生无痛负压经络热敷磁波共振按摩器 羽翼白",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001616",
+          "name": "金稻（K·SKIN）刮痧仪家用电动吸痧机经络刷疏通仪淋巴按摩器操盘手 升级充电款-红色电动吸痧机",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002141",
+          "name": "灵恝手臂按摩器网球肘理疗神器全自动电动空气波气压揉捏肘关节电热护肘艾灸震动胳膊麻木疼腿部远红外热敷仪 智能气压按摩【单只】热敷震动",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "足疗机",
+      "description": "医药保健·足疗机",
+      "keywords_hint": [
+        "足疗",
+        "足浴",
+        "脚底按摩"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD003828",
+          "name": "卫尚泉足疗机多功能揉捏按摩足疗机揉捏推拿起压按摩足部",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002568",
+          "name": "足疗机日本 日本hka全自动足疗机揉捏家用脚底脚部足部足底穴位按摩仪器捏脚神器耐辉顿 黑骑士【尊版】",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003323",
+          "name": "足疗机小米有品 折叠泡·脚桶加热恒温家用全自动电动足底按摩足·浴盆足疗机 六味足浴包六大包（共180小包）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001331",
+          "name": "日本HKA 足疗机按摩器 多功能脚底足部按摩器脚部足底按摩仪器加热敷家用 豪华至尊版板凳足疗机",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001182",
+          "name": "足疗机小米有品 折叠泡·脚桶加热恒温家用全自动足疗机电动足底按摩足·浴盆 标准款",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000865",
+          "name": "健丝美『足疗机+腿部按摩器』足疗机腿部按摩器穴位足底全自动小腿揉捏加热家用足部脚底按摩器GK 至尊版金色送腿部按摩",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003596",
+          "name": "ROMVE蒸汽足疗机足底脚部按摩器家用全自动加热脚底部穴位足疗仪生日父母亲礼物适用于小米米家同款 【永乐宫联名】蒸汽足疗机+足浴包30片+保温盖",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000493",
+          "name": "足疗机遥控加热多功能脚底暖脚足脚揉捏按摩器 黑色 301",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001902",
+          "name": "按摩足疗机温热足底按摩揉捏按压推拿滚动加热全自动足部按摩器 大号",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003207",
+          "name": "二代足部按摩足疗机美腿机共享脚底足部电动按摩器带遥控 中国红二代",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003563",
+          "name": "足疗机脚底按摩器足部足底脚部脚步家用全自动穴位揉捏按脚器 玫瑰金 尊享款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001487",
+          "name": "皮谱足疗机泡脚 折叠泡脚机加热恒温家用全自动足疗机电动足底按摩足浴机 标准款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002720",
+          "name": "皮谱足疗机泡脚 可折叠泡脚机洗脚机全自动加热恒温电动按摩器足浴机家用足疗神器 大号液晶旗舰款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002758",
+          "name": "迪斯足疗机 F18足疗机家用全自动脚底足底按摩器足部穴位按摩仪团购 贵宾金",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000421",
+          "name": "全自动足疗机穴位揉捏按脚腿部小腿脚部足底脚底足部家用按摩器仪 旗舰黑9999款",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "送给长辈的礼物",
+      "description": "医药保健·意图型(送礼)",
+      "keywords_hint": [
+        "按摩",
+        "足浴",
+        "保健",
+        "理疗"
+      ],
+      "pool_size": 15,
+      "candidates": [
+        {
+          "id": "JD003128",
+          "name": "端午节送给妈妈婆婆岳母的生日礼物实用父亲节礼物送爸爸给妈妈生日母亲送礼长辈老人的孝顺实用 送爸爸心动白【语音播报+红光理疗+两档热敷】-",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000355",
+          "name": "美煌 足浴桶老人礼物新年礼物实用送长辈生日礼物送妈妈爸爸父母见面礼送岳父岳母老年人礼物高档礼品 孝心礼物 熏蒸泡三合一 全自动系列 祝寿送礼老人生日礼物送长辈",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001583",
+          "name": "毕业季送老师的礼物 花胶礼盒空盒鱼胶礼盒250克500克装鱼胶木盒花胶包装盒鱼胶礼品盒空盒子礼盒 不配礼袋 中号(200-250克))",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000135",
+          "name": "渊盛老人礼物实用送长辈祝寿全身按摩垫腰背部按摩靠垫加热床垫多功能按摩器生日礼物送爸爸妈妈母亲节礼物 【升级版大面积加热按摩垫】深灰绒",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003222",
+          "name": "柯达（Kodak）照片书定制纪念册 相册 杂志册礼物集毕业册节日礼物赠与我爱的人 方8 20页",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD003979",
+          "name": "智汇 多功能全身按摩垫全身躺按摩毯器仪老年人礼物实用送长辈父亲母亲生日礼物妈妈送爸爸父母礼物祝寿礼物 全身按摩皮革款【颈部揉捏热敷+玉石艾灸+拆卸药枕】",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001281",
+          "name": "海参鲍鱼礼盒10只海参干货过节礼品领导长辈高端礼物 腾旺纳跃 10只鲍鱼棕色礼盒装",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003486",
+          "name": "宁正堂 颈椎按摩神器按摩仪圣诞节礼物生日礼物女送女友男朋友老婆爸爸妈妈长辈父母老年人礼物年会礼品 雪玉白-低头族神器（肩颈部护颈仪）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD001249",
+          "name": "宁正堂 颈椎按摩神器按摩仪圣诞节礼物生日礼物女送女友男朋友老婆送爸爸妈妈长辈父母亲老年人礼物年会礼品 雪玉白-低头族神器（肩颈部护颈仪）",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD002484",
+          "name": "美煌 足脚底按摩 老人礼物礼品实用送父母亲爸爸妈妈老年人礼物长辈生日礼物送岳父岳母送领导 足部疗机老公老婆公司活动周年店庆员工福利客户抽奖品",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD003297",
+          "name": "父亲节妈妈生日礼物50-60岁送长辈送爸爸给父亲送母亲送老人实用的老妈7080岁老人老丈人生日礼物 卡其色款【按摩+热敷+躺坐两用+三档定时+手提礼盒",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001539",
+          "name": "七夕送男女朋友 母亲生日礼物妈妈给婆婆的老年人长辈40-50岁实用 【深邃蓝】-基础礼盒-恒温热敷+五大按摩模式",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001985",
+          "name": "智汇 老人礼物送长辈父母父亲生日礼物妈妈爸爸老年人实用足疗机足疗仪足疗足部脚部足底脚底按摩器祝寿婆婆 旗舰款【360度全包裹+恒温热敷+滚轮刮痧+脚套】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001438",
+          "name": "杨氏六喜颈椎按摩垫多功能电动全身家用按摩床垫生日礼物送爸爸妈妈父母长辈老年人祝寿养生实用 【孝心刺绣毛绒版】可拆卸药枕+爸妈您辛苦了+升级6",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000122",
+          "name": "【节日礼物】眼部按摩仪恒温热敷眼睛按摩眼罩凯胜智能护眼仪送长辈朋友（支持HUAWEI HiLink） 眼部按摩仪-经典灰【音乐款礼盒装】",
+          "category": "医药保健",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "学生用的笔记本电脑",
+      "description": "手机数码·意图型(学生本)",
+      "keywords_hint": [
+        "笔记本",
+        "轻薄",
+        "学生"
+      ],
+      "pool_size": 20,
+      "candidates": [
+        {
+          "id": "JD002084",
+          "name": "【专业46级考试】英语听力考试学生收音机大学英语四六级收音机调频fm考试用的四级六级三级ab级收音机 白色FM调频收音机+送五号电池",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000823",
+          "name": "优士电吹风机家用大功率宿舍用学生网红款风筒发廊冷热低噪音恒温吹风筒 翡翠绿",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002281",
+          "name": "热得快烧水棒神器安全桶烧电热棒加热管热水洗澡家用烧水器热的快 所有的款不能用于水壶，暖水瓶",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD002218",
+          "name": "索尼录音笔 Sony/索尼录音笔PCM-A10小随身专业高清降噪会议商务上课用学生 黑色 标配 16GB",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001948",
+          "name": "【达茂旗馆】古的草原 羊蝎子火锅 内蒙古牧区羔羊脊骨 浓汤肉多火锅食材加热即食 1200g*1盒",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD002255",
+          "name": "雷神猎刃S 2025【i9HX RTX5060】16英寸大学生用设计编程AI高性能轻薄游戏本笔记本电脑国家政府补贴 京东自营",
+          "category": "手机数码",
+          "price": "6443.11",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003128",
+          "name": "端午节送给妈妈婆婆岳母的生日礼物实用父亲节礼物送爸爸给妈妈生日母亲送礼长辈老人的孝顺实用 送爸爸心动白【语音播报+红光理疗+两档热敷】-",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001703",
+          "name": "中联（ZOLEE）电风扇小吊扇小型迷你小风扇床上用风扇家用蚊帐扇学生宿舍用电风扇5叶大风力微风吊扇 标品+5档遥控定时线",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001583",
+          "name": "毕业季送老师的礼物 花胶礼盒空盒鱼胶礼盒250克500克装鱼胶木盒花胶包装盒鱼胶礼品盒空盒子礼盒 不配礼袋 中号(200-250克))",
+          "category": "食品生鲜",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD000001",
+          "name": "美的烘干机家用小型速干衣机风干烘干器烤衣服的烘衣机折叠大容量 蓝色",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "KD002829",
+          "name": "联想笔记本电脑2025补贴20%高性能轻薄办公设计编程游戏扬天V学生网课手提超能本可选异能者 N150 16G内存 512G固态 P14H IPS全高清屏 满血性能显卡 全新...",
+          "category": "手机数码",
+          "price": "2248.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002317",
+          "name": "联想笔记本电脑2025补贴20%高性能轻薄办公设计编程游戏扬天V学生网课手提超能本可选异能者 N150 16G内存 512G固态 P14H IPS全高清屏 满血性能显卡 全新...",
+          "category": "手机数码",
+          "price": "2248.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002246",
+          "name": "联想笔记本电脑2025补贴20%高性能轻薄办公设计编程游戏扬天V学生网课手提超能本可选异能者 N150 16G内存 512G固态 P14H IPS全高清屏 满血性能显卡 全新...",
+          "category": "手机数码",
+          "price": "2248.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD001908",
+          "name": "联想笔记本电脑2025补贴20%高性能轻薄办公设计编程游戏扬天V学生网课手提超能本可选异能者 N150 16G内存 512G固态 P14H IPS全高清屏 满血性能显卡 全新...",
+          "category": "手机数码",
+          "price": "2248.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002371",
+          "name": "联想笔记本电脑 2025可选酷睿i5高性能超轻薄本 设计办公学生游戏本可选异能者 N100 16G内存 512G高速固态 P14H IPS全高清屏 精装升级 满血性能显卡 WiFi",
+          "category": "手机数码",
+          "price": "2249.0",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002971",
+          "name": "ThinkPad联想ThinkBook16+ 2025酷睿Ultra9可选3.2K屏补贴20%笔记本电脑高性能轻薄设计办公游戏学生超能本 25款酷睿5 32G内存 1TB固态 V15 IPS全高清屏",
+          "category": "手机数码",
+          "price": "4548.75",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002766",
+          "name": "ThinkPad联想ThinkBook16+ 2025酷睿Ultra9可选3.2K屏补贴20%笔记本电脑高性能轻薄设计办公游戏学生超能本 25款酷睿5 32G内存 1TB固态 V15 IPS全高清屏",
+          "category": "手机数码",
+          "price": "4548.75",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD002568",
+          "name": "ThinkPad联想ThinkBook16+ 2025酷睿Ultra9可选3.2K屏补贴20%笔记本电脑高性能轻薄设计办公游戏学生超能本 25款酷睿5 32G内存 1TB固态 V15 IPS全高清屏",
+          "category": "手机数码",
+          "price": "4548.75",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000956",
+          "name": "ThinkPad联想ThinkBook16+ 2025酷睿Ultra9可选3.2K屏补贴20%笔记本电脑高性能轻薄设计办公游戏学生超能本 25款酷睿5 32G内存 1TB固态 V15 IPS全高清屏",
+          "category": "手机数码",
+          "price": "4548.75",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "KD000872",
+          "name": "ThinkPad联想ThinkBook16+ 2025酷睿Ultra9可选3.2K屏补贴20%笔记本电脑高性能轻薄设计办公游戏学生超能本 25款酷睿5 32G内存 1TB固态 V15 IPS全高清屏",
+          "category": "手机数码",
+          "price": "4548.75",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    },
+    {
+      "query": "运动时戴的耳机",
+      "description": "手机数码·意图型(运动耳机)",
+      "keywords_hint": [
+        "耳机",
+        "运动",
+        "防水"
+      ],
+      "pool_size": 14,
+      "candidates": [
+        {
+          "id": "JD003075",
+          "name": "比博欧（biboou） 适用小米项圈运动蓝牙耳机硅胶套小米mini降噪耳机耳帽耳机套耳塞套耳机配件 透明【大中小各一对，送收纳盒】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002845",
+          "name": "纽曼（Newmine）V28微鳯运动蓝牙耳机对讲机防丢通话器音乐耳机可录音持久续航磁吸收纳手机通用 纽曼微鳯蓝牙耳机V28",
+          "category": "家用电器",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003879",
+          "name": "酷狗（KUGOU）M2真无线蓝牙耳机柄式半入耳运动游戏耳机超长续航智能版 星空灰",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD000431",
+          "name": "JBL MINI NC黑色 蓝牙耳机 主动降噪真无线耳机 无线运动耳机 防水防汗 苹果华为小米安卓通用",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002461",
+          "name": "小米（MI）适用于手环6/5运动智能智能心率血压睡眠监测运动计步蓝牙彩屏耳机二合一分离式手环 色皮带【旗舰版】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD001811",
+          "name": "JBL TUNE215BT 无线蓝牙耳机 半入耳式运动耳麦 5.0高效传输 Type-C极速充电 超长续航 苹果安卓耳机 曜石黑",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002856",
+          "name": "迷你运动收音机英语四六考试专用会议调频收音机简单老人户外晨练 机子+挂绳+耳机",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": null
+        },
+        {
+          "id": "JD003251",
+          "name": "鸣仁堂电动自动按摩文胸美胸宝胸部按摩器乳房按摩仪 黑色旗舰款【可随身戴】",
+          "category": "医药保健",
+          "price": "",
+          "from": "bm25",
+          "relevant": null
+        },
+        {
+          "id": "JD001881",
+          "name": "Masentek F808无线蓝牙耳机骨传导概念挂耳式不入耳式耳麦 运动跑步听歌通话游戏 苹果华为安卓手机电脑通用",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25",
+          "relevant": 1
+        },
+        {
+          "id": "JD003443",
+          "name": "英酷（INCOOL） 挂脖式蓝牙耳机无线运动耳机跑步入耳挂脖式适用于苹果华为小米VIVO\\/OPPO 顶配版【38小时续航+千元音质 】幸运红 【INCOOL 旗舰高配】",
+          "category": "手机数码",
+          "price": "",
+          "from": "bm25+vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD001305",
+          "name": "KO-STAR T19真无线蓝牙耳机TWS双耳降噪运动跑步游戏适用于华为苹果vivo小米oppo手机 【高清镜面/进口芯片/智能触控】象牙白",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD002514",
+          "name": "兰士顿 蓝牙耳机挂脖式无线运动耳麦 跑步超长续航磁吸开关半入耳式 苹果华为oppo小米vivo手机通用 L5C 黑色",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        },
+        {
+          "id": "JD000773",
+          "name": "智能手环运动电子无需蓝牙女男跑步睡眠学生儿童防水震动闹钟健康led运动计步器多功能篮球 T9黑色(新增:三组闹钟 抬手亮 防水 秒表)",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": null
+        },
+        {
+          "id": "JD002213",
+          "name": "【OKSJ华强北三代ANC】苹果蓝牙耳机无线airpods3 华为/小米/vivo/oppo/荣耀10/iPhone11/12运动主动降噪",
+          "category": "手机数码",
+          "price": "",
+          "from": "vector",
+          "relevant": 1
+        }
+      ],
+      "relevant": []
+    }
+  ]
+}

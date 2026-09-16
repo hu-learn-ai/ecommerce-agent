@@ -29,7 +29,7 @@ ensure_project_root()
 
 import jieba
 
-from tests.rag_evaluation import SEARCH_TEST_CASES, RetrievalMetrics
+from tests.rag_evaluation import SEARCH_TEST_CASES, RetrievalMetrics, load_labeled_gt
 
 # ------------------------------------------------------------------ #
 #  BM25 检索器
@@ -134,12 +134,20 @@ def evaluate() -> dict:
         faiss_index_path=settings.faiss_index_path,
     )
 
-    # 4. 逐用例评估
+    # 4. 逐用例评估（GT 优先用人工标注，缺失时回落关键词匹配）
+    labeled_gt = load_labeled_gt()
+    human_gt_cases = 0
     results = []
     for case in SEARCH_TEST_CASES:
         query = case["query"]
         keywords = case["relevant_keywords"]
-        gt = build_neutral_ground_truth(products, keywords)
+        if query in labeled_gt:
+            gt = {str(i) for i in labeled_gt[query]}
+            gt_source = "human"
+            human_gt_cases += 1
+        else:
+            gt = build_neutral_ground_truth(products, keywords)
+            gt_source = "keyword"
 
         # BM25 检索
         bm25_hits = bm25_retriever.search(query, 10)
@@ -157,6 +165,7 @@ def evaluate() -> dict:
             {
                 "query": query,
                 "ground_truth_size": len(gt),
+                "gt_source": gt_source,
                 "bm25": {"ids": bm25_ids, "metrics": bm25_metrics},
                 "vector": {"ids": vec_ids, "metrics": vec_metrics},
             }
@@ -172,6 +181,9 @@ def evaluate() -> dict:
     #    不含该细粒度品类词，无法建立中立相关集，与检索方法优劣无关）
     valid_results = [r for r in results if r["ground_truth_size"] > 0]
     skipped = len(results) - len(valid_results)
+    if skipped:
+        skipped_queries = [r["query"] for r in results if r["ground_truth_size"] == 0]
+        print(f"  跳过（人工标注为商品库内无相关商品）: {'、'.join(skipped_queries)}")
 
     metrics_keys = [
         "recall@1",
@@ -196,6 +208,21 @@ def evaluate() -> dict:
         summary["vector"][key] = round(vec_avg, 4)
         summary["delta"][key] = round(vec_avg - bm25_avg, 4)
 
+    # 按 GT 来源分组：人工标注才是无偏口径，关键词 GT 与它不能混在一起解读
+    summary["by_gt_source"] = {}
+    for source in ("human", "keyword"):
+        group = [r for r in valid_results if r.get("gt_source") == source]
+        if not group:
+            continue
+        summary["by_gt_source"][source] = {"cases": len(group)}
+        for key in metrics_keys:
+            summary["by_gt_source"][source][f"bm25_{key}"] = round(
+                sum(r["bm25"]["metrics"][key] for r in group) / len(group), 4
+            )
+            summary["by_gt_source"][source][f"vector_{key}"] = round(
+                sum(r["vector"]["metrics"][key] for r in group) / len(group), 4
+            )
+
     # 6. 输出汇总表
     print(f"\n{'=' * 60}")
     print(f"  汇总对比 ({len(valid_results)} 个有效用例, 跳过 {skipped} 个 gt=0 用例)")
@@ -208,8 +235,22 @@ def evaluate() -> dict:
             f"{summary['vector'][key]:<12.4f}{summary['delta'][key]:<12.4f}"
         )
 
+    if summary.get("by_gt_source"):
+        print(f"\n{'=' * 60}")
+        print("  按 GT 来源拆分（人工标注 = 无偏口径；关键词 GT 偏向 BM25）")
+        print(f"{'=' * 60}")
+        for source, data in summary["by_gt_source"].items():
+            label = "人工标注" if source == "human" else "关键词匹配"
+            print(f"  [{label}] {data['cases']} 个用例")
+            for key in ("ndcg@5", "mrr", "precision@5", "hit_rate@5"):
+                print(
+                    f"    {key:<12} bm25={data[f'bm25_{key}']:.4f}  "
+                    f"vector={data[f'vector_{key}']:.4f}"
+                )
+
     # 7. 保存报告
     report = {"summary": summary, "results": results}
+    report["summary"]["human_gt_cases"] = human_gt_cases
     json_path = os.path.join(PROJECT_ROOT, "tests", "bm25_baseline_report.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2, default=str)
@@ -233,10 +274,27 @@ def evaluate() -> dict:
                 f"{summary['vector'][key]:.4f} | "
                 f"{delta:+.4f} | {rel} |\n"
             )
-        f.write(
-            "\n> Ground truth 为中立关键词匹配（商品名/分类包含查询关键词），"
-            "对两种方法公平，不依赖任一方法的结果。\n"
-        )
+        if human_gt_cases:
+            f.write(
+                f"\n> Ground truth 为**人工标注**（{human_gt_cases}/{len(SEARCH_TEST_CASES)} 个用例，"
+                "来源 `tests/retrieval_gt_labeled.json`），其余用例回落为关键词匹配。\n"
+            )
+        if summary.get("by_gt_source"):
+            f.write("\n### 按 GT 来源拆分（人工标注 = 无偏口径）\n\n")
+            f.write("| GT 来源 | 用例数 | 指标 | BM25 | 向量检索 |\n|---|---:|---|---:|---:|\n")
+            for source, data in summary["by_gt_source"].items():
+                label = "人工标注" if source == "human" else "关键词匹配"
+                for key in ("ndcg@5", "mrr", "precision@5", "hit_rate@5"):
+                    f.write(
+                        f"| {label} | {data['cases']} | {key} | "
+                        f"{data[f'bm25_{key}']:.4f} | {data[f'vector_{key}']:.4f} |\n"
+                    )
+        else:
+            f.write(
+                "\n> Ground truth 为关键词匹配（商品名/分类包含查询关键词）。"
+                "注意：该口径天然偏向 BM25，人工标注后重跑可消除此偏置"
+                "（见 `python tests/build_retrieval_gt.py`）。\n"
+            )
     print(f"Markdown 报告已保存: {md_path}")
 
     return report

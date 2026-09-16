@@ -148,6 +148,9 @@ def register_all_agents(
         faiss_index_path=settings.faiss_index_path,
         shared_embedder=shared_embedder,
     )
+    # 预热 BM25 关键词索引：构建需 ~10s（7000 条商品名 jieba 分词），
+    # 放在启动期完成，避免第一个搜索请求承担冷启动延迟
+    search_agent.warmup()
     recommend_agent = RecommendAgent(
         neo4j_driver=neo4j_driver,
         llm=llm,

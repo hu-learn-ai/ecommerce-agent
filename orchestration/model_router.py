@@ -348,8 +348,14 @@ class SemanticCache:
     适用场景: 用户换了措辞但语义相同的查询
     例: "有什么便宜的耳机" vs "推荐个低价耳机" → 语义命中
 
-    注意: embedding 函数需要外部注入 (延迟加载 BGE 模型)
+    注意 1: embedding 函数需要外部注入 (延迟加载 BGE 模型)
+    注意 2: 必须按 namespace（intent + 参数签名）隔离。L3 只看 query 相似度，
+            若不做隔离，"蓝牙耳机"的搜索回答会被语义匹配成同 query 的分类回答
+            （实测相似度 1.0 直接误命中）。因此所有读写都带 namespace，
+            语义比对只在同一 namespace 内进行。
     """
+
+    _NS_SEP = "\x1f"
 
     def __init__(
         self,
@@ -360,8 +366,8 @@ class SemanticCache:
         self._embed_fn = embed_fn
         self._threshold = similarity_threshold
         self._max_size = max_size
-        # 存储: key → (embedding_vector, value, timestamp)
-        self._store: Dict[str, Tuple[np.ndarray, str, float]] = {}
+        # 存储: ns_key → (namespace, embedding_vector, value, timestamp)
+        self._store: Dict[str, Tuple[str, np.ndarray, str, float]] = {}
         # 嵌入缓存: 规范化查询 → 向量（避免重复查询重复计算 BGE）
         self._embed_cache: Dict[str, np.ndarray] = {}
         self._embed_cache_max: int = 500
@@ -383,29 +389,34 @@ class SemanticCache:
         """规范化查询文本（去除多余空白、统一小写）"""
         return " ".join(text.strip().lower().split())
 
-    def get_exact(self, query: str) -> Optional[str]:
+    @classmethod
+    def _ns_key(cls, namespace: str, norm: str) -> str:
+        """namespace 作用域内的存储 key（无 namespace 时退化为原行为）"""
+        return f"{namespace}{cls._NS_SEP}{norm}" if namespace else norm
+
+    def get_exact(self, query: str, namespace: str = "") -> Optional[str]:
         """精确快速路径：规范化 key 直接查字典，不计算 embedding。"""
-        key = self._norm(query)
+        key = self._ns_key(namespace, self._norm(query))
         item = self._store.get(key)
         if item is not None:
-            _, value, ts = item
+            _, _, value, ts = item
             if time.time() - ts <= settings.cache_ttl_seconds:
                 self._semantic_hits += 1
                 return value
         return None
 
-    def get(self, query: str) -> Optional[str]:
-        """语义查询: 返回最相似缓存项的 value (如果超过阈值)"""
+    def get(self, query: str, namespace: str = "") -> Optional[str]:
+        """语义查询: 返回同一 namespace 内最相似缓存项的 value (如果超过阈值)"""
         if not self._embed_fn or not self._store:
             self._semantic_misses += 1
             return None
 
         try:
             norm = self._norm(query)
-            # 精确快速路径（避免重复计算 embedding）
-            item = self._store.get(norm)
+            # 精确快速路径（避免重复计算 embedding，且必须限定 namespace）
+            item = self._store.get(self._ns_key(namespace, norm))
             if item is not None:
-                _, value, ts = item
+                _, _, value, ts = item
                 if time.time() - ts <= settings.cache_ttl_seconds:
                     self._semantic_hits += 1
                     return value
@@ -425,7 +436,10 @@ class SemanticCache:
             best_sim = 0.0
             best_value = None
 
-            for key, (cached_vec, value, ts) in self._store.items():
+            for entry_ns, cached_vec, value, ts in self._store.values():
+                # namespace 隔离：跨 intent/参数的缓存一律不参与语义比对
+                if entry_ns != namespace:
+                    continue
                 # 检查 TTL
                 if time.time() - ts > settings.cache_ttl_seconds:
                     continue
@@ -440,7 +454,12 @@ class SemanticCache:
 
             if best_sim >= self._threshold and best_value is not None:
                 self._semantic_hits += 1
-                obs.log_event("semantic_cache_hit", query=query[:50], similarity=round(best_sim, 4))
+                obs.log_event(
+                    "semantic_cache_hit",
+                    query=query[:50],
+                    namespace=namespace[:50],
+                    similarity=round(best_sim, 4),
+                )
                 return best_value
         except Exception as e:
             obs.log_event("semantic_cache_error", error=str(e))
@@ -448,7 +467,7 @@ class SemanticCache:
         self._semantic_misses += 1
         return None
 
-    def set(self, key: str, value: str, query: str = None):
+    def set(self, key: str, value: str, query: str = None, namespace: str = ""):
         """写入语义缓存 (同时存储 embedding)"""
         if not self._embed_fn:
             return
@@ -464,11 +483,16 @@ class SemanticCache:
                 if vec is not None:
                     self._cache_embed(norm, vec)
             if vec is not None:
-                self._store[norm] = (vec, value, time.time())
+                self._store[self._ns_key(namespace, norm)] = (
+                    namespace,
+                    vec,
+                    value,
+                    time.time(),
+                )
 
                 # LRU 淘汰: 超过 max_size 时移除最旧的
                 if len(self._store) > self._max_size:
-                    oldest_key = min(self._store, key=lambda k: self._store[k][2])
+                    oldest_key = min(self._store, key=lambda k: self._store[k][3])
                     del self._store[oldest_key]
         except Exception:
             pass
@@ -495,6 +519,7 @@ class MultiLevelCache:
 
     L3 语义缓存使用 embedding 余弦相似度匹配, 命中阈值 0.92。
     需要外部注入 embed_fn 后才生效 (延迟加载 BGE 模型)。
+    L3 必须按 namespace 隔离（见 SemanticCache），否则跨意图会误命中。
     """
 
     def __init__(self, embed_fn: Callable[[str], np.ndarray] = None):
@@ -514,13 +539,14 @@ class MultiLevelCache:
         """注入 embedding 函数, 激活 L3 语义缓存"""
         self._l3.set_embed_fn(embed_fn)
 
-    def get(self, key: str, query: str = None) -> Optional[str]:
+    def get(self, key: str, query: str = None, namespace: str = "") -> Optional[str]:
         """
         查询缓存
 
         Args:
             key: 精确匹配 key (intent|query|params)
             query: 原始用户查询 (用于 L3 语义匹配, 默认等于 key)
+            namespace: L3 语义匹配的作用域 (intent+参数签名)，防止跨意图误命中
         """
         # L1 精确匹配
         if key in self._l1:
@@ -538,13 +564,13 @@ class MultiLevelCache:
         # L3 语义匹配
         semantic_query = query or key
         # 3a. 精确快速路径（不计算 embedding）
-        value = self._l3.get_exact(semantic_query)
+        value = self._l3.get_exact(semantic_query, namespace=namespace)
         if value is not None:
             self._l1[key] = value
             self._hits += 1
             return value
         # 3b. 语义相似度匹配
-        value = self._l3.get(semantic_query)
+        value = self._l3.get(semantic_query, namespace=namespace)
         if value is not None:
             # 回填 L1
             self._l1[key] = value
@@ -554,11 +580,11 @@ class MultiLevelCache:
         self._misses += 1
         return None
 
-    def set(self, key: str, value: str, query: str = None):
+    def set(self, key: str, value: str, query: str = None, namespace: str = ""):
         """写入缓存 (同时写入 L1, L2, L3)"""
         self._l1[key] = value
         self._l2.set(key, value)
-        self._l3.set(key, value, query=query or key)
+        self._l3.set(key, value, query=query or key, namespace=namespace)
 
     def get_stats(self) -> dict:
         """获取缓存统计"""
@@ -581,6 +607,19 @@ class MultiLevelCache:
         for k in sorted(params.keys()):
             key_parts.append(f"{k}={params[k]}")
         return "|".join(key_parts)
+
+    @staticmethod
+    def make_namespace(intent: str, **params) -> str:
+        """生成 L3 语义匹配的 namespace（intent + 参数签名）
+
+        L3 只做 query 相似度比对，若不带 namespace 隔离会出现
+        "搜索的回答被当成分类的回答返回" 这类跨意图误命中。
+        参数（如 top_k）会改变答案，因此也纳入 namespace。
+        """
+        parts = [str(intent).strip().lower()]
+        for k in sorted(params.keys()):
+            parts.append(f"{k}={params[k]}")
+        return "|".join(parts)
 
 
 # ------------------------------------------------------------------ #
@@ -615,7 +654,8 @@ class CostOptimizer:
     def cache_get(self, intent: str, query: str, **params) -> Optional[str]:
         """查询缓存 (L1 精确 → L2 磁盘 → L3 语义)"""
         key = MultiLevelCache.make_key(intent, query, **params)
-        result = self.cache.get(key, query=query)
+        namespace = MultiLevelCache.make_namespace(intent, **params)
+        result = self.cache.get(key, query=query, namespace=namespace)
         if result:
             obs.log_event("cache_hit", intent=intent, query=query[:50])
         return result
@@ -623,7 +663,8 @@ class CostOptimizer:
     def cache_set(self, intent: str, query: str, value: str, **params):
         """写入缓存 (同时写入 L1, L2, L3)"""
         key = MultiLevelCache.make_key(intent, query, **params)
-        self.cache.set(key, value, query=query)
+        namespace = MultiLevelCache.make_namespace(intent, **params)
+        self.cache.set(key, value, query=query, namespace=namespace)
 
     def get_stats(self) -> dict:
         """获取成本优化统计"""
